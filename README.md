@@ -1,4 +1,4 @@
-# Xecades :: Alpha\[α\]
+# Xecades :: Alpha \[α\]
 
 *Warning: WIP*
 
