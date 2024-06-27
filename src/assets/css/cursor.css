@@ -1,0 +1,51 @@
+#cursor {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    z-index: 10086;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    transition-property: background, transform;
+    perspective: 1000px;
+}
+
+#cursor.hidden {
+    background: transparent;
+}
+
+#cursor.hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(2.5);
+}
+
+#cursor.active {
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(0.5);
+}
+
+* {
+    cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='8px' height='8px'><circle cx='4' cy='4' r='4' opacity='.5'/></svg>") 4 4, auto !important;
+}
+
+@media screen and (pointer: coarse) {
+    #cursor {
+        display: none !important;
+    }
+}
+
+/* @media (prefers-color-scheme: dark) {
+    #cursor {
+        background: rgba(255, 255, 255, 0.25);
+    }
+    #cursor.hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    #cursor.active {
+        background: rgba(255, 255, 255, 0.5);
+    }
+    * {
+        cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='8px' height='8px'><circle cx='4' cy='4' r='4' fill='white' opacity='.8'/></svg>") 4 4, auto !important;
+    }
+} */
