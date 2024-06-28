@@ -1,7 +1,7 @@
 // Modules
 import { createApp } from "vue";
 
-// Vue Pages
+// Vue
 import App from "./App.vue";
 
 // JS
