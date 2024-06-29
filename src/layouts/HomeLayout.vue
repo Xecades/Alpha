@@ -2,11 +2,12 @@
 import reveal from "@/assets/js/reveal";
 import cursorSync from "@/assets/js/cursor";
 import { render } from "@/assets/js/homeUtils";
-import { ref, watch } from "vue";
+import { isProxy, ref, watch } from "vue";
 
 const $ = defineProps({ data: Object });
 const VBody = ref(render($.data));
-watch($.data, () => { VBody.value = render($.data); });
+if (isProxy($.data))
+    watch($.data, () => { VBody.value = render($.data); });
 
 reveal();
 cursorSync();
@@ -165,6 +166,7 @@ cursorSync();
     border-radius: 4px;
     box-sizing: border-box;
     width: 220px;
+    aspect-ratio: 621 / 843;
     max-width: 50%;
     display: inline-block;
 }
