@@ -15,7 +15,7 @@ const routes = [
     { path: "/timeline", name: "timeline", component: TimelineView },
     { path: "/sponsor", name: "sponsor", component: SponsorView },
     { path: "/sponsorship", name: "sponsorship", component: SponsorshipView },
-    { path: "/:pathMatch(.*)", name: "ErrorView", component: ErrorView },
+    { path: "/:pathMatch(.*)", name: "error", component: ErrorView },
 ];
 
 export default routes;
