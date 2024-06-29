@@ -2,9 +2,11 @@
 import reveal from "@/assets/js/reveal";
 import cursorSync from "@/assets/js/cursor";
 import { render } from "@/assets/js/homeUtils";
+import { ref, watch } from "vue";
 
 const $ = defineProps({ data: Object });
-const VBody = render($.data);
+const VBody = ref(render($.data));
+watch($.data, () => { VBody.value = render($.data); });
 
 reveal();
 cursorSync();
@@ -46,12 +48,23 @@ cursorSync();
     margin-bottom: 0.5rem;
 }
 
+/* hr */
+
 .home-layout hr {
     height: 0px;
     border: none;
     border-top: 1px solid #e5e7eb;
     margin: .5rem;
 }
+
+/* small */
+
+.home-layout p.small {
+    font-size: .9rem;
+    opacity: .8;
+}
+
+/* table */
 
 .home-layout .table ul {
     margin: 0 8px;
@@ -81,6 +94,8 @@ cursorSync();
     font-size: 1rem;
     line-height: 1.5rem;
 }
+
+/* timeline */
 
 .home-layout .timeline ul.tl {
     margin: 0 8px;
@@ -136,5 +151,21 @@ cursorSync();
 .home-layout .timeline hr:last-child {
     margin-top: 0;
     margin-bottom: 1.3rem;
+}
+
+/* sponsor */
+
+.home-layout .sponsor {
+    margin: 12px 0px 12px 22px;
+}
+
+.home-layout .sponsor img {
+    margin: 0 13px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 220px;
+    max-width: 50%;
+    display: inline-block;
 }
 </style>

@@ -4,6 +4,7 @@ import LinkTo from "@/components/LinkTo.vue";
 // General Snippets
 const ruby = (body, text, rtclass) => <RubyText text={text} rtclass={rtclass}>{body}</RubyText>;
 const link = (body, src, mode) => <LinkTo src={src} mode={mode}>{body}</LinkTo>;
+const small = (body) => <p class="rv indent small">{body}</p>;
 const hr = () => <hr class="rv" />;
 
 // Table
@@ -18,8 +19,13 @@ const _tl_li = (year, meta) => <li class="tl"><div class="rv year">{year}</div>{
 const _tl_ul = (items) => <ul class="tl">{items.map((args) => _tl_li(args.year, args.meta))}</ul>;
 const timeline = (items) => <span class="timeline">{hr()}{_tl_ul(items)}{hr()}</span>;
 
+// Sponsor QR Code
+// const _load_img = (src) => new URL(src, import.meta.url).href;
+const _img = (src) => <img class="rv" src={src} />;
+const sponsor = (src1, src2) => <div class="sponsor">{_img(src1)}{_img(src2)}</div>;
+
 // Renderer
 const _line_render = (p) => p instanceof Array ? <p class="rv indent">{p}</p> : p;
 const render = (data) => <>{data.body.map(_line_render)}</>;
 
-export { ruby, link, hr, table, timeline, render };
+export { ruby, link, small, hr, table, timeline, sponsor, render };

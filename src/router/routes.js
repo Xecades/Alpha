@@ -4,6 +4,7 @@ import LabView from "@/views/LabView.vue";
 import FriendView from "@/views/FriendView.vue";
 import TimelineView from "@/views/TimelineView.vue";
 import SponsorView from "@/views/SponsorView.vue";
+import SponsorshipView from "@/views/SponsorshipView.vue";
 import ErrorView from "@/views/ErrorView.vue";
 
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
     { path: "/friend", name: "friend", component: FriendView },
     { path: "/timeline", name: "timeline", component: TimelineView },
     { path: "/sponsor", name: "sponsor", component: SponsorView },
+    { path: "/sponsorship", name: "sponsorship", component: SponsorshipView },
     { path: "/:pathMatch(.*)", name: "ErrorView", component: ErrorView },
 ];
 

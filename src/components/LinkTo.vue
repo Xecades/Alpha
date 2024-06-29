@@ -1,15 +1,22 @@
 <script setup>
 const $ = defineProps({
-    src: String,
+    src: String | Function,
     mode: String
 });
 
-const inside = $.src.startsWith("/");
+const isButton = $.src instanceof Function;
+const inside = !isButton && $.src.startsWith("/");
 const rmode = $.mode ?? (inside ? "stay" : "jump");
 </script>
 
 <template>
-    <template v-if="rmode == 'stay'">
+    <template v-if="isButton">
+        <a class="cursor" @click="src">
+            <slot />
+        </a>
+    </template>
+
+    <template v-else-if="rmode == 'stay'">
         <router-link :to="encodeURI(src)" v-if="inside" class="cursor">
             <slot />
         </router-link>
