@@ -28,26 +28,26 @@ const documentReady = () => {
 const consoleMessage = () => {
     const year = new Date().getFullYear();
     console.log(`
-    ┌─Xecades Homepage───────────────────────────────────────┐
-    │                                                        │
-    │              Yet another concise homepage              │
-    │                                                        │
-    ├────────────────────────────────────────────────────────┤
-    │                                                        │
-    │ Github               https://github.com/Xecades/Alpha/ │
-    │ Website                           https://xecades.xyz/ │
-    │ QQ                   [DNS TXT] https://qq.xecades.xyz/ │
-    │                                                        │
-    ├────────────────────────────────────────────────────────┤
-    │                                                        │
-    │ Built with vite and... and my laptop.                  │
-    │                                                        │
-    ├────────────────────────────────────────────────────────┤
-    │                                                        │
-    │ MIT LICENSE                                            │
-    │ Copyright © 2019 - ${year} Xecades                        │
-    │                                                        │
-    └────────────────────────────────────────────────────────┘
+    ┌─Xecades Alpha──────────────────────────────────────┐
+    │                                                    │
+    │            Yet another concise homepage            │
+    │                                                    │
+    ├────────────────────────────────────────────────────┤
+    │                                                    │
+    │ Github           https://github.com/Xecades/Alpha/ │
+    │ Website                       https://xecades.xyz/ │
+    │ QQ               [DNS TXT] https://qq.xecades.xyz/ │
+    │                                                    │
+    ├────────────────────────────────────────────────────┤
+    │                                                    │
+    │ Built with vite and... and my laptop.              │
+    │                                                    │
+    ├────────────────────────────────────────────────────┤
+    │                                                    │
+    │ MIT LICENSE                                        │
+    │ Copyright © 2019 - ${year} Xecades                    │
+    │                                                    │
+    └────────────────────────────────────────────────────┘
     `);
 };
 
