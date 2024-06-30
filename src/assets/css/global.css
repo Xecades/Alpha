@@ -57,3 +57,7 @@ html.sr .rv {
 .indent {
     text-indent: 2.25rem;
 }
+
+.no-select {
+    user-select: none;
+}

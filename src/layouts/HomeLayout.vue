@@ -45,7 +45,7 @@ cursorSync();
 .subtitle,
 .home-layout p {
     font-size: 1.125rem;
-    line-height: 2rem;
+    line-height: 2.2rem;
     margin-bottom: 0.5rem;
 }
 

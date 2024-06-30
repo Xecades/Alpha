@@ -57,14 +57,15 @@ const process = (x) => new Object({
     name: <>
         {x.nick}
         <span class="money hide">
-            （{x.money}元）
+            （{x.money.toFixed(2)} 元）
         </span>
     </>,
     desc: x.desc,
     url: () => { }
 });
 
-const zheli_gen = () => link(ruby("这里", show.value ? "ON" : "OFF"), toggle);
+const no_select = (x) => <span class="no-select">{x}</span>;
+const zheli_gen = () => no_select(link(ruby("这里", show.value ? "ON" : "OFF"), toggle));
 
 const data = ref({
     "title": "赞助者",
@@ -72,7 +73,7 @@ const data = ref({
     "body": [
         ["你的每一分善意都将被他记在心中。"],
         table(raw.map(process)),
-        small("注：手动更新，排名不分先后。"),
+        small("注：手动更新，排名不分先后。所有赞助将用于网站维护。"),
         [
             "你可以点击", zheli_gen(),
             "切换赞助金额显示，或者点击回到", link(ruby("主页", "/index"), "/"),

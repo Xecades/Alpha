@@ -12,12 +12,12 @@ const data = {
             link(ruby("踪迹", "/about"), "/about"), "。",
         ],
         [
-            "我现在是一名大一学生，就读于", link(ruby("浙江大学竺可桢学院", "Chu Kochen Honors College"), "http://ckc.zju.edu.cn/"),
+            "我是一名大一学生，就读于", link(ruby("浙江大学竺可桢学院", "Chu Kochen Honors College"), "http://ckc.zju.edu.cn/"),
             "。如果你恰好也是这个学校的学生，欢迎来图灵 2302 班找我。",
         ],
         [
             "我会在", link(ruby("博客", "/blog"), "https://blog.xecades.xyz/", "stay"),
-            "上记录我感兴趣的内容，我也会记录自己的学习", link(ruby("笔记", "/note"), "https://note.xecades.xyz/", "stay"),
+            "上记录我感兴趣的内容，也会记录自己的学习", link(ruby("笔记", "/note"), "https://note.xecades.xyz/", "stay"),
             "。有时，我会开发一些有趣的", link(ruby("项目", "/lab"), "/lab"),
             "。我乐于邂逅", link(ruby("有趣的灵魂", "/friend"), "/friend"),
             "，他们带给了我许多新的思考，伴随着我的", link(ruby("成长", "/timeline"), "/timeline"), "。",

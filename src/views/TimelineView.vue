@@ -97,10 +97,10 @@ const data = {
                 year: 2023,
                 meta: [
                     { date: "6 月 7 日", desc: "高考" },
-                    { date: "6 月 23 日", desc: "出分" },
-                    { date: "7 月 22 日", desc: "录取" },
                     { date: "8 月 24 日", desc: "浙江大学竺可桢学院图灵班就读" },
                     { date: "8 月", desc: "十八岁生日快乐！" },
+                    { date: "10 月 6 日", desc: "第一次参加 CTF 竞赛：ZJUCTF 2023" },
+                    { date: "10 月 28 日", desc: "参加 Hackergame 2023 CTF 竞赛" },
                     { date: "12 月 31 日", desc: "和朋友参加学校的跨年活动，最快乐的时光" },
                 ]
             },
