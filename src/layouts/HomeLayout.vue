@@ -31,18 +31,18 @@ cursorSync();
     padding-bottom: 10rem;
 }
 
-.title {
+.home-layout .title {
     font-size: 3rem;
     letter-spacing: .05em;
     margin-bottom: 12px;
     height: 3.5rem;
 }
 
-.subtitle {
+.home-layout .subtitle {
     font-weight: bold;
 }
 
-.subtitle,
+.home-layout .subtitle,
 .home-layout p {
     font-size: 1.125rem;
     line-height: 2.2rem;
