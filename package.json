@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@unhead/vue": "^1.9.14",
+        "klaw-sync": "^6.0.0",
         "scrollreveal": "^4.0.9",
         "vue": "^3.4.29",
         "vue-router": "^4.3.3"

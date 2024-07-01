@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
+// import klawSync from "klaw-sync";
 
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -30,6 +31,15 @@ export default defineConfig({
                 if (route.component?.includes("note")) {
                     route.addToMeta({ layout: "note" });
                 }
+            },
+            async beforeWriteFiles(routes) {
+                // Append note structure to each note route
+                // const note = routes.children.filter((r) =>
+                //     r.component?.includes("note")
+                // );
+                // console.log(note);
+                // const note_tree = klawSync("src/note");
+                // console.log(note_tree);
             },
         }),
 

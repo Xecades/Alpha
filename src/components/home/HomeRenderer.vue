@@ -1,6 +1,4 @@
 <script setup>
-import reveal from "@/assets/js/reveal";
-import cursorSync from "@/assets/js/cursor";
 import { render } from "@/assets/js/homeUtils";
 import { isProxy, ref, watch } from "vue";
 
@@ -8,9 +6,6 @@ const $ = defineProps({ data: Object });
 const VBody = ref(render($.data));
 if (isProxy($.data))
     watch($.data, () => { VBody.value = render($.data); });
-
-reveal();
-cursorSync();
 </script>
 
 <template>

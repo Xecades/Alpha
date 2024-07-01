@@ -1,10 +1,3 @@
-<script setup>
-import { RouterView } from "vue-router";
-import cursorSync from "./assets/js/cursor";
-
-cursorSync();
-</script>
-
 <template>
     <RouterView />
 </template>

@@ -1,4 +1,4 @@
-import { onMounted } from "vue";
+import { onMounted, onUpdated } from "vue";
 
 const lerp = (a, b, n) => (1 - n) * a + n * b;
 
@@ -66,8 +66,7 @@ class Cursor {
 }
 
 const cursor = new Cursor();
-export default function cursorSync() {
-    onMounted(() => {
-        cursor.refresh();
-    });
+export default function setupCursor() {
+    onMounted(() => cursor.refresh());
+    onUpdated(() => cursor.refresh());
 }
