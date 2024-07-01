@@ -7,7 +7,7 @@ const beforeEach = (to, from, next) => {
     } else {
         document.querySelector("#main").classList.add("fade-out");
         setTimeout(() => {
-            console.debug("[+] Fade out completed");
+            console.debug("     Fade out completed");
             next();
         }, 100);
     }

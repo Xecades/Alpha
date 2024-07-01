@@ -1,3 +1,7 @@
+<script setup>
+console.debug("     Default layout loaded");
+</script>
+
 <template>
     <main>
         <!-- [Default Layout] -->
