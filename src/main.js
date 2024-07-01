@@ -1,5 +1,6 @@
 // Modules
 import { createApp } from "vue";
+import { createHead } from "@unhead/vue";
 
 // Vue
 import App from "./App.vue";
@@ -56,10 +57,12 @@ async function main() {
     consoleMessage();
     await documentReady();
 
-    console.debug("[+] Vue mounted");
     const app = createApp(App);
     app.use(router);
+    app.use(createHead()); // ref: unplugin-vue-markdown
     app.mount("#app");
+
+    console.debug("[+] Vue mounted");
 }
 
 main();

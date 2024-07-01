@@ -1,5 +1,4 @@
 <script setup>
-import HomeLayout from "@/layouts/HomeLayout.vue";
 import { ruby, link } from "@/assets/js/homeUtils";
 
 const data = {
@@ -16,8 +15,8 @@ const data = {
             "。如果你恰好也是这个学校的学生，欢迎来图灵 2302 班找我。",
         ],
         [
-            "我会在", link(ruby("博客", "/blog"), "https://blog.xecades.xyz/", "stay"),
-            "上记录我感兴趣的内容，也会记录自己的学习", link(ruby("笔记", "/note"), "https://note.xecades.xyz/", "stay"),
+            "我会在", link(ruby("博客", "/blog"), "/blog"),
+            "上记录我感兴趣的内容，也会记录自己的学习", link(ruby("笔记", "/note"), "/note"),
             "。有时，我会开发一些有趣的", link(ruby("项目", "/lab"), "/lab"),
             "。我乐于邂逅", link(ruby("有趣的灵魂", "/friend"), "/friend"),
             "，他们带给了我许多新的思考，伴随着我的", link(ruby("成长", "/timeline"), "/timeline"), "。",
@@ -27,7 +26,7 @@ const data = {
 </script>
 
 <template>
-    <HomeLayout :data="data" />
+    <HomeRenderer :data="data" />
 </template>
 
 <style>

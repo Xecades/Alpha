@@ -1,5 +1,4 @@
 <script setup lang="jsx">
-import HomeLayout from "@/layouts/HomeLayout.vue";
 import { ruby, link, table, small } from "@/assets/js/homeUtils";
 import { ref, watch } from "vue";
 
@@ -91,7 +90,7 @@ watch(show, () => {
 </script>
 
 <template>
-    <HomeLayout :data="data" />
+    <HomeRenderer :data="data" />
 </template>
 
 <style>

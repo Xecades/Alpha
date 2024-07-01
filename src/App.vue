@@ -6,7 +6,7 @@ cursorSync();
 </script>
 
 <template>
-    <RouterView id="main" />
+    <RouterView />
 </template>
 
 <style>

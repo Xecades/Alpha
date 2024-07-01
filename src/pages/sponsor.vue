@@ -1,5 +1,4 @@
 <script setup>
-import HomeLayout from "@/layouts/HomeLayout.vue";
 import { ruby, link, small, sponsor } from "@/assets/js/homeUtils";
 import WechatQR from "@/assets/img/wechat.jpg";
 import AlipayQR from "@/assets/img/alipay.jpg";
@@ -17,5 +16,5 @@ const data = {
 </script>
 
 <template>
-    <HomeLayout :data="data" />
+    <HomeRenderer :data="data" />
 </template>

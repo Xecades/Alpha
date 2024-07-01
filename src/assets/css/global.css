@@ -44,7 +44,7 @@ body {
 
 /* Scrollbar Flickering Prevention */
 html {
-    margin-right: calc(100% - 100vw);
+    padding-right: calc(100% - 100vw);
     overflow-x: hidden;
 }
 

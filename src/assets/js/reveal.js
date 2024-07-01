@@ -3,6 +3,7 @@ import { onBeforeUnmount, onMounted } from "vue";
 
 export default function reveal() {
     onMounted(() => {
+        console.debug("[+] reveal.js mounted");
         ScrollReveal().reveal(".rv", {
             // reset: true,
             interval: 20,

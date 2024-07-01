@@ -1,5 +1,4 @@
 <script setup>
-import HomeLayout from "@/layouts/HomeLayout.vue";
 import { ruby, link, table } from "@/assets/js/homeUtils";
 
 const data = {
@@ -39,5 +38,5 @@ const data = {
 </script>
 
 <template>
-    <HomeLayout :data="data" />
+    <HomeRenderer :data="data" />
 </template>
