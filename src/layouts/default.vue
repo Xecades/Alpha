@@ -9,8 +9,6 @@ console.debug("     Default layout loaded");
 </script>
 
 <template>
-    <main>
-        <!-- [Default Layout] -->
-        <RouterView id="main" />
-    </main>
+    <!-- [Default Layout] -->
+    <RouterView id="main" />
 </template>

@@ -1,10 +1,11 @@
 /* Global Fonts */
-@import url("https://fonts.loli.net/css2?family=EB+Garamond&display=swap");
+/* @import url("https://fonts.loli.net/css2?family=EB+Garamond&display=swap"); */
+@import url("https://fonts.loli.net/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.loli.net/css2?family=Noto+Serif&display=swap");
 @import url("https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700&display=swap");
 
 body {
-    font-family: "EB Garamond", "Noto Serif SC", songti sc, serif;
+    font-family: "PT Serif", "Noto Serif SC", songti sc, serif;
     color: #4b5563;
 }
 
@@ -60,4 +61,9 @@ html.sr .rv {
 
 .no-select {
     user-select: none;
+}
+
+/* Prevent Scrollbar Flickering */
+#app {
+    width: 100vw;
 }

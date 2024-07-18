@@ -37,7 +37,6 @@ a {
     color: rgb(0, 93, 146);
     transition: opacity 0.2s;
     opacity: .7;
-    text-decoration: none;
 }
 
 a:hover {

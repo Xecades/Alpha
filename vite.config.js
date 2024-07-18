@@ -1,6 +1,5 @@
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
-// import klawSync from "klaw-sync";
 
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -9,6 +8,7 @@ import VueRouter from "unplugin-vue-router/vite";
 import Markdown from "unplugin-vue-markdown/vite";
 import Components from "unplugin-vue-components/vite";
 import Layouts from "vite-plugin-vue-layouts";
+import ViteYaml from "@modyfi/vite-plugin-yaml";
 
 const customElement = ["rb"];
 
@@ -32,15 +32,6 @@ export default defineConfig({
                     route.addToMeta({ layout: "note" });
                 }
             },
-            async beforeWriteFiles(routes) {
-                // Append note structure to each note route
-                // const note = routes.children.filter((r) =>
-                //     r.component?.includes("note")
-                // );
-                // console.log(note);
-                // const note_tree = klawSync("src/note");
-                // console.log(note_tree);
-            },
         }),
 
         // [@vitejs/plugin-vue]
@@ -63,13 +54,19 @@ export default defineConfig({
         // [unplugin-vue-components]
         //  @ https://github.com/unplugin/unplugin-vue-components
         //  - Auto import components
-        Components(),
+        Components({
+            directoryAsNamespace: true,
+        }),
 
         // [vite-plugin-vue-layouts]
         //  @ https://github.com/JohnCampionJr/vite-plugin-vue-layouts
         //  - Add layouts for routes
         //  + I use it to add layout for markdown files
         Layouts(),
+
+        // [@modyfi/vite-plugin-yaml]
+        //  @ https://github.com/Modyfi/vite-plugin-yaml
+        ViteYaml(),
 
         // [@vitejs/plugin-vue-jsx]
         vueJsx(),

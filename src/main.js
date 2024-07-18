@@ -1,6 +1,9 @@
 // Modules
 import { createApp } from "vue";
 import { createHead } from "@unhead/vue";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 // Vue
 import App from "./App.vue";
@@ -41,7 +44,7 @@ const consoleMessage = () => {
     │                                                    │
     ├────────────────────────────────────────────────────┤
     │                                                    │
-    │ Built with vite and... and my laptop.              │
+    │ Built with Vue.js and... and my laptop.            │
     │                                                    │
     ├────────────────────────────────────────────────────┤
     │                                                    │
@@ -57,9 +60,12 @@ async function main() {
     consoleMessage();
     await documentReady();
 
+    library.add(faMagnifyingGlass);
+
     const app = createApp(App);
     app.use(router);
     app.use(createHead()); // ref: unplugin-vue-markdown
+    app.component("font-awesome-icon", FontAwesomeIcon);
     app.mount("#app");
 
     console.debug("[+] Vue mounted");
