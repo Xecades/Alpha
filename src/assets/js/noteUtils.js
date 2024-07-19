@@ -23,6 +23,15 @@ function parseNav(nav) {
     return { title: "", link: "", child: dfs(nav) };
 }
 
+/**
+ * Convert note path to an array of path segments.
+ *
+ * @param {string} path - The path to be parsed.
+ * @returns {Array<string>|boolean} - An array of path segments if path valid, otherwise false.
+ * @example
+ * parsePath("/note/cs/c/intro") // ["cs", "c", "intro"]
+ * parsePath("/foo") // false
+ */
 function parsePath(path) {
     let p = /^\/note\/(.*)\/?$/.exec(path);
     return p === null ? false : p[1].split("/");

@@ -1,47 +1,43 @@
 <script setup>
 import setupReveal from "@/assets/js/reveal";
 import setupCursor from "@/assets/js/cursor";
-import { parsePath } from "@/assets/js/noteUtils";
-import { useRoute } from "vue-router";
-import { computed } from "vue";
 
 setupReveal();
 setupCursor();
 
-const route = useRoute();
-const path = computed(() => parsePath(route.path));
+const theme = {
+    side_width: "300px",
+}
 
 console.debug("     Note layout loaded");
 </script>
 
 <template>
-    <NoteHeader />
-    <main>
-        <NoteSidebar v-if="path" id="sidebar" />
+    <div class="wrapper">
+        <NoteLeft id="left" />
         <NoteContent id="content">
             <RouterView id="main" />
         </NoteContent>
-    </main>
-    <NoteFooter />
+        <NoteRight id="right" />
+    </div>
 </template>
 
 <style scoped>
-* {
-    --sidebar-width: 250px;
-}
-
-main {
-    padding-top: calc(48px + 30px);
-    width: 1100px;
-    margin: 0 auto;
+.wrapper {
+    width: 100vw;
     display: flex;
 }
 
-#sidebar {
-    width: var(--sidebar-width);
+#content {
+    flex-grow: 1;
 }
 
-#content {
-    flex: 1;
+#left,
+#right {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    width: v-bind("theme.side_width");
+    height: 100vh;
 }
 </style>
