@@ -11,6 +11,7 @@ const category = computed(() => page.value.title);
 
 <template>
     <div>
+        <h1>{{ page }}</h1>
         <slot />
     </div>
 </template>

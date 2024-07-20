@@ -1,6 +1,6 @@
 import _raw_config from "@/note/config.yml";
 
-function parseNav(nav) {
+function _parseNav(nav) {
     function dfs(node) {
         let ret = [];
         for (const item of node) {
@@ -37,16 +37,16 @@ function parsePath(path) {
     return p === null ? false : p[1].split("/");
 }
 
-const __getNodeBy_gen = (fn) => (n, v) => n.child.find((x) => fn(x) === v);
+const _getNodeBy_gen = (fn) => (n, v) => n.child.find((x) => fn(x) === v);
 const getNodeBy = {
-    title: __getNodeBy_gen((x) => x.title),
-    link: __getNodeBy_gen((x) => x.link),
-    fn: __getNodeBy_gen,
+    title: _getNodeBy_gen((x) => x.title),
+    link: _getNodeBy_gen((x) => x.link),
+    fn: _getNodeBy_gen,
 };
 
 const config = {};
 config.site_name = _raw_config.site_name;
-config.root = parseNav(_raw_config.nav);
+config.root = _parseNav(_raw_config.nav);
 
 export { config, parsePath, getNodeBy };
 
