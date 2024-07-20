@@ -37,10 +37,45 @@ function parsePath(path) {
     return p === null ? false : p[1].split("/");
 }
 
+/**
+ * Flatten path to array of objects.
+ *
+ * @param {object} n - The root node.
+ * @param {Array<string>} path - The path to the node.
+ * @returns {Array<object>} - An array of objects, without child nodes.
+ * @example
+ * flattenPath(n, ["cs", "c"]) // [{title: "计算机科学", link: "cs"}, {title: "C 语言", link: "c"}]
+ */
+function flattenPath(n, path) {
+    let ret = [];
+    for (let i = 0; i < path.length; i++) {
+        let node = getNodeBy.link(n, path[i]);
+        if (node === undefined) return ret;
+        ret.push({ title: node.title, link: node.link });
+        n = node;
+    }
+    return ret;
+}
+
+/**
+ * Get node by path.
+ *
+ * @param {object} n - The root node.
+ * @param {Array<string>} path - The path to the node.
+ * @returns {object|boolean} - The node if found, otherwise false.
+ */
+function _getNodeBy_path(n, path) {
+    if (path.length === 0) return n;
+    let child = n.child.find((x) => x.link === path[0]);
+    if (child === undefined) return false;
+    return _getNodeBy_path(child, path.slice(1));
+}
+
 const _getNodeBy_gen = (fn) => (n, v) => n.child.find((x) => fn(x) === v);
 const getNodeBy = {
     title: _getNodeBy_gen((x) => x.title),
     link: _getNodeBy_gen((x) => x.link),
+    path: _getNodeBy_path,
     fn: _getNodeBy_gen,
 };
 
@@ -48,7 +83,7 @@ const config = {};
 config.site_name = _raw_config.site_name;
 config.root = _parseNav(_raw_config.nav);
 
-export { config, parsePath, getNodeBy };
+export { config, parsePath, getNodeBy, flattenPath };
 
 // {
 //     "site_name": "笔记本",

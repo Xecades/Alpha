@@ -3,7 +3,7 @@ import { createApp } from "vue";
 import { createHead } from "@unhead/vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 // Vue
 import App from "./App.vue";
@@ -60,7 +60,7 @@ async function main() {
     consoleMessage();
     await documentReady();
 
-    library.add(faMagnifyingGlass);
+    library.add(faAngleRight);
 
     const app = createApp(App);
     app.use(router);
