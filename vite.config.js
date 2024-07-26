@@ -10,7 +10,7 @@ import Components from "unplugin-vue-components/vite";
 import Layouts from "vite-plugin-vue-layouts";
 import ViteYaml from "@modyfi/vite-plugin-yaml";
 
-const customElement = ["rb"];
+const customElement = ["rb", "css-doodle"];
 
 export default defineConfig({
     plugins: [

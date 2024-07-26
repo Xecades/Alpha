@@ -19,7 +19,7 @@ const $ = defineProps({
 ul {
     display: block;
     user-select: none;
-    padding-left: .3rem;
+    font-size: .92rem;
 }
 
 li {
@@ -40,6 +40,6 @@ li {
 
 .icon {
     color: #ddd;
-    padding: 0 .6rem;
+    padding: 0 .4rem;
 }
 </style>

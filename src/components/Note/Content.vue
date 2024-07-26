@@ -1,4 +1,5 @@
 <script setup lang="jsx">
+import "@/assets/css/markdown.css"
 import { config, parsePath, getNodeBy, flattenPath } from "@/assets/js/noteUtils";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
@@ -16,10 +17,10 @@ const breadcrumb = computed(() => flattenPath(config.root, path.value.slice(0, -
 <template>
     <div>
         <header>
-            <NotePartBreadcrumb :data="breadcrumb" />
             <h1>{{ title }}</h1>
+            <NotePartBreadcrumb class="breadcrumb" :data="breadcrumb" />
         </header>
-        <main>
+        <main class="markdown">
             <slot />
         </main>
     </div>
@@ -27,14 +28,26 @@ const breadcrumb = computed(() => flattenPath(config.root, path.value.slice(0, -
 
 <style scoped>
 header {
-    margin: 3rem 0 2em 0;
-    padding-left: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 2.3rem;
+    margin-left: var(--content-margin-lr);
+    margin-right: var(--content-margin-lr);
 }
 
 h1 {
-    font-size: 3rem;
-    color: #6e6e6e;
-    font-weight: bold;
+    font-size: 2.2rem;
+    color: #535353;
     letter-spacing: .12rem;
+    line-height: 3.5rem;
+    height: 3.5rem;
+}
+
+.breadcrumb {
+    margin-top: .3rem;
+    margin-left: .1rem;
+}
+
+main {
+    margin: 1.4rem var(--content-margin-lr);
 }
 </style>

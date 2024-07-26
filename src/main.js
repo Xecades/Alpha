@@ -1,4 +1,5 @@
 // Modules
+import "css-doodle";
 import { createApp } from "vue";
 import { createHead } from "@unhead/vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
