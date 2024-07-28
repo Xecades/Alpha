@@ -1,5 +1,7 @@
 <script setup lang="jsx">
 import "@/assets/css/markdown.css"
+import "@/assets/css/prism-one-light.css"
+
 import { config, parsePath, getNodeBy, flattenPath } from "@/assets/js/noteUtils";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
@@ -20,7 +22,7 @@ const breadcrumb = computed(() => flattenPath(config.root, path.value.slice(0, -
             <h1>{{ title }}</h1>
             <NotePartBreadcrumb class="breadcrumb" :data="breadcrumb" />
         </header>
-        <main class="markdown">
+        <main>
             <slot />
         </main>
     </div>
@@ -28,7 +30,7 @@ const breadcrumb = computed(() => flattenPath(config.root, path.value.slice(0, -
 
 <style scoped>
 header {
-    margin-top: 3rem;
+    margin-top: 4.2rem;
     margin-bottom: 2.3rem;
     margin-left: var(--content-margin-lr);
     margin-right: var(--content-margin-lr);

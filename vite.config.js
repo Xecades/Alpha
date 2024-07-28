@@ -10,6 +10,10 @@ import Components from "unplugin-vue-components/vite";
 import Layouts from "vite-plugin-vue-layouts";
 import ViteYaml from "@modyfi/vite-plugin-yaml";
 
+import { slugify } from "transliteration";
+import MarkdownItAnchor from "markdown-it-anchor";
+import markdownItPrism from "markdown-it-prism";
+
 const customElement = ["rb", "css-doodle"];
 
 export default defineConfig({
@@ -49,6 +53,39 @@ export default defineConfig({
         //  - Markdown loader
         Markdown({
             headEnabled: true,
+            wrapperClasses: "markdown",
+
+            // Default options passed to markdown-it
+            // @ https://markdown-it.github.io/markdown-it/
+            markdownItOptions: {
+                html: true,
+                linkify: true,
+                typographer: true,
+            },
+
+            // A function providing the Markdown It instance
+            // gets the ability to apply custom settings/plugins
+            markdownItSetup(md) {
+                // [markdown-it-anchor]
+                // @ https://github.com/valeriangalliat/markdown-it-anchor
+                md.use(MarkdownItAnchor, {
+                    permalink: MarkdownItAnchor.permalink.linkInsideHeader({
+                        class: "cursor header-anchor",
+                        symbol: "¶",
+                        placement: "after",
+                    }),
+                    slugify: slugify,
+                });
+
+                // [markdown-it-prism]
+                // @ https://github.com/jGleitz/markdown-it-prism
+                md.use(markdownItPrism, {
+                    highlightInlineCode: true,
+                    plugins: ["match-braces"], // TODO: does it work?
+                });
+
+                // TODO: markdown-it-toc-done-right
+            },
         }),
 
         // [unplugin-vue-components]

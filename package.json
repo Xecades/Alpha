@@ -18,7 +18,11 @@
         "@unhead/vue": "^1.9.14",
         "css-doodle": "^0.39.2",
         "fs-extra": "^11.2.0",
+        "markdown-it-anchor": "^9.0.1",
+        "markdown-it-prism": "^2.3.0",
+        "markdown-it-toc-done-right": "^4.2.0",
         "scrollreveal": "^4.0.9",
+        "transliteration": "^2.3.5",
         "vue": "^3.4.29",
         "vue-router": "^4.3.3",
         "yaml": "^2.4.5"
