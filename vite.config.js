@@ -13,8 +13,9 @@ import ViteYaml from "@modyfi/vite-plugin-yaml";
 import { slugify } from "transliteration";
 import MarkdownItAnchor from "markdown-it-anchor";
 import markdownItPrism from "markdown-it-prism";
+import markdownItTocDoneRight from "markdown-it-toc-done-right";
 
-const customElement = ["rb", "css-doodle"];
+const customElement = ["rb"];
 
 export default defineConfig({
     plugins: [
@@ -84,7 +85,21 @@ export default defineConfig({
                     plugins: ["match-braces"], // TODO: does it work?
                 });
 
-                // TODO: markdown-it-toc-done-right
+                // [markdown-it-toc-done-right]
+                // @ https://github.com/nagaozen/markdown-it-toc-done-right
+                // - To extract TOC ast from markdown
+                let prm = new Promise((res) => {
+                    md.use(markdownItTocDoneRight, {
+                        callback: (html, ast) => {
+                            res(ast);
+                            // console.log(JSON.stringify(ast, null, 2)); // TODO
+                        },
+                    });
+                });
+
+                prm.then((ast) => {
+                    console.log(JSON.stringify(ast, null, 2)); // TODO
+                });
             },
         }),
 
