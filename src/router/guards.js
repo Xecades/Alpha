@@ -1,5 +1,7 @@
+import logger from "@/assets/js/logger";
+
 const beforeEach = (to, from, next) => {
-    console.debug(`[*] Navigating: ${from.fullPath} -> ${to.fullPath}`);
+    logger.star(`Navigating: ${from.fullPath} -> ${to.fullPath}`);
 
     // Fade out when navigating
     if (!from.name) {
@@ -8,7 +10,7 @@ const beforeEach = (to, from, next) => {
     } else {
         document.querySelector("#main").classList.add("fade-out");
         setTimeout(() => {
-            console.debug("     Fade out completed");
+            logger.nbsp("Fade out completed");
             next();
         }, 100);
     }

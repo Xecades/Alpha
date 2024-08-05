@@ -6,6 +6,7 @@ import App from "./App.vue";
 
 // JS
 import router from "./router";
+import logger from "./assets/js/logger";
 
 // CSS
 import "./assets/css/reset.css";
@@ -17,7 +18,7 @@ const documentReady = () => {
     return new Promise((res) => {
         document.onreadystatechange = () => {
             if (document.readyState === "complete") {
-                console.debug("[+] Document ready");
+                logger.plus("Document ready");
                 res();
             }
         };
@@ -28,26 +29,26 @@ const documentReady = () => {
 const consoleMessage = () => {
     const year = new Date().getFullYear();
     console.log(`
-    ┌─Xecades Alpha──────────────────────────────────────┐
-    │                                                    │
-    │            Yet another concise homepage            │
-    │                                                    │
-    ├────────────────────────────────────────────────────┤
-    │                                                    │
-    │ Github           https://github.com/Xecades/Alpha/ │
-    │ Website                       https://xecades.xyz/ │
-    │ QQ               [DNS TXT] https://qq.xecades.xyz/ │
-    │                                                    │
-    ├────────────────────────────────────────────────────┤
-    │                                                    │
-    │ Built with Vue.js and... and my laptop.            │
-    │                                                    │
-    ├────────────────────────────────────────────────────┤
-    │                                                    │
-    │ MIT LICENSE                                        │
-    │ Copyright © 2019 - ${year} Xecades                    │
-    │                                                    │
-    └────────────────────────────────────────────────────┘
+┌─Xecades Alpha──────────────────────────────────────┐
+│                                                    │
+│            Yet another concise homepage            │
+│                                                    │
+├────────────────────────────────────────────────────┤
+│                                                    │
+│ Github           https://github.com/Xecades/Alpha/ │
+│ Website                       https://xecades.xyz/ │
+│ QQ               [DNS TXT] https://qq.xecades.xyz/ │
+│                                                    │
+├────────────────────────────────────────────────────┤
+│                                                    │
+│ Built with Vue.js and... and my laptop.            │
+│                                                    │
+├────────────────────────────────────────────────────┤
+│                                                    │
+│ MIT LICENSE                                        │
+│ Copyright © 2019 - ${year} Xecades                    │
+│                                                    │
+└────────────────────────────────────────────────────┘
     `);
 };
 
@@ -60,7 +61,7 @@ async function main() {
     app.use(router);
     app.mount("#app");
 
-    console.debug("[+] Vue mounted");
+    logger.plus("Vue mounted");
 }
 
 main();

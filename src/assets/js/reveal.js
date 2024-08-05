@@ -1,8 +1,9 @@
 import ScrollReveal from "scrollreveal";
+import logger from "./logger";
 import { onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated } from "vue";
 
 function mount() {
-    console.debug("     Reveal module mounted");
+    logger.nbsp("Reveal module mounted");
     ScrollReveal().reveal(".rv", {
         // reset: true,
         interval: 20,

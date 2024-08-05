@@ -2,6 +2,7 @@
 import { render } from "@/assets/js/home/utils.jsx";
 import { isProxy, ref, watch } from "vue";
 
+import logger from "@/assets/js/logger";
 import setupReveal from "@/assets/js/reveal.js";
 import setupCursor from "@/assets/js/cursor.js";
 
@@ -17,7 +18,7 @@ if (isProxy(props.data)) {
     });
 }
 
-console.debug("     Default layout loaded");
+logger.nbsp("Home layout loaded");
 </script>
 
 <template>
