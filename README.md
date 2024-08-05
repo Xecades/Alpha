@@ -1,29 +1,14 @@
-# alpha
+# Xecades :: Alpha \[α\]
 
-This template should help get you started developing with Vue 3 in Vite.
+*Warning: WIP*
 
-## Recommended IDE Setup
+A total refactoring of my website, including:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+ - **Homepage**: [xecades.xyz](https://xecades.xyz/)
+ - **Blog**: [blog.xecades.xyz](https://blog.xecades.xyz/)
+ - **Note**: [note.xecades.xyz](https://note.xecades.xyz/)
 
-## Customize configuration
+Will be integrated as a single website to improve consistency.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+ - **Tech stack**: Vue.js
+ - **Preview**: [alpha.xecades.xyz](https://alpha.xecades.xyz/)
