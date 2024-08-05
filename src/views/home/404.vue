@@ -1,6 +1,6 @@
 <script setup>
 import HomeLayout from "@/layout/home.vue";
-import { ruby, link } from "@/assets/js/home/utils";
+import { ruby, link } from "@/assets/js/home/partials";
 
 const data = {
     "title": "404 Not Found",

@@ -1,5 +1,5 @@
 <script setup>
-import { render } from "@/assets/js/home/utils.jsx";
+import { render } from "@/assets/js/home/partials.jsx";
 import { isProxy, ref, watch } from "vue";
 
 import logger from "@/assets/js/logger";

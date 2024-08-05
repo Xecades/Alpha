@@ -1,6 +1,6 @@
 <script setup>
 import HomeLayout from "@/layout/home.vue";
-import { ruby, link, table } from "@/assets/js/home/utils";
+import { ruby, link, table } from "@/assets/js/home/partials";
 
 const data = {
     "title": "实验室",

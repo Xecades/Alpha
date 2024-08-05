@@ -1,6 +1,6 @@
 <script setup lang="jsx">
 import HomeLayout from "@/layout/home.vue";
-import { ruby, link, table, small } from "@/assets/js/home/utils";
+import { ruby, link, table, small } from "@/assets/js/home/partials";
 
 import { ref, watch } from "vue";
 
