@@ -33,17 +33,24 @@ const rmode = props.mode ?? (inside ? "stay" : "jump");
 </template>
 
 <style scoped>
+* {
+    --color: rgb(0, 93, 146);
+    --opacity: .7;
+    --hover-opacity: 1;
+    --active-opacity: .9;
+}
+
 a {
-    color: rgb(0, 93, 146);
+    color: var(--color);
     transition: opacity 0.2s;
-    opacity: .7;
+    opacity: var(--opacity);
 }
 
 a:hover {
-    opacity: 1;
+    --opacity: var(--hover-opacity);
 }
 
 a:active {
-    opacity: .9;
+    --opacity: var(--active-opacity);
 }
 </style>
