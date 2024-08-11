@@ -1,6 +1,15 @@
 <script setup>
+/**
+ * @todo ToC 需要支持 Components，考虑从 markdown 文件中直接解析
+ * @todo 用 Config Nav 中的标题作为页面标题（？）
+ * @todo Config Nav 真的需要设置标题吗？还是说直接用 Front Matter 的 title？
+ */
+
 import { shallowRef, watch } from "vue";
 import { useRoute } from "vue-router";
+
+// @ https://github.com/Modyfi/vite-plugin-yaml
+import config from "@note/config.yml";
 
 // @ https://github.com/mathiasbynens/he
 // + To decode HTML entities, e.g. &#x5915; -> 夕
@@ -18,7 +27,6 @@ const posts = {
     toc: import.meta.glob("@note/**/*.md", { import: "toc" }),
 };
 
-console.log(posts);
 
 const injectComps = {};
 const postBody = shallowRef();
@@ -72,6 +80,9 @@ watch(
         </div>
         <div>
             {{ postToc }}
+        </div>
+        <div>
+            {{ config }}
         </div>
         <!-- https://cn.vuejs.org/guide/essentials/component-basics.html#dynamic-components -->
         <component :is="postBody" />

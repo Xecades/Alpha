@@ -7,6 +7,7 @@ import vueDevTools from "vite-plugin-vue-devtools";
 
 import { plugin as markdown, Mode } from "vite-plugin-markdown";
 import liveReload from "vite-plugin-live-reload";
+import ViteYaml from "@modyfi/vite-plugin-yaml";
 
 const customElement = ["rb"];
 
@@ -36,7 +37,11 @@ export default defineConfig({
 
         // [vite-plugin-live-reload]
         // @ https://github.com/arnoson/vite-plugin-live-reload
-        liveReload("(note|blog)/**/*.(md|yml)")
+        liveReload("(note|blog)/**/*.(md|yml)"),
+
+        // [@modyfi/vite-plugin-yaml]
+        // @ https://github.com/Modyfi/vite-plugin-yaml
+        ViteYaml(),
     ],
     resolve: {
         alias: {
