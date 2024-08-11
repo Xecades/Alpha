@@ -5,6 +5,9 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 
+import { plugin as markdown, Mode } from "vite-plugin-markdown";
+import liveReload from "vite-plugin-live-reload";
+
 const customElement = ["rb"];
 
 export default defineConfig({
@@ -24,10 +27,21 @@ export default defineConfig({
 
         // [vite-plugin-vue-devtools]
         vueDevTools(),
+
+        // [vite-plugin-markdown]
+        // @ https://github.com/hmsk/vite-plugin-markdown
+        markdown({
+            mode: [Mode.TOC, Mode.VUE, Mode.MARKDOWN],
+        }),
+
+        // [vite-plugin-live-reload]
+        // @ https://github.com/arnoson/vite-plugin-live-reload
+        liveReload("(note|blog)/**/*.(md|yml)")
     ],
     resolve: {
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
+            "@note": fileURLToPath(new URL("./note", import.meta.url)),
         },
     },
 });
