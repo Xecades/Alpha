@@ -3,8 +3,8 @@ site_name: "Notes :: Xecades"
 nav:
   - cs:
       - c:
-          - markdown
           - snippets
+      - markdown
       - cldf
       - fds
   - math:
