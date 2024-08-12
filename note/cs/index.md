@@ -1,1 +1,3 @@
-# Computer Science
+---
+title: 计算机科学
+---

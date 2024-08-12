@@ -1,1 +1,3 @@
-# Linear Algebra
+---
+title: 线性代数课程笔记
+---

@@ -1,1 +1,3 @@
-# Computer Logic and Design Fundamentals
+---
+title: 计算机逻辑设计基础课程笔记
+---

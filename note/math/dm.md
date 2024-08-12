@@ -1,1 +1,3 @@
-# Discrete Math
+---
+title: 离散数学
+---

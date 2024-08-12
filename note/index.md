@@ -1,4 +1,6 @@
-# 这里是笔记首页
+---
+title: 这里是笔记首页
+---
 
 Aliqua commodo occaecat ullamco aliqua laboris. Et ut enim sit fugiat duis ex elit laborum. Consequat amet culpa sint eiusmod duis duis exercitation cupidatat sit. Anim ipsum aliquip exercitation eiusmod.
 

@@ -1,12 +1,12 @@
 site_name: "Notes :: Xecades"
 
 nav:
-  - 计算机科学 @cs:
-      - C 语言 @c:
-          - C 语言介绍: intro
-          - 代码片段: snippets
-      - 计算机逻辑设计基础课程笔记: cldf
-      - 数据结构课程笔记: fds
-  - 数学 @math:
-      - 线性代数课程笔记: la
-      - 离散数学: dm
+  - cs:
+      - c:
+          - markdown
+          - snippets
+      - cldf
+      - fds
+  - math:
+      - la
+      - dm
