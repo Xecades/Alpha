@@ -13,6 +13,11 @@ import "./assets/css/reset.css";
 import "./assets/css/cursor.css";
 import "./assets/css/global.css";
 
+// Font Awesome
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
 // Wait for document ready
 const documentReady = () => {
     return new Promise((res) => {
@@ -57,8 +62,11 @@ async function main() {
     consoleMessage();
     await documentReady();
 
+    library.add(faAngleRight);
+
     const app = createApp(App);
     app.use(router);
+    app.component("font-awesome-icon", FontAwesomeIcon);
     app.mount("#app");
 
     logger.plus("Vue mounted");
