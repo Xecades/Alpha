@@ -5,6 +5,8 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 
+import md from "./script/markdown-it";
+
 import { plugin as markdown, Mode } from "vite-plugin-markdown";
 import liveReload from "vite-plugin-live-reload";
 import ViteYaml from "@modyfi/vite-plugin-yaml";
@@ -33,6 +35,7 @@ export default defineConfig({
         // @ https://github.com/hmsk/vite-plugin-markdown
         markdown({
             mode: [Mode.TOC, Mode.VUE, Mode.MARKDOWN],
+            markdownIt: md,
         }),
 
         // [vite-plugin-live-reload]

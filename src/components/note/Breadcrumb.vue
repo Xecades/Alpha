@@ -1,11 +1,20 @@
 <script setup>
+/**
+ * @example /note/                  =>  Nothing
+ * @example /note/cs/               =>  Nothing (?)
+ * @example /note/cs/c/             =>  计算机科学
+ * @example /note/cs/c/snippets/    =>  计算机科学 > C 语言
+ * 
+ * @todo 处理标题过长的情况
+ */
+
 const props = defineProps({ path: Array });
 </script>
 
 <template>
     <ul>
         <li v-for="(item, idx) in path" :key="idx">
-            <router-link class="cursor link" :to='item.link'>
+            <router-link class="cursor link" :to="item.link">
                 {{ item.title }}
             </router-link>
             <font-awesome-icon v-if="idx != path.length - 1" class="icon" :icon="['fas', 'angle-right']" />
@@ -18,18 +27,21 @@ const props = defineProps({ path: Array });
     --text-color: #bbb;
     --text-hover-color: #777;
     --icon-color: #ddd;
+
+    --height: 1.6rem;
 }
 
 ul {
     display: block;
     user-select: none;
     font-size: .92rem;
+    height: var(--height);
 }
 
 li {
     display: inline-block;
-    height: 1.6rem;
-    line-height: 1.6rem;
+    height: var(--height);
+    line-height: var(--height);
 }
 
 .link {

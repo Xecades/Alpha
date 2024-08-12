@@ -84,7 +84,7 @@ const to_local = (path) => {
 const resolvePath = async (path) => {
     let ret = [];
 
-    for (let i = 0; i < path.length; i++) {
+    for (let i = 0; i < path.length - 1; i++) {
         let partial_path = path.slice(0, i + 1);
         let partial_src = to_local(partial_path);
 

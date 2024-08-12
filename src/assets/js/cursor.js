@@ -1,3 +1,7 @@
+/**
+ * @todo 开关控制台偶尔会导致子光标卡住，当前 prod 环境也有这个问题
+ */
+
 import { onMounted, onUpdated } from "vue";
 
 const lerp = (a, b, n) => (1 - n) * a + n * b;
