@@ -32,6 +32,7 @@ import config from "@note/config.yml";
 // setup's
 import setupReveal from "@/assets/js/reveal";
 import setupCursor from "@/assets/js/cursor";
+import toc from "@/assets/js/note/toc";
 
 setupReveal();
 setupCursor();
@@ -99,7 +100,9 @@ const resolvePath = async (path) => {
     return ret;
 }
 
-
+/**
+ * @todo 删掉这个函数
+ */
 const toc_decode = (toc) => toc.map((item) => {
     item.content = dingbatDecode(item.content);
     return item;
@@ -114,7 +117,8 @@ watch(
         if (src) {
             postBody.value = (await posts.vue[src]())(injectComps);
             postAttrs.value = await posts.attr[src]();
-            postToc.value = toc_decode(await posts.toc[src]());
+            // postToc.value = toc_decode(await posts.toc[src]());
+            postToc.value = toc(await posts.md[src]());
             titlePath.value = await resolvePath(path);
 
             console.log("postAttrs:", postAttrs.value);
@@ -134,7 +138,7 @@ watch(
     <div class="wrapper">
         <LeftBar id="left" :posts="posts" />
         <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
-        <RightBar id="right" :posts="posts" />
+        <RightBar id="right" :toc="postToc" />
     </div>
 </template>
 
