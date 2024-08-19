@@ -12,6 +12,7 @@ import logger from "./assets/js/logger";
 import "./assets/css/reset.css";
 import "./assets/css/cursor.css";
 import "./assets/css/global.css";
+import "katex/dist/katex.min.css";
 
 // Font Awesome
 import { library } from "@fortawesome/fontawesome-svg-core";

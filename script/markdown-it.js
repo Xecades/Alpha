@@ -41,18 +41,18 @@ md.use(MarkdownItPrism, {
 /**
  * @name markdown-it-wrapper
  */
-// md.use(MarkdownItWrapper, {
-//     marker: "^",
-//     tag: "sup",
-//     allowSpaces: false,
-//     allowNewlines: false,
-// });
+md.use(MarkdownItWrapper, {
+    type: "inline",
+    name: "katex_inline",
+    marker: "$",
+    renderer: (c) => `<inline-math data="${encodeURI(c)}"></inline-math>`,
+});
 
-// md.use(MarkdownItWrapper, {
-//     marker: "$$",
-//     tag: "double-dollar",
-//     allowSpaces: true,
-//     allowNewlines: true,
-// });
+md.use(MarkdownItWrapper, {
+    type: "block",
+    name: "katex_block",
+    marker: "$$",
+    renderer: (c) => `<block-math data="${encodeURI(c)}"></block-math>`,
+});
 
 export default md;

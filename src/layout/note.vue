@@ -24,6 +24,10 @@ import LeftBar from "@/components/note/LeftBar.vue";
 import RightBar from "@/components/note/RightBar.vue";
 import Content from "@/components/note/Content.vue";
 
+// Markdown
+import InlineMath from "@/components/md/InlineMath.vue";
+import BlockMath from "@/components/md/BlockMath.vue";
+
 
 // @ https://github.com/Modyfi/vite-plugin-yaml
 import config from "@note/config.yml";
@@ -58,7 +62,7 @@ const posts = {
 };
 
 
-const injectComps = {};
+const injectComps = { InlineMath, BlockMath };
 const postBody = shallowRef();
 const postAttrs = shallowRef({});
 const postToc = shallowRef({});

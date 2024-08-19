@@ -2,12 +2,12 @@
 title: Custom Token Test
 ---
 
-Ordinary text, ^fen**c**e^, another text
+Ordinary text, $\LaTeX$, another text
 
-Hey, $tokenize **me**$!!
+Hey, $\mathfrak{Xecades}$
 
-$$
-double dollar!!!
-new lines available
-snippet **inside** available!!!
-$$
+$$\begin{aligned}
+&\Bigl(f*g\Bigr)(6) \\
+=&\sum_{d\mid 6}f(d)g\biggl(\dfrac{6}{d}\biggr) \\
+=&f(1)g(6)+f(2)g(3)+f(3)g(2)+f(6)g(1)
+\end{aligned}$$
