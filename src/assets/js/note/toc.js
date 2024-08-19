@@ -6,24 +6,27 @@
  *       - 以 # 开头
  *       - # 后面有一个空格
  *       - 不在代码块中
- * 
+ *
  * @todo 以及锚点跳转：通过 transliteration 实现
  */
-function toc(md) {
+
+import md from "../md-title";
+
+function toc(text) {
     const reg = /^ *#{1,6} /s;
 
-    md = md.split("\n");
+    text = text.split("\n");
     let headers = [];
 
     let is_in_cb = false; // 是否在代码块中
 
-    for (let i = 0; i < md.length; i++) {
-        if (md[i].startsWith("```")) {
+    for (let i = 0; i < text.length; i++) {
+        if (text[i].startsWith("```")) {
             is_in_cb = !is_in_cb;
         }
 
-        if (!is_in_cb && reg.test(md[i])) {
-            headers.push(md[i].trim());
+        if (!is_in_cb && reg.test(text[i])) {
+            headers.push(text[i].trim());
         }
     }
 
@@ -31,6 +34,8 @@ function toc(md) {
         let nbsp_idx = h.indexOf(" ");
         let level = h.slice(0, nbsp_idx).length;
         let title = h.slice(nbsp_idx + 1).trim();
+
+        title = md.renderInline(title);
 
         return {
             level,
