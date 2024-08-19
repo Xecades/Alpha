@@ -1,4 +1,5 @@
 import MarkdownIt from "markdown-it";
+import { slugify } from "transliteration";
 
 import MarkdownItAnchor from "markdown-it-anchor";
 import MarkdownItPrism from "markdown-it-prism";
@@ -23,8 +24,7 @@ md.use(MarkdownItAnchor, {
         symbol: "¶",
         placement: "after",
     }),
-    slugify: () => "t",
-    uniqueSlugStartIndex: 2,
+    slugify: slugify,
 });
 
 /**
