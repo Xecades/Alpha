@@ -4,6 +4,8 @@ import { slugify } from "transliteration";
 import MarkdownItAnchor from "markdown-it-anchor";
 import MarkdownItPrism from "markdown-it-prism";
 
+import MarkdownItWrapper from "./markdown-it-wrapper";
+
 // MarkdownIt Configurations
 // https://markdown-it.github.io/markdown-it/#MarkdownIt.new
 const md = new MarkdownIt({
@@ -35,5 +37,22 @@ md.use(MarkdownItPrism, {
     highlightInlineCode: true,
     plugins: ["match-braces"],
 });
+
+/**
+ * @name markdown-it-wrapper
+ */
+// md.use(MarkdownItWrapper, {
+//     marker: "^",
+//     tag: "sup",
+//     allowSpaces: false,
+//     allowNewlines: false,
+// });
+
+// md.use(MarkdownItWrapper, {
+//     marker: "$$",
+//     tag: "double-dollar",
+//     allowSpaces: true,
+//     allowNewlines: true,
+// });
 
 export default md;
