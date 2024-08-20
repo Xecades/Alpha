@@ -3,8 +3,7 @@ import MarkdownItWrapper from "@/../script/markdown-it-wrapper";
 
 const md = new MarkdownIt();
 
-// TODO: 不要 disable，而是只显示文字
-md.disable(["link"]);
+md.disable(["link", "image", "linkify", "newline"]);
 
 md.use(MarkdownItWrapper, {
     type: "inline",

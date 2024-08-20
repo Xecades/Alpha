@@ -44,7 +44,7 @@ function toc(text) {
     });
 
     console.log(headers);
-    return {};
+    return headers;
 }
 
 export default toc;
