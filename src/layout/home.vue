@@ -4,7 +4,7 @@ import { isProxy, ref, watch } from "vue";
 
 import logger from "@/assets/js/logger";
 import setupReveal from "@/assets/js/reveal.js";
-import setupCursor from "@/assets/js/cursor.js";
+import { setupCursor } from "@/assets/js/cursor.js";
 
 const props = defineProps({ data: Object });
 const VBody = ref(render(props.data));

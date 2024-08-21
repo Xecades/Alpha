@@ -70,7 +70,14 @@ class Cursor {
 }
 
 const cursor = new Cursor();
-export default function setupCursor() {
+
+function setupCursor() {
     onMounted(() => cursor.refresh());
     onUpdated(() => cursor.refresh());
 }
+
+function refreshCursor() {
+    cursor.refresh();
+}
+
+export { refreshCursor, setupCursor };

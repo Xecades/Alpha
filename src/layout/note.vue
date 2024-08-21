@@ -37,7 +37,7 @@ import config from "@note/config.yml";
 
 // setup's
 import setupReveal from "@/assets/js/reveal";
-import setupCursor from "@/assets/js/cursor";
+import { setupCursor } from "@/assets/js/cursor";
 import toc from "@/assets/js/note/toc";
 
 setupReveal();

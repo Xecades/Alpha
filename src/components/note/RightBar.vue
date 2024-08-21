@@ -16,6 +16,7 @@
  */
 
 import { computed, ref } from "vue";
+import { refreshCursor } from "@/assets/js/cursor";
 
 const props = defineProps({
     toc_raw: Array,
@@ -45,61 +46,92 @@ const navigate = (id) => {
 </script>
 
 <template>
-    <div class="box">
-        <div class="wrapper" @mouseenter="showtext = true" @mouseleave="showtext = false">
-            <a class="item cursor" :href="'#' + item.link" v-for="item in toc" @click.prevent="navigate(item.link)">
-                <div class="bar" :style="{ width: item.width }" v-if="!showtext"></div>
-                <div class="text" v-html="item.title" v-else></div>
-            </a>
-        </div>
+    <div class="container">
+        <Transition name="bars" class="wrapper" @enter="refreshCursor" @mouseenter="showtext = true"
+            @mouseleave="showtext = false">
+            <div class="toc" v-if="!showtext">
+                <template v-for="item in toc">
+                    <div class="bar item cursor" :style="{ width: item.width }"></div>
+                </template>
+            </div>
+            <div class="toc" v-else>
+                <template v-for="item in toc">
+                    <a class="text item cursor" :href="'#' + item.link" v-html="item.title"
+                        @click.prevent="navigate(item.link)"></a>
+                </template>
+            </div>
+        </Transition>
     </div>
 </template>
 
 <style scoped>
 * {
-    --padding-top: 11rem;
+    --offset-top: 11rem;
+    --padding: 2rem;
+    --offset-right: calc(70px - var(--padding));
+
+    --translate-offset: 7px;
+
     --color: #e3e2e0;
-    --height: 4px;
     --gap: 15px;
+    --bar-height: 4px;
     --bar-padding: 4px;
-    --margin-right: 40px;
 }
 
-.box {
-    padding-top: var(--padding-top);
-    right: 0;
-}
-
-.wrapper {
-    margin-left: auto;
-    margin-right: var(--margin-right);
+.toc {
     width: 15rem;
     display: flex;
     flex-direction: column;
     gap: calc(var(--gap) - 2 * var(--bar-padding));
+    position: absolute;
+    top: var(--offset-top);
+    right: var(--offset-right);
+    padding: var(--padding);
 }
 
 .item {
     margin-left: auto;
-    display: block;
+    display: inline-block;
     color: #6e758c;
     font-size: .95rem;
     transition: color .05s;
+    position: relative;
 }
 
 .item:hover {
     color: #60a5fa;
 }
 
-.slot {
-    margin-left: auto;
-}
-
 .bar {
-    margin: var(--bar-padding);
+    margin-top: var(--bar-padding);
     background-color: var(--color);
     border-radius: 4px;
-    height: var(--height);
+    height: var(--bar-height);
     transition: background-color .3s;
+}
+
+.text {
+    line-height: 1.6rem;
+}
+
+.bars-enter-active,
+.bars-leave-active {
+    transition-property: opacity, transform;
+}
+
+.bars-enter-active {
+    transition-duration: .37s;
+    transition-timing-function: ease-out;
+}
+
+.bars-leave-active {
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.15, .79, .69, .68);
+}
+
+.bars-enter-from,
+.bars-leave-to {
+    opacity: 0;
+    transform: translateX(var(--translate-offset));
 }
 </style>
