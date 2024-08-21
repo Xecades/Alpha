@@ -41,15 +41,6 @@ import toc from "@/assets/js/note/toc";
 setupReveal();
 setupCursor();
 
-
-/**
- * @link https://github.com/mathiasbynens/he
- * @desc To decode HTML entities, e.g. &#x5915; -> 夕
- * @todo 不需要这个模块，重写一个 ToC 处理模块
- */
-import { decode as dingbatDecode } from "he";
-
-
 const route = useRoute();
 
 // https://cn.vitejs.dev/guide/features.html#glob-import
@@ -65,7 +56,7 @@ const posts = {
 const injectComps = { InlineMath, BlockMath };
 const postBody = shallowRef();
 const postAttrs = shallowRef({});
-const postToc = shallowRef({});
+const postToc = shallowRef([]);
 const titlePath = ref([]);
 
 const to_local = (path) => {
@@ -102,15 +93,7 @@ const resolvePath = async (path) => {
     }
 
     return ret;
-}
-
-/**
- * @todo 删掉这个函数
- */
-const toc_decode = (toc) => toc.map((item) => {
-    item.content = dingbatDecode(item.content);
-    return item;
-});
+};
 
 
 watch(
@@ -121,7 +104,6 @@ watch(
         if (src) {
             postBody.value = (await posts.vue[src]())(injectComps);
             postAttrs.value = await posts.attr[src]();
-            // postToc.value = toc_decode(await posts.toc[src]());
             postToc.value = toc(await posts.md[src]());
             titlePath.value = await resolvePath(path);
 
@@ -139,10 +121,10 @@ watch(
 </script>
 
 <template>
-    <div class="wrapper">
+    <div class="container">
         <LeftBar id="left" :posts="posts" />
         <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
-        <RightBar id="right" :toc="postToc" />
+        <RightBar id="right" :toc_raw="postToc" />
     </div>
 </template>
 
@@ -151,7 +133,7 @@ watch(
     --content-width: 740px;
 }
 
-.wrapper {
+.container {
     width: 100vw;
     display: flex;
 }

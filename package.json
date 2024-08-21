@@ -22,7 +22,6 @@
         "@modyfi/vite-plugin-yaml": "^1.1.0",
         "@vitejs/plugin-vue": "^5.0.5",
         "@vitejs/plugin-vue-jsx": "^4.0.0",
-        "he": "^1.2.0",
         "katex": "^0.16.11",
         "markdown-it": "^14.1.0",
         "markdown-it-anchor": "^9.0.1",

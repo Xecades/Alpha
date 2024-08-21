@@ -1,26 +1,10 @@
 <script setup>
-import katex from "katex";
+import { render_block } from "@/assets/js/latex";
 
-const props = defineProps({
-    data: String
-});
-
-const options = {
-    displayMode: true,
-    throwOnError: true,
-};
-
-const render = (raw) => {
-    try {
-        return katex.renderToString(raw, options);
-    } catch (error) {
-        console.log(error);
-        return raw;
-    }
-};
+const props = defineProps({ data: String });
 
 const raw = decodeURI(props.data);
-const parsed = render(raw);
+const parsed = render_block(raw);
 </script>
 
 <template>

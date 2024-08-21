@@ -7,10 +7,12 @@
  *       - # 后面有一个空格
  *       - 不在代码块中
  *
- * @todo 以及锚点跳转：通过 transliteration 实现
+ * @note Permalink 格式：
+ *       - 第一个为 t
+ *       - 后面的以此类推为 t-2, t-3, ...
  */
 
-import md from "../md-title";
+import md from "../toc-renderer";
 
 function toc(text) {
     const reg = /^ *#{1,6} /s;
@@ -30,17 +32,15 @@ function toc(text) {
         }
     }
 
-    headers = headers.map((h) => {
+    headers = headers.map((h, idx) => {
         let nbsp_idx = h.indexOf(" ");
         let level = h.slice(0, nbsp_idx).length;
         let title = h.slice(nbsp_idx + 1).trim();
+        let link = idx == 0 ? "t" : `t-${idx + 1}`;
 
         title = md.renderInline(title);
 
-        return {
-            level,
-            title,
-        };
+        return { level, title, link };
     });
 
     console.log(headers);
@@ -48,60 +48,3 @@ function toc(text) {
 }
 
 export default toc;
-
-/*
-平铺结构：x
-[
-    { "level": 2, "title": "二级标题" },
-    { "level": 3, "title": "三级标题" },
-    { "level": 4, "title": "四级标题" },
-    { "level": 5, "title": "五级标题" },
-    { "level": 6, "title": "六级标题" },
-    { "level": 2, "title": "但是这里应该被判定为标题" },  <-+
-    { "level": 4, "title": "这里也是" }                <-+- 这里第二项是否需要把 level 改为 3？x
-]
-
-Preorder Traverse 一下
-树形结构：√
-Indent?
-[
-    {
-        "level": 2,
-        "title": "二级标题",
-        "children": [
-            {
-                "level": 3,
-                "title": "三级标题",
-                "children": [
-                    {
-                        "level": 4,
-                        "title": "四级标题",
-                        "children": [
-                            {
-                                "level": 5,
-                                "title": "五级标题",
-                                "children": [
-                                    {
-                                        "level": 6,
-                                        "title": "六级标题"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "level": 2,
-        "title": "但是这里应该被判定为标题",
-        "children": [
-            {
-                "level": 4,
-                "title": "这里也是"
-            }
-        ]
-    }
-]
-*/

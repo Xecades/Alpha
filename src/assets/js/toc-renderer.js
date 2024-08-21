@@ -1,5 +1,7 @@
 import MarkdownIt from "markdown-it";
+
 import MarkdownItWrapper from "@/../script/markdown-it-wrapper";
+import { render_inline } from "./latex";
 
 const md = new MarkdownIt();
 
@@ -9,7 +11,7 @@ md.use(MarkdownItWrapper, {
     type: "inline",
     name: "katex_inline",
     marker: "$",
-    renderer: (c) => `<inline-math data="${encodeURI(c)}"></inline-math>`,
+    renderer: render_inline,
 });
 
 export default md;
