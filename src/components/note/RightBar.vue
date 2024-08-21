@@ -45,7 +45,7 @@ const navigate = (id) => {
 </script>
 
 <template>
-    <div class="container">
+    <div class="box">
         <div class="wrapper" @mouseenter="showtext = true" @mouseleave="showtext = false">
             <a class="item cursor" :href="'#' + item.link" v-for="item in toc" @click.prevent="navigate(item.link)">
                 <div class="bar" :style="{ width: item.width }" v-if="!showtext"></div>
@@ -65,7 +65,7 @@ const navigate = (id) => {
     --margin-right: 40px;
 }
 
-.container {
+.box {
     padding-top: var(--padding-top);
     right: 0;
 }
@@ -102,6 +102,4 @@ const navigate = (id) => {
     height: var(--height);
     transition: background-color .3s;
 }
-
-.text {}
 </style>
