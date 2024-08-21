@@ -26,6 +26,7 @@ const props = defineProps({
     --menu-width: 42px;
     --menu-height: 40px;
     --menu-color: #cecece;
+    --menu-hover-color: #a9a9a9;
     --menu-bg-hover-color: #e8e9e97d;
 }
 
@@ -39,11 +40,12 @@ const props = defineProps({
     line-height: var(--menu-height);
     font-size: 1.4rem;
     border-radius: 3px;
-    transition: background-color .15s;
+    transition: background-color .15s, color .15s;
     color: var(--menu-color);
 }
 
 .menu:hover {
     background-color: var(--menu-bg-hover-color);
+    color: var(--menu-hover-color);
 }
 </style>
