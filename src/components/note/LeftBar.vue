@@ -1,51 +1,154 @@
 <script setup>
+import { ref } from "vue";
+
 /**
- * @todo 不需要传入完整的 posts，后续改为 postAttrs，etc.
+ * @note 即使只载入 front matter 也会完整地渲染一遍 markdown，是否改成提前渲染？
+ *       改成直接读取文件的形式是否会更快？
+ * 
+ * @note 需要显示的东西：
+ *        - 搜索功能：全部文章的 markdown 源码
+ *            以什么形式出现？点击出现 popup 窗口？
+ *            是否需要提前生成索引文件？搜索的高亮如何处理？
+ *            特殊 snippet 如何处理？（是否需要先用 markdown-it 渲染一遍？）
+ *             * 采用 xdino 的设计方案
+ *        - 文章目录：文章层级关系、全部文章的 title
+ *            以什么样的形式展开？如果全部展开会不会太长？
+ *            是 hover 触发还是和 ToC 一样处理？
+ *             * 只要 hover 左侧 bar 即触发，范围大一点，只要鼠标停留在左侧就不消失（✓）
  */
 const props = defineProps({
     posts: Object,
 });
+
+const categories = ref([
+    { name: "数学", opacity: 0 },
+    { name: "计算机", opacity: 0 },
+    { name: "CTF", opacity: 0 },
+    { name: "其他", opacity: 0 },
+]);
+
+const ishover = ref(false);
+
+const REVEAL_DELAY = 40;
+
+const reveal_category = () => {
+    let len = categories.value.length;
+
+    for (let i = 0; i < len; i++) {
+        clearTimeout(categories.value[i].timeout);
+
+        let curr = setTimeout(() => {
+            categories.value[i].opacity = 1;
+        }, REVEAL_DELAY * i);
+
+        categories.value[i].timeout = curr;
+    }
+};
+
+const hide_category = () => {
+    let len = categories.value.length;
+
+    for (let i = len - 1; i >= 0; i--) {
+        clearTimeout(categories.value[i].timeout);
+
+        let curr = setTimeout(() => {
+            categories.value[i].opacity = 0;
+        }, REVEAL_DELAY * (len - 1 - i));
+
+        categories.value[i].timeout = curr;
+    }
+};
 </script>
 
 <template>
-    <div>
-        <div class="menu cursor">
-            <font-awesome-icon :icon="['fas', 'bars']" />
-        </div>
-        <div class="category">
-            <!-- PLACEHOLDER -->
+    <div @mouseenter="ishover = true; reveal_category()" @mouseleave="ishover = false; hide_category()">
+        <ul class="nav">
+            <li class="btn cursor" id="search">
+                <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+            </li>
+        </ul>
+        <ul class="category">
+            <template v-for="item in categories">
+                <li class="item cursor" :style="{ opacity: item.opacity }">
+                    {{ item.name }}
+                </li>
+            </template>
+        </ul>
+        <div class="content" v-show="ishover">
+            <!-- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia molestiae, quas quis aliquid itaque
+            laudantium! Natus est accusamus in quidem quam ducimus dolore doloribus repellendus, necessitatibus alias,
+            aperiam quaerat placeat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Error vel sequi asperiores
+            temporibus deleniti dolorem ipsa alias. Rerum, iste blanditiis earum dicta illo minima quos delectus vero
+            odio corrupti a! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro in velit corrupti esse
+            aliquam itaque, eius deleniti vero nisi? Facilis possimus in, voluptatem magnam quisquam tempore quibusdam
+            ullam error fugit. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore enim quisquam, sint
+            deleniti modi dolorem placeat eaque dolore cum veniam dolores. Inventore incidunt illo nesciunt aperiam
+            fugit aliquid officiis quaerat! -->
         </div>
     </div>
 </template>
 
 <style scoped>
 * {
-    --margin-top: 28px;
-    --margin-left: 35px;
+    --offset-top: 28px;
+    --offset-left: 35px;
 
-    --menu-width: 42px;
-    --menu-height: 40px;
-    --menu-color: #cecece;
-    --menu-hover-color: #a9a9a9;
-    --menu-bg-hover-color: #e8e9e97d;
+    --nav-width: 42px;
+    --nav-height: 40px;
+    --nav-gap: 2px;
+    --nav-color: #cecece;
+    --nav-hover-color: #a9a9a9;
+    --nav-bg-hover-color: #f2f2f2c4;
 }
 
-.menu {
-    margin-top: var(--margin-top);
-    margin-left: var(--margin-left);
+.nav {
+    margin-top: var(--offset-top);
+    margin-left: var(--offset-left);
+    display: flex;
+    flex-direction: row;
+    gap: var(--nav-gap);
+}
 
-    height: var(--menu-height);
-    width: var(--menu-width);
+.nav .btn {
+    height: var(--nav-height);
+    width: var(--nav-width);
     text-align: center;
-    line-height: var(--menu-height);
-    font-size: 1.4rem;
+    line-height: var(--nav-height);
+    font-size: 1.2rem;
     border-radius: 3px;
     transition: background-color .15s, color .15s;
-    color: var(--menu-color);
+    color: var(--nav-color);
+    display: block;
 }
 
-.menu:hover {
-    background-color: var(--menu-bg-hover-color);
-    color: var(--menu-hover-color);
+.category {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: var(--offset-top);
+    left: calc(var(--offset-left) + var(--nav-width) + var(--nav-gap));
+    height: var(--nav-height);
+    text-wrap: nowrap;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.category .item {
+    height: var(--nav-height);
+    line-height: var(--nav-height);
+    font-size: .9rem;
+    padding: 0 12px;
+    color: #888e8f;
+    background-color: #fdfdfdf5;
+    transition: background-color .15s, opacity .2s;
+}
+
+.category .item:hover {
+    background-color: #f5f5f5fc;
+}
+
+.nav .btn:hover {
+    background-color: var(--nav-bg-hover-color);
+    color: var(--nav-hover-color);
 }
 </style>

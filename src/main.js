@@ -17,7 +17,11 @@ import "katex/dist/katex.min.css";
 // Font Awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faAngleRight, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+    faAngleRight,
+    faBars,
+    faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 // Wait for document ready
 const documentReady = () => {
@@ -63,7 +67,7 @@ async function main() {
     consoleMessage();
     await documentReady();
 
-    library.add(faAngleRight, faBars);
+    library.add(faAngleRight, faBars, faMagnifyingGlass);
 
     const app = createApp(App);
     app.use(router);

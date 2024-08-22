@@ -43,7 +43,6 @@ function toc(text) {
         return { level, title, link };
     });
 
-    console.log(headers);
     return headers;
 }
 

@@ -16,6 +16,10 @@
  * @todo index.md 添加 Vue 组件
  * 
  * @todo 添加点击跳转顶部的功能
+ * 
+ * @todo 处理 front matter
+ * 
+ * @todo 使用 await 来提高性能
  */
 
 import { ref, shallowRef, watch } from "vue";
@@ -109,8 +113,8 @@ watch(
             postToc.value = toc(await posts.md[src]());
             titlePath.value = await resolvePath(path);
 
-            console.log("postAttrs:", postAttrs.value);
-            console.log("postToc:", postToc.value);
+            // console.log("postAttrs:", postAttrs.value);
+            // console.log("postToc:", postToc.value);
         } else {
             postBody.value = null;
             postAttrs.value = {};
@@ -142,6 +146,7 @@ watch(
 
 #content {
     width: var(--content-width);
+    z-index: 10;
 }
 
 #left,
@@ -150,5 +155,6 @@ watch(
     top: 0;
     width: calc((100vw - var(--content-width)) / 2);
     height: 100vh;
+    z-index: 100;
 }
 </style>
