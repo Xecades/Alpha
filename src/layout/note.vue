@@ -51,13 +51,8 @@ const route = useRoute();
 
 // https://cn.vitejs.dev/guide/features.html#glob-import
 // https://github.com/hmsk/vite-plugin-markdown/blob/main/examples/vue/src/App.vue#L22
-const posts = {
-    md: import.meta.glob("@note/**/*.md", { import: "markdown" }),
-    vue: import.meta.glob("@note/**/*.md", { import: "VueComponentWith" }),
-    attr: import.meta.glob("@note/**/*.md", { import: "attributes" }),
-    toc: import.meta.glob("@note/**/*.md", { import: "toc" }),
-};
-
+// @todo 需要大改
+const posts = import.meta.glob("@note/**/*.md");
 
 const injectComps = { InlineMath, BlockMath };
 const postBody = shallowRef();
@@ -73,8 +68,8 @@ const to_local = (path) => {
 
     let src = "/" + tmp.join("/");
 
-    if (posts.md[src + ".md"]) return src + ".md"; // Normal post
-    else if (posts.md[src + "/index.md"]) return src + "/index.md"; // Index page
+    if (posts[src + ".md"]) return src + ".md"; // Normal post
+    else if (posts[src + "/index.md"]) return src + "/index.md"; // Index page
     else return null; // 404
 };
 
@@ -90,7 +85,7 @@ const resolvePath = async (path) => {
         let partial_path = path.slice(0, i + 1);
         let partial_src = to_local(partial_path);
 
-        let attr = await posts.attr[partial_src]();
+        let attr = (await posts[partial_src]()).attributes;
 
         ret.push({
             title: attr.title,
@@ -108,9 +103,11 @@ watch(
         let src = to_local(path);
 
         if (src) {
-            postBody.value = (await posts.vue[src]())(injectComps);
-            postAttrs.value = await posts.attr[src]();
-            postToc.value = toc(await posts.md[src]());
+            let mod = await posts[src]();
+
+            postBody.value = mod.VueComponentWith(injectComps);
+            postAttrs.value = mod.attributes;
+            postToc.value = toc(mod.markdown);
             titlePath.value = await resolvePath(path);
 
             // console.log("postAttrs:", postAttrs.value);
