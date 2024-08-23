@@ -49,6 +49,9 @@
 
 读取文件 -> MD 渲染 -> Vue SFC 编译 -> 挂载
        *-> 预处理标题及目录 -> 挂载
+       *-> 处理搜索用的索引（用 `fuse.js`） -> 挂载 `fuse` 对象
+
+（性能影响如何？是否需要保存到临时文件里？）
 
 TODO: 舍弃 vite-plugin-markdown，自己实现渲染，提前编译成 Vue 组件
       舍弃 vite-plugin-yaml
