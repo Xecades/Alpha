@@ -1,6 +1,4 @@
-site_name: "Notes :: Xecades"
-
-nav:
+structure:
   - cs:
       - c:
           - snippets
