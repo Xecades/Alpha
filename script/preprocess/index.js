@@ -29,5 +29,9 @@ const chokidar_cb = async () => {
     cb_active = false;
 };
 
-chokidar.watch(NOTE_BASE).on("change", chokidar_cb);
+if (process.env.NODE_ENV == "development") {
+    // 必须要加一个守卫，否则 build 的时候会死循环
+    chokidar.watch(NOTE_BASE).on("change", chokidar_cb);
+}
+
 await chokidar_cb();
