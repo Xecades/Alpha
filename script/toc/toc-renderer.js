@@ -7,6 +7,7 @@ const md = new MarkdownIt();
 
 md.disable(["link", "image", "linkify", "newline"]);
 
+// 这里需要先把 LaTeX 渲染出来，否则还需要编译一遍 Vue Components
 md.use(MarkdownItWrapper, {
     type: "inline",
     name: "katex_inline",
