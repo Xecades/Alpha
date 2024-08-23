@@ -5,7 +5,8 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 
-import md from "./script/markdown-it";
+import md from "./script/markdown";
+import { notes } from "./script/preprocess";
 
 import { plugin as markdown, Mode } from "vite-plugin-markdown";
 import liveReload from "vite-plugin-live-reload";
@@ -50,6 +51,7 @@ export default defineConfig({
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
             "@note": fileURLToPath(new URL("./note", import.meta.url)),
+            "@cache": fileURLToPath(new URL("./cache", import.meta.url)),
         },
     },
 });

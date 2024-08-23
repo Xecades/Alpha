@@ -12,9 +12,9 @@
  *       - 后面的以此类推为 t-2, t-3, ...
  */
 
-import md from "../toc-renderer";
+import md from "./toc-renderer";
 
-function toc(text) {
+export default (text) => {
     const reg = /^ *#{1,6} /s;
 
     text = text.split("\n");
@@ -44,6 +44,4 @@ function toc(text) {
     });
 
     return headers;
-}
-
-export default toc;
+};

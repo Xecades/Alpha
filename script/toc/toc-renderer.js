@@ -1,7 +1,7 @@
 import MarkdownIt from "markdown-it";
 
-import MarkdownItWrapper from "@/../script/markdown-it-wrapper";
-import { render_inline } from "./latex";
+import MarkdownItWrapper from "../markdown-it-wrapper";
+import { render_inline } from "../../src/assets/js/latex";
 
 const md = new MarkdownIt();
 

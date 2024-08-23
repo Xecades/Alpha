@@ -3,7 +3,7 @@ import MarkdownIt from "markdown-it";
 import MarkdownItAnchor from "markdown-it-anchor";
 import MarkdownItPrism from "markdown-it-prism";
 
-import MarkdownItWrapper from "./markdown-it-wrapper";
+import MarkdownItWrapper from "../markdown-it-wrapper";
 
 // MarkdownIt Configurations
 // https://markdown-it.github.io/markdown-it/#MarkdownIt.new
@@ -11,6 +11,7 @@ const md = new MarkdownIt({
     html: true,
     linkify: true,
     typographer: true,
+    xhtmlOut: true,
 });
 
 /**

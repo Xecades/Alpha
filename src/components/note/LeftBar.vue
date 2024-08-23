@@ -17,7 +17,7 @@ import { ref } from "vue";
  *             * 只要 hover 左侧 bar 即触发，范围大一点，只要鼠标停留在左侧就不消失（✓）
  */
 const props = defineProps({
-    posts: Object,
+    meta: Object,
 });
 
 const categories = ref([

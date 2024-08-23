@@ -39,20 +39,20 @@ import BlockMath from "@/components/md/BlockMath.vue";
 import config from "@note/config.yml";
 
 
-// setup's
+// Setup's
 import setupReveal from "@/assets/js/reveal";
 import { setupCursor } from "@/assets/js/cursor";
-import toc from "@/assets/js/note/toc";
+
+
+// Cache
+import meta_cache from "@cache/note/meta";
+import comps_cache from "@cache/note/comps";
+
 
 setupReveal();
 setupCursor();
 
 const route = useRoute();
-
-// https://cn.vitejs.dev/guide/features.html#glob-import
-// https://github.com/hmsk/vite-plugin-markdown/blob/main/examples/vue/src/App.vue#L22
-// @todo 需要大改
-const posts = import.meta.glob("@note/**/*.md");
 
 const injectComps = { InlineMath, BlockMath };
 const postBody = shallowRef();
@@ -66,10 +66,10 @@ const to_local = (path) => {
     if (tmp === "") tmp = ["note"];
     else tmp.unshift("note");
 
-    let src = "/" + tmp.join("/");
+    let src = tmp.join("/");
 
-    if (posts[src + ".md"]) return src + ".md"; // Normal post
-    else if (posts[src + "/index.md"]) return src + "/index.md"; // Index page
+    if (meta_cache[src + ".md"]) return src + ".md"; // Normal post
+    else if (meta_cache[src + "/index.md"]) return src + "/index.md"; // Index page
     else return null; // 404
 };
 
@@ -85,7 +85,7 @@ const resolvePath = async (path) => {
         let partial_path = path.slice(0, i + 1);
         let partial_src = to_local(partial_path);
 
-        let attr = (await posts[partial_src]()).attributes;
+        let attr = meta_cache[partial_src].attr;
 
         ret.push({
             title: attr.title,
@@ -103,19 +103,14 @@ watch(
         let src = to_local(path);
 
         if (src) {
-            let mod = await posts[src]();
-
-            postBody.value = mod.VueComponentWith(injectComps);
-            postAttrs.value = mod.attributes;
-            postToc.value = toc(mod.markdown);
+            postBody.value = comps_cache[src](injectComps);
+            postAttrs.value = meta_cache[src].attr;
+            postToc.value = meta_cache[src].toc;
             titlePath.value = await resolvePath(path);
-
-            // console.log("postAttrs:", postAttrs.value);
-            // console.log("postToc:", postToc.value);
         } else {
             postBody.value = null;
             postAttrs.value = {};
-            postToc.value = {};
+            postToc.value = [];
             titlePath.value = [];
         }
     },
@@ -125,7 +120,7 @@ watch(
 
 <template>
     <div class="container">
-        <LeftBar id="left" :posts="posts" />
+        <LeftBar id="left" :meta="meta_cache" />
         <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
         <RightBar id="right" :toc_raw="postToc" />
     </div>
