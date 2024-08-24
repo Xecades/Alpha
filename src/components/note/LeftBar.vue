@@ -16,17 +16,9 @@ import { ref } from "vue";
  *            是 hover 触发还是和 ToC 一样处理？
  *             * 只要 hover 左侧 bar 即触发，范围大一点，只要鼠标停留在左侧就不消失（✓）
  */
-const props = defineProps({
-    config: Object,
-});
+const props = defineProps({ config: Object });
 
-const categories = ref([
-    { name: "数学", opacity: 0 },
-    { name: "计算机", opacity: 0 },
-    { name: "CTF", opacity: 0 },
-    { name: "其他", opacity: 0 },
-]);
-
+const categories = ref(props.config.nav.map(cate => ({ name: cate.title, opacity: 0 })));
 const ishover = ref(false);
 
 const REVEAL_DELAY = 40;

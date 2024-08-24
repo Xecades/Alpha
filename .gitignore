@@ -13,7 +13,7 @@ dist
 dist-ssr
 coverage
 *.local
-cache
+tmp
 
 /cypress/videos/
 /cypress/screenshots/

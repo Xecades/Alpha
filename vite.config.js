@@ -31,7 +31,7 @@ export default defineConfig({
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
             "@note": fileURLToPath(new URL("./note", import.meta.url)),
-            "@cache": fileURLToPath(new URL("./cache", import.meta.url)),
+            "@cache": fileURLToPath(new URL("./tmp", import.meta.url)),
         },
     },
 });

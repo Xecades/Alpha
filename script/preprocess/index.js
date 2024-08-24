@@ -17,4 +17,4 @@ const parse_fn = (path, cache_dir) => async () => {
     await cacheConfig(data, path + "/config.yml", cache_dir + "/config.js", "note");
 };
 
-hmr(NOTE_BASE, parse_fn(NOTE_BASE, "./cache/note"));
+hmr(NOTE_BASE, parse_fn(NOTE_BASE, "./tmp/note"));
