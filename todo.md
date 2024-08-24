@@ -4,6 +4,8 @@
  - 卡顿处理
  - 参考 https://xdino.vercel.app/
 
+**TODO:** 给左右侧边栏加上背景，方便在较窄屏幕上展示
+
 ## General
 
  - 移动端设备支持
