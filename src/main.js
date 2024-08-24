@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
     faAngleRight,
     faBars,
+    faCaretLeft,
     faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -67,7 +68,7 @@ async function main() {
     consoleMessage();
     await documentReady();
 
-    library.add(faAngleRight, faBars, faMagnifyingGlass);
+    library.add(faAngleRight, faBars, faMagnifyingGlass, faCaretLeft);
 
     const app = createApp(App);
     app.use(router);

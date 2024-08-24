@@ -31,7 +31,6 @@ const parse_nav = (nav, data, prefix) => {
                 title: title_of(pathname),
                 name: name,
                 link: path,
-                pathname: pathname,
                 children: [],
             };
             return res;
@@ -46,7 +45,6 @@ const parse_nav = (nav, data, prefix) => {
             title: title_of(pathname),
             name: name,
             link: path,
-            pathname: pathname,
             children: [],
         };
 

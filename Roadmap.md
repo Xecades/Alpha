@@ -31,11 +31,15 @@
  - TikZ 支持
  - Typst 支持（？）
 
+## Cursor
+
+切换页面时，为避免卡顿，尝试隐藏副光标
+
 ## 优化（已完成）
 
 **NOTE:** 预先编译 Vue Components，性能能得到极大提升
 
-**TODO:** Fuse.js 数据库预生成
+**TODO:** Fuse.js 数据库预生成，在 navigate 完成后再获取数据
 
 1. 渲染 Markdown + LaTeX：快
 2. 读取文件：超级快（显著快于渲染）

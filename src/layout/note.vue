@@ -115,7 +115,7 @@ watch(
 </script>
 
 <template>
-    <div class="container">
+    <div class="note-layout">
         <LeftBar id="left" :config="config_cache" />
         <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
         <RightBar id="right" :toc_raw="postToc" />
@@ -127,7 +127,7 @@ watch(
     --content-width: 740px;
 }
 
-.container {
+.note-layout {
     width: 100vw;
     display: flex;
 }
