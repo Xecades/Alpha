@@ -1,10 +1,14 @@
-structure:
+nav:
   - cs:
       - c:
           - snippets
-      - markdown
+      - test:
+          - customToken
+          - latex
+          - markdown
+          - toc
       - cldf
       - fds
   - math:
-      - la
       - dm
+      - la

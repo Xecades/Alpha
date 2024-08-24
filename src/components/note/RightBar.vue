@@ -66,8 +66,9 @@ const navigate = (id) => {
 
 <style scoped>
 * {
-    --offset-top: 11rem;
     --padding: 2rem;
+    --toc-width: 15rem;
+    --offset-top: 11rem;
     --offset-right: calc(70px - var(--padding));
 
     --translate-offset: 7px;
@@ -79,7 +80,7 @@ const navigate = (id) => {
 }
 
 .toc {
-    width: 15rem;
+    width: var(--toc-width);
     display: flex;
     flex-direction: column;
     gap: calc(var(--gap) - 2 * var(--bar-padding));

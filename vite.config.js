@@ -5,8 +5,6 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 
-import ViteYaml from "@modyfi/vite-plugin-yaml";
-
 import "./script/preprocess";
 
 const customElement = ["rb"];
@@ -28,10 +26,6 @@ export default defineConfig({
 
         // [vite-plugin-vue-devtools]
         vueDevTools(),
-
-        // [@modyfi/vite-plugin-yaml]
-        // @ https://github.com/Modyfi/vite-plugin-yaml
-        ViteYaml(),
     ],
     resolve: {
         alias: {

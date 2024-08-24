@@ -34,11 +34,6 @@ import Content from "@/components/note/Content.vue";
 import InlineMath from "@/components/md/InlineMath.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
 
-
-// @ https://github.com/Modyfi/vite-plugin-yaml
-import config from "@note/config.yml";
-
-
 // Setup's
 import setupReveal from "@/assets/js/reveal";
 import { setupCursor } from "@/assets/js/cursor";
@@ -47,6 +42,7 @@ import { setupCursor } from "@/assets/js/cursor";
 // Cache
 import meta_cache from "@cache/note/meta";
 import comps_cache from "@cache/note/comps";
+import config_cache from "@cache/note/config";
 
 
 setupReveal();
@@ -120,7 +116,7 @@ watch(
 
 <template>
     <div class="container">
-        <LeftBar id="left" :meta="meta_cache" />
+        <LeftBar id="left" :config="config_cache" />
         <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
         <RightBar id="right" :toc_raw="postToc" />
     </div>

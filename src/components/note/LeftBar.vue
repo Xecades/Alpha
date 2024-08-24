@@ -17,7 +17,7 @@ import { ref } from "vue";
  *             * 只要 hover 左侧 bar 即触发，范围大一点，只要鼠标停留在左侧就不消失（✓）
  */
 const props = defineProps({
-    meta: Object,
+    config: Object,
 });
 
 const categories = ref([
@@ -75,15 +75,7 @@ const hide_category = () => {
             </template>
         </ul>
         <div class="content" v-show="ishover">
-            <!-- Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia molestiae, quas quis aliquid itaque
-            laudantium! Natus est accusamus in quidem quam ducimus dolore doloribus repellendus, necessitatibus alias,
-            aperiam quaerat placeat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Error vel sequi asperiores
-            temporibus deleniti dolorem ipsa alias. Rerum, iste blanditiis earum dicta illo minima quos delectus vero
-            odio corrupti a! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro in velit corrupti esse
-            aliquam itaque, eius deleniti vero nisi? Facilis possimus in, voluptatem magnam quisquam tempore quibusdam
-            ullam error fugit. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore enim quisquam, sint
-            deleniti modi dolorem placeat eaque dolore cum veniam dolores. Inventore incidunt illo nesciunt aperiam
-            fugit aliquid officiis quaerat! -->
+            {{ config }}
         </div>
     </div>
 </template>
