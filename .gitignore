@@ -13,7 +13,7 @@ dist
 dist-ssr
 coverage
 *.local
-tmp
+cache
 
 /cypress/videos/
 /cypress/screenshots/
@@ -29,3 +29,4 @@ tmp
 *.sw?
 
 *.tsbuildinfo
+.vercel
