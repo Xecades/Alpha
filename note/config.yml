@@ -10,5 +10,6 @@ nav:
       - cldf
       - fds
   - math:
+      - fourier
       - dm
       - la

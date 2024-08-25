@@ -1,10 +1,8 @@
 import fs from "fs-extra";
 
 export default async (data, dist) => {
-    await fs.ensureFile(dist);
-
     let cache =
-        'import { createElementVNode as _createElementVNode, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, createStaticVNode as _createStaticVNode, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"\n';
+        'import { createElementVNode as _createElementVNode, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, createCommentVNode as _createCommentVNode, createStaticVNode as _createStaticVNode, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from "vue"\n';
     cache += "const cache = {}\n";
 
     for (const item of data) {
