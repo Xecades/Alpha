@@ -21,7 +21,11 @@ import {
     faAngleRight,
     faBars,
     faCaretLeft,
+    faFaceFrown,
+    faFile,
+    faFolder,
     faMagnifyingGlass,
+    faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Wait for document ready
@@ -68,7 +72,16 @@ async function main() {
     consoleMessage();
     await documentReady();
 
-    library.add(faAngleRight, faBars, faMagnifyingGlass, faCaretLeft);
+    library.add(
+        faAngleRight,
+        faBars,
+        faMagnifyingGlass,
+        faCaretLeft,
+        faXmark,
+        faFile,
+        faFolder,
+        faFaceFrown
+    );
 
     const app = createApp(App);
     app.use(router);

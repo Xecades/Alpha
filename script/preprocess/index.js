@@ -15,7 +15,7 @@ const parse_fn = (path, cache_dir) => async () => {
     const data = await parseMd(path);
     await cacheMeta(data, cache_dir + "/meta.json");
     await cacheComps(data, cache_dir + "/comps.js");
-    await cacheSearch(data, cache_dir + "/search.json");
+    await cacheSearch(data, cache_dir + "/search.js");
     await cacheConfig(
         data,
         path + "/config.yml",

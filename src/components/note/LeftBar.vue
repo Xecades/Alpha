@@ -1,10 +1,11 @@
 <script setup lang="jsx">
 import { refreshCursor } from "@/assets/js/cursor";
-import { onUpdated, ref, watch } from "vue";
+import { nextTick, onUpdated, ref, watch } from "vue";
 import { RouterLink } from "vue-router";
 
 // 必须手动引用，否则 JSX 会出问题
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import Search from "./Search.vue";
 
 /**
  * @note 即使只载入 front matter 也会完整地渲染一遍 markdown，是否改成提前渲染？
@@ -25,7 +26,9 @@ const props = defineProps({ config: Object });
 
 const categories = ref(props.config.nav.map(cate => ({ name: cate.title, opacity: 0 })));
 const active_id = ref(0);
+
 const is_hover = ref(false);
+const is_searching = ref(true);
 
 const REVEAL_DELAY = 40;
 
@@ -44,8 +47,6 @@ const reveal_category = () => {
 };
 
 const hide_category = () => {
-    // return;
-
     let len = categories.value.length;
 
     for (let i = len - 1; i >= 0; i--) {
@@ -57,6 +58,16 @@ const hide_category = () => {
 
         categories.value[i].timeout = curr;
     }
+};
+
+const reveal_search = async () => {
+    is_searching.value = true;
+    await nextTick();
+    document.querySelector(".search .input").focus();
+};
+
+const hide_search = () => {
+    is_searching.value = false;
 };
 
 const mouseenter = async () => {
@@ -106,10 +117,11 @@ onUpdated(() => {
 <template>
     <div @mouseenter="mouseenter" @mouseleave="mouseleave">
         <ul class="nav">
-            <li class="btn cursor" id="search">
+            <li class="btn cursor" id="search" @click="reveal_search">
                 <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
             </li>
         </ul>
+
         <ul class="category">
             <template v-for="item, idx in categories">
                 <li class="item cursor" :class="idx == active_id && 'active'" :style="{ opacity: item.opacity }"
@@ -118,9 +130,17 @@ onUpdated(() => {
                 </li>
             </template>
         </ul>
+
         <Transition name="content">
             <component class="content" :is="VBody" v-if="is_hover" />
         </Transition>
+
+        <!-- https://cn.vuejs.org/guide/built-ins/teleport.html -->
+        <Teleport to="body">
+            <Transition name="search">
+                <Search v-if="is_searching" @close="hide_search" />
+            </Transition>
+        </Teleport>
     </div>
 </template>
 
@@ -188,11 +208,33 @@ onUpdated(() => {
     --nav-hover-color: #a9a9a9;
     --nav-bg-hover-color: #f2f2f2c4;
 
-    --translate-offset: -7px;
+    --cate-translate-offset: -7px;
     --cate-offset-left: 63px;
     --cate-offset-top: calc(26px + var(--nav-height) + var(--offset-top));
     --cate-width: 250px;
     --cate-title-height: 1.45rem;
+
+    --search-scale: .99;
+}
+
+.search-enter-active,
+.search-leave-active {
+    transition-property: opacity, transform;
+    transition-duration: .12s;
+}
+
+.search-enter-active {
+    transition-timing-function: cubic-bezier(.41,.16,.83,.74);
+}
+
+.search-leave-active {
+    transition-timing-function: cubic-bezier(.08,.46,.76,.89);
+}
+
+.search-enter-from,
+.search-leave-to {
+    opacity: 0;
+    transform: scale(var(--search-scale));
 }
 
 .content-enter-active,
@@ -213,7 +255,7 @@ onUpdated(() => {
 .content-enter-from,
 .content-leave-to {
     opacity: 0;
-    transform: translateY(var(--translate-offset));
+    transform: translateY(var(--cate-translate-offset));
 }
 
 .nav {
@@ -246,6 +288,7 @@ onUpdated(() => {
     text-wrap: nowrap;
     overflow: hidden;
     border-radius: 4px;
+    user-select: none;
 }
 
 .category .item {

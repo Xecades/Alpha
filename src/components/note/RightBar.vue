@@ -46,7 +46,7 @@ const navigate = (id) => {
 </script>
 
 <template>
-    <div class="container">
+    <div class="wrapper">
         <Transition name="bars" class="wrapper" @enter="refreshCursor" @mouseenter="showtext = true"
             @mouseleave="showtext = false">
             <div class="toc" v-if="!showtext">
