@@ -17,7 +17,8 @@ const curr_cate = router.currentRoute.value.params.path[0];
 const categories = ref(props.config.nav.map(cate => ({ name: cate.title, link: cate.link, opacity: 0 })));
 
 // 根据当前路径确定默认激活的分类
-const active_id = ref(categories.value.findIndex(cate => cate.link === "note/" + curr_cate));
+const curr_id = categories.value.findIndex(cate => cate.link === "note/" + curr_cate);
+const active_id = ref(curr_id === -1 ? 0 : curr_id);
 
 
 const is_hover = ref(false);
