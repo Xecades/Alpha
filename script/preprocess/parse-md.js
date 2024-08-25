@@ -1,10 +1,11 @@
 import fs from "fs/promises";
 import fm from "front-matter";
 
-import traverse from "./traverse";
-import vueCompiler from "./vue-compiler";
 import md from "../markdown";
 import tocRender from "../toc";
+import traverse from "./traverse";
+import vueCompiler from "./vue-compiler";
+import extractText from "./extract-text";
 
 export default async (src) => {
     const ret = await traverse(src, (x) => x.endsWith(".md"));
@@ -33,7 +34,13 @@ export default async (src) => {
         ret[i].html = html;
 
         /**
-         * Phase 4: 编译 Vue Components
+         * Phase 4: 提取纯文本
+         */
+        const text = extractText(html);
+        ret[i].text = text;
+
+        /**
+         * Phase 5: 编译 Vue Components
          */
         const vue = vueCompiler(html, dirent.name);
         ret[i].vue = vue;

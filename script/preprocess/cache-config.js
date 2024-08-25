@@ -67,12 +67,9 @@ const parse_nav = (nav, data, prefix) => {
 };
 
 export default async (data, config_path, dist, prefix) => {
-    await fs.ensureFile(dist);
     const config = await readYML(config_path);
 
     config.nav = parse_nav(config.nav, data, prefix);
 
-    let cache = "export default ";
-    cache += JSON.stringify(config);
-    await fs.outputFile(dist, cache);
+    await fs.outputJSON(dist, config);
 };
