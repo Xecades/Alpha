@@ -119,6 +119,7 @@ watch(query, sync, { immediate: true });
     height: calc(100% - var(--search-height) - var(--search-margin-top) - var(--results-bottom));
     overflow-y: auto;
     margin: 0 0 var(--results-bottom) var(--margin-lr);
+    user-select: none;
 }
 
 .results .empty {
