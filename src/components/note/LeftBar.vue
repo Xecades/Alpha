@@ -1,34 +1,27 @@
 <script setup lang="jsx">
 import { refreshCursor } from "@/assets/js/cursor";
 import { nextTick, onUpdated, ref, watch } from "vue";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 
 // 必须手动引用，否则 JSX 会出问题
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import Search from "./Search.vue";
 
-/**
- * @note 即使只载入 front matter 也会完整地渲染一遍 markdown，是否改成提前渲染？
- *       改成直接读取文件的形式是否会更快？
- * 
- * @note 需要显示的东西：
- *        - 搜索功能：全部文章的 markdown 源码
- *            以什么形式出现？点击出现 popup 窗口？
- *            是否需要提前生成索引文件？搜索的高亮如何处理？
- *            特殊 snippet 如何处理？（是否需要先用 markdown-it 渲染一遍？）
- *             * 采用 xdino 的设计方案
- *        - 文章目录：文章层级关系、全部文章的 title
- *            以什么样的形式展开？如果全部展开会不会太长？
- *            是 hover 触发还是和 ToC 一样处理？
- *             * 只要 hover 左侧 bar 即触发，范围大一点，只要鼠标停留在左侧就不消失（✓）
- */
-const props = defineProps({ config: Object });
 
-const categories = ref(props.config.nav.map(cate => ({ name: cate.title, opacity: 0 })));
-const active_id = ref(0);
+const props = defineProps({ config: Object });
+const router = useRouter();
+
+
+const curr_cate = router.currentRoute.value.params.path[0];
+const categories = ref(props.config.nav.map(cate => ({ name: cate.title, link: cate.link, opacity: 0 })));
+
+// 根据当前路径确定默认激活的分类
+const active_id = ref(categories.value.findIndex(cate => cate.link === "note/" + curr_cate));
+
 
 const is_hover = ref(false);
-const is_searching = ref(true);
+const is_searching = ref(false);
 
 const REVEAL_DELAY = 40;
 
@@ -125,7 +118,7 @@ onUpdated(() => {
         <ul class="category">
             <template v-for="item, idx in categories">
                 <li class="item cursor" :class="idx == active_id && 'active'" :style="{ opacity: item.opacity }"
-                    @click="active_id = idx">
+                    @click="router.push('/' + item.link)" @mouseover="active_id = idx">
                     {{ item.name }}
                 </li>
             </template>
@@ -224,11 +217,11 @@ onUpdated(() => {
 }
 
 .search-enter-active {
-    transition-timing-function: cubic-bezier(.41,.16,.83,.74);
+    transition-timing-function: cubic-bezier(.41, .16, .83, .74);
 }
 
 .search-leave-active {
-    transition-timing-function: cubic-bezier(.08,.46,.76,.89);
+    transition-timing-function: cubic-bezier(.08, .46, .76, .89);
 }
 
 .search-enter-from,
