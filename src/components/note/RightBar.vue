@@ -1,15 +1,11 @@
 <script setup>
 /**
- * @todo 当页面到底部时，ToC 会跳动
- * 
  * @todo 完成 ToC 的动画！！！
- * @todo 样式不满意，仍需优化（LaTeX 块是否应该小一点？）
- * @todo hover 的纵向判定范围再广一点
+ * @todo 样式不满意，仍需优化
  * @todo 联动 cursor（？）
  * 
  * @todo 测试当 ToC 过长时的换行
  * @todo 完成 ToC 中的 html 标签，例如 code 块
- * @todo 当鼠标移到 ToC 下面时，不应该展开 ToC
  * 
  * @todo ToC 展开后的层级效果！！！！！！
  * @todo 当前滚动进度高亮！！！！！

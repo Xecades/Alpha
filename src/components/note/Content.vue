@@ -1,7 +1,6 @@
 <script setup>
 /**
- * @todo 图片缓存，不能每次都重写加载一遍
- * @note Markdown 加载文件很大，尽量缓存
+ * @todo 图片缓存，不能每次都重新加载一遍
  */
 
 import Breadcrumb from "./Breadcrumb.vue";
@@ -24,6 +23,7 @@ const props = defineProps({
             <!-- 如果 path 为空：Note Index / Category Index / 404 -->
             <!-- 但是不能不显示 Breadcrumb，否则会导致 flicker -->
             <!-- 考虑替换为其他东西 -->
+            <!-- TODO: 不要 Breakcrumb，改成 Metadata -->
             <Breadcrumb id="breadcrumb" :path="path" />
         </header>
 

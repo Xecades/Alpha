@@ -1,25 +1,9 @@
 <script setup>
 /**
- * @todo ToC 需要支持 Components，考虑从 markdown 文件中直接解析
- * @todo 真的需要吗？还是直接对其中的 LaTeX 部分进行处理？
- * 
- * @todo 是先在 note.vue 处理完需要的数据，还是直接把 posts 传给 Components？
- * @reply 先在本文件处理完
- * 
- * @todo vite-plugin-markdown 无论如何都会渲染一遍 html，如果多次获取会不会很慢？
- *       vite 对此是否有优化？
- *       @ https://github.com/hmsk/vite-plugin-markdown/blob/main/src/index.ts#L60
- * 
- * @todo 是否需要 index.md 页面？
  * @todo index.md 页面应该写什么？只需要 abstract 即可，也可以省略不要
- * @todo 分类直接用 index.md 的 title 是否合适？合适
  * @todo index.md 添加 Vue 组件
  * 
- * @todo 添加点击跳转顶部的功能
- * 
  * @todo 处理 front matter
- * 
- * @todo 使用 await 来提高性能
  */
 
 import { ref, shallowRef, watch } from "vue";
@@ -37,7 +21,6 @@ import BlockMath from "@/components/md/BlockMath.vue";
 // Setup's
 import setupReveal from "@/assets/js/reveal";
 import { setupCursor } from "@/assets/js/cursor";
-
 
 // Cache
 import meta_cache from "@cache/note/meta";
