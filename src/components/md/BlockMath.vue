@@ -1,5 +1,6 @@
 <script setup>
 import { render_block } from "@/assets/js/latex";
+import { PerfectScrollbar } from "vue3-perfect-scrollbar";
 
 const props = defineProps({ data: String });
 
@@ -8,5 +9,5 @@ const parsed = render_block(raw);
 </script>
 
 <template>
-    <p v-html="parsed"></p>
+    <PerfectScrollbar tag="p" v-html="parsed" />
 </template>

@@ -13,6 +13,7 @@ import "./assets/css/reset.css";
 import "./assets/css/cursor.css";
 import "./assets/css/global.css";
 import "katex/dist/katex.min.css";
+import "vue3-perfect-scrollbar/style.css"
 
 // Font Awesome
 import { library } from "@fortawesome/fontawesome-svg-core";

@@ -1,11 +1,14 @@
 <script setup>
 import { nextTick, ref, watch } from "vue";
+import { PerfectScrollbar } from "vue3-perfect-scrollbar";
 
 import search from "@cache/note/search";
 import { refreshCursor } from "@/assets/js/cursor";
+import logger from "@/assets/js/logger";
 
 const query = ref("");
 const results = ref([]);
+const scrollbarApi = ref(null);
 
 const BEFORE_CNT = 10;
 
@@ -57,6 +60,8 @@ const sync = async (q) => {
     results.value = val;
     await nextTick();
     refreshCursor();
+    scrollbarApi.value?.ps.update();
+    logger.nbsp("Scrollbar updated");
 };
 
 watch(query, sync, { immediate: true });
@@ -77,7 +82,7 @@ watch(query, sync, { immediate: true });
                 </div>
             </div>
 
-            <ul class="results">
+            <PerfectScrollbar tag="ul" class="results" ref="scrollbarApi" :options="{ suppressScrollX: true }">
                 <li class="empty" v-if="results.length === 0">
                     <font-awesome-icon class="icon" :icon="['fas', 'face-frown']" />
                 </li>
@@ -110,7 +115,7 @@ watch(query, sync, { immediate: true });
                         </div>
                     </router-link>
                 </li>
-            </ul>
+            </PerfectScrollbar>
         </div>
     </div>
 </template>
@@ -134,13 +139,13 @@ watch(query, sync, { immediate: true });
 
 .results {
     height: calc(100% - var(--search-height) - var(--search-margin-top) - var(--results-bottom));
-    overflow-y: auto;
-    margin: 0 0 var(--results-bottom) var(--margin-lr);
+    overflow-y: hidden;
+    margin: 0 var(--margin-lr) var(--results-bottom) var(--margin-lr);
     user-select: none;
 }
 
 .results .empty {
-    width: calc(100% - var(--margin-lr));
+    width: calc(100% - var(--margin-lr) * 2);
     height: 100%;
     position: relative;
 }
@@ -160,7 +165,7 @@ watch(query, sync, { immediate: true });
 }
 
 .results .post:hover {
-    background-color: #f9f9f9;
+    background-color: #f3f3f382;
 }
 
 .results .post .meta .title {
@@ -254,12 +259,11 @@ watch(query, sync, { immediate: true });
 .panel {
     width: var(--panel-width);
     height: var(--panel-height);
-    background-color: #ffffffd5;
+    background-color: #ffffffe6;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1); */
     border: 1px solid var(--line-color);
     border-radius: var(--panel-radius);
 }
