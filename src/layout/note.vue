@@ -15,8 +15,10 @@ import RightBar from "@/components/note/RightBar.vue";
 import Content from "@/components/note/Content.vue";
 
 // Markdown
+import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
 import InlineMath from "@/components/md/InlineMath.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Anchor from "@/components/md/Anchor.vue";
 
 // Setup's
 import setupReveal from "@/assets/js/reveal";
@@ -33,7 +35,7 @@ setupCursor();
 
 const route = useRoute();
 
-const injectComps = { InlineMath, BlockMath };
+const injectComps = { InlineMath, BlockMath, Anchor, ImageCaptioned };
 const postBody = shallowRef();
 const postAttrs = shallowRef({});
 const postToc = shallowRef([]);

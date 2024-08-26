@@ -9,45 +9,52 @@ const results = ref([]);
 
 const BEFORE_CNT = 10;
 
-const sync = async (v) => {
-    let res = search(v);
-    let tmp = [];
+const sync = async (q) => {
+    const len = (i) => i[1] - i[0];
+    const longest = (is) => is.reduce((acc, cur) => len(cur) > len(acc) ? cur : acc);
 
-    if (v) {
+    let res = search(q);
+    let val = [];
+
+    if (q) {
         for (let r of res) {
+            let match = r.matches[0];
+
             // Always highlights the longest match
-            r.matches[0].indices.sort((a, b) => (b[1] - b[0]) - (a[1] - a[0]));
+            let [s, e] = longest(match.indices);
 
-            let [s, e] = r.matches[0].indices[0];
-            let type = r.matches[0].key;
-            let text = r.item.content;
+            let type = match.key;
+            let text = match.value;
 
-            let before, match, after;
+            let before, mark, after;
 
-            // Only highlight content matches
             if (type === "content") {
                 if (s - BEFORE_CNT > 0)
-                    before = "..." + text.slice(s - BEFORE_CNT, s);
+                    before = "..." + text.slice(s - BEFORE_CNT, s).trimLeft();
                 else
                     before = text.slice(0, s);
-                match = text.slice(s, e + 1);
+                mark = text.slice(s, e + 1);
+                after = text.slice(e + 1);
+            } else if (type === "title") {
+                before = text.slice(0, s);
+                mark = text.slice(s, e + 1);
                 after = text.slice(e + 1);
             }
 
-            tmp.push({
+            val.push({
                 ...r.item,
-                highlight: type === "content",
+                type,
                 before,
-                match,
+                mark,
                 after,
             });
         }
     } else {
         // if query is empty, show all posts
-        tmp = res;
+        val = res;
     }
 
-    results.value = tmp;
+    results.value = val;
     await nextTick();
     refreshCursor();
 };
@@ -80,12 +87,21 @@ watch(query, sync, { immediate: true });
                             <span class="icon" :data-type="res.is_index ? 'index' : 'post'">
                                 <font-awesome-icon :icon="['fas', res.is_index ? 'folder' : 'file']" />
                             </span>
-                            <span class="title">{{ res.title }}</span>
+                            <span class="title">
+                                <template v-if="res.type === 'title'">
+                                    <span>{{ res.before }}</span>
+                                    <mark>{{ res.mark }}</mark>
+                                    <span>{{ res.after }}</span>
+                                </template>
+                                <template v-else>
+                                    <span>{{ res.title || "[无标题]" }}</span>
+                                </template>
+                            </span>
                         </div>
                         <div class="content">
-                            <template v-if="res.highlight">
+                            <template v-if="res.type === 'content'">
                                 <span>{{ res.before }}</span>
-                                <span class="highlight">{{ res.match }}</span>
+                                <mark>{{ res.mark }}</mark>
                                 <span>{{ res.after }}</span>
                             </template>
                             <template v-else>
@@ -102,6 +118,7 @@ watch(query, sync, { immediate: true });
 <style scoped>
 * {
     --margin-lr: 1rem;
+    --line-color: #e1e1e1;
 
     --panel-width: 720px;
     --panel-height: 430px;
@@ -133,7 +150,7 @@ watch(query, sync, { immediate: true });
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(6.7);
-    color: #f3f4f6;
+    color: #f6f6f6;
 }
 
 .results .post {
@@ -143,7 +160,7 @@ watch(query, sync, { immediate: true });
 }
 
 .results .post:hover {
-    background-color: #f8f9fa;
+    background-color: #f9f9f9;
 }
 
 .results .post .meta .title {
@@ -173,9 +190,9 @@ watch(query, sync, { immediate: true });
     text-wrap: nowrap;
 }
 
-.results .post .highlight {
+.results .post mark {
     background-color: #fef08a;
-    padding: 0 2px;
+    color: unset;
 }
 
 .search {
@@ -183,7 +200,7 @@ watch(query, sync, { immediate: true });
     align-items: center;
     justify-content: space-between;
     margin: var(--search-margin-top) var(--margin-lr) 0;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid var(--line-color);
     height: var(--search-height);
     gap: var(--search-gap);
 }
@@ -220,6 +237,7 @@ watch(query, sync, { immediate: true });
     outline: none;
     padding: 0 5px;
     color: #3b3c3e;
+    background-color: transparent;
     opacity: .9;
 }
 
@@ -236,12 +254,13 @@ watch(query, sync, { immediate: true });
 .panel {
     width: var(--panel-width);
     height: var(--panel-height);
-    background-color: #fff;
+    background-color: #ffffffd5;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
+    /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1); */
+    border: 1px solid var(--line-color);
     border-radius: var(--panel-radius);
 }
 </style>

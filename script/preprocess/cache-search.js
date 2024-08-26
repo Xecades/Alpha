@@ -6,7 +6,7 @@ const options = {
     keys: ["title", "content"],
     includeMatches: true,
     ignoreLocation: true,
-    includeScore: true,
+    threshold: 0.4,
 };
 
 export default async (data, dist) => {

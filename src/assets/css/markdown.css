@@ -1,20 +1,19 @@
 /**
- * @todo 重构
+ * @todo 完善标点挤压（写 js 脚本，临时用 font-feature-settings: "halt" 解决）
  */
 
-.markdown .header-anchor {
-    opacity: 0;
-    transition: opacity 0.15s;
+:root {
+    --theme-color: #60a5fa;
+    --block-extend: -0.5rem;
 }
 
-.markdown :is(h1, h2, h3, h4, h5, h6):hover .header-anchor {
-    opacity: 1;
-}
-
+/* 基础样式 */
 .markdown {
-    line-height: 1.75rem;
+    line-height: 1.8rem;
+    /* font-feature-settings: "halt"; */
 }
 
+/* 段落 */
 .markdown p {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -22,7 +21,39 @@
     text-align: justify;
 }
 
-/* Never use h1 */
+/* KaTeX 数学公式 */
+.markdown .katex {
+    font-size: 1.1em;
+}
+
+.markdown .katex-display {
+    margin: 1.8em 0;
+}
+
+.markdown .katex-display .katex {
+    font-size: 1.21rem;
+}
+
+/* 锚点 */
+.markdown .header-anchor {
+    opacity: 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    color: var(--theme-color);
+    transition: opacity 0.15s, color 0.15s;
+    user-select: none;
+    padding: 0 7px;
+    margin: 0;
+}
+
+.markdown .header-anchor:hover {
+    color: #0e78fa;
+}
+
+.markdown :is(h1, h2, h3, h4, h5, h6):hover .header-anchor {
+    opacity: 1;
+}
+
+/* header 标签（h1 被 ban 掉了） */
 /* .markdown h1 {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -53,191 +84,147 @@
     line-height: 1.25rem;
 }
 
-/* .markdown h1, */
 .markdown :is(h2, h3, h4, h5, h6) {
     position: relative;
     margin: 1.6rem 0;
     color: #2e2e2e;
 }
 
-.markdown .task-list-item-checkbox {
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-    vertical-align: baseline;
+/* hr 标签 */
+.markdown hr {
+    margin: 4.5rem auto;
+    width: 21rem;
+    height: 1px;
+    background-color: #e3e3e3;
 }
 
-.markdown del {
-    text-decoration-thickness: 1px;
+/* s 标签 */
+/* .markdown s {} */
+
+/* strong 标签 */
+.markdown strong {
+    font-weight: bold;
 }
 
-.markdown a {
-    position: relative;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-    color: rgb(96, 165, 250);
-}
-/* .markdown a:not(.linkcard) {
-    position: relative;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(96 165 250 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, fill, stroke,
-        -webkit-text-decoration-color;
-    transition-property: color, background-color, border-color,
-        text-decoration-color, fill, stroke;
-    transition-property: color, background-color, border-color,
-        text-decoration-color, fill, stroke, -webkit-text-decoration-color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 0.1s;
+/* em 标签 */
+.markdown em {
+    font-style: italic;
 }
 
-.markdown a:not(.linkcard):hover,
-.markdown a:not(.linkcard):hover .external {
-    --tw-text-opacity: 1;
-    color: rgb(29 78 216 / var(--tw-text-opacity));
-}
-
-.markdown a:not(.linkcard) .external {
-    margin-left: 0.25rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    line-height: 1;
-    --tw-text-opacity: 1;
-    color: rgb(96 165 250 / var(--tw-text-opacity));
-    transition-property: color, background-color, border-color, fill, stroke,
-        -webkit-text-decoration-color;
-    transition-property: color, background-color, border-color,
-        text-decoration-color, fill, stroke;
-    transition-property: color, background-color, border-color,
-        text-decoration-color, fill, stroke, -webkit-text-decoration-color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 0.1s;
-} */
-
-.markdown .inline-fas {
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    line-height: 1;
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
-.markdown ol,
-.markdown ul:not(.contains-task-list) {
-    list-style-position: inside;
-    padding-left: 2rem;
-}
-
-.markdown ul:not(.contains-task-list) {
-    list-style: circle;
+/* 列表 */
+.markdown ul {
+    list-style: disc;
 }
 
 .markdown ol {
     list-style: decimal;
 }
 
-.markdown li::marker {
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
+.markdown :is(ul, ol) {
+    margin-left: 20px;
 }
 
-.markdown img {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-    border-radius: 0.25rem;
+.markdown :is(ul, ol) li {
+    text-indent: 10px;
 }
 
-.markdown img + .caption {
-    position: relative;
-    margin-top: 0.25rem;
-    display: block;
-    width: 100%;
-    text-align: center;
+.markdown :is(ul, ol) li::marker {
+    color: #7c8087;
 }
 
-.markdown img + .caption span {
-    position: relative;
-    margin-bottom: 1.25rem;
-    display: inline-block;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
+/* checkbox */
+/* @see https://getcssscan.com/css-checkboxes-examples */
+/* @see https://github.com/linsir/markdown-it-task-checkbox */
+.markdown .task-list {
+    list-style: none;
+    margin-left: unset;
 }
 
-.markdown img + .caption span:after {
-    position: absolute;
-    display: inline-block;
-    border-top-width: 1px;
-    border-style: dashed;
-    --tw-border-opacity: 1;
-    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+.markdown .task-list li {
+    text-indent: unset;
+}
+
+.markdown .checkbox *,
+.markdown .checkbox ::after,
+.markdown .checkbox ::before {
+    box-sizing: border-box;
+}
+
+.markdown .checkbox input[type="checkbox"] {
+    margin: 0;
+    width: 0;
+    height: 0;
+    display: inline;
+    appearance: none;
+}
+
+.markdown .checkbox input[type="checkbox"] + label:before {
     content: "";
-    bottom: -2px;
-    left: -0.1rem;
-    right: -0.1rem;
+    display: inline-block;
+    vertical-align: sub;
+    height: 1em;
+    width: 1em;
+    margin-right: 0.6em;
+    margin-bottom: 1.5px;
+    color: #00000046;
+    border: 0.06em solid;
+    border-radius: 0.2em;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="white" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>')
+            no-repeat center,
+        white;
+    background-size: 0;
 }
 
-.markdown code:not(.hljs) {
-    border-radius: 0.25rem;
-    background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-    --tw-bg-opacity: 0.5;
-    padding: 0.25rem;
-    line-height: 1;
-    --tw-text-opacity: 1;
-    color: rgb(75 85 99 / var(--tw-text-opacity));
-    margin: 0 0.125rem;
+.markdown .checkbox input[type="checkbox"]:checked + label:before {
+    background-color: #56a0ef;
+    background-size: 0.75em;
+    color: #00000013;
 }
 
+/* 引言 */
 .markdown blockquote {
-    margin-bottom: 1rem;
-    border-left-width: 4px;
-    --tw-border-opacity: 1;
-    border-color: rgb(243 244 246 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    padding-left: 1.25rem;
-    color: rgb(75 85 99 / var(--tw-text-opacity));
-    --tw-text-opacity: 0.9;
+    margin: 1.5rem 0;
+    padding: 0.5rem 1rem;
+    border-left: 4px solid #e6e7e8;
+    background-color: #f2f2f2b5;
+    color: #4b5563;
+    border-radius: 0 4px 4px 0;
 }
 
 .markdown > blockquote {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-    padding-right: 1.25rem;
+    margin-left: var(--block-extend);
+    margin-right: var(--block-extend);
 }
 
-.markdown hr {
-    margin: 4.5rem 10rem;
-    height: 1px;
-    background-color: #e3e3e3;
+/* 行内代码块 */
+.markdown :not(pre) > code {
+    font-family: monospace;
+    background: #edeeeebf;
+    padding: 0.2em 0.3em;
+    border-radius: 0.3em;
+    white-space: normal;
+    font-size: 1.05em;
+    line-height: 1em;
 }
 
-.markdown .hljs {
-    position: relative;
-    margin-left: -2.5rem;
-    margin-right: -2.5rem;
-    --tw-bg-opacity: 1;
-    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+.markdown :not(pre) > code ::selection {
+    background-color: var(--selection-bg);
 }
 
-.markdown .hljs.hljs::-moz-selection,
-.markdown .hljs::-moz-selection {
-    background-color: rgba(187, 221, 251, 0.5);
-    color: unset;
+/* 行间代码块 */
+.markdown pre[class*="language-"] {
+    margin-left: var(--block-extend);
+    margin-right: var(--block-extend);
+    background: #f5f5f59c;
+    border-radius: 2px;
+    scrollbar-width: none;
 }
 
-.markdown .hljs.hljs::selection,
-.markdown .hljs::selection {
-    background-color: rgba(187, 221, 251, 0.5);
-    color: unset;
+.markdown pre[class*="language-"] code {
+    background: unset;
+    font-size: 0.97em;
+}
+
+.markdown pre[class*="language-"] ::selection {
+    background-color: var(--selection-bg);
 }

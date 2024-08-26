@@ -4,7 +4,6 @@
  * @todo 样式不满意，仍需优化
  * @todo 联动 cursor（？）
  * 
- * @todo 测试当 ToC 过长时的换行
  * @todo 完成 ToC 中的 html 标签，例如 code 块
  * 
  * @todo ToC 展开后的层级效果！！！！！！
@@ -14,9 +13,7 @@
 import { computed, ref } from "vue";
 import { refreshCursor } from "@/assets/js/cursor";
 
-const props = defineProps({
-    toc_raw: Array,
-});
+const props = defineProps({ toc_raw: Array });
 
 const width_preset = ["50px", "40px", "30px", "20px", "13px"];
 const levels = computed(() => props.toc_raw.map((item) => item.level));
@@ -62,10 +59,14 @@ const navigate = (id) => {
 
 <style scoped>
 * {
-    --padding: 2rem;
-    --toc-width: 15rem;
+    --padding: .5rem;
+    --margin: 1.5rem;
+
     --offset-top: 11rem;
-    --offset-right: calc(70px - var(--padding));
+    --offset-right: calc(70px - var(--padding) - var(--margin));
+
+    --bg-color: linear-gradient(90deg, #f7f7f780, #f7f7f7f5);
+    --bg-radius: 4px;
 
     --translate-offset: 7px;
 
@@ -76,7 +77,7 @@ const navigate = (id) => {
 }
 
 .toc {
-    width: var(--toc-width);
+    width: max-content;
     display: flex;
     flex-direction: column;
     gap: calc(var(--gap) - 2 * var(--bar-padding));
@@ -84,6 +85,13 @@ const navigate = (id) => {
     top: var(--offset-top);
     right: var(--offset-right);
     padding: var(--padding);
+    margin: var(--margin);
+    background-image: var(--bg-color);
+    border-radius: var(--bg-radius);
+}
+
+:global(#right .toc .katex) {
+    font-size: 1rem;
 }
 
 .item {

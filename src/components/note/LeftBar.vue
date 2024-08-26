@@ -78,8 +78,9 @@ const render = (node, is_root = false) => {
     let { title, children, link } = node;
     link = "/" + link;
 
-    const icon_comp = <FontAwesomeIcon class="icon" icon="fa-solid fa-caret-left" />;
-    const title_comp = <RouterLink to={link} class="title cursor">{title}{icon_comp}</RouterLink>;
+    const text_comp = <span class="text">{title}</span>;
+    const icon_comp = <span class="sign"><FontAwesomeIcon class="icon" icon="fa-solid fa-caret-right" /></span>;
+    const title_comp = <RouterLink to={link} class="title cursor">{icon_comp}{text_comp}</RouterLink>;
 
     if (children.length === 0) {
         title_comp.props.leaf = true;
@@ -145,37 +146,44 @@ onUpdated(() => {
     top: var(--cate-offset-top);
     width: var(--cate-width);
     display: block;
+    background-image: var(--bg-color);
+    border-radius: var(--bg-radius);
+    padding: 15px 0;
 }
 
 .note-layout .content .title {
     color: #787f83;
     font-size: 0.95rem;
-    height: var(--cate-title-height);
     line-height: var(--cate-title-height);
     margin-bottom: 5px;
-    display: block;
+    padding-right: 10px;
+    display: flex;
+    gap: 8px;
     transition: color .2s;
 }
 
-.note-layout .content .title.router-link-exact-active {
+.note-layout .content .title.router-link-exact-active .text {
     color: var(--theme-color);
 }
 
-.note-layout .content .title .icon {
+.note-layout .content .title .sign {
     color: var(--theme-color);
     opacity: 0;
-    margin-left: 8px;
     transition: opacity .1s;
-    float: right;
-    height: var(--cate-title-height);
-    transform: scale(.7);
+    font-size: .7rem;
+    display: block;
 }
 
-.note-layout .content .title:hover {
+.note-layout .content .title .text {
+    text-indent: calc(0px - var(--cate-title-indent));
+    padding-left: var(--cate-title-indent);
+}
+
+.note-layout .content .title:hover .text {
     color: var(--theme-color);
 }
 
-.note-layout .content .title:hover .icon {
+.note-layout .content .title:hover .sign {
     opacity: 1;
 }
 
@@ -194,6 +202,8 @@ onUpdated(() => {
     --offset-left: 35px;
 
     --theme-color: #60a5fa;
+    --bg-color: linear-gradient(90deg, #fdfdfdf5, #fdfdfd80);
+    --bg-radius: 4px;
 
     --nav-width: 42px;
     --nav-height: 40px;
@@ -204,9 +214,10 @@ onUpdated(() => {
 
     --cate-translate-offset: -7px;
     --cate-offset-left: 63px;
-    --cate-offset-top: calc(26px + var(--nav-height) + var(--offset-top));
-    --cate-width: 250px;
+    --cate-offset-top: calc(11px + var(--nav-height) + var(--offset-top));
+    --cate-width: 270px;
     --cate-title-height: 1.45rem;
+    --cate-title-indent: .5rem;
 
     --search-scale: .99;
 }
@@ -281,7 +292,7 @@ onUpdated(() => {
     height: var(--nav-height);
     text-wrap: nowrap;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: var(--bg-radius);
     user-select: none;
 }
 
@@ -291,7 +302,7 @@ onUpdated(() => {
     font-size: .9rem;
     padding: 0 12px;
     color: #888e8f;
-    background-color: #fdfdfdf5;
+    background-image: var(--bg-color);
     text-decoration-color: transparent;
     transition: background-color .15s, opacity .2s, text-decoration-color .2s;
 }

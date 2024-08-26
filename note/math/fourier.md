@@ -1,5 +1,5 @@
 ---
-title: 「离散傅里叶变换」和「离散傅里叶反变换」
+title: 离散傅里叶变换和离散傅里叶反变换文字文字文字文字文字文字文字文字文字文字
 ---
 
 **离散傅里叶变换**（Discrete Fourier Transform, DFT）和**离散傅里叶反变换**（Inverse Discrete Fourier Transform, IDFT） 是鼎鼎大名的**快速傅里叶变换**（Fast Fourier Transform, FFT）的前置知识.

@@ -45,7 +45,7 @@ const props = defineProps({
 
     --header-color: #535353;
     --header-size: 2.2rem;
-    --header-height: 3.5rem;
+    --header-line-height: 3.5rem;
 }
 
 main {
@@ -53,7 +53,6 @@ main {
 }
 
 header {
-    /* 上 左右 下 */
     margin: var(--margin-top) var(--margin-lr) var(--header-main-spacing);
 }
 
@@ -61,8 +60,7 @@ h1 {
     font-size: var(--header-size);
     color: var(--header-color);
     letter-spacing: .12rem;
-    line-height: var(--header-height);
-    height: var(--header-height);
+    line-height: var(--header-line-height);
 }
 
 #breadcrumb {
