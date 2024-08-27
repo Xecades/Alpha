@@ -3,6 +3,7 @@
  * @todo 图片缓存，不能每次都重新加载一遍
  */
 
+import { nextTick, watch } from "vue";
 import Breadcrumb from "./Breadcrumb.vue";
 
 import "@/assets/css/markdown.css";
@@ -13,6 +14,24 @@ const props = defineProps({
     attr: Object,
     path: Array,
 });
+
+watch(
+    () => props.body,
+    async () => {
+        await nextTick();
+        const headings = document.querySelectorAll(".heading");
+        headings.forEach((heading) => {
+            const anchor = heading.querySelector(".header-anchor");
+            if (anchor) {
+                anchor.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    heading.scrollIntoView({ behavior: "smooth" });
+                });
+            }
+        });
+    },
+    { immediate: true }
+);
 </script>
 
 <template>
@@ -27,7 +46,6 @@ const props = defineProps({
             <Breadcrumb id="breadcrumb" :path="path" />
         </header>
 
-        <!-- TODO: Markdown CSS -->
         <main class="markdown">
             <!-- https://cn.vuejs.org/guide/essentials/component-basics.html#dynamic-components -->
             <component :is="body" />

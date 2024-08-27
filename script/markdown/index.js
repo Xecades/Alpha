@@ -114,6 +114,12 @@ const originalHeadingOpen =
     };
 
 md.renderer.rules.heading_open = function (tokens, idx, options, env, self) {
+    // console.log(tokens[idx]);
+
+    // const token = tokens[idx]
+    // let level = +token.tag.slice(1);
+    // let id = token.attrGet("id");
+
     tokens[idx].attrSet("class", "heading");
     return originalHeadingOpen(tokens, idx, options, env, self);
 };

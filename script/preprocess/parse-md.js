@@ -33,6 +33,8 @@ export default async (src) => {
         const html = md.render(raw);
         ret[i].html = html;
 
+        // console.log(html);
+
         /**
          * Phase 4: 提取纯文本
          */
