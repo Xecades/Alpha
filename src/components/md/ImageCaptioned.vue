@@ -4,14 +4,15 @@
  */
 
 import { refreshCursor } from "@/assets/js/cursor";
-import { nextTick, onBeforeUnmount, onMounted } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 import mediumZoom from "medium-zoom";
 
 const props = defineProps({ alt: String, src: String });
+const img = ref(null);
 
 onMounted(() => {
-    const zoom = mediumZoom("[data-ic-zoomable]", { background: "#47484a85" });
+    const zoom = mediumZoom(img.value, { background: "#47484a85" });
     zoom.on("open", async () => {
         await nextTick();
         refreshCursor();
@@ -22,7 +23,7 @@ onMounted(() => {
 
 <template>
     <figure>
-        <img class="cursor" :alt="alt" :src="src" data-ic-zoomable />
+        <img ref="img" class="cursor" :alt="alt" :src="src" data-ic-zoomable />
         <figcaption v-if="alt">
             <slot />
         </figcaption>

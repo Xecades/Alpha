@@ -1,14 +1,18 @@
 <script setup>
 import { nextTick, ref, watch } from "vue";
-import { PerfectScrollbar } from "vue3-perfect-scrollbar";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
+
+import { refreshCursor } from "@/assets/js/cursor";
 
 import search from "@cache/note/search";
-import { refreshCursor } from "@/assets/js/cursor";
-import logger from "@/assets/js/logger";
 
 const query = ref("");
 const results = ref([]);
-const scrollbarApi = ref(null);
+
+const osOptions = {
+    scrollbars: { autoHide: "move" },
+    overflow: { x: "hidden" },
+};
 
 const BEFORE_CNT = 10;
 
@@ -60,8 +64,6 @@ const sync = async (q) => {
     results.value = val;
     await nextTick();
     refreshCursor();
-    scrollbarApi.value?.ps.update();
-    logger.nbsp("Scrollbar updated");
 };
 
 watch(query, sync, { immediate: true });
@@ -82,7 +84,7 @@ watch(query, sync, { immediate: true });
                 </div>
             </div>
 
-            <PerfectScrollbar tag="ul" class="results" ref="scrollbarApi" :options="{ suppressScrollX: true }">
+            <OverlayScrollbarsComponent element="ul" class="results" :options="osOptions" defer>
                 <li class="empty" v-if="results.length === 0">
                     <font-awesome-icon class="icon" :icon="['fas', 'face-frown']" />
                 </li>
@@ -115,7 +117,7 @@ watch(query, sync, { immediate: true });
                         </div>
                     </router-link>
                 </li>
-            </PerfectScrollbar>
+            </OverlayScrollbarsComponent>
         </div>
     </div>
 </template>

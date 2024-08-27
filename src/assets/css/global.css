@@ -72,9 +72,3 @@ html.sr .rv {
 #app {
     width: 100vw;
 }
-
-/* perfect-scrollbar z-index */
-.ps__rail-x,
-.ps__rail-y {
-    z-index: 1000;
-}

@@ -38,9 +38,9 @@
         "markdown-it-task-checkbox": "^1.0.6",
         "medium-zoom": "^1.1.0",
         "module-from-string": "^3.3.1",
+        "overlayscrollbars-vue": "^0.5.9",
         "vite": "^5.3.1",
         "vite-plugin-vue-devtools": "^7.3.1",
-        "vue3-perfect-scrollbar": "^2.0.0",
         "yaml": "^2.5.0"
     }
 }
