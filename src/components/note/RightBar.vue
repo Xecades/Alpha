@@ -28,7 +28,12 @@ const showtext = ref(false);
 const navigate = (id) => {
     let el = document.getElementById(id);
     if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        // 不能用 scrollIntoView，因为 ScrollReveal 动画会打断滚动
+
+        const offset = -4 * 16;
+        const y = el.getBoundingClientRect().top + window.scrollY + offset;
+
+        window.scrollTo({ top: y, behavior: "smooth" });
     }
 };
 </script>

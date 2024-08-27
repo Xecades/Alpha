@@ -154,6 +154,11 @@ watch(postToc, setup_scroll, { immediate: true });
     z-index: 10;
 }
 
+#content.hide {
+    transition: opacity .1s ease-out;
+    opacity: 0;
+}
+
 #left,
 #right {
     position: sticky;

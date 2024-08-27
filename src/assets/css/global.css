@@ -59,6 +59,10 @@ html.sr .rv {
     visibility: hidden;
 }
 
+html.sr #content {
+    visibility: hidden;
+}
+
 /* Partial Styles */
 .indent {
     text-indent: 2.25rem;

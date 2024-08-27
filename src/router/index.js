@@ -3,8 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
 import setupGuards from "./guards";
 
-const scrollBehavior = (_, __, saved) =>
-    saved ?? { left: 0, top: 0, behavior: "smooth" };
+const scrollBehavior = (_, __, saved) => saved ?? { left: 0, top: 0 };
 
 const router = createRouter({
     routes,

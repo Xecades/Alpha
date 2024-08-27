@@ -21,12 +21,9 @@ const md = new MarkdownIt({
 /**
  * @name markdown-it-prism
  * @see https://github.com/jGleitz/markdown-it-prism
- *
- * @todo match-braces 起作用了吗？看起来没有
  */
 md.use(MarkdownItPrism, {
     highlightInlineCode: true,
-    plugins: ["match-braces"],
 });
 
 /**

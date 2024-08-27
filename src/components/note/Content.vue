@@ -4,6 +4,7 @@
  */
 
 import { nextTick, watch } from "vue";
+
 import Breadcrumb from "./Breadcrumb.vue";
 
 import "@/assets/css/markdown.css";
@@ -15,20 +16,29 @@ const props = defineProps({
     path: Array,
 });
 
+const register_anchor = () => {
+    const headings = document.querySelectorAll(".heading");
+    headings.forEach((heading) => {
+        const anchor = heading.querySelector(".header-anchor");
+        if (anchor) {
+            anchor.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                const offset = -4 * 16;
+                const y = heading.getBoundingClientRect().top + window.scrollY + offset;
+
+                window.scrollTo({ top: y, behavior: "smooth" });
+            });
+        }
+    });
+};
+
+
 watch(
     () => props.body,
     async () => {
         await nextTick();
-        const headings = document.querySelectorAll(".heading");
-        headings.forEach((heading) => {
-            const anchor = heading.querySelector(".header-anchor");
-            if (anchor) {
-                anchor.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    heading.scrollIntoView({ behavior: "smooth" });
-                });
-            }
-        });
+        register_anchor();
     },
     { immediate: true }
 );
@@ -36,7 +46,8 @@ watch(
 
 <template>
     <div>
-        <header>
+        <!-- 通过 key 强制组件刷新，从而正常触发动画 -->
+        <header :key="attr.title">
             <h1>{{ attr.title }}</h1>
 
             <!-- 如果 path 为空：Note Index / Category Index / 404 -->
