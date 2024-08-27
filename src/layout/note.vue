@@ -6,7 +6,7 @@
  * @todo 处理 front matter
  */
 
-import { ref, shallowRef, watch } from "vue";
+import { nextTick, ref, shallowRef, watch } from "vue";
 import { useRoute } from "vue-router";
 
 // Components
@@ -40,6 +40,36 @@ const postBody = shallowRef();
 const postAttrs = shallowRef({});
 const postToc = shallowRef([]);
 const titlePath = ref([]);
+
+const in_view = ref(null);
+
+
+const setup_scroll = async () => {
+    const in_viewport = (el) => {
+        var rect = el.getBoundingClientRect();
+
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    };
+
+    in_view.value = null;
+
+    await nextTick();
+    const headings = document.querySelectorAll(".markdown .heading");
+
+    window.onscroll = () => {
+        for (let i = 0; i < headings.length; i++) {
+            if (in_viewport(headings[i])) {
+                in_view.value = i;
+                break;
+            }
+        }
+    };
+};
 
 const to_local = (path) => {
     let tmp = Array.from(path);  // Deep copy
@@ -97,13 +127,15 @@ watch(
     },
     { immediate: true }
 );
+
+watch(postToc, setup_scroll, { immediate: true });
 </script>
 
 <template>
     <div class="note-layout">
         <LeftBar id="left" :config="config_cache" />
         <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
-        <RightBar id="right" :toc_raw="postToc" />
+        <RightBar id="right" :toc_raw="postToc" :in_view="in_view" />
     </div>
 </template>
 

@@ -107,4 +107,15 @@ md.renderer.rules.image = function (tokens, idx, options, env, self) {
     return `<image-captioned alt="${alt}" src="${src}">${caption}</image-captioned>`;
 };
 
+const originalHeadingOpen =
+    md.renderer.rules.heading_open ||
+    function (tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options);
+    };
+
+md.renderer.rules.heading_open = function (tokens, idx, options, env, self) {
+    tokens[idx].attrSet("class", "heading");
+    return originalHeadingOpen(tokens, idx, options, env, self);
+};
+
 export default md;

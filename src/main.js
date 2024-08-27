@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
     faAngleRight,
     faBars,
+    faCaretLeft,
     faCaretRight,
     faFaceFrown,
     faFile,
@@ -78,6 +79,7 @@ async function main() {
         faBars,
         faMagnifyingGlass,
         faCaretRight,
+        faCaretLeft,
         faXmark,
         faFile,
         faFolder,

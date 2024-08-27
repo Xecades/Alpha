@@ -3,24 +3,23 @@
  * @todo 完成 ToC 的动画！！！
  * @todo 样式不满意，仍需优化
  * @todo 联动 cursor（？）
- * 
- * @todo 完成 ToC 中的 html 标签，例如 code 块
- * 
- * @todo ToC 展开后的层级效果！！！！！！
- * @todo 当前滚动进度高亮！！！！！
  */
 
 import { computed, ref } from "vue";
 import { refreshCursor } from "@/assets/js/cursor";
 
-const props = defineProps({ toc_raw: Array });
+const props = defineProps({ toc_raw: Array, in_view: Number });
 
 const width_preset = ["50px", "40px", "30px", "20px", "13px"];
+const indent_preset = ["0rem", "1rem", "1.7rem", "2.3rem", "2.8rem"];
 const levels = computed(() => props.toc_raw.map((item) => item.level));
 
 const maxLevel = computed(() => Math.max(...levels.value));
+const minLevel = computed(() => Math.min(...levels.value));
 const toc = computed(() => props.toc_raw.map((item) => {
     item.width = width_preset[4 + item.level - maxLevel.value];
+    item.indent = indent_preset[item.level - minLevel.value];
+
     return item;
 }));
 
@@ -29,10 +28,6 @@ const showtext = ref(false);
 const navigate = (id) => {
     let el = document.getElementById(id);
     if (el) {
-        /**
-         * @see https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollIntoView
-         * @todo 优化滚动效果，跳转留一个 offset
-         */
         el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 };
@@ -43,14 +38,19 @@ const navigate = (id) => {
         <Transition name="bars" class="wrapper" @enter="refreshCursor" @mouseenter="showtext = true"
             @mouseleave="showtext = false">
             <div class="toc" v-if="!showtext">
-                <template v-for="item in toc">
-                    <div class="bar item cursor" :style="{ width: item.width }"></div>
+                <template v-for="(item, idx) in toc">
+                    <div class="bar item cursor" :style="{ width: item.width }" :class="{ 'active': idx === in_view }">
+                    </div>
                 </template>
             </div>
             <div class="toc" v-else>
-                <template v-for="item in toc">
-                    <a class="text item cursor" :href="'#' + item.link" v-html="item.title"
-                        @click.prevent="navigate(item.link)"></a>
+                <template v-for="(item, idx) in toc">
+                    <a class="detail item cursor" :href="'#' + item.link" @click.prevent="navigate(item.link)"
+                        :style="{ marginRight: item.indent }"
+                        :class="{ 'active': idx === in_view, 'passed': idx < in_view }">
+                        <span class="text" v-html="item.title"></span>
+                        <span class="sign"><font-awesome-icon :icon="['fas', 'caret-left']" /></span>
+                    </a>
                 </template>
             </div>
         </Transition>
@@ -61,6 +61,7 @@ const navigate = (id) => {
 * {
     --padding: .5rem;
     --margin: 1.5rem;
+    --theme-color: #60a5fa;
 
     --offset-top: 11rem;
     --offset-right: calc(70px - var(--padding) - var(--margin));
@@ -74,6 +75,8 @@ const navigate = (id) => {
     --gap: 15px;
     --bar-height: 4px;
     --bar-padding: 4px;
+
+    --toc-title-indent: .5rem;
 }
 
 .toc {
@@ -94,6 +97,19 @@ const navigate = (id) => {
     font-size: 1rem;
 }
 
+:global(#right .toc code) {
+    font-family: var(--monospace);
+    font-size: .85em;
+}
+
+:global(#right .toc em) {
+    font-style: italic;
+}
+
+:global(#right .toc strong) {
+    font-weight: bold;
+}
+
 .item {
     margin-left: auto;
     display: inline-block;
@@ -112,11 +128,45 @@ const navigate = (id) => {
     background-color: var(--color);
     border-radius: 4px;
     height: var(--bar-height);
-    transition: background-color .3s;
+    transition: background-color .15s;
 }
 
-.text {
+.bar.active {
+    background-color: #bdbbb8;
+}
+
+.detail {
     line-height: 1.6rem;
+    transition: color .15s;
+}
+
+.detail.active {
+    color: var(--theme-color);
+}
+
+.detail.passed {
+    color: #acb1c1;
+}
+
+.detail .sign {
+    color: var(--theme-color);
+    opacity: 0;
+    transition: opacity .1s;
+    font-size: .7rem;
+    display: block;
+    float: inline-end;
+}
+
+.detail .text {
+    padding-right: var(--toc-title-indent);
+}
+
+.detail:hover .text {
+    color: var(--theme-color);
+}
+
+.detail:hover .sign {
+    opacity: 1;
 }
 
 .bars-enter-active,

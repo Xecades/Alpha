@@ -5,6 +5,8 @@
 :root {
     --theme-color: #60a5fa;
     --block-extend: -0.5rem;
+    --monospace: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono",
+        monospace;
 }
 
 /* 基础样式 */
@@ -49,7 +51,7 @@
     color: #0e78fa;
 }
 
-.markdown :is(h1, h2, h3, h4, h5, h6):hover .header-anchor {
+.markdown .heading:hover .header-anchor {
     opacity: 1;
 }
 
@@ -84,10 +86,11 @@
     line-height: 1.25rem;
 }
 
-.markdown :is(h2, h3, h4, h5, h6) {
+.markdown .heading {
     position: relative;
     margin: 1.6rem 0;
     color: #2e2e2e;
+    scroll-margin-top: 4rem;
 }
 
 /* hr 标签 */
@@ -212,19 +215,28 @@
 }
 
 /* 行间代码块 */
-.markdown pre[class*="language-"] {
-    margin-left: var(--block-extend);
-    margin-right: var(--block-extend);
-    background: #f5f5f59c;
-    border-radius: 2px;
+.markdown pre {
+    background: hsl(230, 1%, 98%);
+    border: 1px solid #ededed;
     scrollbar-width: none;
+    padding: 1em;
+    margin: 0.5em 0;
+    overflow: auto;
+    border-radius: 0.3em;
+    color: hsl(230, 8%, 24%);
+    font-family: var(--monospace);
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 2;
 }
 
-.markdown pre[class*="language-"] code {
+.markdown pre code {
     background: unset;
     font-size: 0.97em;
 }
 
-.markdown pre[class*="language-"] ::selection {
+.markdown pre ::selection {
     background-color: var(--selection-bg);
 }
