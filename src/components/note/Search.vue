@@ -69,9 +69,14 @@ const sync = async (q) => {
 };
 
 watch(query, sync, { immediate: true });
-watch(() => props.visible, () => {
-    setTimeout(() => {
+watch(() => props.visible, (v) => {
+    if (v) return;
+
+    setTimeout(async () => {
         query.value = "";
+        await nextTick();
+        const el = document.querySelector(".results .post");
+        el.scrollIntoView({ block: "start" });
     }, 120); // Same as .search-leave-active transition duration in LeftBar.vue
 });
 </script>
