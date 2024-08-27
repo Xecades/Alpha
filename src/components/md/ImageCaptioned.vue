@@ -24,7 +24,7 @@ onMounted(() => {
 <template>
     <figure>
         <img ref="img" class="cursor" :alt="alt" :src="src" data-ic-zoomable />
-        <figcaption v-if="alt">
+        <figcaption v-if="alt" :title="alt">
             <slot />
         </figcaption>
     </figure>

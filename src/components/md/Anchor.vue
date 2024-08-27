@@ -15,26 +15,23 @@ const is_internal = props.href.startsWith("/");
 <style scoped>
 * {
     --color: #3083e8;
-    --hover-bg: #499afedb;
-    --active-bg: #83b5f2db;
+    --hover-color: #0454b3;
 }
 
 a {
     color: var(--color);
-    transition: color .1s, background-color .1s ease;
-    margin: -2px;
-    padding: 2px;
-    border-radius: 2px;
-    position: relative;
+    transition: color .1s;
 }
 
 a:hover {
-    background: var(--hover-bg);
-    color: white;
+    color: var(--hover-color);
 }
 
-a:active {
-    background: var(--active-bg);
-    color: white;
+a::after {
+    content: "✦";
+    font-size: 0.7em;
+    line-height: 1em;
+    padding: 0 2px;
+    vertical-align: super;
 }
 </style>
