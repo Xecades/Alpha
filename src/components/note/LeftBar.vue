@@ -133,7 +133,7 @@ onUpdated(() => {
         <!-- https://cn.vuejs.org/guide/built-ins/teleport.html -->
         <Teleport to="body">
             <Transition name="search">
-                <Search v-if="is_searching" @close="hide_search" />
+                <Search v-show="is_searching" :visible="is_searching" @close="hide_search" />
             </Transition>
         </Teleport>
     </div>

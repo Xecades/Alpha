@@ -6,6 +6,8 @@ import { refreshCursor } from "@/assets/js/cursor";
 
 import search from "@cache/note/search";
 
+const props = defineProps({ visible: Boolean });
+
 const query = ref("");
 const results = ref([]);
 
@@ -67,6 +69,11 @@ const sync = async (q) => {
 };
 
 watch(query, sync, { immediate: true });
+watch(() => props.visible, () => {
+    setTimeout(() => {
+        query.value = "";
+    }, 120); // Same as .search-leave-active transition duration in LeftBar.vue
+});
 </script>
 
 <template>
