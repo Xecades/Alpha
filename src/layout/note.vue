@@ -132,7 +132,7 @@ watch(postToc, setup_scroll, { immediate: true });
 </script>
 
 <template>
-    <div class="note-layout">
+    <div class="note-layout" id="main">
         <LeftBar id="left" :config="config_cache" />
         <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
         <RightBar id="right" :toc_raw="postToc" :in_view="in_view" />

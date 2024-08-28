@@ -5,7 +5,7 @@ import { nextTick } from "vue";
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const type_of = (x) => {
-    if (x.path === "/") return "index";
+    if (x.path === "/" && x.name === undefined) return "root";
     if (x.name) return "home";
 
     const path = x.path;
@@ -35,8 +35,10 @@ const beforeEach = async (to, from) => {
      * Blog -> Blog: ScrollReveal
      */
 
-    if (t_from === "index") {
+    if (t_from === "root") {
+        // Navigating from nowhere
         return true;
+        //
     } else if (t_from === "note" && t_to === "note") {
         // ScrollReveal
         const content = document.querySelector("#content");
@@ -57,6 +59,8 @@ const beforeEach = async (to, from) => {
 const afterEach = async (to, from) => {
     const t_to = type_of(to);
     const t_from = type_of(from);
+
+    console.assert(t_to !== "root", "Navigating to root is impossible");
 
     /**
      * Home -> Home: None
