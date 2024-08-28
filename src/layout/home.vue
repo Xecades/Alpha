@@ -1,13 +1,21 @@
-<script setup>
+<script setup lang="ts">
+// @ts-ignore
 import { render } from "@/assets/js/home/partials";
 import { isProxy, ref, watch } from "vue";
 
 import logger from "@/assets/js/logger";
 import setupReveal from "@/assets/js/reveal";
 import { setupCursor } from "@/assets/js/cursor";
+import type { JSX } from "vue/jsx-runtime";
 
-const props = defineProps({ data: Object });
-const VBody = ref(render(props.data));
+interface HomeLayoutData {
+    title: string;
+    subtitle: string;
+    body: any[];
+}
+
+const props = defineProps<{ data: HomeLayoutData }>();
+const VBody = ref<JSX.Element>(render(props.data));
 
 setupReveal();
 setupCursor();

@@ -6,14 +6,14 @@
  */
 import { render as DomSerializer } from "dom-serializer";
 import { parseDOM } from "htmlparser2";
-import { Element } from "domhandler";
+import { Element, type ChildNode } from "domhandler";
 import { compileTemplate } from "vue/compiler-sfc";
 
-export default (html, filename) => {
-    const ast = parseDOM(html);
+export default (html: string, filename: string) => {
+    const ast: ChildNode[] = parseDOM(html);
 
     // Top-level <pre> tags become <pre v-pre>
-    ast.forEach((node) => {
+    ast.forEach((node: ChildNode) => {
         if (node instanceof Element) {
             if (["pre", "code"].includes(node.tagName)) {
                 node.attribs["v-pre"] = "true";
@@ -22,7 +22,7 @@ export default (html, filename) => {
     });
 
     // Any <code> tag becomes <code v-pre> excepting under `<pre>`
-    const markCodeAsPre = (node) => {
+    const markCodeAsPre = (node: ChildNode) => {
         if (node instanceof Element) {
             if (node.tagName === "code") node.attribs["v-pre"] = "true";
             if (node.childNodes.length > 0)
@@ -31,7 +31,7 @@ export default (html, filename) => {
     };
     ast.forEach(markCodeAsPre);
 
-    let { code: code } = compileTemplate({
+    let { code } = compileTemplate({
         source: DomSerializer(ast),
         id: filename,
         filename,

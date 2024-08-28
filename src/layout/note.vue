@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 /**
  * @todo index.md 页面应该写什么？只需要 abstract 即可，也可以省略不要
  * @todo index.md 添加 Vue 组件
@@ -6,7 +6,7 @@
  * @todo 处理 front matter
  */
 
-import { nextTick, ref, shallowRef, watch } from "vue";
+import { nextTick, ref, shallowRef, watch, type Component, type Ref } from "vue";
 import { useRoute } from "vue-router";
 
 // Components
@@ -25,9 +25,19 @@ import setupReveal from "@/assets/js/reveal";
 import { setupCursor } from "@/assets/js/cursor";
 
 // Cache
+// @ts-ignore
 import meta_cache from "@cache/note/meta";
+// @ts-ignore
 import comps_cache from "@cache/note/comps";
+// @ts-ignore
 import config_cache from "@cache/note/config";
+
+// Types
+import type { FMAttr } from "script/preprocess/parse-md";
+import type { Header } from "script/toc";
+
+type TitleLink = { title: string, link: string };
+type MetaItem = { attr: FMAttr, toc: Header[] };
 
 
 setupReveal();
@@ -36,17 +46,17 @@ setupCursor();
 const route = useRoute();
 
 const injectComps = { InlineMath, BlockMath, Anchor, ImageCaptioned };
-const postBody = shallowRef();
-const postAttrs = shallowRef({});
-const postToc = shallowRef([]);
-const titlePath = ref([]);
+const postBody: Ref<any> = shallowRef();
+const postAttrs: Ref<FMAttr | {}> = shallowRef({});
+const postToc: Ref<Header[]> = shallowRef([]);
+const titlePath: Ref<TitleLink[]> = ref([]);
 
-const in_view = ref(null);
+const in_view: Ref<null | number> = ref(null);
 
 
 const setup_scroll = async () => {
-    const in_viewport = (el) => {
-        var rect = el.getBoundingClientRect();
+    const in_viewport = (el: Element): boolean => {
+        let rect: DOMRect = el.getBoundingClientRect();
 
         return (
             rect.top >= 0 &&
@@ -71,30 +81,25 @@ const setup_scroll = async () => {
     };
 };
 
-const to_local = (path) => {
-    let tmp = Array.from(path);  // Deep copy
+const to_local = (path: string[]) => {
+    let tmp: string[] = Array.from(path);  // Deep copy
 
-    if (tmp === "") tmp = ["note"];
-    else tmp.unshift("note");
+    tmp.unshift("note");
 
-    let src = tmp.join("/");
+    let src: string = tmp.join("/");
 
     if (meta_cache[src + ".md"]) return src + ".md"; // Normal post
     else if (meta_cache[src + "/index.md"]) return src + "/index.md"; // Index page
     else return null; // 404
 };
 
-/**
- * 将 Path 转化为 title 数组
- * 
- * @param {Array} path 路径数组
- */
-const resolvePath = async (path) => {
-    let ret = [];
+// 将 Path 转化为 title 数组
+const resolvePath = async (path: string[]) => {
+    let ret: TitleLink[] = [];
 
     for (let i = 0; i < path.length - 1; i++) {
-        let partial_path = path.slice(0, i + 1);
-        let partial_src = to_local(partial_path);
+        let partial_path: string[] = path.slice(0, i + 1);
+        let partial_src: string = to_local(partial_path) as string;
 
         let attr = meta_cache[partial_src].attr;
 
@@ -110,8 +115,13 @@ const resolvePath = async (path) => {
 
 watch(
     () => route.params.path,
-    async (path) => {
-        let src = to_local(path);
+    async (path_raw: string | string[]) => {
+        let path: string[];
+
+        if (typeof path_raw === "string") path = [path_raw];
+        else path = path_raw;
+
+        let src: string | null = to_local(path);
 
         if (src) {
             postBody.value = comps_cache[src](injectComps);
@@ -134,7 +144,7 @@ watch(postToc, setup_scroll, { immediate: true });
 <template>
     <div class="note-layout" id="main">
         <LeftBar id="left" :config="config_cache" />
-        <Content id="content" :body="postBody" :attr="postAttrs" :path="titlePath" />
+        <Content id="content" :body="postBody" :attr="(postAttrs as FMAttr)" :path="titlePath" />
         <RightBar id="right" :toc_raw="postToc" :in_view="in_view" />
     </div>
 </template>

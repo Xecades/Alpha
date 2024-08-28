@@ -2,22 +2,41 @@ import logger from "@/assets/js/logger";
 import ScrollReveal from "scrollreveal";
 import { nextTick } from "vue";
 
-const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+import type {
+    NavigationGuard,
+    NavigationHookAfter,
+    RouteLocationNormalizedGeneric,
+    RouteLocationNormalizedLoadedGeneric,
+    Router,
+} from "vue-router";
 
-const type_of = (x) => {
-    if (x.path === "/" && x.name === undefined) return "root";
-    if (x.name) return "home";
+const sleep = (ms: number) => new Promise<void>((res) => setTimeout(res, ms));
+
+type RouteLocation =
+    | RouteLocationNormalizedGeneric
+    | RouteLocationNormalizedLoadedGeneric;
+
+enum RouteType {
+    root = "root",
+    home = "home",
+    note = "note",
+    blog = "blog",
+}
+
+const type_of = (x: RouteLocation): RouteType => {
+    if (x.path === "/" && x.name === undefined) return RouteType.root;
+    if (x.name) return RouteType.home;
 
     const path = x.path;
-    if (path.startsWith("/note")) return "note";
-    else if (path.startsWith("/blog")) return "blog";
+    if (path.startsWith("/note")) return RouteType.note;
+    else if (path.startsWith("/blog")) return RouteType.blog;
 
     throw new Error("Invalid route type");
 };
 
-const beforeEach = async (to, from) => {
-    const t_from = type_of(from);
-    const t_to = type_of(to);
+const beforeEach: NavigationGuard = async (to, from) => {
+    const t_from: RouteType = type_of(from);
+    const t_to: RouteType = type_of(to);
 
     logger.star(`${from.fullPath} (${t_from}) -> ${to.fullPath} (${t_to})`);
 
@@ -35,32 +54,33 @@ const beforeEach = async (to, from) => {
      * Blog -> Blog: ScrollReveal
      */
 
-    if (t_from === "root") {
+    if (t_from === RouteType.root) {
         // Navigating from nowhere
         return true;
         //
-    } else if (t_from === "note" && t_to === "note") {
+    } else if (t_from === RouteType.note && t_to === RouteType.note) {
         // ScrollReveal
-        const content = document.querySelector("#content");
+        const content = document.querySelector("#content") as Element;
         content.classList.add("hide");
         await sleep(100);
         //
-    } else if (t_from === "blog" && t_to === "blog") {
+    } else if (t_from === RouteType.blog && t_to === RouteType.blog) {
         // ScrollReveal
         throw new Error("Not implemented");
         //
     } else {
         // Fade out
-        document.querySelector("#main").classList.add("fade-out");
+        const main = document.querySelector("#main") as Element;
+        main.classList.add("fade-out");
         await sleep(100);
     }
 };
 
-const afterEach = async (to, from) => {
-    const t_to = type_of(to);
-    const t_from = type_of(from);
+const afterEach: NavigationHookAfter = async (to, from) => {
+    const t_to: RouteType = type_of(to);
+    const t_from: RouteType = type_of(from);
 
-    console.assert(t_to !== "root", "Navigating to root is impossible");
+    console.assert(t_to !== RouteType.root, "Navigating to root is impossible");
 
     /**
      * Home -> Home: None
@@ -76,11 +96,11 @@ const afterEach = async (to, from) => {
      * Blog -> Blog: ScrollReveal
      */
 
-    if (t_to === "note") {
+    if (t_to === RouteType.note) {
         // ScrollReveal
         await nextTick();
 
-        const content = document.querySelector("#content");
+        const content = document.querySelector("#content") as Element;
         content.classList.remove("hide");
 
         const target = "header h1, #breadcrumb, .markdown > *";
@@ -93,14 +113,14 @@ const afterEach = async (to, from) => {
             scale: 0.99,
         });
         //
-    } else if (t_to === "blog") {
+    } else if (t_to === RouteType.blog) {
         // ScrollReveal
         throw new Error("Not implemented");
         //
     }
 };
 
-function setupGuards(router) {
+function setupGuards(router: Router) {
     router.beforeEach(beforeEach);
     router.afterEach(afterEach);
 }

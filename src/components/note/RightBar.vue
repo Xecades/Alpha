@@ -1,37 +1,43 @@
-<script setup>
+<script setup lang="ts">
 /**
  * @todo 完成 ToC 的动画！！！
  * @todo 样式不满意，仍需优化
  * @todo 联动 cursor（？）
  */
 
-import { computed, ref } from "vue";
+import { computed, ref, type ComputedRef, type Ref } from "vue";
 import { refreshCursor } from "@/assets/js/cursor";
 
-const props = defineProps({ toc_raw: Array, in_view: Number });
+// Types
+import type { Header } from "script/toc";
+
+type HeaderRef = Header & { width: string, indent: string };
+
+const props = defineProps<{ toc_raw: Header[], in_view: number | null }>();
 
 const width_preset = ["50px", "40px", "30px", "20px", "13px"];
 const indent_preset = ["0rem", "1rem", "1.7rem", "2.3rem", "2.8rem"];
-const levels = computed(() => props.toc_raw.map((item) => item.level));
 
-const maxLevel = computed(() => Math.max(...levels.value));
-const minLevel = computed(() => Math.min(...levels.value));
-const toc = computed(() => props.toc_raw.map((item) => {
+const levels: ComputedRef<number[]> = computed(() => props.toc_raw.map((item) => item.level));
+const maxLevel: ComputedRef<number> = computed(() => Math.max(...levels.value));
+const minLevel: ComputedRef<number> = computed(() => Math.min(...levels.value));
+
+const toc: ComputedRef<HeaderRef[]> = computed(() => props.toc_raw.map((item: any) => {
     item.width = width_preset[4 + item.level - maxLevel.value];
     item.indent = indent_preset[item.level - minLevel.value];
 
-    return item;
+    return item as HeaderRef;
 }));
 
-const showtext = ref(false);
+const showtext: Ref<boolean> = ref(false);
 
-const navigate = (id) => {
+const navigate = (id: string) => {
     let el = document.getElementById(id);
     if (el) {
         // 不能用 scrollIntoView，因为 ScrollReveal 动画会打断滚动
 
         const offset = -4 * 16;
-        const y = el.getBoundingClientRect().top + window.scrollY + offset;
+        const y: number = el.getBoundingClientRect().top + window.scrollY + offset;
 
         window.scrollTo({ top: y, behavior: "smooth" });
     }
@@ -52,7 +58,7 @@ const navigate = (id) => {
                 <template v-for="(item, idx) in toc">
                     <a class="detail item cursor" :href="'#' + item.link" @click.prevent="navigate(item.link)"
                         :style="{ marginRight: item.indent }"
-                        :class="{ 'active': idx === in_view, 'passed': idx < in_view }">
+                        :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }">
                         <span class="text" v-html="item.title"></span>
                         <span class="sign"><font-awesome-icon :icon="['fas', 'caret-left']" /></span>
                     </a>

@@ -1,10 +1,16 @@
 import MarkdownIt from "markdown-it";
+import type Token from "markdown-it/lib/token.d.mts";
 
 import MarkdownItAnchor from "markdown-it-anchor";
 import MarkdownItPrism from "markdown-it-prism";
+
+// @ts-ignore
 import MarkdownItForInline from "markdown-it-for-inline";
+
+// @ts-ignore
 import MarkdownItTaskCheckbox from "markdown-it-task-checkbox";
 
+// @ts-ignore
 import MarkdownItWrapper from "../markdown-it-wrapper";
 
 import extractText from "../preprocess/extract-text";
@@ -45,14 +51,15 @@ md.use(MarkdownItWrapper, {
     type: "inline",
     name: "katex_inline",
     marker: "$",
-    renderer: (c) => `<inline-math data="${encodeURI(c)}"></inline-math>`,
+    renderer: (c: string) =>
+        `<inline-math data="${encodeURI(c)}"></inline-math>`,
 });
 
 md.use(MarkdownItWrapper, {
     type: "block",
     name: "katex_block",
     marker: "$$",
-    renderer: (c) => `<block-math data="${encodeURI(c)}"></block-math>`,
+    renderer: (c: string) => `<block-math data="${encodeURI(c)}"></block-math>`,
 });
 
 /**
@@ -63,7 +70,7 @@ md.use(
     MarkdownItForInline,
     "vueify_anchor_open",
     "link_open",
-    (tokens, idx) => {
+    (tokens: Token[], idx: number) => {
         tokens[idx].tag = "anchor";
     }
 );
@@ -72,7 +79,7 @@ md.use(
     MarkdownItForInline,
     "vueify_anchor_close",
     "link_close",
-    (tokens, idx) => {
+    (tokens: Token[], idx: number) => {
         tokens[idx].tag = "anchor";
     }
 );
@@ -89,7 +96,7 @@ md.use(MarkdownItAnchor, {
         symbol: "¶",
         placement: "after",
     }),
-    slugify: () => "t",
+    slugify: (): string => "t",
     uniqueSlugStartIndex: 2,
 });
 
@@ -98,7 +105,12 @@ md.use(MarkdownItAnchor, {
  */
 md.renderer.rules.image = function (tokens, idx, options, env, self) {
     let src = tokens[idx].attrGet("src");
-    let caption = self.renderInline(tokens[idx].children, options, env);
+    let caption = self.renderInline(
+        tokens[idx].children as Token[],
+        options,
+        env
+    );
+
     let alt = extractText(caption);
 
     return `<image-captioned alt="${alt}" src="${src}">${caption}</image-captioned>`;

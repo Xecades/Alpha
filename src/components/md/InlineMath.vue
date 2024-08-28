@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { render_inline } from "@/assets/js/latex";
 
-const props = defineProps({ data: String });
+const props = defineProps<{ data: string }>();
 
-const raw = decodeURI(props.data);
-const parsed = render_inline(raw);
+const raw: string = decodeURI(props.data);
+const parsed: string = render_inline(raw);
 </script>
 
 <template>

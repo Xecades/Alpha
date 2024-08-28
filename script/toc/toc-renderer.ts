@@ -1,5 +1,6 @@
 import MarkdownIt from "markdown-it";
 
+// @ts-ignore
 import MarkdownItWrapper from "../markdown-it-wrapper";
 import { render_inline } from "../../src/assets/js/latex";
 

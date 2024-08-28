@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 /**
  * @todo 图片缓存，不能每次都重新加载一遍
  */
@@ -10,14 +10,17 @@ import Breadcrumb from "./Breadcrumb.vue";
 import "@/assets/css/markdown.css";
 import "@/assets/css/prism-one-light.css";
 
-const props = defineProps({
-    body: Object,
-    attr: Object,
-    path: Array,
-});
+// Types
+import type { FMAttr } from "script/preprocess/parse-md";
+
+type TitleLink = { title: string, link: string };
+
+
+const props = defineProps<{ body: any, attr: FMAttr, path: TitleLink[] }>();
 
 const register_anchor = () => {
     const headings = document.querySelectorAll(".heading");
+
     headings.forEach((heading) => {
         const anchor = heading.querySelector(".header-anchor");
         if (anchor) {
@@ -25,7 +28,7 @@ const register_anchor = () => {
                 e.preventDefault();
 
                 const offset = -4 * 16;
-                const y = heading.getBoundingClientRect().top + window.scrollY + offset;
+                const y: number = heading.getBoundingClientRect().top + window.scrollY + offset;
 
                 window.scrollTo({ top: y, behavior: "smooth" });
             });

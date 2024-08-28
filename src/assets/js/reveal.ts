@@ -1,6 +1,6 @@
 import ScrollReveal from "scrollreveal";
 import logger from "./logger";
-import { onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated } from "vue";
+import { onBeforeUnmount, onMounted } from "vue";
 
 function mount() {
     logger.nbsp("Reveal module mounted");
@@ -20,7 +20,5 @@ function destroy() {
 
 export default function setupReveal() {
     onMounted(mount);
-    // onUpdated(mount);
     onBeforeUnmount(destroy);
-    // onBeforeUpdate(destroy);
 }

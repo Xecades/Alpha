@@ -5,7 +5,7 @@
 import chokidar from "chokidar";
 
 // 目前存在的问题：修改本 js 会导致注册多个 chokidar.watch
-export default async (watch_dir, fn) => {
+export default async (watch_dir: string, fn: () => Promise<void>) => {
     let cb_active = false;
     const chokidar_cb = async () => {
         if (cb_active) return;

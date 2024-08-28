@@ -11,7 +11,7 @@ import hmr from "./hmr";
 
 const NOTE_BASE = "./note";
 
-const parse_fn = (path, cache_dir) => async () => {
+const parse_fn = (path: string, cache_dir: string) => async () => {
     const data = await parseMd(path);
     await cacheMeta(data, cache_dir + "/meta.json");
     await cacheComps(data, cache_dir + "/comps.js");

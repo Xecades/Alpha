@@ -32,7 +32,7 @@ import {
 
 // Wait for document ready
 const documentReady = () => {
-    return new Promise((res) => {
+    return new Promise<void>((res) => {
         document.onreadystatechange = () => {
             if (document.readyState === "complete") {
                 logger.plus("Document ready");

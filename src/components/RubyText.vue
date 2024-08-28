@@ -1,10 +1,10 @@
-<script setup>
-const props = defineProps({
-    text: String,
-    rbclass: String,
-    rtclass: String,
-    class: String
-});
+<script setup lang="ts">
+const props = defineProps<{
+    text: string,
+    rbclass: string,
+    rtclass: string,
+    class: string
+}>();
 </script>
 
 <template>

@@ -4,12 +4,23 @@
 
 import { onMounted, onUpdated } from "vue";
 
-const lerp = (a, b, n) => (1 - n) * a + n * b;
+const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b;
+
+interface Coord {
+    x: number;
+    y: number;
+}
+
+interface Cursor {
+    cursor: HTMLDivElement;
+    pos: { curr: Coord | null; prev: Coord | null };
+    els: NodeListOf<Element>;
+}
 
 class Cursor {
     constructor() {
         this.pos = { curr: null, prev: null };
-        this.els = [];
+
         this.create();
         this.init();
         this.render();
@@ -31,18 +42,16 @@ class Cursor {
         }
     }
 
-    move(left, top) {
+    move(left: number, top: number) {
         this.cursor.style["left"] = `${left}px`;
         this.cursor.style["top"] = `${top}px`;
     }
 
     create() {
-        if (!this.cursor) {
-            this.cursor = document.createElement("div");
-            this.cursor.id = "cursor";
-            this.cursor.classList.add("hidden");
-            document.body.append(this.cursor);
-        }
+        this.cursor = document.createElement("div");
+        this.cursor.id = "cursor";
+        this.cursor.classList.add("hidden");
+        document.body.append(this.cursor);
     }
 
     init() {
@@ -58,7 +67,7 @@ class Cursor {
     }
 
     render() {
-        if (this.pos.prev) {
+        if (this.pos.curr && this.pos.prev) {
             this.pos.prev.x = lerp(this.pos.prev.x, this.pos.curr.x, 0.1);
             this.pos.prev.y = lerp(this.pos.prev.y, this.pos.curr.y, 0.1);
             this.move(this.pos.prev.x, this.pos.prev.y);

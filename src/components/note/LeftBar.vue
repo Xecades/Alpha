@@ -1,30 +1,37 @@
-<script setup lang="jsx">
+<script setup lang="tsx">
 import { refreshCursor } from "@/assets/js/cursor";
-import { nextTick, onUpdated, ref, watch } from "vue";
+import { nextTick, onUpdated, ref, watch, type Ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 
 // 必须手动引用，否则 JSX 会出问题
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+// Components
 import Search from "./Search.vue";
 
+// Types
+import type { Config, Nav } from "script/preprocess/cache-config";
+import type { JSX } from "vue/jsx-runtime";
 
-const props = defineProps({ config: Object });
+type Category = { name: string, link: string, opacity: number, timeout?: NodeJS.Timeout };
+
+
+const props = defineProps<{ config: Config }>();
 const router = useRouter();
 
 
-const curr_cate = router.currentRoute.value.params.path[0];
-const categories = ref(props.config.nav.map(cate => ({ name: cate.title, link: cate.link, opacity: 0 })));
+const curr_cate: string = router.currentRoute.value.params.path[0];
+const categories: Ref<Category[]> = ref(props.config.nav.map(cate => ({ name: cate.title, link: cate.link, opacity: 0 })));
 
 // 根据当前路径确定默认激活的分类
-const curr_id = categories.value.findIndex(cate => cate.link === "note/" + curr_cate);
-const active_id = ref(curr_id === -1 ? 0 : curr_id);
+const curr_id: number = categories.value.findIndex(c => c.link === "note/" + curr_cate);
+const active_id: Ref<number> = ref(curr_id === -1 ? 0 : curr_id);
 
 
 const is_hover = ref(false);
 const is_searching = ref(false);
 
-const REVEAL_DELAY = 40;
+const REVEAL_DELAY: number = 40;
 
 const reveal_category = () => {
     let len = categories.value.length;
@@ -32,7 +39,7 @@ const reveal_category = () => {
     for (let i = 0; i < len; i++) {
         clearTimeout(categories.value[i].timeout);
 
-        let curr = setTimeout(() => {
+        let curr: NodeJS.Timeout = setTimeout(() => {
             categories.value[i].opacity = 1;
         }, REVEAL_DELAY * i);
 
@@ -46,7 +53,7 @@ const hide_category = () => {
     for (let i = len - 1; i >= 0; i--) {
         clearTimeout(categories.value[i].timeout);
 
-        let curr = setTimeout(() => {
+        let curr: NodeJS.Timeout = setTimeout(() => {
             categories.value[i].opacity = 0;
         }, REVEAL_DELAY * (len - 1 - i));
 
@@ -57,7 +64,9 @@ const hide_category = () => {
 const reveal_search = async () => {
     is_searching.value = true;
     await nextTick();
-    document.querySelector(".search .input").focus();
+
+    const input = document.querySelector(".search .input") as any;
+    input.focus();
 };
 
 const hide_search = () => {
@@ -74,31 +83,31 @@ const mouseleave = () => {
     hide_category();
 };
 
-const render = (node, is_root = false) => {
+const render = (node: Nav, is_root: boolean = false): JSX.Element => {
     let { title, children, link } = node;
     link = "/" + link;
 
-    const text_comp = <span class="text">{title}</span>;
-    const icon_comp = <span class="sign"><FontAwesomeIcon class="icon" icon="fa-solid fa-caret-right" /></span>;
-    const title_comp = <RouterLink to={link} class="title cursor">{icon_comp}{text_comp}</RouterLink>;
+    const text_comp: JSX.Element = <span class="text">{title}</span>;
+    const icon_comp: JSX.Element = <span class="sign"><FontAwesomeIcon class="icon" icon="fa-solid fa-caret-right" /></span>;
+    const title_comp: JSX.Element = <RouterLink to={link} class="title cursor">{icon_comp}{text_comp}</RouterLink>;
 
     if (children.length === 0) {
-        title_comp.props.leaf = true;
+        (title_comp.props as any).leaf = true;
         return title_comp;
     }
 
-    let child_comps = children.map(child => <li class="child">{render(child)}</li>);
-    let children_comp = <ul class="children">{child_comps}</ul>;
+    let child_comps: JSX.Element[] = children.map(child => <li class="child">{render(child)}</li>);
+    let children_comp: JSX.Element = <ul class="children">{child_comps}</ul>;
 
     if (is_root) {
         return children_comp;
     }
 
-    return [title_comp, children_comp];
+    return <>{[title_comp, children_comp]}</>;
 };
 
 const VBody_fn = () => () => render(props.config.nav[active_id.value], true)
-const VBody = ref(VBody_fn());
+const VBody: Ref<() => JSX.Element> = ref(VBody_fn());
 
 watch(active_id, async () => {
     VBody.value = VBody_fn();

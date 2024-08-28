@@ -1,6 +1,6 @@
-<script setup>
-const props = defineProps({ href: String });
-const is_internal = props.href.startsWith("/");
+<script setup lang="ts">
+const props = defineProps<{ href: string }>();
+const is_internal: boolean = props.href.startsWith("/");
 </script>
 
 <template>

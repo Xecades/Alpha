@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import yaml from "yaml";
+import type { ParsedData } from "./parse-md";
 
 /**
  * @fileoverview 预处理 config.yml 文件
@@ -12,22 +13,45 @@ import yaml from "yaml";
  *   + 最终得到的是 Array
  */
 
-const readYML = async (path) => {
+type NavRaw = Record<string, any>;
+
+interface ConfigYML {
+    nav: NavRaw[];
+}
+
+export interface Nav {
+    title: string;
+    name: string;
+    link: string;
+    children: Nav[];
+}
+
+export interface Config {
+    nav: Nav[];
+}
+
+const readYML = async (path: string) => {
     const raw = await fs.readFile(path, "utf-8");
-    return yaml.parse(raw);
+    return yaml.parse(raw) as ConfigYML;
 };
 
-const parse_nav = (nav, data, prefix) => {
-    const name_of = (o) => Object.keys(o)[0];
-    const title_of = (p) => data.filter((d) => d.pathname === p)[0].attr.title;
-    const traverse = (branch, path) => {
+const parse_nav = (
+    nav: NavRaw[],
+    data: ParsedData[],
+    prefix: string
+): Nav[] => {
+    const name_of = (o: object) => Object.keys(o)[0];
+    const title_of = (p: string) =>
+        data.filter((d) => d.pathname === p)[0].attr.title;
+
+    const traverse = (branch: object | string, path: string): Nav => {
         if (typeof branch === "string") {
             let name = branch;
             path += "/" + name;
 
             let pathname = path + ".md";
 
-            let res = {
+            let res: Nav = {
                 title: title_of(pathname),
                 name: name,
                 link: path,
@@ -41,14 +65,14 @@ const parse_nav = (nav, data, prefix) => {
 
         let pathname = path + "/index.md";
 
-        let res = {
+        let res: Nav = {
             title: title_of(pathname),
             name: name,
             link: path,
             children: [],
         };
 
-        let children = branch[name];
+        let children: NavRaw[] = (branch as any)[name];
         for (let child of children) {
             res.children.push(traverse(child, path));
         }
@@ -56,7 +80,7 @@ const parse_nav = (nav, data, prefix) => {
         return res;
     };
 
-    let res = [];
+    let res: Nav[] = [];
 
     for (let branch of nav) {
         let tree = traverse(branch, prefix);
@@ -66,7 +90,12 @@ const parse_nav = (nav, data, prefix) => {
     return res;
 };
 
-export default async (data, config_path, dist, prefix) => {
+export default async (
+    data: ParsedData[],
+    config_path: string,
+    dist: string,
+    prefix: string
+) => {
     const config = await readYML(config_path);
 
     config.nav = parse_nav(config.nav, data, prefix);

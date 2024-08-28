@@ -1,6 +1,7 @@
 import katex from "katex";
+import type { KatexOptions } from "katex";
 
-const _render = (options) => (raw) => {
+const _render = (options: KatexOptions) => (raw: string) => {
     try {
         return katex.renderToString(raw, options);
     } catch (error) {
@@ -11,6 +12,6 @@ const _render = (options) => (raw) => {
 
 const render_inline = _render({ displayMode: false, throwOnError: true });
 const render_block = _render({ displayMode: true, throwOnError: true });
-const render = (raw, opts) => _render(opts)(raw);
+const render = (raw: string, opts: KatexOptions) => _render(opts)(raw);
 
 export { render, render_inline, render_block };

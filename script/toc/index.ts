@@ -14,21 +14,30 @@
 
 import md from "./toc-renderer";
 
-export default (text) => {
+export interface Header {
+    /** 当前 heading 的层级 */
+    level: number;
+    /** 当前 heading 的标题 */
+    title: string;
+    /** 当前 heading 的 permalink */
+    link: string;
+}
+
+export default (text: string) => {
     const reg = /^ *#{1,6} /s;
 
-    text = text.split("\n");
+    let lines = text.split("\n");
     let headers = [];
 
     let is_in_cb = false; // 是否在代码块中
 
-    for (let i = 0; i < text.length; i++) {
-        if (text[i].startsWith("```")) {
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith("```")) {
             is_in_cb = !is_in_cb;
         }
 
-        if (!is_in_cb && reg.test(text[i])) {
-            headers.push(text[i].trim());
+        if (!is_in_cb && reg.test(lines[i])) {
+            headers.push(lines[i].trim());
         }
     }
 
@@ -40,7 +49,7 @@ export default (text) => {
 
         title = md.renderInline(title);
 
-        return { level, title, link };
+        return { level, title, link } as Header;
     });
 
     return headers;

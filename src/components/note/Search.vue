@@ -1,41 +1,72 @@
-<script setup>
-import { nextTick, ref, watch } from "vue";
+<script setup lang="ts">
+import { nextTick, ref, watch, type Ref } from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
 
 import { refreshCursor } from "@/assets/js/cursor";
 
+// @ts-ignore
 import search from "@cache/note/search";
 
-const props = defineProps({ visible: Boolean });
+// Types
+import type { PartialOptions } from "overlayscrollbars";
+import type { FuseResult, FuseResultMatch, RangeTuple } from "fuse.js";
 
-const query = ref("");
-const results = ref([]);
+type SearchObj = {
+    /** 文章标题 */
+    title: string;
+    /** 提取纯文本后的文章内容 */
+    content: string;
+    /** 文章链接 */
+    link: string;
+    /** 是否为索引页，i.e. index.md */
+    is_index: boolean;
+};
 
-const osOptions = {
+type Result = {
+    /** 高亮区域 */
+    type: "title" | "content";
+    /** 高亮前面的文本 */
+    before: string;
+    /** 高亮文本 */
+    mark: string;
+    /** 高亮后面的文本 */
+    after: string;
+} & SearchObj;
+
+const props = defineProps<{
+    /** 搜索组件是否可见 */
+    visible: boolean
+}>();
+
+const query: Ref<string> = ref("");
+const results: Ref<Result[]> = ref([]);
+
+const osOptions: PartialOptions = {
     scrollbars: { autoHide: "move" },
     overflow: { x: "hidden" },
 };
 
-const BEFORE_CNT = 10;
+const BEFORE_CNT: number = 10;
 
-const sync = async (q) => {
-    const len = (i) => i[1] - i[0];
-    const longest = (is) => is.reduce((acc, cur) => len(cur) > len(acc) ? cur : acc);
+const sync = async (q: string) => {
+    const len = (i: RangeTuple) => i[1] - i[0];
+    const longest = (is: readonly RangeTuple[]) =>
+        is.reduce((acc, cur) => len(cur) > len(acc) ? cur : acc);
 
-    let res = search(q);
-    let val = [];
+    let res: FuseResult<SearchObj>[] | Result[] = search(q);
+    let val: Result[] = [];
 
     if (q) {
-        for (let r of res) {
-            let match = r.matches[0];
+        for (let r of res as FuseResult<SearchObj>[]) {
+            let match = (r.matches as FuseResultMatch[])[0];
 
             // Always highlights the longest match
             let [s, e] = longest(match.indices);
 
-            let type = match.key;
-            let text = match.value;
+            let type = match.key as "title" | "content";
+            let text = match.value as string;
 
-            let before, mark, after;
+            let before = "", mark = "", after = "";
 
             if (type === "content") {
                 if (s - BEFORE_CNT > 0)
@@ -60,7 +91,7 @@ const sync = async (q) => {
         }
     } else {
         // if query is empty, show all posts
-        val = res;
+        val = res as Result[];
     }
 
     results.value = val;
@@ -69,13 +100,14 @@ const sync = async (q) => {
 };
 
 watch(query, sync, { immediate: true });
-watch(() => props.visible, (v) => {
+watch(() => props.visible, (v: boolean) => {
     if (v) return;
 
     setTimeout(async () => {
         query.value = "";
         await nextTick();
-        const el = document.querySelector(".results .post");
+
+        const el = document.querySelector(".results .post") as Element;
         el.scrollIntoView({ block: "start" });
     }, 120); // Same as .search-leave-active transition duration in LeftBar.vue
 });
@@ -96,7 +128,7 @@ watch(() => props.visible, (v) => {
                 </div>
             </div>
 
-            <OverlayScrollbarsComponent element="ul" class="results" :options="osOptions" defer>
+            <OverlayScrollbarsComponent element="ul" class="results" :options="(osOptions as any)" defer>
                 <li class="empty" v-if="results.length === 0">
                     <font-awesome-icon class="icon" :icon="['fas', 'face-frown']" />
                 </li>

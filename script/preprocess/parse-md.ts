@@ -7,17 +7,33 @@ import traverse from "./traverse";
 import vueCompiler from "./vue-compiler";
 import extractText from "./extract-text";
 
-export default async (src) => {
-    const ret = await traverse(src, (x) => x.endsWith(".md"));
+import type { PathnameDirent } from "./traverse";
+import type { Header } from "../toc";
+
+export interface FMAttr {
+    title: string;
+}
+
+export interface ParsedData extends PathnameDirent {
+    attr: FMAttr;
+    raw: string;
+    toc: Header[];
+    html: string;
+    text: string;
+    vue: string;
+}
+
+export default async (src: string) => {
+    const ret = (await traverse(src, (x) => x.endsWith(".md"))) as ParsedData[];
 
     for (let i = 0; i < ret.length; i++) {
         const { pathname, dirent } = ret[i];
-        const content = await fs.readFile(pathname, "utf-8");
+        const content: string = await fs.readFile(pathname, "utf-8");
 
         /**
          * Phase 1: 解析 front-matter
          */
-        const { attributes: attr, body: raw } = fm(content);
+        const { attributes: attr, body: raw } = fm<FMAttr>(content);
         ret[i].attr = attr;
         ret[i].raw = raw;
 
@@ -32,8 +48,6 @@ export default async (src) => {
          */
         const html = md.render(raw);
         ret[i].html = html;
-
-        // console.log(html);
 
         /**
          * Phase 4: 提取纯文本

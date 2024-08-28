@@ -1,18 +1,18 @@
-<script setup>
+<script setup lang="ts">
 /**
  * @todo 图片懒加载
  */
 
 import { refreshCursor } from "@/assets/js/cursor";
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, ref, type Ref } from "vue";
 
 import mediumZoom from "medium-zoom";
 
-const props = defineProps({ alt: String, src: String });
-const img = ref(null);
+const props = defineProps<{ alt: string, src: string }>();
+const img: Ref<HTMLImageElement | null> = ref(null);
 
 onMounted(() => {
-    const zoom = mediumZoom(img.value, { background: "#47484a85" });
+    const zoom = mediumZoom(img.value as HTMLElement, { background: "#47484a85" });
     zoom.on("open", async () => {
         await nextTick();
         refreshCursor();

@@ -7,7 +7,9 @@ import sponsor from "@/views/home/sponsor.vue";
 import sponsorship from "@/views/home/sponsorship.vue";
 import error from "@/views/home/404.vue";
 
-const homeRoutes = [
+import type { RouteRecordRaw } from "vue-router";
+
+const homeRoutes: RouteRecordRaw[] = [
     { path: "/", name: "home", component: index },
     { path: "/about", name: "about", component: about },
     { path: "/lab", name: "lab", component: lab },
