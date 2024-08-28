@@ -40,6 +40,7 @@
  - TS-ize
  - Markdown 图片加载时的处理
  - Markdown 图片加载失败时的处理
+ - 404 页面
 
 ## General
 

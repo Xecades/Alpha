@@ -118,7 +118,7 @@ watch(
     async (path_raw: string | string[]) => {
         let path: string[];
 
-        if (typeof path_raw === "string") path = [path_raw];
+        if (typeof path_raw === "string") path = [];
         else path = path_raw;
 
         let src: string | null = to_local(path);

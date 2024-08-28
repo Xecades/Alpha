@@ -3,7 +3,7 @@ type fn = () => void;
 
 const props = defineProps<{
     src: string | fn,
-    mode: "stay" | "jump"
+    mode?: "stay" | "jump"
 }>();
 
 const isButton: boolean = props.src instanceof Function;

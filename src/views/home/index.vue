@@ -12,7 +12,7 @@ const data = {
             link(ruby("踪迹", "/about"), "/about"), "。",
         ],
         [
-            "我是一名大一学生，就读于", link(ruby("浙江大学竺可桢学院", "Chu Kochen Honors College"), "http://ckc.zju.edu.cn/"),
+            "我是一名大二学生，就读于", link(ruby("浙江大学竺可桢学院", "Chu Kochen Honors College"), "http://ckc.zju.edu.cn/"),
             "，现任浙江大学 AAA 战队队员。如果你恰好也是这个学校的学生，欢迎来图灵 2302 班找我。",
         ],
         [

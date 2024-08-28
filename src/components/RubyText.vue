@@ -1,14 +1,13 @@
 <script setup lang="ts">
 const props = defineProps<{
     text: string,
-    rbclass: string,
-    rtclass: string,
-    class: string
+    rbclass?: string,
+    rtclass?: string
 }>();
 </script>
 
 <template>
-    <ruby :class="class">
+    <ruby>
         <rb :class="rbclass">
             <slot />
         </rb>
