@@ -1,0 +1,62 @@
+:root {
+    --cursor-bg: rgba(0, 0, 0, 0.25);
+    --cursor-hover-bg: rgba(0, 0, 0, 0.1);
+    --cursor-hover-scale: 2.5;
+    --cursor-active-bg: rgba(0, 0, 0, 0.5);
+    --cursor-active-scale: 0.5;
+    --cursor-size: 16px;
+    --cursor-transition-duration: 0.2s;
+}
+
+#cursor {
+    position: fixed;
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    background: var(--cursor-bg);
+    border-radius: calc(var(--cursor-size) / 2);
+    z-index: 10086;
+    pointer-events: none;
+    transition: all var(--cursor-transition-duration) ease-in-out;
+    transition-property: background, transform;
+    perspective: 1000px;
+}
+
+#cursor.hidden {
+    background: transparent;
+}
+
+#cursor.hover {
+    background: var(--cursor-hover-bg);
+    transform: scale(var(--cursor-hover-scale));
+}
+
+#cursor.active {
+    background: var(--cursor-active-bg);
+    transform: scale(var(--cursor-active-scale));
+}
+
+* {
+    cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='8px' height='8px'><circle cx='4' cy='4' r='4' opacity='.5'/></svg>") 4 4, auto;
+}
+
+/* Disable cursor for mobile devices */
+@media screen and (pointer: coarse) {
+    #cursor {
+        display: none;
+    }
+}
+
+/* @media (prefers-color-scheme: dark) {
+    #cursor {
+        background: rgba(255, 255, 255, 0.25);
+    }
+    #cursor.hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    #cursor.active {
+        background: rgba(255, 255, 255, 0.5);
+    }
+    * {
+        cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='8px' height='8px'><circle cx='4' cy='4' r='4' fill='white' opacity='.8'/></svg>") 4 4, auto;
+    }
+} */

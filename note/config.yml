@@ -1,0 +1,15 @@
+nav:
+  - cs:
+      - c:
+          - snippets
+      - test:
+          - customToken
+          - latex
+          - markdown
+          - toc
+      - cldf
+      - fds
+  - math:
+      - fourier
+      - dm
+      - la

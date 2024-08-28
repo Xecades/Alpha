@@ -1,20 +1,37 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from "node:url";
+import { defineConfig } from "vite";
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import vueDevTools from 'vite-plugin-vue-devtools'
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import vueDevTools from "vite-plugin-vue-devtools";
 
-// https://vitejs.dev/config/
+import "./script/preprocess";
+
+const customElement = ["rb"];
+
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    vueDevTools(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
-})
+    plugins: [
+        // [@vitejs/plugin-vue]
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: (tag) => customElement.includes(tag),
+                },
+            },
+            include: [/\.vue$/],
+        }),
+
+        // [@vitejs/plugin-vue-jsx]
+        vueJsx(),
+
+        // [vite-plugin-vue-devtools]
+        vueDevTools(),
+    ],
+    resolve: {
+        alias: {
+            "@": fileURLToPath(new URL("./src", import.meta.url)),
+            "@note": fileURLToPath(new URL("./note", import.meta.url)),
+            "@cache": fileURLToPath(new URL("./cache", import.meta.url)),
+        },
+    },
+});

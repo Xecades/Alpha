@@ -1,0 +1,78 @@
+@import url("https://fonts.loli.net/css2?family=EB+Garamond&display=swap");
+@import url("https://fonts.loli.net/css2?family=Noto+Serif&display=swap");
+@import url("https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700&display=swap");
+/* @import url("https://fonts.loli.net/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"); */
+
+:root {
+    --font-color: #4b5563;
+    --font-family: "EB Garamond", "Georgia", "Noto Serif SC", songti sc, serif;
+    --selection-bg: rgba(187, 221, 251, 0.5);
+}
+
+/* Global Fonts */
+body {
+    font-family: var(--font-family);
+    color: var(--font-color);
+}
+
+/* Tap / Selection / Outline Effects */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+*::selection {
+    background-color: var(--selection-bg);
+}
+
+body {
+    outline: none;
+}
+
+/* Background Image */
+body {
+    background-image: radial-gradient(
+            circle at 28% 29%,
+            #ededed06 0%,
+            #ededed06 50%,
+            #88888806 50%,
+            #88888806 100%
+        ),
+        radial-gradient(
+            circle at 8% 78%,
+            #9c9c9c06 0%,
+            #9c9c9c06 50%,
+            #25252506 50%,
+            #25252506 100%
+        );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Scrollbar Flickering Prevention */
+html {
+    padding-right: calc(100% - 100vw);
+    overflow-x: hidden;
+}
+
+/* ScrollReveal.js Flicker Prevention */
+html.sr .rv {
+    visibility: hidden;
+}
+
+html.sr #content {
+    visibility: hidden;
+}
+
+/* Partial Styles */
+.indent {
+    text-indent: 2.25rem;
+}
+
+.no-select {
+    user-select: none;
+}
+
+/* Prevent Scrollbar Flickering */
+#app {
+    width: 100vw;
+}
