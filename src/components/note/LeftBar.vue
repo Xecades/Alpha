@@ -126,14 +126,14 @@ onUpdated(() => {
             </li>
         </ul>
 
-        <ul class="category">
+        <div class="category">
             <template v-for="item, idx in categories">
-                <li class="item cursor" :class="idx == active_id && 'active'" :style="{ opacity: item.opacity }"
-                    @click="router.push('/' + item.link)" @mouseover="active_id = idx">
+                <a class="item cursor" :class="idx == active_id && 'active'" :style="{ opacity: item.opacity }"
+                    @click.prevent="router.push('/' + item.link)" @mouseover="active_id = idx" :href="'/' + item.link">
                     {{ item.name }}
-                </li>
+                </a>
             </template>
-        </ul>
+        </div>
 
         <Transition name="content">
             <component class="content" :is="VBody" v-if="is_hover" />
@@ -181,6 +181,7 @@ onUpdated(() => {
     transition: opacity .1s;
     font-size: .7rem;
     display: block;
+    animation: shake-x 1s infinite ease-in-out;
 }
 
 .note-layout .content .title .text {
@@ -302,6 +303,7 @@ onUpdated(() => {
     text-wrap: nowrap;
     overflow: hidden;
     border-radius: var(--bg-radius);
+    background-image: var(--bg-color);
     user-select: none;
 }
 
@@ -311,7 +313,6 @@ onUpdated(() => {
     font-size: .9rem;
     padding: 0 12px;
     color: #888e8f;
-    background-image: var(--bg-color);
     text-decoration-color: transparent;
     transition: background-color .15s, opacity .2s, text-decoration-color .2s;
 }

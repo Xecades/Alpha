@@ -76,3 +76,15 @@ html.sr #content {
 #app {
     width: 100vw;
 }
+
+/* Animation */
+@keyframes shake-x {
+    0%,
+    100% {
+        transform: translateX(2px);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+}

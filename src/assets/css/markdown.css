@@ -128,6 +128,7 @@
 
 .markdown :is(ul, ol) li {
     text-indent: 10px;
+    line-height: 2.5em;
 }
 
 .markdown :is(ul, ol) li::marker {
@@ -200,7 +201,7 @@
 
 /* 行内代码块 */
 .markdown :not(pre) > code {
-    font-family: monospace;
+    font-family: var(--monospace);
     background: #edeeeebf;
     padding: 0.2em 0.3em;
     border-radius: 0.3em;

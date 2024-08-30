@@ -166,6 +166,7 @@ const navigate = (id: string) => {
     font-size: .7rem;
     display: block;
     float: inline-end;
+    animation: shake-x 1s infinite ease-in-out;
 }
 
 .detail .text {

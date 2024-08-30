@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
+import autoprefixer from "autoprefixer";
 
 import "./script/preprocess";
 
@@ -32,6 +33,11 @@ export default defineConfig({
             "@": fileURLToPath(new URL("./src", import.meta.url)),
             "@note": fileURLToPath(new URL("./note", import.meta.url)),
             "@cache": fileURLToPath(new URL("./cache", import.meta.url)),
+        },
+    },
+    css: {
+        postcss: {
+            plugins: [autoprefixer()],
         },
     },
 });

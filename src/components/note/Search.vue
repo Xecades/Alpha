@@ -121,7 +121,7 @@ watch(() => props.visible, (v: boolean) => {
                     <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
                 </div>
 
-                <input class="input cursor" v-model="query" type="text" placeholder="Search in the void." />
+                <input class="input cursor" v-model.trim="query" type="text" placeholder="Search in the void." />
 
                 <div class="icon cursor xmark" @click="$emit('close')">
                     <font-awesome-icon :icon="['fas', 'xmark']" />
