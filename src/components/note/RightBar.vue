@@ -6,7 +6,7 @@
  */
 
 import { computed, ref, type ComputedRef, type Ref } from "vue";
-import { refreshCursor } from "@/assets/js/cursor";
+import cursor from "@/assets/js/cursor";
 
 // Types
 import type { Header } from "script/toc";
@@ -46,7 +46,7 @@ const navigate = (id: string) => {
 
 <template>
     <div class="wrapper">
-        <Transition name="bars" class="wrapper" @enter="refreshCursor" @mouseenter="showtext = true"
+        <Transition name="bars" class="wrapper" @enter="cursor.refresh()" @mouseenter="showtext = true"
             @mouseleave="showtext = false">
             <div class="toc" v-if="!showtext">
                 <template v-for="(item, idx) in toc">
