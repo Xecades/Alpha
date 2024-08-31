@@ -2,7 +2,7 @@
 import { nextTick, ref, watch, type Ref } from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
 
-import cursor from "@/assets/js/cursor";
+import { refreshCursor } from "@/assets/js/cursor";
 
 // @ts-ignore
 import search from "@cache/note/search";
@@ -96,7 +96,7 @@ const sync = async (q: string) => {
 
     results.value = val;
     await nextTick();
-    cursor.refresh();
+    refreshCursor();
 };
 
 watch(query, sync, { immediate: true });

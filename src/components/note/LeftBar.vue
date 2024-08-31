@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import cursor from "@/assets/js/cursor";
+import { refreshCursor } from "@/assets/js/cursor";
 import { nextTick, onUpdated, ref, watch, type Ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 
@@ -114,7 +114,7 @@ watch(active_id, async () => {
 });
 
 onUpdated(() => {
-    cursor.refresh();
+    refreshCursor();
 });
 </script>
 

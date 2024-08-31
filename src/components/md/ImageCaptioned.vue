@@ -3,7 +3,7 @@
  * @todo 图片懒加载
  */
 
-import cursor from "@/assets/js/cursor";
+import { refreshCursor } from "@/assets/js/cursor";
 import { nextTick, onBeforeUnmount, onMounted, ref, type Ref } from "vue";
 
 import mediumZoom from "medium-zoom";
@@ -15,7 +15,7 @@ onMounted(() => {
     const zoom = mediumZoom(img.value as HTMLElement, { background: "#47484a85" });
     zoom.on("open", async () => {
         await nextTick();
-        cursor.refresh();
+        refreshCursor();
     });
     onBeforeUnmount(zoom.detach.bind(zoom));
 });

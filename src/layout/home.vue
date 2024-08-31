@@ -5,7 +5,7 @@ import { isProxy, ref, watch } from "vue";
 
 import logger from "@/assets/js/logger";
 import setupReveal from "@/assets/js/reveal";
-import cursor from "@/assets/js/cursor";
+import { setupCursor } from "@/assets/js/cursor";
 import type { JSX } from "vue/jsx-runtime";
 
 interface HomeLayoutData {
@@ -18,7 +18,7 @@ const props = defineProps<{ data: HomeLayoutData }>();
 const VBody = ref<JSX.Element>(render(props.data));
 
 setupReveal();
-cursor.setup();
+setupCursor();
 
 if (isProxy(props.data)) {
     watch(props.data, () => {
