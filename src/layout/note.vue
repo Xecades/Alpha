@@ -16,7 +16,7 @@ import Content from "@/components/note/Content.vue";
 
 // Setup's
 import setupReveal from "@/assets/js/reveal";
-import { setupCursor } from "@/assets/js/cursor";
+import cursor from "@/assets/js/cursor";
 
 // Cache
 // @ts-ignore
@@ -35,7 +35,7 @@ type MetaItem = { attr: FMAttr, toc: Header[] };
 
 
 setupReveal();
-setupCursor();
+cursor.setup();
 
 const route = useRoute();
 
