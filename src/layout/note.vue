@@ -14,12 +14,6 @@ import LeftBar from "@/components/note/LeftBar.vue";
 import RightBar from "@/components/note/RightBar.vue";
 import Content from "@/components/note/Content.vue";
 
-// Markdown
-import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
-import InlineMath from "@/components/md/InlineMath.vue";
-import BlockMath from "@/components/md/BlockMath.vue";
-import Anchor from "@/components/md/Anchor.vue";
-
 // Setup's
 import setupReveal from "@/assets/js/reveal";
 import cursor from "@/assets/js/cursor";
@@ -45,8 +39,7 @@ cursor.setup();
 
 const route = useRoute();
 
-const injectComps = { InlineMath, BlockMath, Anchor, ImageCaptioned };
-const postBody: Ref<any> = shallowRef();
+const postBodyFn: Ref<any> = shallowRef();
 const postAttrs: Ref<FMAttr | {}> = shallowRef({});
 const postToc: Ref<Header[]> = shallowRef([]);
 const titlePath: Ref<TitleLink[]> = ref([]);
@@ -124,12 +117,13 @@ watch(
         let src: string | null = to_local(path);
 
         if (src) {
-            postBody.value = comps_cache[src](injectComps);
+            postBodyFn.value = comps_cache[src];
             postAttrs.value = meta_cache[src].attr;
             postToc.value = meta_cache[src].toc;
             titlePath.value = await resolvePath(path);
+            console.log("debug 1");
         } else {
-            postBody.value = null;
+            postBodyFn.value = null;
             postAttrs.value = {};
             postToc.value = [];
             titlePath.value = [];
@@ -144,7 +138,7 @@ watch(postToc, setup_scroll, { immediate: true });
 <template>
     <div class="note-layout" id="main">
         <LeftBar id="left" :config="config_cache" />
-        <Content id="content" :body="postBody" :attr="(postAttrs as FMAttr)" :path="titlePath" />
+        <Content id="content" :renderer="postBodyFn" :attr="(postAttrs as FMAttr)" :path="titlePath" />
         <RightBar id="right" :toc_raw="postToc" :in_view="in_view" />
     </div>
 </template>

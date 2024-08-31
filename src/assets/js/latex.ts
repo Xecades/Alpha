@@ -2,12 +2,13 @@ import katex from "katex";
 import type { KatexOptions } from "katex";
 
 const _render = (options: KatexOptions) => (raw: string) => {
-    try {
-        return katex.renderToString(raw, options);
-    } catch (error) {
-        console.error(error);
-        return raw;
-    }
+    return raw;
+    // try {
+    //     return katex.renderToString(raw, options);
+    // } catch (error) {
+    //     console.error(error);
+    //     return raw;
+    // }
 };
 
 const render_inline = _render({ displayMode: false, throwOnError: true });

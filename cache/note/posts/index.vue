@@ -1,0 +1,2 @@
+<script setup>import {onMounted} from "vue";const emit = defineEmits(['mounted']);onMounted(()=>{emit("mounted")})</script><template><h2 id="t" tabindex="-1" class="heading">测试 <inline-math data="%5CLaTeX"></inline-math> 测试 <a class="cursor header-anchor" href="#t">¶</a></h2>
+</template>

@@ -44,7 +44,6 @@
         "markdown-it-prism": "^2.3.0",
         "markdown-it-task-checkbox": "^1.0.6",
         "medium-zoom": "^1.1.0",
-        "module-from-string": "^3.3.1",
         "npm-run-all2": "^6.2.0",
         "overlayscrollbars-vue": "^0.5.9",
         "postcss": "^8.4.41",

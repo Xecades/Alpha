@@ -1,5 +1,4 @@
 import logger from "@/assets/js/logger";
-import ScrollReveal from "scrollreveal";
 import { nextTick } from "vue";
 
 import type {
@@ -103,15 +102,7 @@ const afterEach: NavigationHookAfter = async (to, from) => {
         const content = document.querySelector("#content") as Element;
         content.classList.remove("hide");
 
-        const target = "header h1, #breadcrumb, .markdown > *";
-
-        ScrollReveal().reveal(target, {
-            interval: 20,
-            duration: 400,
-            origin: "top",
-            distance: "4px",
-            scale: 0.99,
-        });
+        // The reveal part is implemented in `Content.vue`
         //
     } else if (t_to === RouteType.blog) {
         // ScrollReveal

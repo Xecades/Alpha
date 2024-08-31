@@ -3,6 +3,10 @@ import { createApp } from "vue";
 
 // Vue
 import App from "./App.vue";
+import Anchor from "./components/md/Anchor.vue";
+import BlockMath from "./components/md/BlockMath.vue";
+import InlineMath from "./components/md/InlineMath.vue";
+import ImageCaptioned from "./components/md/ImageCaptioned.vue";
 
 // JS
 import router from "./router";
@@ -89,6 +93,13 @@ async function main() {
     const app = createApp(App);
     app.use(router);
     app.component("font-awesome-icon", FontAwesomeIcon);
+
+    // Register markdown components
+    app.component("Anchor", Anchor);
+    app.component("BlockMath", BlockMath);
+    app.component("InlineMath", InlineMath);
+    app.component("ImageCaptioned", ImageCaptioned);
+
     app.mount("#app");
 
     logger.plus("Vue mounted");
