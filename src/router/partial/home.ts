@@ -1,13 +1,13 @@
-import type { RouteRecordRaw } from "vue-router";
+import index from "@/views/home/index.vue";
+import about from "@/views/home/about.vue";
+import lab from "@/views/home/lab.vue";
+import friend from "@/views/home/friend.vue";
+import timeline from "@/views/home/timeline.vue";
+import sponsor from "@/views/home/sponsor.vue";
+import sponsorship from "@/views/home/sponsorship.vue";
+import error from "@/views/home/404.vue";
 
-const index = () => import("@/views/home/index.vue");
-const about = () => import("@/views/home/about.vue");
-const lab = () => import("@/views/home/lab.vue");
-const friend = () => import("@/views/home/friend.vue");
-const timeline = () => import("@/views/home/timeline.vue");
-const sponsor = () => import("@/views/home/sponsor.vue");
-const sponsorship = () => import("@/views/home/sponsorship.vue");
-const error = () => import("@/views/home/404.vue");
+import type { RouteRecordRaw } from "vue-router";
 
 const homeRoutes: RouteRecordRaw[] = [
     { path: "/", name: "home", component: index },

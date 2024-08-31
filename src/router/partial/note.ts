@@ -1,6 +1,6 @@
-import type { RouteRecordRaw } from "vue-router";
+import note_generic from "@/layout/note.vue";
 
-const note_generic = () => import("@/layout/note.vue");
+import type { RouteRecordRaw } from "vue-router";
 
 // https://router.vuejs.org/zh/guide/essentials/route-matching-syntax.html#可重复的参数
 const noteRoutes: RouteRecordRaw[] = [

@@ -3,9 +3,9 @@
  * @todo 图片缓存，不能每次都重新加载一遍
  */
 
-import { defineAsyncComponent, nextTick, shallowRef, watch, type ShallowRef } from "vue";
+import { nextTick, watch } from "vue";
+
 import Breadcrumb from "./Breadcrumb.vue";
-import ScrollReveal from "scrollreveal";
 
 import "@/assets/css/markdown.css";
 import "@/assets/css/prism-one-light.css";
@@ -16,8 +16,7 @@ import type { FMAttr } from "script/preprocess/parse-md";
 type TitleLink = { title: string, link: string };
 
 
-const props = defineProps<{ renderer: () => any, attr: FMAttr, path: TitleLink[] }>();
-const body: ShallowRef<any> = shallowRef(null);
+const props = defineProps<{ body: any, attr: FMAttr, path: TitleLink[] }>();
 
 const register_anchor = () => {
     const headings = document.querySelectorAll(".heading");
@@ -37,23 +36,10 @@ const register_anchor = () => {
     });
 };
 
-const mounted_hook = () => {
-    const target = "header h1, #breadcrumb, .markdown > *";
-
-    ScrollReveal().reveal(target, {
-        interval: 20,
-        duration: 400,
-        origin: "top",
-        distance: "4px",
-        scale: 0.99,
-    });
-}
 
 watch(
-    () => props.renderer,
+    () => props.body,
     async () => {
-        body.value = defineAsyncComponent(props.renderer);
-
         await nextTick();
         register_anchor();
     },
@@ -76,7 +62,7 @@ watch(
 
         <main class="markdown">
             <!-- https://cn.vuejs.org/guide/essentials/component-basics.html#dynamic-components -->
-            <component :is="body" @mounted="mounted_hook" />
+            <component :is="body" />
         </main>
     </div>
 </template>

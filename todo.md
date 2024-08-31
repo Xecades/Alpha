@@ -4,24 +4,12 @@
  - 卡顿处理！！！
  - 参考 https://xdino.vercel.app/
 
-**卡顿分析:**
-
- - KaTeX 在组件挂载同时渲染
- - Vue 组件编译耗时
-
-**解决方案:**
-
- - DOM 渲染完成后再加载 KaTeX
- - 传递静态 HTML（？）（违背设计初衷）
- - Safari 特殊对待？
-
 **TODO:**
 
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）
  - 搜索点进去自动跳转到对应位置
  - 把左右侧边栏改成 position: absolute，不用 flex 了
  - Breadcrumb 删了
- - 文章内容做 Lazy Load
  - safari 下有大问题！
  - safari 下 console message 用不了 ascii art
  - safari 下网页 logo 颜色有问题
@@ -50,12 +38,10 @@
  - 加上时间戳
  - 优化 boundle 大小
  - 网页标题
+ - TS-ize
  - Markdown 图片加载时的处理
  - Markdown 图片加载失败时的处理
  - 404 页面
- - Vitest 测试
- - 页面高度不够时，左右栏加上滚动
- - 使用 Suspense
 
 ## General
 
