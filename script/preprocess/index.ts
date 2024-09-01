@@ -1,27 +1,28 @@
+import hmr from "./utils/hmr";
+import cache from "./cache";
+import parse from "./utils/md";
+
+import { BASE, type ParsedMarkdown } from "./types";
+
 /**
- * @fileoverview 在 vite 运行前预处理文件
+ * Create a cache function for markdown files.
+ *
+ * @param base - The base name for markdown caching.
+ * @returns A function that caches markdown files.
  */
+const cache_fn_maker = (base: BASE) => async () => {
+    const parsed: ParsedMarkdown[] = await parse(base);
 
-import parseMd from "./parse-md";
-import cacheMeta from "./cache-meta";
-import cacheComps from "./cache-comps";
-import cacheConfig from "./cache-config";
-import cacheSearch from "./cache-search";
-import hmr from "./hmr";
-
-const NOTE_BASE = "./note";
-
-const parse_fn = (path: string, cache_dir: string) => async () => {
-    const data = await parseMd(path);
-    await cacheMeta(data, cache_dir + "/meta.json");
-    await cacheComps(data, cache_dir + "/comps.js", cache_dir + "/posts");
-    await cacheSearch(data, cache_dir + "/search.js");
-    await cacheConfig(
-        data,
-        path + "/config.yml",
-        cache_dir + "/config.json",
-        "note"
-    );
+    await cache.meta(parsed, base);
+    await cache.search(parsed, base);
+    await cache.config(parsed, base);
+    await cache.route(parsed, base);
+    await cache.sfc(parsed, base);
 };
 
-hmr(NOTE_BASE, parse_fn(NOTE_BASE, "./cache/note"));
+/**
+ * Preprocess files before Vue starts.
+ */
+export default () => {
+    hmr(BASE.NOTE, cache_fn_maker(BASE.NOTE));
+};

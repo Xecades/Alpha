@@ -1,41 +1,17 @@
 <script setup lang="ts">
 import { nextTick, ref, watch, type Ref } from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
+import { search } from "@/assets/js/note/search";
 
 import cursor from "@/assets/js/cursor";
 
-// @ts-ignore
-import search from "@cache/note/search";
-
 // Types
 import type { PartialOptions } from "overlayscrollbars";
-import type { FuseResult, FuseResultMatch, RangeTuple } from "fuse.js";
-
-type SearchObj = {
-    /** 文章标题 */
-    title: string;
-    /** 提取纯文本后的文章内容 */
-    content: string;
-    /** 文章链接 */
-    link: string;
-    /** 是否为索引页，i.e. index.md */
-    is_index: boolean;
-};
-
-type Result = {
-    /** 高亮区域 */
-    type: "title" | "content";
-    /** 高亮前面的文本 */
-    before: string;
-    /** 高亮文本 */
-    mark: string;
-    /** 高亮后面的文本 */
-    after: string;
-} & SearchObj;
+import type { Result } from "@/assets/js/note/search";
 
 const props = defineProps<{
-    /** 搜索组件是否可见 */
-    visible: boolean
+    /** Whether this component is visible */
+    visible: boolean;
 }>();
 
 const query: Ref<string> = ref("");
@@ -46,71 +22,31 @@ const osOptions: PartialOptions = {
     overflow: { x: "hidden" },
 };
 
-const BEFORE_CNT: number = 10;
-
-const sync = async (q: string) => {
-    const len = (i: RangeTuple) => i[1] - i[0];
-    const longest = (is: readonly RangeTuple[]) =>
-        is.reduce((acc, cur) => len(cur) > len(acc) ? cur : acc);
-
-    let res: FuseResult<SearchObj>[] | Result[] = search(q);
-    let val: Result[] = [];
-
-    if (q) {
-        for (let r of res as FuseResult<SearchObj>[]) {
-            let match = (r.matches as FuseResultMatch[])[0];
-
-            // Always highlights the longest match
-            let [s, e] = longest(match.indices);
-
-            let type = match.key as "title" | "content";
-            let text = match.value as string;
-
-            let before = "", mark = "", after = "";
-
-            if (type === "content") {
-                if (s - BEFORE_CNT > 0)
-                    before = "..." + text.slice(s - BEFORE_CNT, s).trimLeft();
-                else
-                    before = text.slice(0, s);
-                mark = text.slice(s, e + 1);
-                after = text.slice(e + 1);
-            } else if (type === "title") {
-                before = text.slice(0, s);
-                mark = text.slice(s, e + 1);
-                after = text.slice(e + 1);
-            }
-
-            val.push({
-                ...r.item,
-                type,
-                before,
-                mark,
-                after,
-            });
-        }
-    } else {
-        // if query is empty, show all posts
-        val = res as Result[];
-    }
-
-    results.value = val;
-    await nextTick();
-    cursor.refresh();
-};
-
-watch(query, sync, { immediate: true });
-watch(() => props.visible, (v: boolean) => {
-    if (v) return;
-
-    setTimeout(async () => {
-        query.value = "";
+watch(
+    query,
+    async () => {
+        results.value = await search(query.value);
         await nextTick();
+        cursor.refresh();
+    },
+    { immediate: true }
+);
 
-        const el = document.querySelector(".results .post") as Element;
-        el.scrollIntoView({ block: "start" });
-    }, 120); // Same as .search-leave-active transition duration in LeftBar.vue
-});
+watch(
+    () => props.visible,
+    (v: boolean) => {
+        if (v) return;
+
+        setTimeout(async () => {
+            query.value = "";
+            await nextTick();
+
+            // Scroll to the top when closed
+            const el = document.querySelector(".results .post") as Element;
+            el.scrollIntoView({ block: "start" });
+        }, 120); // Timeout same as .search-leave-active transition duration in LeftBar.vue
+    }
+);
 </script>
 
 <template>
@@ -121,22 +57,47 @@ watch(() => props.visible, (v: boolean) => {
                     <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
                 </div>
 
-                <input class="input cursor" v-model.trim="query" type="text" placeholder="Search in the void." />
+                <input
+                    class="input cursor"
+                    v-model.trim="query"
+                    type="text"
+                    placeholder="Search in the void."
+                />
 
                 <div class="icon cursor xmark" @click="$emit('close')">
                     <font-awesome-icon :icon="['fas', 'xmark']" />
                 </div>
             </div>
 
-            <OverlayScrollbarsComponent element="ul" class="results" :options="(osOptions as any)" defer>
+            <OverlayScrollbarsComponent
+                element="ul"
+                class="results"
+                :options="(osOptions as any)"
+                defer
+            >
                 <li class="empty" v-if="results.length === 0">
-                    <font-awesome-icon class="icon" :icon="['fas', 'face-frown']" />
+                    <font-awesome-icon
+                        class="icon"
+                        :icon="['fas', 'face-frown']"
+                    />
                 </li>
                 <li v-for="res in results">
-                    <router-link :to="res.link" class="post cursor" @click="$emit('close')">
+                    <router-link
+                        :to="res.link"
+                        class="post cursor"
+                        @click="$emit('close')"
+                    >
                         <div class="meta">
-                            <span class="icon" :data-type="res.is_index ? 'index' : 'post'">
-                                <font-awesome-icon :icon="['fas', res.is_index ? 'folder' : 'file']" />
+                            <span
+                                class="icon"
+                                :data-type="res.is_index ? 'index' : 'post'"
+                            >
+                                <font-awesome-icon
+                                    :icon="[
+                                        'fas',
+                                        res.is_index ? 'folder' : 'file',
+                                    ]"
+                                />
                             </span>
                             <span class="title">
                                 <template v-if="res.type === 'title'">
@@ -184,7 +145,10 @@ watch(() => props.visible, (v: boolean) => {
 }
 
 .results {
-    height: calc(100% - var(--search-height) - var(--search-margin-top) - var(--results-bottom));
+    height: calc(
+        100% - var(--search-height) - var(--search-margin-top) -
+            var(--results-bottom)
+    );
     overflow-y: hidden;
     margin: 0 var(--margin-lr) var(--results-bottom) var(--margin-lr);
     user-select: none;
@@ -207,7 +171,7 @@ watch(() => props.visible, (v: boolean) => {
 .results .post {
     display: block;
     padding: 12px 16px;
-    transition: background-color .15s;
+    transition: background-color 0.15s;
 }
 
 .results .post:hover {
@@ -233,7 +197,7 @@ watch(() => props.visible, (v: boolean) => {
 .results .post .content {
     color: #969797;
     margin: 6px 13px 0;
-    font-size: .94rem;
+    font-size: 0.94rem;
     height: 1.6rem;
     line-height: 1.6rem;
     overflow: hidden;
@@ -273,7 +237,7 @@ watch(() => props.visible, (v: boolean) => {
 
 .search .icon.xmark {
     font-size: 1.4rem;
-    transition: color .15s, transform .15s ease-in-out;
+    transition: color 0.15s, transform 0.15s ease-in-out;
 }
 
 .search .icon.xmark:hover {
@@ -289,7 +253,7 @@ watch(() => props.visible, (v: boolean) => {
     padding: 0 5px;
     color: #3b3c3e;
     background-color: transparent;
-    opacity: .9;
+    opacity: 0.9;
 }
 
 .wrapper {

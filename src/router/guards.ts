@@ -1,4 +1,5 @@
 import logger from "@/assets/js/logger";
+import ScrollReveal from "scrollreveal";
 import { nextTick } from "vue";
 
 import type {
@@ -21,6 +22,8 @@ enum RouteType {
     note = "note",
     blog = "blog",
 }
+
+const target = "header h1, #breadcrumb, .markdown > *";
 
 const type_of = (x: RouteLocation): RouteType => {
     if (x.path === "/" && x.name === undefined) return RouteType.root;
@@ -73,6 +76,8 @@ const beforeEach: NavigationGuard = async (to, from) => {
         main.classList.add("fade-out");
         await sleep(100);
     }
+
+    ScrollReveal().clean(target);
 };
 
 const afterEach: NavigationHookAfter = async (to, from) => {
@@ -101,7 +106,15 @@ const afterEach: NavigationHookAfter = async (to, from) => {
 
         const content = document.querySelector("#content") as Element;
         content.classList.remove("hide");
-        // ScrollReveal is performed in `note/Content.vue`
+
+        ScrollReveal().reveal(target, {
+            interval: 20,
+            duration: 400,
+            origin: "top",
+            distance: "4px",
+            scale: 0.99,
+        });
+        console.log(document.querySelectorAll(target));
         //
     } else if (t_to === RouteType.blog) {
         // ScrollReveal

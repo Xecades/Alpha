@@ -3,35 +3,45 @@
  * @todo 图片缓存，不能每次都重新加载一遍
  */
 
-import { nextTick, ref, watch, type Ref } from "vue";
-import ScrollReveal from "scrollreveal";
+import { computed, nextTick, watch } from "vue";
+import { useRoute } from "vue-router";
 
-import Breadcrumb from "./Breadcrumb.vue";
+import _meta_untyped from "@cache/note/meta";
+const meta = _meta_untyped as CacheMeta;
 
 import "@/assets/css/markdown.css";
 import "@/assets/css/prism-one-light.css";
 
 // Types
-import type { FMAttr } from "script/preprocess/parse-md";
-import type { JsxElement } from "typescript";
+import type { ComputedRef } from "vue";
+import type { CacheMeta, MarkdownFrontMatter } from "script/preprocess/types";
 
-type TitleLink = { title: string, link: string };
+const route = useRoute();
 
+const pathname: ComputedRef<string> = computed(
+    () => route.meta.pathname as string
+);
+const attr: ComputedRef<MarkdownFrontMatter> = computed(
+    () => meta[pathname.value].attr
+);
 
-const props = defineProps<{ renderer: () => any, attr: FMAttr, path: TitleLink[] }>();
-const body: Ref<JsxElement | undefined> = ref();
-
+/**
+ * Iterate through headings and register anchor click event.
+ */
 const register_anchor = () => {
     const headings = document.querySelectorAll(".heading");
 
     headings.forEach((heading) => {
         const anchor = heading.querySelector(".header-anchor");
         if (anchor) {
-            anchor.addEventListener("click", (e) => {
+            anchor.addEventListener("click", (e: Event) => {
                 e.preventDefault();
 
-                const offset = -4 * 16;
-                const y: number = heading.getBoundingClientRect().top + window.scrollY + offset;
+                const offset: number = -4 * 16;
+                const y: number =
+                    heading.getBoundingClientRect().top +
+                    window.scrollY +
+                    offset;
 
                 window.scrollTo({ top: y, behavior: "smooth" });
             });
@@ -39,31 +49,11 @@ const register_anchor = () => {
     });
 };
 
-
-const register_scrollreveal = () => {
-    const target = "header h1, #breadcrumb, .markdown > *";
-
-    ScrollReveal().reveal(target, {
-        interval: 20,
-        duration: 400,
-        origin: "top",
-        distance: "4px",
-        scale: 0.99,
-    });
-}
-
-
 watch(
-    () => props.renderer,
+    () => route.path,
     async () => {
         await nextTick();
-        body.value = (await props.renderer()).default;
-        console.log(body.value);
-
-        await nextTick();
         register_anchor();
-        await nextTick();
-        register_scrollreveal();
     },
     { immediate: true }
 );
@@ -78,13 +68,12 @@ watch(
             <!-- 如果 path 为空：Note Index / Category Index / 404 -->
             <!-- 但是不能不显示 Breadcrumb，否则会导致 flicker -->
             <!-- 考虑替换为其他东西 -->
-            <!-- TODO: 不要 Breakcrumb，改成 Metadata -->
-            <Breadcrumb id="breadcrumb" :path="path" />
+            <!-- @TODO: 不要 Breakcrumb，改成 Metadata -->
+            <!-- <Breadcrumb id="breadcrumb" :path="path" /> -->
         </header>
 
         <main class="markdown">
-            <!-- https://cn.vuejs.org/guide/essentials/component-basics.html#dynamic-components -->
-            <component :is="body" />
+            <RouterView />
         </main>
     </div>
 </template>
@@ -113,12 +102,12 @@ header {
 h1 {
     font-size: var(--header-size);
     color: var(--header-color);
-    letter-spacing: .12rem;
+    letter-spacing: 0.12rem;
     line-height: var(--header-line-height);
 }
 
 #breadcrumb {
-    margin-top: .3rem;
-    margin-left: .1rem;
+    margin-top: 0.3rem;
+    margin-left: 0.1rem;
 }
 </style>

@@ -1,112 +1,107 @@
 <script setup lang="tsx">
-import cursor from "@/assets/js/cursor";
 import { nextTick, onUpdated, ref, watch, type Ref } from "vue";
-import { RouterLink, useRouter } from "vue-router";
-
-// 必须手动引用，否则 JSX 会出问题
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { useRoute } from "vue-router";
+import { render_list } from "@/assets/js/note/leftbar";
+import cursor from "@/assets/js/cursor";
 
 // Components
 import Search from "./Search.vue";
 
+// Cache
+import _config_untyped from "@cache/note/config";
+const config = _config_untyped as Config;
+
 // Types
-import type { Config, Nav } from "script/preprocess/cache-config";
 import type { JSX } from "vue/jsx-runtime";
+import type { Config, RouteMeta } from "script/preprocess/types";
 
-type Category = { name: string, link: string, opacity: number, timeout?: NodeJS.Timeout };
+/** Attributes attached to a category */
+type Category = {
+    name: string;
+    link: string;
+    opacity: number;
+    timeout?: NodeJS.Timeout;
+};
 
+const route = useRoute();
+const meta: RouteMeta = route.meta as unknown as RouteMeta;
 
-const props = defineProps<{ config: Config }>();
-const router = useRouter();
+/** Categories to be displayed as buttons. */
+const categories: Ref<Category[]> = ref(
+    config.nav.map((cate) => ({
+        name: cate.title,
+        link: cate.link,
+        opacity: 0,
+    }))
+);
 
+/** ID of category of current page, -1 iff location is index. */
+const category_id: number = categories.value.findIndex(
+    (c: Category) => c.link === "note/" + meta.category
+);
 
-const curr_cate: string = router.currentRoute.value.params.path[0];
-const categories: Ref<Category[]> = ref(props.config.nav.map(cate => ({ name: cate.title, link: cate.link, opacity: 0 })));
+/** ID of active category. */
+const active_id: Ref<number> = ref(category_id === -1 ? 0 : category_id);
 
-// 根据当前路径确定默认激活的分类
-const curr_id: number = categories.value.findIndex(c => c.link === "note/" + curr_cate);
-const active_id: Ref<number> = ref(curr_id === -1 ? 0 : curr_id);
-
-
-const is_hover = ref(false);
-const is_searching = ref(false);
+const is_hovering: Ref<boolean> = ref(false);
+const is_searching: Ref<boolean> = ref(false);
 
 const REVEAL_DELAY: number = 40;
 
-const reveal_category = () => {
-    let len = categories.value.length;
+const category_fn = {
+    reveal: () => {
+        let len = categories.value.length;
 
-    for (let i = 0; i < len; i++) {
-        clearTimeout(categories.value[i].timeout);
+        for (let i = 0; i < len; i++) {
+            clearTimeout(categories.value[i].timeout);
 
-        let curr: NodeJS.Timeout = setTimeout(() => {
-            categories.value[i].opacity = 1;
-        }, REVEAL_DELAY * i);
+            let timeout: NodeJS.Timeout = setTimeout(() => {
+                categories.value[i].opacity = 1;
+            }, REVEAL_DELAY * i);
 
-        categories.value[i].timeout = curr;
-    }
+            categories.value[i].timeout = timeout;
+        }
+    },
+    hide: () => {
+        let len = categories.value.length;
+
+        for (let i = len - 1; i >= 0; i--) {
+            clearTimeout(categories.value[i].timeout);
+
+            let timeout: NodeJS.Timeout = setTimeout(() => {
+                categories.value[i].opacity = 0;
+            }, REVEAL_DELAY * (len - 1 - i));
+
+            categories.value[i].timeout = timeout;
+        }
+    },
 };
 
-const hide_category = () => {
-    let len = categories.value.length;
+const search_fn = {
+    reveal: async () => {
+        is_searching.value = true;
+        await nextTick();
 
-    for (let i = len - 1; i >= 0; i--) {
-        clearTimeout(categories.value[i].timeout);
-
-        let curr: NodeJS.Timeout = setTimeout(() => {
-            categories.value[i].opacity = 0;
-        }, REVEAL_DELAY * (len - 1 - i));
-
-        categories.value[i].timeout = curr;
-    }
+        const input = document.querySelector(".search .input") as any;
+        input.focus();
+    },
+    hide: () => {
+        is_searching.value = false;
+    },
 };
 
-const reveal_search = async () => {
-    is_searching.value = true;
-    await nextTick();
-
-    const input = document.querySelector(".search .input") as any;
-    input.focus();
+const mouse_fn = {
+    enter: () => {
+        is_hovering.value = true;
+        category_fn.reveal();
+    },
+    leave: () => {
+        is_hovering.value = false;
+        category_fn.hide();
+    },
 };
 
-const hide_search = () => {
-    is_searching.value = false;
-};
-
-const mouseenter = async () => {
-    is_hover.value = true;
-    reveal_category();
-};
-
-const mouseleave = () => {
-    is_hover.value = false;
-    hide_category();
-};
-
-const render = (node: Nav, is_root: boolean = false): JSX.Element => {
-    let { title, children, link } = node;
-    link = "/" + link;
-
-    const text_comp: JSX.Element = <span class="text">{title}</span>;
-    const icon_comp: JSX.Element = <span class="sign"><FontAwesomeIcon class="icon" icon="fa-solid fa-caret-right" /></span>;
-    const title_comp: JSX.Element = <RouterLink to={link} class="title cursor">{icon_comp}{text_comp}</RouterLink>;
-
-    if (children.length === 0) {
-        (title_comp.props as any).leaf = true;
-        return title_comp;
-    }
-
-    let child_comps: JSX.Element[] = children.map(child => <li class="child">{render(child)}</li>);
-    let children_comp: JSX.Element = <ul class="children">{child_comps}</ul>;
-
-    if (is_root) {
-        return children_comp;
-    }
-
-    return <>{[title_comp, children_comp]}</>;
-};
-
-const VBody_fn = () => () => render(props.config.nav[active_id.value], true)
+const VBody_fn = () => () => render_list(config.nav[active_id.value], true);
 const VBody: Ref<() => JSX.Element> = ref(VBody_fn());
 
 watch(active_id, async () => {
@@ -119,30 +114,40 @@ onUpdated(() => {
 </script>
 
 <template>
-    <div @mouseenter="mouseenter" @mouseleave="mouseleave">
+    <div @mouseenter="mouse_fn.enter" @mouseleave="mouse_fn.leave">
         <ul class="nav">
-            <li class="btn cursor" id="search" @click="reveal_search">
+            <li class="btn cursor" id="search" @click="search_fn.reveal">
                 <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
             </li>
         </ul>
 
         <div class="category">
-            <template v-for="item, idx in categories">
-                <a class="item cursor" :class="idx == active_id && 'active'" :style="{ opacity: item.opacity }"
-                    @click.prevent="router.push('/' + item.link)" @mouseover="active_id = idx" :href="'/' + item.link">
+            <template v-for="(item, idx) in categories">
+                <a
+                    class="item cursor"
+                    :class="idx == active_id && 'active'"
+                    :style="{ opacity: item.opacity }"
+                    @click.prevent="$router.push('/' + item.link)"
+                    @mouseover="active_id = idx"
+                    :href="'/' + item.link"
+                >
                     {{ item.name }}
                 </a>
             </template>
         </div>
 
         <Transition name="content">
-            <component class="content" :is="VBody" v-if="is_hover" />
+            <component class="content" :is="VBody" v-if="is_hovering" />
         </Transition>
 
         <!-- https://cn.vuejs.org/guide/built-ins/teleport.html -->
         <Teleport to="body">
             <Transition name="search">
-                <Search v-show="is_searching" :visible="is_searching" @close="hide_search" />
+                <Search
+                    v-show="is_searching"
+                    :visible="is_searching"
+                    @close="search_fn.hide"
+                />
             </Transition>
         </Teleport>
     </div>
@@ -168,7 +173,7 @@ onUpdated(() => {
     padding-right: 10px;
     display: flex;
     gap: 8px;
-    transition: color .2s;
+    transition: color 0.2s;
 }
 
 .note-layout .content .title.router-link-exact-active .text {
@@ -178,8 +183,8 @@ onUpdated(() => {
 .note-layout .content .title .sign {
     color: var(--theme-color);
     opacity: 0;
-    transition: opacity .1s;
-    font-size: .7rem;
+    transition: opacity 0.1s;
+    font-size: 0.7rem;
     display: block;
     animation: shake-x 1s infinite ease-in-out;
 }
@@ -201,7 +206,7 @@ onUpdated(() => {
     margin-left: 1rem;
 }
 
-.note-layout .content>.children {
+.note-layout .content > .children {
     margin: 0;
 }
 </style>
@@ -227,23 +232,23 @@ onUpdated(() => {
     --cate-offset-top: calc(11px + var(--nav-height) + var(--offset-top));
     --cate-width: 270px;
     --cate-title-height: 1.45rem;
-    --cate-title-indent: .5rem;
+    --cate-title-indent: 0.5rem;
 
-    --search-scale: .99;
+    --search-scale: 0.99;
 }
 
 .search-enter-active,
 .search-leave-active {
     transition-property: opacity, transform;
-    transition-duration: .12s;
+    transition-duration: 0.12s;
 }
 
 .search-enter-active {
-    transition-timing-function: cubic-bezier(.41, .16, .83, .74);
+    transition-timing-function: cubic-bezier(0.41, 0.16, 0.83, 0.74);
 }
 
 .search-leave-active {
-    transition-timing-function: cubic-bezier(.08, .46, .76, .89);
+    transition-timing-function: cubic-bezier(0.08, 0.46, 0.76, 0.89);
 }
 
 .search-enter-from,
@@ -258,13 +263,13 @@ onUpdated(() => {
 }
 
 .content-enter-active {
-    transition-duration: .23s;
+    transition-duration: 0.23s;
     transition-timing-function: ease-out;
 }
 
 .content-leave-active {
-    transition-duration: .15s;
-    transition-timing-function: cubic-bezier(.15, .79, .69, .68);
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.15, 0.79, 0.69, 0.68);
 }
 
 .content-enter-from,
@@ -288,7 +293,7 @@ onUpdated(() => {
     line-height: var(--nav-height);
     font-size: 1.2rem;
     border-radius: 3px;
-    transition: background-color .15s, color .15s;
+    transition: background-color 0.15s, color 0.15s;
     color: var(--nav-color);
     display: block;
 }
@@ -310,11 +315,11 @@ onUpdated(() => {
 .category .item {
     height: var(--nav-height);
     line-height: var(--nav-height);
-    font-size: .9rem;
+    font-size: 0.9rem;
     padding: 0 12px;
     color: #888e8f;
     text-decoration-color: transparent;
-    transition: background-color .15s, opacity .2s, text-decoration-color .2s;
+    transition: background-color 0.15s, opacity 0.2s, text-decoration-color 0.2s;
 }
 
 .category .item.active {

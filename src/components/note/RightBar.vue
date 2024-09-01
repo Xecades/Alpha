@@ -5,62 +5,74 @@
  * @todo 联动 cursor（？）
  */
 
-import { computed, ref, type ComputedRef, type Ref } from "vue";
+import { nextTick, ref, watch, type Ref } from "vue";
+import { useRoute } from "vue-router";
+
 import cursor from "@/assets/js/cursor";
+import {
+    navigate,
+    normalize_toc,
+    setup_scroll_listener,
+} from "@/assets/js/note/rightbar";
+
+import _meta_untyped from "@cache/note/meta";
+const meta = _meta_untyped as CacheMeta;
 
 // Types
-import type { Header } from "script/toc";
+import type { CacheMeta } from "script/preprocess/types";
+import type { HeaderRef } from "@/assets/js/note/rightbar";
 
-type HeaderRef = Header & { width: string, indent: string };
-
-const props = defineProps<{ toc_raw: Header[], in_view: number | null }>();
-
-const width_preset = ["50px", "40px", "30px", "20px", "13px"];
-const indent_preset = ["0rem", "1rem", "1.7rem", "2.3rem", "2.8rem"];
-
-const levels: ComputedRef<number[]> = computed(() => props.toc_raw.map((item) => item.level));
-const maxLevel: ComputedRef<number> = computed(() => Math.max(...levels.value));
-const minLevel: ComputedRef<number> = computed(() => Math.min(...levels.value));
-
-const toc: ComputedRef<HeaderRef[]> = computed(() => props.toc_raw.map((item: any) => {
-    item.width = width_preset[4 + item.level - maxLevel.value];
-    item.indent = indent_preset[item.level - minLevel.value];
-
-    return item as HeaderRef;
-}));
+const route = useRoute();
 
 const showtext: Ref<boolean> = ref(false);
+const toc: Ref<HeaderRef[]> = ref([]);
+const in_view: Ref<number | null> = ref(null);
 
-const navigate = (id: string) => {
-    let el = document.getElementById(id);
-    if (el) {
-        // 不能用 scrollIntoView，因为 ScrollReveal 动画会打断滚动
+watch(
+    () => route.path,
+    async () => {
+        const pathname: string = route.meta.pathname as string;
+        toc.value = normalize_toc(meta[pathname].toc);
+        in_view.value = null;
 
-        const offset = -4 * 16;
-        const y: number = el.getBoundingClientRect().top + window.scrollY + offset;
-
-        window.scrollTo({ top: y, behavior: "smooth" });
-    }
-};
+        await nextTick();
+        setup_scroll_listener(in_view);
+    },
+    { immediate: true }
+);
 </script>
 
 <template>
     <div class="wrapper">
-        <Transition name="bars" class="wrapper" @enter="cursor.refresh()" @mouseenter="showtext = true"
-            @mouseleave="showtext = false">
+        <Transition
+            name="bars"
+            class="wrapper"
+            @enter="cursor.refresh()"
+            @mouseenter="showtext = true"
+            @mouseleave="showtext = false"
+        >
             <div class="toc" v-if="!showtext">
                 <template v-for="(item, idx) in toc">
-                    <div class="bar item cursor" :style="{ width: item.width }" :class="{ 'active': idx === in_view }">
-                    </div>
+                    <div
+                        class="bar item cursor"
+                        :style="{ width: item.width }"
+                        :class="{ active: idx === in_view }"
+                    ></div>
                 </template>
             </div>
             <div class="toc" v-else>
                 <template v-for="(item, idx) in toc">
-                    <a class="detail item cursor" :href="'#' + item.link" @click.prevent="navigate(item.link)"
+                    <a
+                        class="detail item cursor"
+                        :href="'#' + item.link"
+                        @click.prevent="navigate(item.link)"
                         :style="{ marginRight: item.indent }"
-                        :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }">
+                        :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }"
+                    >
                         <span class="text" v-html="item.title"></span>
-                        <span class="sign"><font-awesome-icon :icon="['fas', 'caret-left']" /></span>
+                        <span class="sign">
+                            <font-awesome-icon :icon="['fas', 'caret-left']" />
+                        </span>
                     </a>
                 </template>
             </div>
@@ -70,7 +82,7 @@ const navigate = (id: string) => {
 
 <style scoped>
 * {
-    --padding: .5rem;
+    --padding: 0.5rem;
     --margin: 1.5rem;
     --theme-color: #60a5fa;
 
@@ -87,7 +99,7 @@ const navigate = (id: string) => {
     --bar-height: 4px;
     --bar-padding: 4px;
 
-    --toc-title-indent: .5rem;
+    --toc-title-indent: 0.5rem;
 }
 
 .toc {
@@ -110,7 +122,7 @@ const navigate = (id: string) => {
 
 :global(#right .toc code) {
     font-family: var(--monospace);
-    font-size: .85em;
+    font-size: 0.85em;
 }
 
 :global(#right .toc em) {
@@ -125,8 +137,8 @@ const navigate = (id: string) => {
     margin-left: auto;
     display: inline-block;
     color: #6e758c;
-    font-size: .95rem;
-    transition: color .05s;
+    font-size: 0.95rem;
+    transition: color 0.05s;
     position: relative;
 }
 
@@ -139,7 +151,7 @@ const navigate = (id: string) => {
     background-color: var(--color);
     border-radius: 4px;
     height: var(--bar-height);
-    transition: background-color .15s;
+    transition: background-color 0.15s;
 }
 
 .bar.active {
@@ -148,7 +160,7 @@ const navigate = (id: string) => {
 
 .detail {
     line-height: 1.6rem;
-    transition: color .15s;
+    transition: color 0.15s;
 }
 
 .detail.active {
@@ -162,8 +174,8 @@ const navigate = (id: string) => {
 .detail .sign {
     color: var(--theme-color);
     opacity: 0;
-    transition: opacity .1s;
-    font-size: .7rem;
+    transition: opacity 0.1s;
+    font-size: 0.7rem;
     display: block;
     float: inline-end;
     animation: shake-x 1s infinite ease-in-out;
@@ -187,13 +199,13 @@ const navigate = (id: string) => {
 }
 
 .bars-enter-active {
-    transition-duration: .37s;
+    transition-duration: 0.37s;
     transition-timing-function: ease-out;
 }
 
 .bars-leave-active {
-    transition-duration: .2s;
-    transition-timing-function: cubic-bezier(.15, .79, .69, .68);
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.15, 0.79, 0.69, 0.68);
 }
 
 .bars-enter-from,

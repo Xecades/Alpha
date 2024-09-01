@@ -13,17 +13,16 @@
 
  - DOM 渲染完成后再加载 KaTeX
  - 传递静态 HTML（✓）-> 采用 JSX 渲染，这样还是可以使用 Vue 的组件
-   - 还是会卡…… 老老实实用 v-html 吧
- - 可能有用：v-cloak, web worker（vue-worker）
+ - 可能有用：web worker（vue-worker）
 
 **TODO:**
 
+ - 把 Home View 也改成子路由的形式
  - devDependencies 和 dependencies 分开
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）
  - 搜索点进去自动跳转到对应位置
  - 把左右侧边栏改成 position: absolute，不用 flex 了
  - Breadcrumb 删了
- - 文章内容做 Lazy Load
  - safari 下有大问题！
  - safari 下 console message 用不了 ascii art
  - safari 下网页 logo 颜色有问题

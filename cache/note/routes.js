@@ -1,0 +1,17 @@
+export default [
+{ path: "cs/c", component: () => import("@cache/note/posts/cs/c/index.vue"), meta: {"pathname":"note/cs/c/index.md","category":"cs"} },
+{ path: "cs/c/snippets", component: () => import("@cache/note/posts/cs/c/snippets.vue"), meta: {"pathname":"note/cs/c/snippets.md","category":"cs"} },
+{ path: "cs/cldf", component: () => import("@cache/note/posts/cs/cldf.vue"), meta: {"pathname":"note/cs/cldf.md","category":"cs"} },
+{ path: "cs/fds", component: () => import("@cache/note/posts/cs/fds.vue"), meta: {"pathname":"note/cs/fds.md","category":"cs"} },
+{ path: "cs", component: () => import("@cache/note/posts/cs/index.vue"), meta: {"pathname":"note/cs/index.md","category":"cs"} },
+{ path: "cs/test/customToken", component: () => import("@cache/note/posts/cs/test/customToken.vue"), meta: {"pathname":"note/cs/test/customToken.md","category":"cs"} },
+{ path: "cs/test", component: () => import("@cache/note/posts/cs/test/index.vue"), meta: {"pathname":"note/cs/test/index.md","category":"cs"} },
+{ path: "cs/test/latex", component: () => import("@cache/note/posts/cs/test/latex.vue"), meta: {"pathname":"note/cs/test/latex.md","category":"cs"} },
+{ path: "cs/test/markdown", component: () => import("@cache/note/posts/cs/test/markdown.vue"), meta: {"pathname":"note/cs/test/markdown.md","category":"cs"} },
+{ path: "cs/test/toc", component: () => import("@cache/note/posts/cs/test/toc.vue"), meta: {"pathname":"note/cs/test/toc.md","category":"cs"} },
+{ path: "index", component: () => import("@cache/note/posts/index.vue"), meta: {"pathname":"note/index.md","category":""} },
+{ path: "math/dm", component: () => import("@cache/note/posts/math/dm.vue"), meta: {"pathname":"note/math/dm.md","category":"math"} },
+{ path: "math/fourier", component: () => import("@cache/note/posts/math/fourier.vue"), meta: {"pathname":"note/math/fourier.md","category":"math"} },
+{ path: "math", component: () => import("@cache/note/posts/math/index.vue"), meta: {"pathname":"note/math/index.md","category":"math"} },
+{ path: "math/la", component: () => import("@cache/note/posts/math/la.vue"), meta: {"pathname":"note/math/la.md","category":"math"} },
+];
