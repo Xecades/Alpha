@@ -150,9 +150,9 @@ $$A(\omega_n^k)=A_1(\omega_n^{2k})+\omega^k_n\cdot A_2(\omega_n^{2k})$$
 
 ---
 
-{% note info info %}
+<!-- {% note info info %} -->
 **注意**，请牢记 $n$ 是 $2$ 的整数次幂，即 $n=2^x$.
-{% endnote %}
+<!-- {% endnote %} -->
 
 对于 $k\in[0,\dfrac{n}{2}-1]$ 的部分（$\dfrac{n}{2}$ 是整数）：
 

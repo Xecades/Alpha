@@ -47,7 +47,7 @@ export default async (src: string) => {
          * Phase 3: 渲染 markdown
          */
         const html = md.render(raw);
-        ret[i].html = html;
+        ret[i].html = html.replace(/<!--.*?-->/sg, "");
 
         /**
          * Phase 4: 提取纯文本

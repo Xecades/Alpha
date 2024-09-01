@@ -6,8 +6,9 @@
 // @ts-ignore
 import innerText from "innertext";
 
-const inline_math_regex = /<inline-math data=".*?"><\/inline-math>/g;
-const block_math_regex = /<block-math data=".*?"><\/block-math>/g;
+/** @todo 改 MD 渲染的时候记得检查这里 */
+const inline_math_regex = /<InlineMath data=".*?"><\/InlineMath>/g;
+const block_math_regex = /<BlockMath data=".*?"><\/BlockMath>/g;
 const anchor_regex = / <a class="cursor header-anchor" href="#t.*?">¶<\/a>/g;
 
 export default (html: string): string => {

@@ -3,7 +3,8 @@
  * @todo 图片缓存，不能每次都重新加载一遍
  */
 
-import { nextTick, watch } from "vue";
+import { nextTick, ref, watch, type Ref } from "vue";
+import ScrollReveal from "scrollreveal";
 
 import Breadcrumb from "./Breadcrumb.vue";
 
@@ -12,11 +13,13 @@ import "@/assets/css/prism-one-light.css";
 
 // Types
 import type { FMAttr } from "script/preprocess/parse-md";
+import type { JsxElement } from "typescript";
 
 type TitleLink = { title: string, link: string };
 
 
-const props = defineProps<{ body: any, attr: FMAttr, path: TitleLink[] }>();
+const props = defineProps<{ renderer: () => any, attr: FMAttr, path: TitleLink[] }>();
+const body: Ref<JsxElement | undefined> = ref();
 
 const register_anchor = () => {
     const headings = document.querySelectorAll(".heading");
@@ -37,11 +40,30 @@ const register_anchor = () => {
 };
 
 
+const register_scrollreveal = () => {
+    const target = "header h1, #breadcrumb, .markdown > *";
+
+    ScrollReveal().reveal(target, {
+        interval: 20,
+        duration: 400,
+        origin: "top",
+        distance: "4px",
+        scale: 0.99,
+    });
+}
+
+
 watch(
-    () => props.body,
+    () => props.renderer,
     async () => {
         await nextTick();
+        body.value = (await props.renderer()).default;
+        console.log(body.value);
+
+        await nextTick();
         register_anchor();
+        await nextTick();
+        register_scrollreveal();
     },
     { immediate: true }
 );

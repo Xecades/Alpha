@@ -28,6 +28,7 @@ const md = new MarkdownIt({
  * @name markdown-it-prism
  * @see https://github.com/jGleitz/markdown-it-prism
  */
+/** @todo `{` 等特殊字符的处理，或许直接改成自定义组件 */
 md.use(MarkdownItPrism, {
     highlightInlineCode: true,
 });
@@ -36,13 +37,14 @@ md.use(MarkdownItPrism, {
  * @name markdown-it-task-checkbox
  * @see https://github.com/linsir/markdown-it-task-checkbox
  */
-md.use(MarkdownItTaskCheckbox, {
-    divWrap: true,
-    divClass: "checkbox",
-    idPrefix: "cbx_",
-    ulClass: "task-list",
-    liClass: "task-list-item",
-});
+/** @todo It produces rubbish code */
+// md.use(MarkdownItTaskCheckbox, {
+//     divWrap: true,
+//     divClass: "checkbox",
+//     idPrefix: "cbx_",
+//     ulClass: "task-list",
+//     liClass: "task-list-item",
+// });
 
 /**
  * @name markdown-it-wrapper
@@ -52,14 +54,14 @@ md.use(MarkdownItWrapper, {
     name: "katex_inline",
     marker: "$",
     renderer: (c: string) =>
-        `<inline-math data="${encodeURI(c)}"></inline-math>`,
+        `<InlineMath data="${encodeURI(c)}"></InlineMath>`,
 });
 
 md.use(MarkdownItWrapper, {
     type: "block",
     name: "katex_block",
     marker: "$$",
-    renderer: (c: string) => `<block-math data="${encodeURI(c)}"></block-math>`,
+    renderer: (c: string) => `<BlockMath data="${encodeURI(c)}"></BlockMath>`,
 });
 
 /**
@@ -71,7 +73,7 @@ md.use(
     "vueify_anchor_open",
     "link_open",
     (tokens: Token[], idx: number) => {
-        tokens[idx].tag = "anchor";
+        tokens[idx].tag = "Anchor";
     }
 );
 
@@ -80,7 +82,7 @@ md.use(
     "vueify_anchor_close",
     "link_close",
     (tokens: Token[], idx: number) => {
-        tokens[idx].tag = "anchor";
+        tokens[idx].tag = "Anchor";
     }
 );
 
@@ -113,7 +115,7 @@ md.renderer.rules.image = function (tokens, idx, options, env, self) {
 
     let alt = extractText(caption);
 
-    return `<image-captioned alt="${alt}" src="${src}">${caption}</image-captioned>`;
+    return `<ImageCaptioned alt="${alt}" src="${src}">${caption}</ImageCaptioned>`;
 };
 
 const originalHeadingOpen =
@@ -123,12 +125,6 @@ const originalHeadingOpen =
     };
 
 md.renderer.rules.heading_open = function (tokens, idx, options, env, self) {
-    // console.log(tokens[idx]);
-
-    // const token = tokens[idx]
-    // let level = +token.tag.slice(1);
-    // let id = token.attrGet("id");
-
     tokens[idx].attrSet("class", "heading");
     return originalHeadingOpen(tokens, idx, options, env, self);
 };
