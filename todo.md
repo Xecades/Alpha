@@ -17,6 +17,7 @@
 
 **TODO:**
 
+ - 在 /note 页面加载会失败
  - 把 Home View 也改成子路由的形式
  - devDependencies 和 dependencies 分开
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）
