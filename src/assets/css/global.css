@@ -59,7 +59,11 @@ html.sr .rv {
     visibility: hidden;
 }
 
-html.sr #content {
+html.sr #content header h1 {
+    visibility: hidden;
+}
+
+html.sr #content .markdown > * {
     visibility: hidden;
 }
 

@@ -1,5 +1,5 @@
 import homeRoutes from "./partial/home";
-import noteRoutes from "./partial/note";
+import noteRoutes from "@cache/note/routes";
 
 const routes = [...homeRoutes, ...noteRoutes];
 

@@ -3,8 +3,11 @@
  * @todo 图片缓存，不能每次都重新加载一遍
  */
 
-import { computed, nextTick, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import ScrollReveal from "scrollreveal";
+
+import JSXLazyLoad from "../JSXLazyLoad.vue";
 
 import _meta_untyped from "@cache/note/meta";
 const meta = _meta_untyped as CacheMeta;
@@ -13,8 +16,9 @@ import "@/assets/css/markdown.css";
 import "@/assets/css/prism-one-light.css";
 
 // Types
-import type { ComputedRef } from "vue";
+import type { ComputedRef, Ref } from "vue";
 import type { CacheMeta, MarkdownFrontMatter } from "script/preprocess/types";
+import type { JSX } from "vue/jsx-runtime";
 
 const route = useRoute();
 
@@ -24,6 +28,13 @@ const pathname: ComputedRef<string> = computed(
 const attr: ComputedRef<MarkdownFrontMatter> = computed(
     () => meta[pathname.value].attr
 );
+const jsx: ComputedRef<() => Promise<any>> = computed(
+    () => route.meta.body as any
+);
+
+const body: Ref<JSX.Element[]> = ref([]);
+const lazyload_key: Ref<string> = ref("");
+const navigation: Ref<boolean> = ref(false);
 
 /**
  * Iterate through headings and register anchor click event.
@@ -49,11 +60,41 @@ const register_anchor = () => {
     });
 };
 
+/**
+ * Callback function when JSX lazyload finishes.
+ */
+const lazyload_finish = () => {
+    register_anchor();
+};
+
+/**
+ * Callback function when JSX lazyload updates.
+ */
+const lazyload_update = (index: number) => {
+    console.log(`Lazyload update: ${index}`);
+
+    const selector: string = ".markdown > *";
+    const els: NodeListOf<HTMLElement> = document.querySelectorAll(selector);
+    const target: HTMLElement = els[index - 1];
+
+    setTimeout(() => {
+        ScrollReveal().reveal(target, {
+            interval: 20,
+            duration: 400,
+            origin: "top",
+            distance: "4px",
+            scale: 0.99,
+        });
+    }, 0);
+};
+
 watch(
     () => route.path,
     async () => {
-        await nextTick();
-        register_anchor();
+        navigation.value = true;
+        body.value = (await jsx.value()).default;
+        lazyload_key.value = route.path;
+        navigation.value = false;
     },
     { immediate: true }
 );
@@ -73,7 +114,13 @@ watch(
         </header>
 
         <main class="markdown">
-            <RouterView />
+            <JSXLazyLoad
+                :data="body"
+                :key="lazyload_key"
+                v-if="!navigation"
+                @finish="lazyload_finish"
+                @update="lazyload_update"
+            />
         </main>
     </div>
 </template>

@@ -23,7 +23,7 @@ enum RouteType {
     blog = "blog",
 }
 
-const target = "header h1, #breadcrumb, .markdown > *";
+const target = "header h1";
 
 const type_of = (x: RouteLocation): RouteType => {
     if (x.path === "/" && x.name === undefined) return RouteType.root;

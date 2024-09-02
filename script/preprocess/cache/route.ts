@@ -1,7 +1,7 @@
 import fs from "fs-extra";
-import { to_SFC_path } from "./sfc";
+import { to_JSX_path } from "./jsx";
 
-import type { BASE, ParsedMarkdown, RouteMeta } from "../types";
+import type { BASE, ParsedMarkdown } from "../types";
 
 /**
  * Generate `./cache/${base}/routes.js` from parsed markdown data.
@@ -15,24 +15,27 @@ import type { BASE, ParsedMarkdown, RouteMeta } from "../types";
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
     const dist: string = `./cache/${base}/routes.js`;
-    let cache: string = "export default [\n";
+
+    let cache: string = 'import note from "@/layout/note.vue";\n';
+    cache += "export default [\n";
 
     for (const item of parsed) {
-        const SFC_path: string = "@" + to_SFC_path(item.pathname, base);
-        const route_path: string = item.pathname
-            .replace(/^.+?\//, "")
-            .replace(/(\/?index)?\.md$/, "");
+        const JSX_path: string = "@" + to_JSX_path(item.pathname, base);
+        const route_path: string =
+            "/" + item.pathname.replace(/(\/?index)?\.md$/, "");
 
         const category: string =
             route_path === "index" ? "" : route_path.split("/")[0];
 
-        const meta: RouteMeta = {
-            pathname: item.pathname,
-            category: category,
-        };
-
-        const meta_str: string = JSON.stringify(meta);
-        cache += `{ path: "${route_path}", component: () => import("${SFC_path}"), meta: ${meta_str} },\n`;
+        cache += "{";
+        cache += `path: "${route_path}",`;
+        cache += `component: note,`;
+        cache += `meta: {`;
+        cache += `pathname: "${item.pathname}",`;
+        cache += `category: "${category}",`;
+        cache += `body: () => import("${JSX_path}"),`;
+        cache += `},`;
+        cache += "},\n";
     }
 
     cache += "];";

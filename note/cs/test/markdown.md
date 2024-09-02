@@ -89,7 +89,7 @@ _斜体_、**粗体**、**_加粗斜体_**、~~删除线~~
 
 代码块
 
-```c
+<!-- ```c
 #include <stdio.h>
 
 int main()
@@ -98,7 +98,7 @@ int main()
     printf("Nulla culpa ut laborum sint esse elit minim sit. Eiusmod et exercitation et laboris voluptate aute et veniam excepteur. Anim dolore culpa commodo adipisicing et aute. In est aliquip duis tempor cillum ullamco qui. Et officia cillum ex et dolor esse magna veniam. Dolor sint velit dolor commodo in. Irure excepteur adipisicing dolore ipsum velit ipsum nisi Lorem pariatur dolor excepteur dolor dolor.\n");
     return 0;
 }
-```
+``` -->
 
 ```
 这个代码块不带语言标识

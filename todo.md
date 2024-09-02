@@ -12,12 +12,12 @@
 **解决方案:**
 
  - DOM 渲染完成后再加载 KaTeX
- - 传递静态 HTML（✓）-> 采用 JSX 渲染，这样还是可以使用 Vue 的组件
- - 可能有用：web worker（vue-worker）
+ - 用 vue-virtual-scroller 优化 dom 渲染（效果不佳，手动实现一个）
+ - 预处理生成 tsx module，返回 vnode 数组
+   - 可能出现的问题：代码块中的 `{` 需要转义（将代码块改成 Vue Component 即可）
 
 **TODO:**
 
- - 用 vue-virtual-scroller 优化 dom 渲染
  - 字体异步加载
  - LaTeX 渲染导致页面卡顿 -> 尝试预渲染 LaTeX（x）
  - devDependencies 和 dependencies 分开
@@ -37,7 +37,7 @@
  - 图片标题下划线被“LaTeX”截断了
  - 排版系统，因为 justify 导致间距不一致
  - 搜索数据库中空格的处理，要不直接删掉？
- - 搜索拿 parser 处理
+ - 搜索拿 parser 处理：或许可以用 https://github.com/fb55/htmlparser2
  - 搜索保留 latex 源码
  - 点两次链接，动画会卡住
  - 完善和主页的衔接（左右边栏的动画）

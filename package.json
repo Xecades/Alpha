@@ -13,7 +13,7 @@
     "dependencies": {
         "vue": "^3.4.29",
         "vue-router": "^4.3.3",
-        "vue-virtual-scroller": "^2.0.0-beta.8"
+        "vue-scroll-reveal": "^2.1.0"
     },
     "devDependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -32,9 +32,12 @@
         "@vue/tsconfig": "^0.5.1",
         "autoprefixer": "^10.4.20",
         "chokidar": "^3.6.0",
+        "dom-serializer": "^2.0.0",
+        "domhandler": "^5.0.3",
         "front-matter": "^4.0.2",
         "fs-extra": "^11.2.0",
         "fuse.js": "^7.0.0",
+        "htmlparser2": "^9.1.0",
         "innertext": "^1.0.3",
         "katex": "^0.16.11",
         "markdown-it": "^14.1.0",

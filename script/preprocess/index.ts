@@ -17,7 +17,7 @@ const cache_fn_maker = (base: BASE) => async () => {
     await cache.search(parsed, base);
     await cache.config(parsed, base);
     await cache.route(parsed, base);
-    await cache.sfc(parsed, base);
+    await cache.jsx(parsed, base);
 };
 
 /**
