@@ -21,7 +21,7 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         const SFC_path: string = "@" + to_SFC_path(item.pathname, base);
         const route_path: string = item.pathname
             .replace(/^.+?\//, "")
-            .replace(/(\/index)?\.md$/, "");
+            .replace(/(\/?index)?\.md$/, "");
 
         const category: string =
             route_path === "index" ? "" : route_path.split("/")[0];

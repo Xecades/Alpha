@@ -9,7 +9,7 @@ export default [
 { path: "cs/test/latex", component: () => import("@cache/note/posts/cs/test/latex.vue"), meta: {"pathname":"note/cs/test/latex.md","category":"cs"} },
 { path: "cs/test/markdown", component: () => import("@cache/note/posts/cs/test/markdown.vue"), meta: {"pathname":"note/cs/test/markdown.md","category":"cs"} },
 { path: "cs/test/toc", component: () => import("@cache/note/posts/cs/test/toc.vue"), meta: {"pathname":"note/cs/test/toc.md","category":"cs"} },
-{ path: "index", component: () => import("@cache/note/posts/index.vue"), meta: {"pathname":"note/index.md","category":""} },
+{ path: "", component: () => import("@cache/note/posts/index.vue"), meta: {"pathname":"note/index.md","category":""} },
 { path: "math/dm", component: () => import("@cache/note/posts/math/dm.vue"), meta: {"pathname":"note/math/dm.md","category":"math"} },
 { path: "math/fourier", component: () => import("@cache/note/posts/math/fourier.vue"), meta: {"pathname":"note/math/fourier.md","category":"math"} },
 { path: "math", component: () => import("@cache/note/posts/math/index.vue"), meta: {"pathname":"note/math/index.md","category":"math"} },

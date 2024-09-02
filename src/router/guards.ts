@@ -114,7 +114,6 @@ const afterEach: NavigationHookAfter = async (to, from) => {
             distance: "4px",
             scale: 0.99,
         });
-        console.log(document.querySelectorAll(target));
         //
     } else if (t_to === RouteType.blog) {
         // ScrollReveal
