@@ -147,13 +147,13 @@
     text-indent: unset;
 }
 
-.markdown .checkbox *,
-.markdown .checkbox ::after,
-.markdown .checkbox ::before {
+.markdown .task-list-item *,
+.markdown .task-list-item ::after,
+.markdown .task-list-item ::before {
     box-sizing: border-box;
 }
 
-.markdown .checkbox input[type="checkbox"] {
+.markdown .task-list-item input[type="checkbox"] {
     margin: 0;
     width: 0;
     height: 0;
@@ -161,7 +161,7 @@
     appearance: none;
 }
 
-.markdown .checkbox input[type="checkbox"] + label:before {
+.markdown .task-list-item input[type="checkbox"] + label:before {
     content: "";
     display: inline-block;
     vertical-align: sub;
@@ -178,7 +178,7 @@
     background-size: 0;
 }
 
-.markdown .checkbox input[type="checkbox"]:checked + label:before {
+.markdown .task-list-item input[type="checkbox"]:checked + label:before {
     background-color: #56a0ef;
     background-size: 0.75em;
     color: #00000013;

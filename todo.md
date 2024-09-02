@@ -19,8 +19,6 @@
 
  - 字体异步加载
  - LaTeX 渲染导致页面卡顿 -> 尝试预渲染 LaTeX（？）
- - 完成 markdown-it-checkbox 的支持
- - 把 Home View 也改成子路由的形式
  - devDependencies 和 dependencies 分开
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）
  - 搜索点进去自动跳转到对应位置

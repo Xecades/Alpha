@@ -6,9 +6,9 @@
 <h5 id="t-4" tabindex="-1" class="heading">五级标题 <a class="cursor header-anchor" href="#t-4">¶</a></h5>
 <h6 id="t-5" tabindex="-1" class="heading">六级标题 <a class="cursor header-anchor" href="#t-5">¶</a></h6>
 <hr />
-<ul>
-<li>[x] 选中</li>
-<li>[ ] 未选中</li>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_0" checked="true" disabled="true" /><label for="cbx_0"> 选中</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_1" disabled="true" /><label for="cbx_1"> 未选中</label></li>
 </ul>
 <hr />
 <p>Sunt ullamco esse esse sit aliquip aliquip ea laboris ea nulla. Quis eiusmod enim aliqua consectetur sit ea. Commodo anim enim sit qui nisi culpa labore fugiat nisi est nulla ad. Dolore dolor magna Lorem sunt dolor commodo eu ad aliquip officia officia incididunt deserunt. Adipisicing veniam aliquip incididunt et amet velit nulla quis magna culpa aliqua nulla. Lorem proident Lorem nostrud elit quis quis id duis incididunt reprehenderit.</p>

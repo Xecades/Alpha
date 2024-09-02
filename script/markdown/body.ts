@@ -8,7 +8,7 @@ import MarkdownItPrism from "markdown-it-prism";
 import MarkdownItForInline from "markdown-it-for-inline";
 
 // @ts-ignore
-// import MarkdownItTaskCheckbox from "markdown-it-task-checkbox";
+import MarkdownItTaskCheckbox from "markdown-it-task-checkbox";
 
 // @ts-ignore
 import MarkdownItWrapper from "../markdown-it-wrapper";
@@ -47,13 +47,13 @@ export default (): MarkdownIt => {
      * @see https://github.com/linsir/markdown-it-task-checkbox
      * @todo It produces rubbish code
      */
-    // md.use(MarkdownItTaskCheckbox, {
-    //     divWrap: true,
-    //     divClass: "checkbox",
-    //     idPrefix: "cbx_",
-    //     ulClass: "task-list",
-    //     liClass: "task-list-item",
-    // });
+    md.use(MarkdownItTaskCheckbox, {
+        divWrap: false,
+        divClass: "checkbox",
+        idPrefix: "cbx_",
+        ulClass: "task-list",
+        liClass: "task-list-item",
+    });
 
     /**
      * @name markdown-it-wrapper
