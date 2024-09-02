@@ -1,5 +1,6 @@
 // Modules
 import { createApp } from "vue";
+import { DynamicScroller } from "vue-virtual-scroller";
 
 // Vue
 import App from "./App.vue";
@@ -93,6 +94,7 @@ async function main() {
     const app = createApp(App);
     app.use(router);
     app.component("font-awesome-icon", FontAwesomeIcon);
+    app.component("DynamicScroller", DynamicScroller);
 
     app.component("Anchor", Anchor);
     app.component("BlockMath", BlockMath);

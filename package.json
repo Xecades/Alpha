@@ -12,7 +12,8 @@
     },
     "dependencies": {
         "vue": "^3.4.29",
-        "vue-router": "^4.3.3"
+        "vue-router": "^4.3.3",
+        "vue-virtual-scroller": "^2.0.0-beta.8"
     },
     "devDependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.6.0",

@@ -17,8 +17,9 @@
 
 **TODO:**
 
+ - 用 vue-virtual-scroller 优化 dom 渲染
  - 字体异步加载
- - LaTeX 渲染导致页面卡顿 -> 尝试预渲染 LaTeX（？）
+ - LaTeX 渲染导致页面卡顿 -> 尝试预渲染 LaTeX（x）
  - devDependencies 和 dependencies 分开
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）
  - 搜索点进去自动跳转到对应位置
