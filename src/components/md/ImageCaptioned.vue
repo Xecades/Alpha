@@ -13,7 +13,7 @@ const img: Ref<HTMLImageElement | null> = ref(null);
 
 onMounted(() => {
     const zoom = mediumZoom(img.value as HTMLElement, {
-        background: "#47484a85",
+        background: "var(--overlay-color)",
     });
 
     zoom.on("open", async () => {
@@ -42,6 +42,10 @@ onMounted(() => {
 .medium-zoom-overlay {
     z-index: 9999;
     cursor: unset !important;
+}
+
+:root {
+    --overlay-color: #47484a85;
 }
 </style>
 

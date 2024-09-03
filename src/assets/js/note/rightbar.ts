@@ -48,12 +48,55 @@ export const navigate = (id: string, offset: number = -4 * 16) => {
 };
 
 /**
- * Setup scroll listener for rightbar.
- *
- * @param in_view - Ref for current in-view heading
+ * Scroll listener class for rightbar.
  */
-export const setup_scroll_listener = (in_view: Ref<number | null>) => {
-    const in_viewport = (el: Element): boolean => {
+export class ScrollListener {
+    targets: HTMLElement[];
+    store: Ref<number | null>;
+
+    /**
+     * Constructor.
+     *
+     * @param in_view - Ref to store the index of the element in view
+     */
+    constructor(in_view: Ref<number | null>) {
+        this.targets = [];
+        this.store = in_view;
+
+        window.onscroll = () => {
+            for (let i = 0; i < this.targets.length; i++) {
+                if (this._in_viewport(this.targets[i])) {
+                    this.store.value = i;
+                    break;
+                }
+            }
+        };
+    }
+
+    /**
+     * Add an element to the listener.
+     *
+     * @param target - The element to add to the listener
+     */
+    listen(target: HTMLElement): void {
+        this.targets.push(target);
+    }
+
+    /**
+     * Clear the listener.
+     */
+    reset(): void {
+        this.targets = [];
+        this.store.value = null;
+    }
+
+    /**
+     * Check whether an element is in viewport.
+     *
+     * @param el - The element to check
+     * @returns Whether the element is in the viewport
+     */
+    _in_viewport(el: Element): boolean {
         const vh = window.innerHeight || document.documentElement.clientHeight;
         const vw = window.innerWidth || document.documentElement.clientWidth;
 
@@ -65,16 +108,5 @@ export const setup_scroll_listener = (in_view: Ref<number | null>) => {
             rect.bottom <= vh &&
             rect.right <= vw
         );
-    };
-
-    const headings = document.querySelectorAll(".markdown .heading");
-
-    window.onscroll = () => {
-        for (let i = 0; i < headings.length; i++) {
-            if (in_viewport(headings[i])) {
-                in_view.value = i;
-                break;
-            }
-        }
-    };
-};
+    }
+}

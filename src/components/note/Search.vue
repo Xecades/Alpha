@@ -110,10 +110,14 @@ watch(
 * {
     --margin-lr: 1rem;
     --line-color: #e1e1e1;
+    --icon-color: #d1d5db;
+    --input-color: #3b3c3e;
+    --xmark-hover-color: #9a9ca0;
 
     --panel-width: 720px;
     --panel-height: 430px;
     --panel-radius: 15px;
+    --panel-background-color: #ffffffe6;
 
     --search-gap: 5px;
     --search-height: 50px;
@@ -121,6 +125,30 @@ watch(
     --search-icon-width: 27px;
 
     --results-bottom: 16px;
+
+    --empty-icon-color: #f6f6f6;
+
+    --post-hover-color: #f3f3f382;
+    --post-title-color: #56585d;
+    --post-icon-color: #737477;
+    --post-content-color: #969797;
+    --post-mark-background-color: #fef08a;
+}
+
+@media (prefers-color-scheme: dark) {
+    * {
+        --line-color: #303030;
+        --icon-color: #505256;
+        --input-color: #c1c5cd;
+        --panel-background-color: #1f1f1fe6;
+        --xmark-hover-color: #9a9ca0;
+        --empty-icon-color: #303030b5;
+        --post-hover-color: #2e2e2e82;
+        --post-title-color: #c4c7cc;
+        --post-icon-color: #96989c;
+        --post-content-color: #9c9c9c;
+        --post-mark-background-color: #57522b;
+    }
 }
 
 .results {
@@ -144,7 +172,7 @@ watch(
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(6.7);
-    color: #f6f6f6;
+    color: var(--empty-icon-color);
 }
 
 .results .post {
@@ -154,15 +182,15 @@ watch(
 }
 
 .results .post:hover {
-    background-color: #f3f3f382;
+    background-color: var(--post-hover-color);
 }
 
 .results .post .meta .title {
-    color: #56585d;
+    color: var(--post-title-color);
 }
 
 .results .post .meta .icon {
-    color: #737477;
+    color: var(--post-icon-color);
     padding: 0 7px 0 4px;
     width: 17px;
     text-align: center;
@@ -174,7 +202,7 @@ watch(
 }
 
 .results .post .content {
-    color: #969797;
+    color: var(--post-content-color);
     margin: 6px 13px 0;
     font-size: 0.94rem;
     height: 1.6rem;
@@ -185,7 +213,7 @@ watch(
 }
 
 .results .post mark {
-    background-color: #fef08a;
+    background-color: var(--post-mark-background-color);
     color: unset;
 }
 
@@ -201,7 +229,7 @@ watch(
 
 .search .icon {
     flex: none;
-    color: #d1d5db;
+    color: var(--icon-color);
     width: var(--search-icon-width);
     display: block;
     height: 100%;
@@ -220,7 +248,7 @@ watch(
 }
 
 .search .icon.xmark:hover {
-    color: #9a9ca0;
+    color: var(--xmark-hover-color);
     transform: scale(1.05);
 }
 
@@ -230,7 +258,7 @@ watch(
     height: 100%;
     outline: none;
     padding: 0 5px;
-    color: #3b3c3e;
+    color: var(--input-color);
     background-color: transparent;
     opacity: 0.9;
 }
@@ -248,7 +276,7 @@ watch(
 .panel {
     width: var(--panel-width);
     height: var(--panel-height);
-    background-color: #ffffffe6;
+    background-color: var(--panel-background-color);
     position: absolute;
     top: 50%;
     left: 50%;

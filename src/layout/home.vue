@@ -41,6 +41,8 @@ logger.nbsp("Home layout loaded");
 
 <style>
 .home-layout {
+    --hover-color: #f3f4f6;
+
     width: 40rem;
     margin: 0 auto;
     padding-top: 10rem;
@@ -49,7 +51,7 @@ logger.nbsp("Home layout loaded");
 
 .home-layout .title {
     font-size: 3rem;
-    letter-spacing: .05em;
+    letter-spacing: 0.05em;
     margin-bottom: 12px;
     height: 3.5rem;
 }
@@ -71,14 +73,14 @@ logger.nbsp("Home layout loaded");
     height: 0px;
     border: none;
     border-top: 1px solid #e5e7eb;
-    margin: .5rem;
+    margin: 0.5rem;
 }
 
 /* small */
 
 .home-layout p.small {
-    font-size: .9rem;
-    opacity: .8;
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 /* table */
@@ -94,11 +96,11 @@ logger.nbsp("Home layout loaded");
     padding: 2px 16px;
     margin: 4px 0;
     border-radius: 8px;
-    transition: background-color .5s;
+    transition: background-color 0.5s;
 }
 
 .home-layout .table li:hover {
-    background-color: #f3f4f6;
+    background-color: var(--hover-color);
 }
 
 .home-layout .table li a {
@@ -149,11 +151,11 @@ logger.nbsp("Home layout loaded");
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
 }
 
 .home-layout .timeline li.yr:hover {
-    background-color: #f3f4f6;
+    background-color: var(--hover-color);
 }
 
 .home-layout .timeline .date {
@@ -185,5 +187,19 @@ logger.nbsp("Home layout loaded");
     aspect-ratio: 621 / 843;
     max-width: 50%;
     display: inline-block;
+}
+
+@media (prefers-color-scheme: dark) {
+    .home-layout {
+        --hover-color: #2a2a2a;
+    }
+
+    .home-layout .sponsor img {
+        border-color: #4a525a;
+    }
+
+    .home-layout .timeline .year {
+        color: #2a2a2a;
+    }
 }
 </style>

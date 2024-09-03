@@ -6,7 +6,30 @@
 :root {
     --font-color: #4b5563;
     --font-family: "EB Garamond", "Georgia", "Noto Serif SC", songti sc, serif;
-    --selection-bg: rgba(187, 221, 251, 0.5);
+    --selection-bg: #bbddfb80;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #171717;
+        --font-color: #d1d5db;
+        --selection-bg: #6567694f;
+    }
+}
+
+/* Overlay Scrollbar Theme */
+.os-theme-dark .os-scrollbar-handle {
+    --os-handle-bg: rgba(0, 0, 0, 0.44);
+    --os-handle-bg-hover: rgba(0, 0, 0, 0.55);
+    --os-handle-bg-active: rgba(0, 0, 0, 0.66);
+}
+
+@media (prefers-color-scheme: dark) {
+    .os-theme-dark .os-scrollbar-handle {
+        --os-handle-bg: rgba(255, 255, 255, 0.44);
+        --os-handle-bg-hover: rgba(255, 255, 255, 0.55);
+        --os-handle-bg-active: rgba(255, 255, 255, 0.66);
+    }
 }
 
 /* Global Fonts */
@@ -44,8 +67,10 @@ body {
             #25252506 50%,
             #25252506 100%
         );
+    background-color: var(--background-color, none);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    transition: background-color 0.7s ease;
 }
 
 /* Scrollbar Flickering Prevention */

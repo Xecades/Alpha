@@ -60,9 +60,9 @@ export default [
 <p>Cupidatat consequat incididunt nostrud laborum incididunt in sunt aute. Elit consectetur consectetur qui fugiat incididunt laborum amet officia quis cupidatat amet ut ullamco. Esse sunt aliqua commodo qui laboris sint enim.</p>
 </blockquote>,
 <hr />,
-<p>行内代码块 <code>#include&lt;iostream&gt;</code>。Mollit dolore est in et aliquip adipisicing et nulla id nulla esse laborum minim nulla. In ad irure qui magna Lorem ad eiusmod do do <code>laborum ex duis</code>. Reprehenderit nulla nisi laborum incididunt voluptate sunt et cupidatat commodo consectetur deserunt. Non officia aliquip enim duis. Ea irure magna excepteur labore eiusmod officia sit id sint anim ipsum duis labore Lorem. Culpa cillum <code>voluptate duis exercitation cillum esse incididunt laborum magna</code>. Est ut commodo non magna nisi sit proident deserunt consectetur ut anim ullamco ut adipisicing.</p>,
+<p>行内代码块 <code class="inline-code">#include&lt;iostream&gt;</code>。Mollit dolore est in et aliquip adipisicing et nulla id nulla esse laborum minim nulla. In ad irure qui magna Lorem ad eiusmod do do <code class="inline-code">laborum ex duis</code>. Reprehenderit nulla nisi laborum incididunt voluptate sunt et cupidatat commodo consectetur deserunt. Non officia aliquip enim duis. Ea irure magna excepteur labore eiusmod officia sit id sint anim ipsum duis labore Lorem. Culpa cillum <code class="inline-code">voluptate duis exercitation cillum esse incididunt laborum magna</code>. Est ut commodo non magna nisi sit proident deserunt consectetur ut anim ullamco ut adipisicing.</p>,
 <blockquote>
-<p><code>scanf()</code> 用于输入数据，而 <code>printf()</code> 用于输出数据。</p>
+<p><code class="inline-code">scanf()</code> 用于输入数据，而 <code class="inline-code">printf()</code> 用于输出数据。</p>
 </blockquote>,
 <hr />,
 <p>代码块</p>,

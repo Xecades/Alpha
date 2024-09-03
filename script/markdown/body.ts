@@ -96,6 +96,15 @@ export default (): MarkdownIt => {
         }
     );
 
+    md.use(
+        MarkdownItForInline,
+        "add_class_to_inline_code",
+        "code_inline",
+        (tokens: Token[], idx: number) => {
+            tokens[idx].attrSet("class", "inline-code");
+        }
+    );
+
     /**
      * @name markdown-it-anchor
      * @note 这个需要放在 MarkdownItForInline 后面，否则 <a> 标签会被替换

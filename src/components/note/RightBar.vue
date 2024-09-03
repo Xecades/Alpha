@@ -1,23 +1,19 @@
 <script setup lang="ts">
-import { nextTick, ref, watch, type Ref } from "vue";
+import { ref, watch, type Ref } from "vue";
 import { useRoute } from "vue-router";
 
 import cursor from "@/assets/js/cursor";
-import {
-    navigate,
-    normalize_toc,
-    setup_scroll_listener,
-} from "@/assets/js/note/rightbar";
+import { navigate, normalize_toc } from "@/assets/js/note/rightbar";
 
 // Types
 import type { HeaderRef } from "@/assets/js/note/rightbar";
 import type { MarkdownHeader } from "script/preprocess/types";
 
+const props = defineProps<{ in_view: number | null }>();
 const route = useRoute();
 
 const showtext: Ref<boolean> = ref(false);
 const toc: Ref<HeaderRef[]> = ref([]);
-const in_view: Ref<number | null> = ref(null);
 
 const mouse_fn = {
     enter: () => {
@@ -32,10 +28,6 @@ watch(
     () => route.path,
     async () => {
         toc.value = normalize_toc(route.meta.toc as MarkdownHeader[]);
-        in_view.value = null;
-
-        await nextTick();
-        setup_scroll_listener(in_view);
     },
     { immediate: true }
 );
@@ -86,17 +78,36 @@ watch(
     --offset-top: 11rem;
     --offset-right: calc(70px - var(--padding) - var(--margin));
 
-    --bg-color: linear-gradient(90deg, #f7f7f780, #f7f7f7f5);
-    --bg-radius: 4px;
+    --item-color: #6e758c;
+    --item-hover-color: #60a5fa;
+
+    --background-color: linear-gradient(90deg, #f7f7f780, #f7f7f7f5);
+    --background-radius: 4px;
 
     --translate-offset: 7px;
 
-    --color: #e3e2e0;
+    --bar-background-color: #e3e2e0;
+    --bar-active-background-color: #bdbbb8;
+
     --gap: 15px;
     --bar-height: 4px;
     --bar-padding: 4px;
 
+    --detail-color-passed: #acb1c1;
+
     --toc-title-indent: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    * {
+        --theme-color: #87b3ea;
+        --background-color: linear-gradient(90deg, #19191980, #191919f5);
+        --bar-background-color: #363636;
+        --bar-active-background-color: #9e9e9e;
+        --item-color: #c4c6ce;
+        --item-hover-color: #87b3ea;
+        --detail-color-passed: #5f6064;
+    }
 }
 
 #right {
@@ -117,8 +128,8 @@ watch(
     right: 0;
     padding: var(--padding);
     margin: var(--margin);
-    background-image: var(--bg-color);
-    border-radius: var(--bg-radius);
+    background-image: var(--background-color);
+    border-radius: var(--background-radius);
 }
 
 :global(#right .toc .katex) {
@@ -141,26 +152,26 @@ watch(
 .item {
     margin-left: auto;
     display: inline-block;
-    color: #6e758c;
+    color: var(--item-color);
     font-size: 0.95rem;
     transition: color 0.05s;
     position: relative;
 }
 
 .item:hover {
-    color: #60a5fa;
+    color: var(--item-hover-color);
 }
 
 .bar {
     margin-top: var(--bar-padding);
-    background-color: var(--color);
+    background-color: var(--bar-background-color);
     border-radius: 4px;
     height: var(--bar-height);
     transition: background-color 0.15s;
 }
 
 .bar.active {
-    background-color: #bdbbb8;
+    background-color: var(--bar-active-background-color);
 }
 
 .detail {
@@ -173,7 +184,7 @@ watch(
 }
 
 .detail.passed {
-    color: #acb1c1;
+    color: var(--detail-color-passed);
 }
 
 .detail .sign {

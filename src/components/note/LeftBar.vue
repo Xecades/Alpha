@@ -162,7 +162,7 @@ onUpdated(() => {
 }
 
 .note-layout .content .title {
-    color: #787f83;
+    color: var(--content-color);
     font-size: 0.95rem;
     line-height: var(--cate-title-height);
     margin-bottom: 5px;
@@ -213,7 +213,7 @@ onUpdated(() => {
     --offset-left: 35px;
 
     --theme-color: #60a5fa;
-    --bg-color: linear-gradient(90deg, #fdfdfdf5, #fdfdfd80);
+    --background: linear-gradient(90deg, #fdfdfdf5, #fdfdfd80);
     --bg-radius: 4px;
 
     --nav-width: 42px;
@@ -221,7 +221,11 @@ onUpdated(() => {
     --nav-gap: 2px;
     --nav-color: #cecece;
     --nav-hover-color: #a9a9a9;
-    --nav-bg-hover-color: #f2f2f2c4;
+    --nav-hover-background-color: #f2f2f2c4;
+
+    --item-color: #888e8f;
+    --item-underline-color: #ced0d1;
+    --item-hover-background-color: #f5f5f5fc;
 
     --cate-translate-offset: -7px;
     --cate-offset-left: 28px;
@@ -232,8 +236,24 @@ onUpdated(() => {
 
     --search-scale: 0.99;
 
+    --content-color: #787f83;
+
     --width: calc(var(--cate-offset-left) + var(--cate-width));
     --height: 100vh;
+}
+
+@media (prefers-color-scheme: dark) {
+    * {
+        --theme-color: #87b3ea;
+        --background: linear-gradient(90deg, #1f1f1ff5, #1f1f1f80);
+        --nav-color: #676767;
+        --nav-hover-color: #a9a9a9;
+        --nav-hover-background-color: #3b3b3bc4;
+        --item-color: #cbcfd2;
+        --item-underline-color: #5d5f61;
+        --item-hover-background-color: #3b3b3bc4;
+        --content-color: #c5ccd0;
+    }
 }
 
 #left {
@@ -314,7 +334,7 @@ onUpdated(() => {
     text-wrap: nowrap;
     overflow: hidden;
     border-radius: var(--bg-radius);
-    background-image: var(--bg-color);
+    background-image: var(--background);
     user-select: none;
 }
 
@@ -323,7 +343,7 @@ onUpdated(() => {
     line-height: var(--nav-height);
     font-size: 0.9rem;
     padding: 0 12px;
-    color: #888e8f;
+    color: var(--item-color);
     text-decoration-color: transparent;
     transition: background-color 0.15s, opacity 0.2s, text-decoration-color 0.2s;
 }
@@ -332,15 +352,15 @@ onUpdated(() => {
     text-decoration-line: underline;
     text-underline-offset: 5px;
     text-decoration-style: wavy;
-    text-decoration-color: #ced0d1;
+    text-decoration-color: var(--item-underline-color);
 }
 
 .category .item:hover {
-    background-color: #f5f5f5fc;
+    background-color: var(--item-hover-background-color);
 }
 
 .nav .btn:hover {
-    background-color: var(--nav-bg-hover-color);
+    background-color: var(--nav-hover-background-color);
     color: var(--nav-hover-color);
 }
 </style>

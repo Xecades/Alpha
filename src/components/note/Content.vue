@@ -19,6 +19,7 @@ import type { ComputedRef, Ref, ShallowRef } from "vue";
 import type { RouteMeta } from "script/preprocess/types";
 import type { JSX } from "vue/jsx-runtime";
 
+const emit = defineEmits(["update"]);
 const route = useRoute();
 
 const meta: ComputedRef<RouteMeta> = computed(
@@ -73,6 +74,8 @@ const lazyload_update = (index: number) => {
     const els: NodeListOf<HTMLElement> = document.querySelectorAll(selector);
     const target: HTMLElement = els[index - 1];
 
+    emit("update", target);
+
     setTimeout(() => {
         ScrollReveal().reveal(target, reveal_config);
     }, 0);
@@ -81,11 +84,8 @@ const lazyload_update = (index: number) => {
 watch(
     () => route.path,
     async () => {
-        // const metadata_comp = metadata(route.meta as any);
-
         rendering.value = true;
         navigation.value = true;
-        // body.value = (await jsx.value()).default.concat([metadata_comp]);
         body.value = (await jsx.value()).default;
 
         lazyload_key.value = route.path;
@@ -129,6 +129,12 @@ watch(
     --header-color: #535353;
     --header-size: 2.2rem;
     --header-line-height: 3.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    * {
+        --header-color: #f3f4f6;
+    }
 }
 
 #content {

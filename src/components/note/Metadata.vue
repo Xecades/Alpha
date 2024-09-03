@@ -50,6 +50,13 @@ onMounted(async () => {
     --line-gap: 15px;
 }
 
+@media (prefers-color-scheme: dark) {
+    * {
+        --color: #878787;
+        --line-color: #393a3b;
+    }
+}
+
 .metadata {
     margin: 0 var(--margin-lr) var(--margin-bottom);
     font-size: 0.8rem;

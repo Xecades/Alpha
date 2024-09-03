@@ -15,6 +15,6 @@ export default [
 <blockcode lang="plain" html="%3Ccode%3E%23%20%E8%BF%99%E9%87%8C%E4%B8%8D%E5%BA%94%E8%AF%A5%E8%A2%AB%E8%AF%86%E5%88%AB%E4%B8%BA%E6%A0%87%E9%A2%98%0A%3C%2Fcode%3E"></blockcode>,
 <h3 id="t-5" tabindex="-1" class="heading">这里也是 <a class="cursor header-anchor" href="#t-5">¶</a></h3>,
 <h4 id="t-6" tabindex="-1" class="heading">这个标题内还有 <inlinemath data="%5CLaTeX"></inlinemath> 数学公式 <a class="cursor header-anchor" href="#t-6">¶</a></h4>,
-<h3 id="t-7" tabindex="-1" class="heading">这个标题里面有 <code>code</code> 块 <a class="cursor header-anchor" href="#t-7">¶</a></h3>,
+<h3 id="t-7" tabindex="-1" class="heading">这个标题里面有 <code class="inline-code">code</code> 块 <a class="cursor header-anchor" href="#t-7">¶</a></h3>,
 <h2 id="t-8" tabindex="-1" class="heading">这个<em>意大利的</em>标题非常<strong>强壮</strong> <a class="cursor header-anchor" href="#t-8">¶</a></h2>,
 ];

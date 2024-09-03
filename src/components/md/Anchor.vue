@@ -18,9 +18,16 @@ const is_internal: boolean = props.href.startsWith("/");
     --hover-color: #0454b3;
 }
 
+@media (prefers-color-scheme: dark) {
+    * {
+        --color: #98c6ff;
+        --hover-color: #54a2ff;
+    }
+}
+
 a {
     color: var(--color);
-    transition: color .1s;
+    transition: color 0.1s;
 }
 
 a:hover {
