@@ -21,38 +21,15 @@ cursor.setup();
 
 <template>
     <div class="note-layout" id="main">
-        <LeftBar id="left" />
-        <Content id="content" />
-        <RightBar id="right" />
+        <LeftBar />
+        <Content />
+        <RightBar />
     </div>
 </template>
 
 <style scoped>
-* {
-    --content-width: 740px;
-}
-
 .note-layout {
     width: 100vw;
     display: flex;
-}
-
-#content {
-    width: var(--content-width);
-    z-index: 10;
-}
-
-#content.hide {
-    transition: opacity 0.1s ease-out;
-    opacity: 0;
-}
-
-#left,
-#right {
-    position: sticky;
-    top: 0;
-    width: calc((100vw - var(--content-width)) / 2);
-    height: 100vh;
-    z-index: 100;
 }
 </style>

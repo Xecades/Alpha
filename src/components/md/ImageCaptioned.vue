@@ -8,11 +8,14 @@ import { nextTick, onBeforeUnmount, onMounted, ref, type Ref } from "vue";
 
 import mediumZoom from "medium-zoom";
 
-const props = defineProps<{ alt: string, src: string }>();
+const props = defineProps<{ alt: string; src: string }>();
 const img: Ref<HTMLImageElement | null> = ref(null);
 
 onMounted(() => {
-    const zoom = mediumZoom(img.value as HTMLElement, { background: "#47484a85" });
+    const zoom = mediumZoom(img.value as HTMLElement, {
+        background: "#47484a85",
+    });
+
     zoom.on("open", async () => {
         await nextTick();
         cursor.refresh();

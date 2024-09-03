@@ -55,15 +55,10 @@ html {
 }
 
 /* ScrollReveal.js Flicker Prevention */
-html.sr .rv {
-    visibility: hidden;
-}
-
-html.sr #content header h1 {
-    visibility: hidden;
-}
-
-html.sr #content .markdown > * {
+html.sr .rv,
+html.sr .note-layout #content header h1,
+html.sr .note-layout #content .markdown > *,
+html.sr .note-layout #left {
     visibility: hidden;
 }
 

@@ -114,6 +114,7 @@ export default (): MarkdownIt => {
     /**
      * Custom Functions
      */
+    // 图片渲染成 Vue 组件
     md.renderer.rules.image = function (tokens, idx, options, env, self) {
         let src = tokens[idx].attrGet("src");
         let caption = self.renderInline(
@@ -122,11 +123,12 @@ export default (): MarkdownIt => {
             env
         );
 
-        let alt = extractText(caption);
+        let alt = extractText(caption) || "空";
 
         return `<ImageCaptioned alt="${alt}" src="${src}">${caption}</ImageCaptioned>`;
     };
 
+    // 标题渲染成 Vue 组件
     const originalHeadingOpen =
         md.renderer.rules.heading_open ||
         function (tokens, idx, options, env, self) {
@@ -136,6 +138,26 @@ export default (): MarkdownIt => {
     md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
         tokens[idx].attrSet("class", "heading");
         return originalHeadingOpen(tokens, idx, options, env, self);
+    };
+
+    // 代码块渲染成 Vue 组件
+    const originalFence =
+        md.renderer.rules.fence ||
+        function (tokens, idx, options, env, self) {
+            return self.renderToken(tokens, idx, options);
+        };
+
+    md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const { info } = tokens[idx];
+
+        const lang = info || "plain";
+
+        let html = originalFence(tokens, idx, options, env, self).trim();
+
+        html = html.replace(/^<pre.*?>(.*)<\/pre>$/gs, (...m) => m[1]);
+        html = encodeURIComponent(html);
+
+        return `<BlockCode lang="${lang}" html="${html}"></BlockCode>`;
     };
 
     return md;

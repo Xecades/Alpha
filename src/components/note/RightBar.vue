@@ -28,6 +28,15 @@ const showtext: Ref<boolean> = ref(false);
 const toc: Ref<HeaderRef[]> = ref([]);
 const in_view: Ref<number | null> = ref(null);
 
+const mouse_fn = {
+    enter: () => {
+        showtext.value = true;
+    },
+    leave: () => {
+        showtext.value = false;
+    },
+};
+
 watch(
     () => route.path,
     async () => {
@@ -43,41 +52,39 @@ watch(
 </script>
 
 <template>
-    <div class="wrapper">
-        <Transition
-            name="bars"
-            class="wrapper"
-            @enter="cursor.refresh()"
-            @mouseenter="showtext = true"
-            @mouseleave="showtext = false"
-        >
-            <div class="toc" v-if="!showtext">
-                <template v-for="(item, idx) in toc">
-                    <div
-                        class="bar item cursor"
-                        :style="{ width: item.width }"
-                        :class="{ active: idx === in_view }"
-                    ></div>
-                </template>
-            </div>
-            <div class="toc" v-else>
-                <template v-for="(item, idx) in toc">
-                    <a
-                        class="detail item cursor"
-                        :href="'#' + item.link"
-                        @click.prevent="navigate(item.link)"
-                        :style="{ marginRight: item.indent }"
-                        :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }"
-                    >
-                        <span class="text" v-html="item.title"></span>
-                        <span class="sign">
-                            <font-awesome-icon :icon="['fas', 'caret-left']" />
-                        </span>
-                    </a>
-                </template>
-            </div>
-        </Transition>
-    </div>
+    <Transition name="rightbar" appear>
+        <div id="right" :key="$route.path">
+            <Transition name="bars" @enter="cursor.refresh()">
+                <div class="toc" v-if="!showtext" @mouseenter="mouse_fn.enter">
+                    <template v-for="(item, idx) in toc">
+                        <div
+                            class="bar item cursor"
+                            :style="{ width: item.width }"
+                            :class="{ active: idx === in_view }"
+                        ></div>
+                    </template>
+                </div>
+                <div class="toc" v-else @mouseleave="mouse_fn.leave">
+                    <template v-for="(item, idx) in toc">
+                        <a
+                            class="detail item cursor"
+                            :href="'#' + item.link"
+                            @click.prevent="navigate(item.link)"
+                            :style="{ marginRight: item.indent }"
+                            :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }"
+                        >
+                            <span class="text" v-html="item.title"></span>
+                            <span class="sign">
+                                <font-awesome-icon
+                                    :icon="['fas', 'caret-left']"
+                                />
+                            </span>
+                        </a>
+                    </template>
+                </div>
+            </Transition>
+        </div>
+    </Transition>
 </template>
 
 <style scoped>
@@ -102,14 +109,22 @@ watch(
     --toc-title-indent: 0.5rem;
 }
 
+#right {
+    position: fixed;
+    width: 0;
+    top: var(--offset-top);
+    /** To avoid scrollbar flickering. */
+    left: calc(100vw - var(--offset-right));
+}
+
 .toc {
     width: max-content;
     display: flex;
     flex-direction: column;
     gap: calc(var(--gap) - 2 * var(--bar-padding));
     position: absolute;
-    top: var(--offset-top);
-    right: var(--offset-right);
+    top: 0;
+    right: 0;
     padding: var(--padding);
     margin: var(--margin);
     background-image: var(--bg-color);
@@ -191,6 +206,26 @@ watch(
 
 .detail:hover .sign {
     opacity: 1;
+}
+
+.rightbar-enter-active,
+.rightbar-leave-active {
+    transition-property: opacity;
+}
+
+.rightbar-enter-active {
+    transition-duration: 0.37s;
+    transition-timing-function: ease-out;
+}
+
+.rightbar-leave-active {
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.15, 0.79, 0.69, 0.68);
+}
+
+.rightbar-enter-from,
+.rightbar-leave-to {
+    opacity: 0;
 }
 
 .bars-enter-active,

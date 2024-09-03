@@ -23,7 +23,7 @@ enum RouteType {
     blog = "blog",
 }
 
-const target = "header h1";
+const target: string = ".note-layout #content header h1, .note-layout #left";
 
 const type_of = (x: RouteLocation): RouteType => {
     if (x.path === "/" && x.name === undefined) return RouteType.root;
@@ -62,9 +62,6 @@ const beforeEach: NavigationGuard = async (to, from) => {
         //
     } else if (t_from === RouteType.note && t_to === RouteType.note) {
         // ScrollReveal
-        const content = document.querySelector("#content") as Element;
-        content.classList.add("hide");
-        await sleep(100);
         //
     } else if (t_from === RouteType.blog && t_to === RouteType.blog) {
         // ScrollReveal
@@ -103,9 +100,6 @@ const afterEach: NavigationHookAfter = async (to, from) => {
     if (t_to === RouteType.note) {
         // ScrollReveal
         await nextTick();
-
-        const content = document.querySelector("#content") as Element;
-        content.classList.remove("hide");
 
         ScrollReveal().reveal(target, {
             interval: 20,

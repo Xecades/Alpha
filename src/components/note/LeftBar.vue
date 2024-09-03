@@ -114,7 +114,7 @@ onUpdated(() => {
 </script>
 
 <template>
-    <div @mouseenter="mouse_fn.enter" @mouseleave="mouse_fn.leave">
+    <div id="left" @mouseenter="mouse_fn.enter" @mouseleave="mouse_fn.leave">
         <ul class="nav">
             <li class="btn cursor" id="search" @click="search_fn.reveal">
                 <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
@@ -143,11 +143,7 @@ onUpdated(() => {
         <!-- https://cn.vuejs.org/guide/built-ins/teleport.html -->
         <Teleport to="body">
             <Transition name="search">
-                <Search
-                    v-show="is_searching"
-                    :visible="is_searching"
-                    @close="search_fn.hide"
-                />
+                <Search v-show="is_searching" @close="search_fn.hide" />
             </Transition>
         </Teleport>
     </div>
@@ -228,13 +224,25 @@ onUpdated(() => {
     --nav-bg-hover-color: #f2f2f2c4;
 
     --cate-translate-offset: -7px;
-    --cate-offset-left: 63px;
-    --cate-offset-top: calc(11px + var(--nav-height) + var(--offset-top));
+    --cate-offset-left: 28px;
+    --cate-offset-top: calc(11px + var(--nav-height));
     --cate-width: 270px;
     --cate-title-height: 1.45rem;
     --cate-title-indent: 0.5rem;
 
     --search-scale: 0.99;
+
+    --width: calc(var(--cate-offset-left) + var(--cate-width));
+    --height: 100vh;
+}
+
+#left {
+    position: fixed;
+    left: var(--offset-left);
+    top: var(--offset-top);
+    width: var(--width);
+    height: var(--height);
+    z-index: 100;
 }
 
 .search-enter-active,
@@ -279,8 +287,6 @@ onUpdated(() => {
 }
 
 .nav {
-    margin-top: var(--offset-top);
-    margin-left: var(--offset-left);
     display: flex;
     flex-direction: row;
     gap: var(--nav-gap);
@@ -302,8 +308,8 @@ onUpdated(() => {
     position: absolute;
     display: flex;
     flex-direction: row;
-    top: var(--offset-top);
-    left: calc(var(--offset-left) + var(--nav-width) + var(--nav-gap));
+    top: 0;
+    left: calc(var(--nav-width) + var(--nav-gap));
     height: var(--nav-height);
     text-wrap: nowrap;
     overflow: hidden;

@@ -42,6 +42,7 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
     const injections: string[] = [
         "Anchor",
         "BlockMath",
+        "BlockCode",
         "InlineMath",
         "ImageCaptioned",
     ];

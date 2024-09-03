@@ -200,7 +200,7 @@
 }
 
 /* 行内代码块 */
-.markdown :not(pre) > code {
+.markdown .inline-code code {
     font-family: var(--monospace);
     background: #edeeeebf;
     padding: 0.2em 0.3em;
@@ -210,33 +210,32 @@
     line-height: 1em;
 }
 
-.markdown :not(pre) > code ::selection {
+.markdown .inline-code code ::selection {
     background-color: var(--selection-bg);
 }
 
 /* 行间代码块 */
-.markdown pre {
+.markdown pre.block-code {
     background: hsl(230, 1%, 98%);
     border: 1px solid #ededed;
-    scrollbar-width: none;
     padding: 1em;
     margin: 0.5em 0;
-    overflow: auto;
     border-radius: 0.3em;
     color: hsl(230, 8%, 24%);
     font-family: var(--monospace);
-    white-space: pre;
+    overflow: auto;
     word-spacing: normal;
     word-break: normal;
     line-height: 1.5;
     tab-size: 2;
 }
 
-.markdown pre code {
+.markdown pre.block-code code {
     background: unset;
+    white-space: pre !important;
     font-size: 0.97em;
 }
 
-.markdown pre ::selection {
+.markdown pre.block-code ::selection {
     background-color: var(--selection-bg);
 }

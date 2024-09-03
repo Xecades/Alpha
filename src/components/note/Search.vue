@@ -9,11 +9,6 @@ import cursor from "@/assets/js/cursor";
 import type { PartialOptions } from "overlayscrollbars";
 import type { Result } from "@/assets/js/note/search";
 
-const props = defineProps<{
-    /** Whether this component is visible */
-    visible: boolean;
-}>();
-
 const query: Ref<string> = ref("");
 const results: Ref<Result[]> = ref([]);
 
@@ -31,26 +26,10 @@ watch(
     },
     { immediate: true }
 );
-
-watch(
-    () => props.visible,
-    (v: boolean) => {
-        if (v) return;
-
-        setTimeout(async () => {
-            query.value = "";
-            await nextTick();
-
-            // Scroll to the top when closed
-            const el = document.querySelector(".results .post") as Element;
-            el.scrollIntoView({ block: "start" });
-        }, 120); // Timeout same as .search-leave-active transition duration in LeftBar.vue
-    }
-);
 </script>
 
 <template>
-    <div class="wrapper" @click.self="$emit('close')">
+    <div id="search" @click.self="$emit('close')">
         <div class="panel">
             <div class="search">
                 <div class="icon glass">
@@ -256,7 +235,7 @@ watch(
     opacity: 0.9;
 }
 
-.wrapper {
+#search {
     z-index: 10000;
     width: 100vw;
     height: 100vh;

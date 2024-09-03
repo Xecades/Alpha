@@ -83,13 +83,13 @@ _斜体_、**粗体**、**_加粗斜体_**、~~删除线~~
 
 行内代码块 `#include<iostream>`。Mollit dolore est in et aliquip adipisicing et nulla id nulla esse laborum minim nulla. In ad irure qui magna Lorem ad eiusmod do do `laborum ex duis`. Reprehenderit nulla nisi laborum incididunt voluptate sunt et cupidatat commodo consectetur deserunt. Non officia aliquip enim duis. Ea irure magna excepteur labore eiusmod officia sit id sint anim ipsum duis labore Lorem. Culpa cillum `voluptate duis exercitation cillum esse incididunt laborum magna`. Est ut commodo non magna nisi sit proident deserunt consectetur ut anim ullamco ut adipisicing.
 
-> `scanf()`{language=c} 用于输入数据，而 `printf()`{language=c} 用于输出数据。
+> `scanf()` 用于输入数据，而 `printf()` 用于输出数据。
 
 ---
 
 代码块
 
-<!-- ```c
+```c
 #include <stdio.h>
 
 int main()
@@ -98,7 +98,7 @@ int main()
     printf("Nulla culpa ut laborum sint esse elit minim sit. Eiusmod et exercitation et laboris voluptate aute et veniam excepteur. Anim dolore culpa commodo adipisicing et aute. In est aliquip duis tempor cillum ullamco qui. Et officia cillum ex et dolor esse magna veniam. Dolor sint velit dolor commodo in. Irure excepteur adipisicing dolore ipsum velit ipsum nisi Lorem pariatur dolor excepteur dolor dolor.\n");
     return 0;
 }
-``` -->
+```
 
 ```
 这个代码块不带语言标识

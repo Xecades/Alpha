@@ -71,8 +71,6 @@ const lazyload_finish = () => {
  * Callback function when JSX lazyload updates.
  */
 const lazyload_update = (index: number) => {
-    console.log(`Lazyload update: ${index}`);
-
     const selector: string = ".markdown > *";
     const els: NodeListOf<HTMLElement> = document.querySelectorAll(selector);
     const target: HTMLElement = els[index - 1];
@@ -101,7 +99,7 @@ watch(
 </script>
 
 <template>
-    <div>
+    <div id="content">
         <!-- 通过 key 强制组件刷新，从而正常触发动画 -->
         <header :key="attr.title">
             <h1>{{ attr.title }}</h1>
@@ -127,6 +125,8 @@ watch(
 
 <style scoped>
 * {
+    --width: 740px;
+
     --margin-lr: 3rem;
     --margin-top: 4rem;
     --margin-bottom: 10rem;
@@ -136,6 +136,12 @@ watch(
     --header-color: #535353;
     --header-size: 2.2rem;
     --header-line-height: 3.5rem;
+}
+
+#content {
+    width: var(--width);
+    margin: 0 auto;
+    z-index: 10;
 }
 
 main {
