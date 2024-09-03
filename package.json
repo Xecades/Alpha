@@ -21,6 +21,7 @@
         "@fortawesome/fontawesome-svg-core": "^6.6.0",
         "@fortawesome/free-solid-svg-icons": "^6.6.0",
         "@fortawesome/vue-fontawesome": "^3.0.8",
+        "dayjs": "^1.11.13",
         "fuse.js": "^7.0.0",
         "katex": "^0.16.11",
         "medium-zoom": "^1.1.0",

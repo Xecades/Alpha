@@ -30,7 +30,7 @@ export default async (src: string): Promise<ParsedMarkdown[]> => {
     const res: ParsedMarkdown[] = [];
     const files: TraverseResult[] = await traverse(src, filter);
 
-    for (const { pathname, dirent } of files) {
+    for (const { pathname, stats } of files) {
         const plain: PlainMarkdownContent = await fs.readFile(
             pathname,
             "utf-8"
@@ -45,7 +45,7 @@ export default async (src: string): Promise<ParsedMarkdown[]> => {
 
         const text: string = _text(html);
 
-        res.push({ pathname, dirent, attr, raw, toc, html, text, parts });
+        res.push({ pathname, stats, attr, raw, toc, html, text, parts });
     }
 
     return res;

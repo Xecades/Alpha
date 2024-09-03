@@ -3,37 +3,34 @@
  * @todo 图片缓存，不能每次都重新加载一遍
  */
 
-import { computed, ref, watch } from "vue";
+import { computed, ref, shallowRef, watch } from "vue";
 import { useRoute } from "vue-router";
+import { reveal_config } from "@/assets/js/reveal";
 import ScrollReveal from "scrollreveal";
 
+import Metadata from "./Metadata.vue";
 import JSXLazyLoad from "../JSXLazyLoad.vue";
-
-import _meta_untyped from "@cache/note/meta";
-const meta = _meta_untyped as CacheMeta;
 
 import "@/assets/css/markdown.css";
 import "@/assets/css/prism-one-light.css";
 
 // Types
-import type { ComputedRef, Ref } from "vue";
-import type { CacheMeta, MarkdownFrontMatter } from "script/preprocess/types";
+import type { ComputedRef, Ref, ShallowRef } from "vue";
+import type { RouteMeta } from "script/preprocess/types";
 import type { JSX } from "vue/jsx-runtime";
 
 const route = useRoute();
 
-const pathname: ComputedRef<string> = computed(
-    () => route.meta.pathname as string
-);
-const attr: ComputedRef<MarkdownFrontMatter> = computed(
-    () => meta[pathname.value].attr
+const meta: ComputedRef<RouteMeta> = computed(
+    () => route.meta as unknown as RouteMeta
 );
 const jsx: ComputedRef<() => Promise<any>> = computed(
     () => route.meta.body as any
 );
 
-const body: Ref<JSX.Element[]> = ref([]);
+const body: ShallowRef<JSX.Element[]> = shallowRef([]);
 const lazyload_key: Ref<string> = ref("");
+const rendering: Ref<boolean> = ref(true);
 const navigation: Ref<boolean> = ref(false);
 
 /**
@@ -65,6 +62,7 @@ const register_anchor = () => {
  */
 const lazyload_finish = () => {
     register_anchor();
+    rendering.value = false;
 };
 
 /**
@@ -76,21 +74,20 @@ const lazyload_update = (index: number) => {
     const target: HTMLElement = els[index - 1];
 
     setTimeout(() => {
-        ScrollReveal().reveal(target, {
-            interval: 20,
-            duration: 400,
-            origin: "top",
-            distance: "4px",
-            scale: 0.99,
-        });
+        ScrollReveal().reveal(target, reveal_config);
     }, 0);
 };
 
 watch(
     () => route.path,
     async () => {
+        // const metadata_comp = metadata(route.meta as any);
+
+        rendering.value = true;
         navigation.value = true;
+        // body.value = (await jsx.value()).default.concat([metadata_comp]);
         body.value = (await jsx.value()).default;
+
         lazyload_key.value = route.path;
         navigation.value = false;
     },
@@ -101,14 +98,8 @@ watch(
 <template>
     <div id="content">
         <!-- 通过 key 强制组件刷新，从而正常触发动画 -->
-        <header :key="attr.title">
-            <h1>{{ attr.title }}</h1>
-
-            <!-- 如果 path 为空：Note Index / Category Index / 404 -->
-            <!-- 但是不能不显示 Breadcrumb，否则会导致 flicker -->
-            <!-- 考虑替换为其他东西 -->
-            <!-- @TODO: 不要 Breakcrumb，改成 Metadata -->
-            <!-- <Breadcrumb id="breadcrumb" :path="path" /> -->
+        <header :key="meta.attr.title">
+            <h1>{{ meta.attr.title }}</h1>
         </header>
 
         <main class="markdown">
@@ -120,6 +111,8 @@ watch(
                 @update="lazyload_update"
             />
         </main>
+
+        <Metadata v-if="!rendering" />
     </div>
 </template>
 
@@ -129,7 +122,7 @@ watch(
 
     --margin-lr: 3rem;
     --margin-top: 4rem;
-    --margin-bottom: 10rem;
+    --margin-bottom: 4rem;
 
     --header-main-spacing: 2.3rem;
 
@@ -142,6 +135,11 @@ watch(
     width: var(--width);
     margin: 0 auto;
     z-index: 10;
+    transition: opacity 0.1s ease-in;
+}
+
+#content.fade {
+    opacity: 0;
 }
 
 main {

@@ -1,10 +1,4 @@
 <script setup lang="ts">
-/**
- * @todo 完成 ToC 的动画！！！
- * @todo 样式不满意，仍需优化
- * @todo 联动 cursor（？）
- */
-
 import { nextTick, ref, watch, type Ref } from "vue";
 import { useRoute } from "vue-router";
 
@@ -15,12 +9,9 @@ import {
     setup_scroll_listener,
 } from "@/assets/js/note/rightbar";
 
-import _meta_untyped from "@cache/note/meta";
-const meta = _meta_untyped as CacheMeta;
-
 // Types
-import type { CacheMeta } from "script/preprocess/types";
 import type { HeaderRef } from "@/assets/js/note/rightbar";
+import type { MarkdownHeader } from "script/preprocess/types";
 
 const route = useRoute();
 
@@ -40,8 +31,7 @@ const mouse_fn = {
 watch(
     () => route.path,
     async () => {
-        const pathname: string = route.meta.pathname as string;
-        toc.value = normalize_toc(meta[pathname].toc);
+        toc.value = normalize_toc(route.meta.toc as MarkdownHeader[]);
         in_view.value = null;
 
         await nextTick();

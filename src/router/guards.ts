@@ -1,5 +1,6 @@
 import logger from "@/assets/js/logger";
 import ScrollReveal from "scrollreveal";
+import { reveal_config } from "@/assets/js/reveal";
 import { nextTick } from "vue";
 
 import type {
@@ -62,6 +63,9 @@ const beforeEach: NavigationGuard = async (to, from) => {
         //
     } else if (t_from === RouteType.note && t_to === RouteType.note) {
         // ScrollReveal
+        const content = document.querySelector("#content") as Element;
+        content.classList.add("fade");
+        await sleep(100);
         //
     } else if (t_from === RouteType.blog && t_to === RouteType.blog) {
         // ScrollReveal
@@ -101,13 +105,10 @@ const afterEach: NavigationHookAfter = async (to, from) => {
         // ScrollReveal
         await nextTick();
 
-        ScrollReveal().reveal(target, {
-            interval: 20,
-            duration: 400,
-            origin: "top",
-            distance: "4px",
-            scale: 0.99,
-        });
+        const content = document.querySelector("#content") as Element;
+        content.classList.remove("fade");
+
+        ScrollReveal().reveal(target, reveal_config);
         //
     } else if (t_to === RouteType.blog) {
         // ScrollReveal

@@ -25,13 +25,6 @@ declare module "@cache/*/search" {
     export default search;
 }
 
-declare module "@cache/*/meta" {
-    import { CacheMeta } from "./script/preprocess/types";
-
-    const meta: CacheMeta;
-    export default meta;
-}
-
 declare module "@cache/*/config" {
     import { Config } from "./script/preprocess/types";
 

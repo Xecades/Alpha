@@ -13,7 +13,6 @@ import { BASE, type ParsedMarkdown } from "./types";
 const cache_fn_maker = (base: BASE) => async () => {
     const parsed: ParsedMarkdown[] = await parse(base);
 
-    await cache.meta(parsed, base);
     await cache.search(parsed, base);
     await cache.config(parsed, base);
     await cache.route(parsed, base);

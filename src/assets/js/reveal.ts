@@ -1,22 +1,23 @@
 import ScrollReveal from "scrollreveal";
-import logger from "./logger";
 import { onBeforeUnmount, onMounted } from "vue";
 
-function mount() {
-    logger.nbsp("Reveal module mounted");
-    ScrollReveal().reveal(".rv", {
-        // reset: true,
-        interval: 20,
-        duration: 400,
-        origin: "top",
-        distance: "4px",
-        scale: 0.99,
-    });
-}
+type Options = scrollReveal.ScrollRevealObjectOptions;
 
-function destroy() {
+export const reveal_config: Options = {
+    interval: 20,
+    duration: 400,
+    origin: "top",
+    distance: "4px",
+    scale: 0.99,
+};
+
+const mount = () => {
+    ScrollReveal().reveal(".rv", reveal_config);
+};
+
+const destroy = () => {
     ScrollReveal().destroy();
-}
+};
 
 export default function setupReveal() {
     onMounted(mount);

@@ -4,7 +4,7 @@
  * @module types
  */
 
-import type { Dirent } from "fs";
+import type { Stats } from "fs";
 import type { FuseResult } from "fuse.js";
 
 /**
@@ -72,8 +72,8 @@ export interface TraverseResult {
     /** Pathname of current file */
     pathname: string;
 
-    /** Dirent data */
-    dirent: Dirent;
+    /** Stat data */
+    stats: Stats;
 }
 
 /** Parsed markdown data. */
@@ -96,18 +96,6 @@ export interface ParsedMarkdown extends TraverseResult {
     /** Plain text extracted from HTML */
     text: string;
 }
-
-/** Component of metadata. */
-export type CacheMetaContent = {
-    /** Parsed front matter */
-    attr: MarkdownFrontMatter;
-
-    /** Table of contents */
-    toc: MarkdownHeader[];
-};
-
-/** Cache metadata. Type of `meta.json` */
-export type CacheMeta = Record<string, CacheMetaContent>;
 
 /**
  * Base names for markdown caching. Cache files are generated based on these names.
@@ -178,6 +166,18 @@ export interface RouteMeta {
 
     /** Body component */
     body: () => Promise<any>;
+
+    /** Parsed front matter */
+    attr: MarkdownFrontMatter;
+
+    /** Table of contents */
+    toc: MarkdownHeader[];
+
+    /** Creation time */
+    birthtime: Date;
+
+    /** Last modified time */
+    mtime: Date;
 }
 
 /** Cached search function. */

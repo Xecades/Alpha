@@ -13,10 +13,10 @@
 
 **TODO:**
 
+ - 在合适的地方加上版权声明
  - 字体异步加载
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）
  - 搜索点进去自动跳转到对应位置
- - Breadcrumb 改成 Metadata
  - 排版系统，因为 justify 导致间距不一致
  - 搜索数据库中空格的处理，要不直接删掉？
  - 点两次链接，动画会卡住
@@ -38,6 +38,8 @@
  - 搜索保留 latex 源码
  - safari 控制台字体问题
  - safari favicon 显示问题
+ - 联动 cursor
+ - 动画顺序有问题
 
 ## General
 
@@ -49,7 +51,6 @@
 
 ## Markdown
 
- - 外部链接标识
  - `{language=xxx}` 格式优化
  - 代码块复制按钮
  - Snippet 支持：https://xdino.vercel.app/articles/FunctionModuleTest

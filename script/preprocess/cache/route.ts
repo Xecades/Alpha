@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import { to_JSX_path } from "./jsx";
 
-import type { BASE, ParsedMarkdown } from "../types";
+import type { BASE, ParsedMarkdown, RouteMeta } from "../types";
 
 /**
  * Generate `./cache/${base}/routes.js` from parsed markdown data.
@@ -10,13 +10,11 @@ import type { BASE, ParsedMarkdown } from "../types";
  *
  * @param parsed - Parsed markdown data.
  * @param base - The base name for markdown caching.
- *
- * @todo 或许把其他的 cache 整合到一起，作为参数传入？
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
     const dist: string = `./cache/${base}/routes.js`;
 
-    let cache: string = 'import note from "@/layout/note.vue";\n';
+    let cache: string = `import ${base} from "@/layout/${base}.vue";\n`;
     cache += "export default [\n";
 
     for (const item of parsed) {
@@ -27,15 +25,27 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         const category: string =
             route_path === "index" ? "" : route_path.split("/")[0];
 
-        cache += "{";
-        cache += `path: "${route_path}",`;
-        cache += `component: note,`;
-        cache += `meta: {`;
-        cache += `pathname: "${item.pathname}",`;
-        cache += `category: "${category}",`;
-        cache += `body: () => import("${JSX_path}"),`;
-        cache += `},`;
-        cache += "},\n";
+        const import_slot: string = "<IMP_SLOT>";
+        const component_slot: string = "<COM_SLOT>";
+
+        const route = {
+            path: route_path,
+            component: component_slot,
+            meta: {
+                pathname: item.pathname,
+                category: category,
+                body: import_slot as any,
+                attr: item.attr,
+                toc: item.toc,
+                birthtime: item.stats.birthtime,
+                mtime: item.stats.mtime,
+            } as RouteMeta,
+        };
+
+        cache += JSON.stringify(route)
+            .replace(`"${import_slot}"`, `() => import("${JSX_path}")`)
+            .replace(`"${component_slot}"`, base);
+        cache += ",\n";
     }
 
     cache += "];";
