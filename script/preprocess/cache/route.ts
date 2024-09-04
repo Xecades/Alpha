@@ -17,6 +17,8 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
     let cache: string = `import ${base} from "@/layout/${base}.vue";\n`;
     cache += "export default [\n";
 
+    let error_cache: string = "";
+
     for (const item of parsed) {
         const JSX_path: string = "@" + to_JSX_path(item.pathname, base);
         const route_path: string =
@@ -29,9 +31,10 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         const component_slot: string = "<COM_SLOT>";
 
         const is_index: boolean = item.pathname.endsWith("index.md");
+        const is_404: boolean = item.pathname === `${base}/404.md`;
 
         const route = {
-            path: route_path,
+            path: is_404 ? `/${base}/:pathMatch(.*)` : route_path,
             component: component_slot,
             meta: {
                 pathname: item.pathname,
@@ -45,12 +48,17 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
             } as RouteMeta,
         };
 
-        cache += JSON.stringify(route)
-            .replace(`"${import_slot}"`, `() => import("${JSX_path}")`)
-            .replace(`"${component_slot}"`, base);
-        cache += ",\n";
+        const stringified: string =
+            JSON.stringify(route)
+                .replace(`"${import_slot}"`, `() => import("${JSX_path}")`)
+                .replace(`"${component_slot}"`, base) + ",\n";
+
+        if (is_404) error_cache = stringified;
+        else cache += stringified;
     }
 
+    cache += error_cache;
     cache += "];";
+
     await fs.outputFile(dist, cache);
 };

@@ -15,12 +15,12 @@
  - 优化 boundle 大小
  - Markdown 图片加载时的处理
  - Markdown 图片加载失败时的处理
- - 404 页面
- - Vitest 测试
  - 页面高度不够时，左右栏加上滚动
+ - Note 404 页面加上一些自定义组件
 
 **不重要的 TODO:**
 
+ - Vitest 测试
  - 添加 HTML `<meta>` 那一堆属性 
  - 在较窄的移动设备上，主页的 ruby text 折行会出问题
  - 测试 Safari 上那一堆 logo 的显示
