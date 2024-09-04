@@ -10,14 +10,44 @@ import error from "@/views/home/404.vue";
 import type { RouteRecordRaw } from "vue-router";
 
 const homeRoutes: RouteRecordRaw[] = [
-    { path: "/", name: "home", component: index },
-    { path: "/about", name: "about", component: about },
-    { path: "/lab", name: "lab", component: lab },
-    { path: "/friend", name: "friend", component: friend },
-    { path: "/timeline", name: "timeline", component: timeline },
-    { path: "/sponsor", name: "sponsor", component: sponsor },
-    { path: "/sponsorship", name: "sponsorship", component: sponsorship },
-    { path: "/:pathMatch(.*)", name: "error", component: error },
+    { path: "/", name: "home", component: index, meta: { title: "" } },
+    { path: "/lab", name: "lab", component: lab, meta: { title: "实验室" } },
+    {
+        path: "/about",
+        name: "about",
+        component: about,
+        meta: { title: "关于" },
+    },
+    {
+        path: "/friend",
+        name: "friend",
+        component: friend,
+        meta: { title: "友人帐" },
+    },
+    {
+        path: "/timeline",
+        name: "timeline",
+        component: timeline,
+        meta: { title: "时光" },
+    },
+    {
+        path: "/sponsor",
+        name: "sponsor",
+        component: sponsor,
+        meta: { title: "赞助" },
+    },
+    {
+        path: "/sponsorship",
+        name: "sponsorship",
+        component: sponsorship,
+        meta: { title: "赞助者" },
+    },
+    {
+        path: "/:pathMatch(.*)",
+        name: "error",
+        component: error,
+        meta: { title: "404" },
+    },
 ];
 
 export default homeRoutes;

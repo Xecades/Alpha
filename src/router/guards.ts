@@ -3,6 +3,7 @@ import ScrollReveal from "scrollreveal";
 import { reveal_config } from "@/assets/js/reveal";
 import { nextTick } from "vue";
 
+import type { RouteMeta } from "@script/types";
 import type {
     NavigationGuard,
     NavigationHookAfter,
@@ -17,29 +18,67 @@ type RouteLocation =
     | RouteLocationNormalizedGeneric
     | RouteLocationNormalizedLoadedGeneric;
 
-enum RouteType {
-    root = "root",
-    home = "home",
-    note = "note",
-    blog = "blog",
+enum ROUTE_TYPE {
+    ROOT = "root",
+    HOME = "home",
+    NOTE = "note",
+    BLOG = "blog",
 }
 
 const target: string = ".note-layout #content header h1, .note-layout #left";
 
-const type_of = (x: RouteLocation): RouteType => {
-    if (x.path === "/" && x.name === undefined) return RouteType.root;
-    if (x.name) return RouteType.home;
+const type_of = (x: RouteLocation): ROUTE_TYPE => {
+    if (x.path === "/" && x.name === undefined) return ROUTE_TYPE.ROOT;
+    if (x.name) return ROUTE_TYPE.HOME;
 
     const path = x.path;
-    if (path.startsWith("/note")) return RouteType.note;
-    else if (path.startsWith("/blog")) return RouteType.blog;
+    if (path.startsWith("/note")) return ROUTE_TYPE.NOTE;
+    else if (path.startsWith("/blog")) return ROUTE_TYPE.BLOG;
 
     throw new Error("Invalid route type");
 };
 
+const setupTitle = (to: RouteLocation, type: ROUTE_TYPE) => {
+    /**
+     * -> Home: Xecades  /  Xecades | ${page title}
+     * -> Note: Xecades Notes  /  Xecades Notes | ${article title}
+     * -> Blog: throw not implemented error
+     */
+
+    const prefix = "Xecades";
+
+    if (type === ROUTE_TYPE.HOME) {
+        // Xecades  /  Xecades | title
+        const title: string = to.meta.title as string;
+
+        if (title === "") {
+            document.title = prefix;
+        } else {
+            document.title = `${prefix} | ${title}`;
+        }
+        //
+    } else if (type === ROUTE_TYPE.NOTE) {
+        // Xecades Notes  /  Xecades Notes | title
+        const meta: RouteMeta = to.meta as any;
+        const title: string = meta.attr.title;
+        const is_root: boolean = meta.category === "";
+
+        if (is_root) {
+            document.title = `${prefix} Notes`;
+        } else {
+            document.title = `${prefix} Notes | ${title}`;
+        }
+        //
+    } else if (type === ROUTE_TYPE.BLOG) {
+        //
+        throw new Error("Not implemented");
+        //
+    }
+};
+
 const beforeEach: NavigationGuard = async (to, from) => {
-    const t_from: RouteType = type_of(from);
-    const t_to: RouteType = type_of(to);
+    const t_from: ROUTE_TYPE = type_of(from);
+    const t_to: ROUTE_TYPE = type_of(to);
 
     logger.star(`${from.fullPath} (${t_from}) -> ${to.fullPath} (${t_to})`);
 
@@ -57,17 +96,17 @@ const beforeEach: NavigationGuard = async (to, from) => {
      * Blog -> Blog: ScrollReveal
      */
 
-    if (t_from === RouteType.root) {
+    if (t_from === ROUTE_TYPE.ROOT) {
         // Navigating from nowhere
         return true;
         //
-    } else if (t_from === RouteType.note && t_to === RouteType.note) {
+    } else if (t_from === ROUTE_TYPE.NOTE && t_to === ROUTE_TYPE.NOTE) {
         // ScrollReveal
         const content = document.querySelector("#content") as Element;
         content.classList.add("fade");
         await sleep(100);
         //
-    } else if (t_from === RouteType.blog && t_to === RouteType.blog) {
+    } else if (t_from === ROUTE_TYPE.BLOG && t_to === ROUTE_TYPE.BLOG) {
         // ScrollReveal
         throw new Error("Not implemented");
         //
@@ -82,10 +121,15 @@ const beforeEach: NavigationGuard = async (to, from) => {
 };
 
 const afterEach: NavigationHookAfter = async (to, from) => {
-    const t_to: RouteType = type_of(to);
-    const t_from: RouteType = type_of(from);
+    const t_to: ROUTE_TYPE = type_of(to);
+    const t_from: ROUTE_TYPE = type_of(from);
 
-    console.assert(t_to !== RouteType.root, "Navigating to root is impossible");
+    console.assert(
+        t_to !== ROUTE_TYPE.ROOT,
+        "Navigating to root is impossible"
+    );
+
+    setupTitle(to, t_to);
 
     /**
      * Home -> Home: None
@@ -101,7 +145,7 @@ const afterEach: NavigationHookAfter = async (to, from) => {
      * Blog -> Blog: ScrollReveal
      */
 
-    if (t_to === RouteType.note) {
+    if (t_to === ROUTE_TYPE.NOTE) {
         // ScrollReveal
         await nextTick();
 
@@ -110,7 +154,7 @@ const afterEach: NavigationHookAfter = async (to, from) => {
 
         ScrollReveal().reveal(target, reveal_config);
         //
-    } else if (t_to === RouteType.blog) {
+    } else if (t_to === ROUTE_TYPE.BLOG) {
         // ScrollReveal
         throw new Error("Not implemented");
         //
