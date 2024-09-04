@@ -233,7 +233,6 @@
 .markdown code.inline-code {
     font-family: var(--monospace);
     background: var(--inline-code-background);
-    padding: 0.2em 0.3em;
     border-radius: 0.3em;
     white-space: normal;
     font-size: 0.9em;
