@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import Fuse from "fuse.js";
 
 import type { IFuseOptions } from "fuse.js";
-import type { BASE, ParsedMarkdown, SearchTarget } from "../types";
+import type { BASE, ParsedMarkdown, SearchTarget } from "../../types";
 
 /** @see https://www.fusejs.io/api/options.html */
 const options: IFuseOptions<string> = {

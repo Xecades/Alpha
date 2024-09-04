@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { RouterLink } from "vue-router";
 
-import type { NavNode } from "script/preprocess/types";
+import type { NavNode } from "@script/types";
 import type { JSX } from "vue/jsx-runtime";
 
 /**

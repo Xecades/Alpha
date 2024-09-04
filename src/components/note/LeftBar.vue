@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { nextTick, onUpdated, ref, watch, type Ref } from "vue";
+import { nextTick, onMounted, onUpdated, ref, watch, type Ref } from "vue";
 import { useRoute } from "vue-router";
 import { render_list } from "@/assets/js/note/leftbar";
 import cursor from "@/assets/js/cursor";
@@ -13,7 +13,7 @@ const config = _config_untyped as Config;
 
 // Types
 import type { JSX } from "vue/jsx-runtime";
-import type { Config, RouteMeta } from "script/preprocess/types";
+import { NOTE_L_STATUS, type Config, type RouteMeta } from "@script/types";
 
 /** Attributes attached to a category */
 type Category = {
@@ -23,6 +23,7 @@ type Category = {
     timeout?: NodeJS.Timeout;
 };
 
+const props = defineProps<{ status: NOTE_L_STATUS }>();
 const route = useRoute();
 const meta: RouteMeta = route.meta as unknown as RouteMeta;
 
@@ -35,7 +36,7 @@ const categories: Ref<Category[]> = ref(
     }))
 );
 
-/** ID of category of current page, -1 iff location is index. */
+/** ID of category of current page, -1 iff current location is index page. */
 const category_id: number = categories.value.findIndex(
     (c: Category) => c.link === "note/" + meta.category
 );
@@ -43,7 +44,8 @@ const category_id: number = categories.value.findIndex(
 /** ID of active category. */
 const active_id: Ref<number> = ref(category_id === -1 ? 0 : category_id);
 
-const is_hovering: Ref<boolean> = ref(false);
+/** @note This variable may be true only when status == HOVER_TO_SHOW. */
+const do_show_detail: Ref<boolean> = ref(false);
 const is_searching: Ref<boolean> = ref(false);
 
 const REVEAL_DELAY: number = 40;
@@ -91,13 +93,22 @@ const search_fn = {
 };
 
 const mouse_fn = {
+    // Handle mouse events only if current status is HOVER_TO_SHOW
     enter: () => {
-        is_hovering.value = true;
-        category_fn.reveal();
+        if (props.status === NOTE_L_STATUS.HOVER_TO_SHOW) {
+            do_show_detail.value = true;
+            category_fn.reveal();
+        }
     },
     leave: () => {
-        is_hovering.value = false;
-        category_fn.hide();
+        if (props.status === NOTE_L_STATUS.HOVER_TO_SHOW) {
+            do_show_detail.value = false;
+            category_fn.hide();
+        }
+    },
+    /** Switch category to `index` */
+    switch: (index: number) => {
+        active_id.value = index;
     },
 };
 
@@ -110,6 +121,12 @@ watch(active_id, async () => {
 
 onUpdated(() => {
     cursor.refresh();
+});
+
+onMounted(() => {
+    if (props.status === NOTE_L_STATUS.ALWAYS_SHOW) {
+        category_fn.reveal();
+    }
 });
 </script>
 
@@ -128,7 +145,7 @@ onUpdated(() => {
                     :class="idx == active_id && 'active'"
                     :style="{ opacity: item.opacity }"
                     @click.prevent="$router.push('/' + item.link)"
-                    @mouseover="active_id = idx"
+                    @mouseover="mouse_fn.switch(idx)"
                     :href="'/' + item.link"
                 >
                     {{ item.name }}
@@ -137,7 +154,7 @@ onUpdated(() => {
         </div>
 
         <Transition name="content">
-            <component class="content" :is="VBody" v-if="is_hovering" />
+            <component class="content" :is="VBody" v-if="do_show_detail" />
         </Transition>
 
         <!-- https://cn.vuejs.org/guide/built-ins/teleport.html -->
@@ -150,18 +167,18 @@ onUpdated(() => {
 </template>
 
 <style>
-.note-layout .content {
+.note-layout #left .content {
     position: absolute;
     left: var(--cate-offset-left);
     top: var(--cate-offset-top);
     width: var(--cate-width);
     display: block;
-    background-image: var(--bg-color);
-    border-radius: var(--bg-radius);
+    background-image: var(--background);
+    border-radius: var(--background-radius);
     padding: 15px 0;
 }
 
-.note-layout .content .title {
+.note-layout #left .content .title {
     color: var(--content-color);
     font-size: 0.95rem;
     line-height: var(--cate-title-height);
@@ -172,11 +189,11 @@ onUpdated(() => {
     transition: color 0.2s;
 }
 
-.note-layout .content .title.router-link-exact-active .text {
+.note-layout #left .content .title.router-link-exact-active .text {
     color: var(--theme-color);
 }
 
-.note-layout .content .title .sign {
+.note-layout #left .content .title .sign {
     color: var(--theme-color);
     opacity: 0;
     transition: opacity 0.1s;
@@ -185,24 +202,24 @@ onUpdated(() => {
     animation: shake-x 1s infinite ease-in-out;
 }
 
-.note-layout .content .title .text {
+.note-layout #left .content .title .text {
     text-indent: calc(0px - var(--cate-title-indent));
     padding-left: var(--cate-title-indent);
 }
 
-.note-layout .content .title:hover .text {
+.note-layout #left .content .title:hover .text {
     color: var(--theme-color);
 }
 
-.note-layout .content .title:hover .sign {
+.note-layout #left .content .title:hover .sign {
     opacity: 1;
 }
 
-.note-layout .content .children {
+.note-layout #left .content .children {
     margin-left: 1rem;
 }
 
-.note-layout .content > .children {
+.note-layout #left .content > .children {
     margin: 0;
 }
 </style>
@@ -214,7 +231,7 @@ onUpdated(() => {
 
     --theme-color: #60a5fa;
     --background: linear-gradient(90deg, #fdfdfdf5, #fdfdfd80);
-    --bg-radius: 4px;
+    --background-radius: 4px;
 
     --nav-width: 42px;
     --nav-height: 40px;
@@ -333,7 +350,7 @@ onUpdated(() => {
     height: var(--nav-height);
     text-wrap: nowrap;
     overflow: hidden;
-    border-radius: var(--bg-radius);
+    border-radius: var(--background-radius);
     background-image: var(--background);
     user-select: none;
 }
@@ -362,5 +379,35 @@ onUpdated(() => {
 .nav .btn:hover {
     background-color: var(--nav-hover-background-color);
     color: var(--nav-hover-color);
+}
+
+@media (max-width: 768px) {
+    * {
+        --offset-top: 28px;
+        --offset-left: 35px;
+
+        --background: unset;
+        --item-hover-background-color: unset;
+        --nav-hover-background-color: unset;
+
+        --width: unset;
+        --height: unset;
+
+        --nav-width: 35px;
+        --nav-gap: 0px;
+    }
+
+    #left {
+        position: absolute;
+    }
+
+    .nav .btn {
+        font-size: 1rem;
+    }
+
+    .category .item {
+        font-size: 0.85rem;
+        padding: 0 9px;
+    }
 }
 </style>

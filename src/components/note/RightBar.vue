@@ -7,7 +7,7 @@ import { navigate, normalize_toc } from "@/assets/js/note/rightbar";
 
 // Types
 import type { HeaderRef } from "@/assets/js/note/rightbar";
-import type { MarkdownHeader } from "script/preprocess/types";
+import type { MarkdownHeader } from "@script/types";
 
 const props = defineProps<{ in_view: number | null }>();
 const route = useRoute();
@@ -114,6 +114,7 @@ watch(
     position: fixed;
     width: 0;
     top: var(--offset-top);
+    z-index: 100;
     /** To avoid scrollbar flickering. */
     left: calc(100vw - var(--offset-right));
 }

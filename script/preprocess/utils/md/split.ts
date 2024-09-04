@@ -2,7 +2,7 @@ import DomHandler from "domhandler";
 import DomSerializer from "dom-serializer";
 import { Parser } from "htmlparser2";
 
-import type { HTMLString } from "../../types";
+import type { HTMLString } from "../../../types";
 import type { DomSerializerOptions } from "dom-serializer";
 
 /**

@@ -1,7 +1,7 @@
 import tocMD from "../../../markdown/toc";
 
 import type MarkdownIt from "markdown-it";
-import type { MarkdownContent, MarkdownHeader } from "../../types";
+import type { MarkdownContent, MarkdownHeader } from "../../../types";
 
 /**
  * Generate TOC based on markdown content.

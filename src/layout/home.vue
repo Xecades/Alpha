@@ -47,6 +47,7 @@ logger.nbsp("Home layout loaded");
     margin: 0 auto;
     padding-top: 10rem;
     padding-bottom: 10rem;
+    text-align: justify;
 }
 
 .home-layout .title {
@@ -96,7 +97,7 @@ logger.nbsp("Home layout loaded");
     padding: 2px 16px;
     margin: 4px 0;
     border-radius: 8px;
-    transition: background-color 0.5s;
+    transition: background-color 0.2s;
 }
 
 .home-layout .table li:hover {
@@ -200,6 +201,99 @@ logger.nbsp("Home layout loaded");
 
     .home-layout .timeline .year {
         color: #2a2a2a;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-layout {
+        width: unset;
+        margin: 0 2rem;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    .home-layout .title {
+        font-size: 2.5rem;
+        height: 3rem;
+        margin-bottom: 30px;
+    }
+
+    .home-layout .subtitle,
+    .home-layout p {
+        font-size: 1rem;
+        line-height: 2.5rem;
+    }
+
+    /* hr */
+
+    .home-layout hr {
+        margin: 1.5rem 0.5rem;
+    }
+
+    /* table */
+
+    .home-layout .table ul {
+        padding: 0 10px;
+    }
+
+    .home-layout .table li {
+        font-size: 1rem;
+        margin: 10px 0;
+    }
+
+    .home-layout .table li a {
+        width: 100%;
+    }
+
+    .home-layout .table li span {
+        font-size: 0.9rem;
+    }
+
+    .home-layout .table li:hover {
+        background-color: unset;
+    }
+
+    /* timeline */
+
+    .home-layout .timeline ul.tl {
+        padding: 28px 15px;
+    }
+
+    .home-layout .timeline li.tl {
+        display: block;
+        margin-bottom: 56px;
+        padding: 8px 0;
+    }
+
+    .home-layout .timeline .year {
+        transform: translate(-6rem, 2.5rem) rotate(-90deg);
+    }
+
+    .home-layout .timeline li.yr {
+        font-size: 0.9rem;
+        line-height: 2.1rem;
+        padding: 0 0 0 16px;
+    }
+
+    .home-layout .timeline li.yr:hover {
+        background-color: unset;
+    }
+
+    .home-layout .timeline .date {
+        display: none;
+    }
+
+    /* sponsor */
+
+    .home-layout .sponsor {
+        margin: 12px 0;
+        display: flex;
+        gap: 10px;
+    }
+
+    .home-layout .sponsor img {
+        margin: 0;
+        max-width: calc((100% - 10px) / 2);
     }
 }
 </style>

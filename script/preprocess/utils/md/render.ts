@@ -1,7 +1,7 @@
 import bodyMD from "../../../markdown/body";
 
 import type MarkdownIt from "markdown-it";
-import type { ComponentString, MarkdownContent } from "../../types";
+import type { ComponentString, MarkdownContent } from "../../../types";
 
 /**
  * Render markdown content to HTML.

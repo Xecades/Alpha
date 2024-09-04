@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
-    text: string,
-    rbclass?: string,
-    rtclass?: string
+    text: string;
+    rbclass?: string;
+    rtclass?: string;
 }>();
 </script>
 

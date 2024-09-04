@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import { to_JSX_path } from "./jsx";
 
-import type { BASE, ParsedMarkdown, RouteMeta } from "../types";
+import type { BASE, ParsedMarkdown, RouteMeta } from "../../types";
 
 /**
  * Generate `./cache/${base}/routes.js` from parsed markdown data.

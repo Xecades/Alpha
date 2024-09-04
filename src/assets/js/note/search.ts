@@ -2,7 +2,7 @@ import _search_untyped from "@cache/note/search";
 const search_internal = _search_untyped as CacheSearch;
 
 import type { FuseResult, FuseResultMatch, RangeTuple } from "fuse.js";
-import type { CacheSearch, SearchTarget } from "script/preprocess/types";
+import type { CacheSearch, SearchTarget } from "@script/types";
 
 /** Search results. */
 export type Result = {

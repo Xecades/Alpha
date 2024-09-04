@@ -4,7 +4,7 @@ import type {
     MarkdownFrontMatter,
     MarkdownFrontMatterParsed,
     PlainMarkdownContent,
-} from "../../types";
+} from "../../../types";
 
 /**
  * Parse front matter from plain markdown text.

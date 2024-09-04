@@ -14,7 +14,8 @@
         "paths": {
             "@/*": ["./src/*"],
             "@note/*": ["./note/*"],
-            "@cache/*": ["./cache/*"]
+            "@cache/*": ["./cache/*"],
+            "@script/*": ["./script/*"]
         }
     }
 }

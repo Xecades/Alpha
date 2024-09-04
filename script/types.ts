@@ -184,3 +184,31 @@ export interface RouteMeta {
 export type CacheSearch = (
     query: string
 ) => SearchTarget[] | FuseResult<SearchTarget>[];
+
+/** Note layout rightbar status. */
+export enum NOTE_R_STATUS {
+    /** To display */
+    SHOW,
+
+    /** To hide */
+    HIDE,
+}
+
+/** Note layout leftbar status. */
+export enum NOTE_L_STATUS {
+    /**
+     * Use hover status to determine whether to display.
+     *
+     * @note This is the default status. Whether to show the leftbar is
+     *       determined by mouse events.
+     */
+    HOVER_TO_SHOW,
+
+    /**
+     * Always show the leftbar.
+     *
+     * @note This status means the category list will always be shown.\
+     *       *BUT*, the detailed article list will **NEVER** be shown.
+     */
+    ALWAYS_SHOW,
+}

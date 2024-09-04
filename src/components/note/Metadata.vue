@@ -6,9 +6,9 @@ import locale_zhcn from "dayjs/locale/zh-cn";
 
 import { reveal_config } from "@/assets/js/reveal";
 import { useRoute } from "vue-router";
-import { nextTick, onMounted } from "vue";
+import { onMounted } from "vue";
 
-import type { RouteMeta } from "script/preprocess/types";
+import type { RouteMeta } from "@script/types";
 import type { Dayjs } from "dayjs";
 
 dayjs.extend(relativeTime);
@@ -70,5 +70,11 @@ onMounted(async () => {
     margin-left: calc(var(--line-extend) * -1);
     margin-bottom: var(--line-gap);
     background-color: var(--line-color);
+}
+
+@media (max-width: 768px) {
+    .metadata {
+        font-size: 0.75rem;
+    }
 }
 </style>

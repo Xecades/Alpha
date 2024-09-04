@@ -1,7 +1,7 @@
 // @ts-ignore
 import Walk from "@root/walk";
 
-import type { PathnameFilter, TraverseResult } from "../types";
+import type { PathnameFilter, TraverseResult } from "../../types";
 import type { Stats } from "fs";
 
 /**

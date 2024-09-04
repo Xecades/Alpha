@@ -1,5 +1,5 @@
 import type { Ref } from "vue";
-import type { MarkdownHeader } from "script/preprocess/types";
+import type { MarkdownHeader } from "@script/types";
 
 /** Header type used for ref rendering */
 export type HeaderRef = MarkdownHeader & {

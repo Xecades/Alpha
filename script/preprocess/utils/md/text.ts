@@ -1,7 +1,7 @@
 // @ts-ignore
 import innerText from "innertext";
 
-import type { ComponentString, HTMLString } from "../../types";
+import type { ComponentString, HTMLString } from "../../../types";
 
 /** @todo 改 MD 渲染的时候记得检查这里 */
 const inline_math_regex = /<InlineMath data=".*?"><\/InlineMath>/g;

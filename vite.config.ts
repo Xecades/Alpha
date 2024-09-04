@@ -35,6 +35,7 @@ export default defineConfig({
             "@": fileURLToPath(new URL("./src", import.meta.url)),
             "@note": fileURLToPath(new URL("./note", import.meta.url)),
             "@cache": fileURLToPath(new URL("./cache", import.meta.url)),
+            "@script": fileURLToPath(new URL("./script", import.meta.url)),
         },
     },
     css: {

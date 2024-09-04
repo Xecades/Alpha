@@ -124,6 +124,7 @@
 .markdown hr {
     margin: 4.5rem auto;
     width: 21rem;
+    max-width: 80%;
     height: 1px;
     background-color: var(--hr-color);
 }
@@ -235,7 +236,7 @@
     padding: 0.2em 0.3em;
     border-radius: 0.3em;
     white-space: normal;
-    font-size: 1.05em;
+    font-size: 0.9em;
     line-height: 1em;
 }
 
@@ -248,8 +249,8 @@
     background: var(--block-code-background);
     border: 1px solid var(--block-code-border);
     padding: 1em;
-    margin: 0.5em 0;
-    border-radius: 0.3em;
+    margin: 1.5em var(--block-extend);
+    border-radius: 2px;
     color: var(--block-code-text);
     font-family: var(--monospace);
     overflow: auto;
@@ -267,4 +268,56 @@
 
 .markdown pre.block-code ::selection {
     background-color: var(--selection-bg);
+}
+
+@media (max-width: 768px) {
+    :root {
+        --block-extend: -1rem;
+    }
+
+    /* KaTeX 数学公式 */
+    .markdown .katex {
+        font-size: 1em;
+    }
+
+    .markdown .katex-display {
+        margin: 1.3em 0;
+    }
+
+    .markdown .katex-display .katex {
+        font-size: 1rem;
+    }
+
+    /* header 标签 */
+    .markdown h2 {
+        font-size: 1.5rem;
+        line-height: 2.6rem;
+    }
+
+    .markdown h3 {
+        font-size: 1.35rem;
+    }
+
+    .markdown h4 {
+        font-size: 1.025rem;
+    }
+
+    .markdown h5 {
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+    }
+
+    .markdown h6 {
+        font-size: 0.8rem;
+    }
+
+    /* hr 标签 */
+    .markdown hr {
+        width: 12rem;
+    }
+
+    /* 引言 */
+    .markdown blockquote {
+        padding: 0.3rem 0.9rem;
+    }
 }

@@ -6,7 +6,7 @@
 import fs from "fs-extra";
 import path from "path";
 
-import type { BASE, ParsedMarkdown } from "../types";
+import type { BASE, ParsedMarkdown } from "../../types";
 
 /**
  * Convert local markdown file path to JSX path.

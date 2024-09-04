@@ -23,6 +23,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.8",
         "dayjs": "^1.11.13",
         "fuse.js": "^7.0.0",
+        "is-mobile": "^4.0.0",
         "katex": "^0.16.11",
         "medium-zoom": "^1.1.0",
         "overlayscrollbars-vue": "^0.5.9",

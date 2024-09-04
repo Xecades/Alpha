@@ -59,7 +59,7 @@ figure {
 }
 
 img {
-    max-width: var(--content-width);
+    max-width: var(--width);
     max-height: 20em;
     margin: 0;
     padding: 0;
@@ -75,5 +75,11 @@ figcaption {
     text-align: center;
     text-decoration: underline dotted;
     text-underline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+    img {
+        max-height: 15em;
+    }
 }
 </style>

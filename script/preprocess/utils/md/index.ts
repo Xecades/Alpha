@@ -16,7 +16,7 @@ import type {
     PathnameFilter,
     PlainMarkdownContent,
     TraverseResult,
-} from "../../types";
+} from "../../../types";
 
 /**
  * Read and parse markdown files.

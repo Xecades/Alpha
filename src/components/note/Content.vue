@@ -16,7 +16,7 @@ import "@/assets/css/prism-one-light.css";
 
 // Types
 import type { ComputedRef, Ref, ShallowRef } from "vue";
-import type { RouteMeta } from "script/preprocess/types";
+import type { RouteMeta } from "@script/types";
 import type { JSX } from "vue/jsx-runtime";
 
 const emit = defineEmits(["update"]);
@@ -163,8 +163,14 @@ h1 {
     line-height: var(--header-line-height);
 }
 
-#breadcrumb {
-    margin-top: 0.3rem;
-    margin-left: 0.1rem;
+@media (max-width: 768px) {
+    * {
+        --width: 100%;
+        --margin-lr: 2.5rem;
+        --margin-top: 5.5rem;
+        --margin-bottom: 5rem;
+        --header-size: 2rem;
+        --header-line-height: 3rem;
+    }
 }
 </style>

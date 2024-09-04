@@ -13,7 +13,7 @@ import type {
     ParsedMarkdown,
     RawConfig,
     RawNavNode,
-} from "../types";
+} from "../../types";
 
 /**
  * Read and parse YML config file to object.
