@@ -13,7 +13,6 @@ import Comment from "./Comment.vue";
 import JSXLazyLoad from "../JSXLazyLoad.vue";
 
 import "@/assets/css/markdown.css";
-import "@/assets/css/prism-one-light.css";
 
 // Types
 import type { ComputedRef, Ref, ShallowRef } from "vue";

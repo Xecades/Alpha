@@ -1,7 +1,8 @@
+/* Styles applied before app loads, which prevents flickering. */
+
 @import url("https://fonts.loli.net/css2?family=EB+Garamond&display=swap");
 @import url("https://fonts.loli.net/css2?family=Noto+Serif&display=swap");
 @import url("https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700&display=swap");
-/* @import url("https://fonts.loli.net/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"); */
 
 :root {
     --font-color: #4b5563;
@@ -70,7 +71,7 @@ body {
     background-color: var(--background-color, none);
     background-repeat: no-repeat;
     background-attachment: fixed;
-    transition: background-color 0.7s ease;
+    background-size: 100vw 100vh;
 }
 
 /* Scrollbar Flickering Prevention */

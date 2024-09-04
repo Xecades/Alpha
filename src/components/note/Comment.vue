@@ -132,7 +132,7 @@ onMounted(async () => {
 }
 
 #twikoo .tk-meta-input .el-input {
-    width: calc(100% / 3);
+    width: auto;
     margin: 0;
 }
 
@@ -174,5 +174,9 @@ onMounted(async () => {
 
 #twikoo .tk-content a {
     color: #999;
+}
+
+@media (max-width: 768px) {
+
 }
 </style>

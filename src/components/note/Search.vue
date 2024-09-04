@@ -292,7 +292,7 @@ watch(
 @media (max-width: 768px) {
     * {
         --panel-width: calc(100% - 3rem);
-        --panel-height: calc(100% - 13rem);
+        --panel-height: calc(100% - 6rem);
     }
 
     .results .empty .icon {

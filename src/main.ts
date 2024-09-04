@@ -11,7 +11,6 @@ import logger from "./assets/js/logger";
 // CSS
 import "./assets/css/reset.css";
 import "./assets/css/cursor.css";
-import "./assets/css/global.css";
 import "katex/dist/katex.min.css";
 import "overlayscrollbars/overlayscrollbars.css";
 
