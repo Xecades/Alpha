@@ -1,5 +1,7 @@
 ---
 title: 测试
+comment: true
+metadata: true
 ---
 
 标点挤压测试（（文字）），（文）「字」。

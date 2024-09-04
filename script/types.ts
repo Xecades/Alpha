@@ -39,6 +39,12 @@ export type ComponentString = string;
 export interface MarkdownFrontMatter {
     /** Article title */
     title: string;
+
+    /** Whether to show comments */
+    comment?: boolean;
+
+    /** Whether to show metadata, i.e. Creation & Modification time */
+    metadata?: boolean;
 }
 
 /** Parsed front matter. */
@@ -178,6 +184,9 @@ export interface RouteMeta {
 
     /** Last modified time */
     mtime: Date;
+
+    /** Page type */
+    type: "index" | "post";
 }
 
 /** Cached search function. */

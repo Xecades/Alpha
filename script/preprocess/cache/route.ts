@@ -28,6 +28,8 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         const import_slot: string = "<IMP_SLOT>";
         const component_slot: string = "<COM_SLOT>";
 
+        const is_index: boolean = item.pathname.endsWith("index.md");
+
         const route = {
             path: route_path,
             component: component_slot,
@@ -39,6 +41,7 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
                 toc: item.toc,
                 birthtime: item.stats.birthtime,
                 mtime: item.stats.mtime,
+                type: is_index ? "index" : "post",
             } as RouteMeta,
         };
 

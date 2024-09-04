@@ -35,6 +35,34 @@ const rendering: Ref<boolean> = ref(true);
 const navigation: Ref<boolean> = ref(false);
 
 /**
+ * Whether to show metadata.
+ *
+ * @note - If is rendering, return false.
+ *       - If not specified in front-matter, return true if it is a post.
+ *       - Otherwise, return the value in front-matter.
+ */
+const show_metadata: ComputedRef<boolean> = computed(() => {
+    if (rendering.value) return false;
+    if (meta.value.attr.metadata === undefined)
+        return meta.value.type === "post";
+    return meta.value.attr.metadata;
+});
+
+/**
+ * Whether to show comments.
+ *
+ * @note - If is rendering, return false.
+ *       - If not specified in front-matter, return true if it is a post.
+ *       - Otherwise, return the value in front-matter.
+ */
+const show_comment: ComputedRef<boolean> = computed(() => {
+    if (rendering.value) return false;
+    if (meta.value.attr.comment === undefined)
+        return meta.value.type === "post";
+    return meta.value.attr.comment;
+});
+
+/**
  * Iterate through headings and register anchor click event.
  */
 const register_anchor = () => {
@@ -112,8 +140,8 @@ watch(
             />
         </main>
 
-        <Metadata v-if="!rendering" />
-        <Comment v-if="!rendering" />
+        <Metadata v-if="show_metadata" />
+        <Comment v-if="show_comment" />
     </div>
 </template>
 
