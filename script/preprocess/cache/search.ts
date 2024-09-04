@@ -30,14 +30,16 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
     const is_index = (post: ParsedMarkdown): boolean =>
         post.pathname.endsWith("/index.md");
 
-    const searchTarget: SearchTarget[] = parsed.map(
-        (post): SearchTarget => ({
-            title: post.attr.title,
-            content: post.text,
-            link: link_of(post),
-            is_index: is_index(post),
-        })
-    );
+    const searchTarget: SearchTarget[] = parsed
+        .filter((post): boolean => post.pathname !== `${base}/404.md`)
+        .map(
+            (post): SearchTarget => ({
+                title: post.attr.title,
+                content: post.text,
+                link: link_of(post),
+                is_index: is_index(post),
+            })
+        );
 
     const index = Fuse.createIndex((options as any).keys, searchTarget);
 
