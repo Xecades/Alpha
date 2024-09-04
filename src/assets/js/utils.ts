@@ -32,3 +32,20 @@ export const isSmallScreen = (): boolean => isWidthLessThan(768);
  * @see https://www.npmjs.com/package/is-mobile
  */
 export const isMobile = (): boolean => is_mobile({ tablet: true });
+
+/**
+ * Load JS from the given URL.
+ *
+ * @param src - The source URL of the script to load
+ * @returns A promise that resolves when the script is loaded
+ */
+export const loadJS = (src: string): Promise<unknown> =>
+    new Promise((resolve, reject) => {
+        let script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = src;
+        document.body.appendChild(script);
+
+        script.onload = resolve;
+        script.onerror = reject;
+    });

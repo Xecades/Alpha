@@ -40,8 +40,6 @@ onMounted(async () => {
 
 <style scoped>
 * {
-    --margin-lr: 3rem;
-    --margin-bottom: 6rem;
     --color: #95989a;
 
     --line-width: 146px;
@@ -58,7 +56,7 @@ onMounted(async () => {
 }
 
 .metadata {
-    margin: 0 var(--margin-lr) var(--margin-bottom);
+    margin: 0 var(--margin-lr) 6rem;
     font-size: 0.8rem;
     color: var(--color);
     line-height: 1.3rem;

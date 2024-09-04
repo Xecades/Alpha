@@ -9,6 +9,7 @@ import { reveal_config } from "@/assets/js/reveal";
 import ScrollReveal from "scrollreveal";
 
 import Metadata from "./Metadata.vue";
+import Comment from "./Comment.vue";
 import JSXLazyLoad from "../JSXLazyLoad.vue";
 
 import "@/assets/css/markdown.css";
@@ -113,6 +114,7 @@ watch(
         </main>
 
         <Metadata v-if="!rendering" />
+        <Comment v-if="!rendering" />
     </div>
 </template>
 

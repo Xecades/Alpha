@@ -84,7 +84,9 @@ html.sr .rv,
 html.sr .note-layout #content header h1,
 html.sr .note-layout #content .markdown > *,
 html.sr .note-layout #left,
-html.sr .note-layout .metadata > * {
+html.sr .note-layout .metadata > *,
+html.sr .note-layout #twikoo .tk-submit .tk-row,
+html.sr .note-layout #twikoo .tk-comments-container > *:not(.tk-comments-no) {
     visibility: hidden;
 }
 

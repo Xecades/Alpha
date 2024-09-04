@@ -264,6 +264,7 @@
     background: unset;
     white-space: pre !important;
     font-size: 0.97em;
+    text-shadow: none;
 }
 
 .markdown pre.block-code ::selection {
