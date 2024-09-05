@@ -140,10 +140,10 @@ watch(
         --line-color: #303030;
         --icon-color: #505256;
         --input-color: #c1c5cd;
-        --panel-background-color: #1f1f1fe6;
+        --panel-background-color: #141414e6;
         --xmark-hover-color: #9a9ca0;
         --empty-icon-color: #303030b5;
-        --post-hover-color: #2e2e2e82;
+        --post-hover-color: #21212182;
         --post-title-color: #c4c7cc;
         --post-icon-color: #96989c;
         --post-content-color: #9c9c9c;

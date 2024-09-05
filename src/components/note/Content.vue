@@ -170,10 +170,10 @@ watch(
     width: var(--width);
     margin: 0 auto;
     z-index: 10;
-    transition: opacity 0.1s ease-in;
 }
 
 #content.fade {
+    transition: opacity 0.1s ease-in;
     opacity: 0;
 }
 

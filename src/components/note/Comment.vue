@@ -48,7 +48,7 @@ onMounted(async () => {
 
 @media (prefers-color-scheme: dark) {
     #comment {
-        --border-color: #393a3b;
+        --border-color: #2c2c2c;
         --input-color: #b0b1b5;
         --owo-background-color: #1f1f1f;
     }

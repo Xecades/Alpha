@@ -29,9 +29,3 @@ const data = {
 <template>
     <HomeLayout :data="data" />
 </template>
-
-<style>
-.home-IPA-ruby {
-    font-family: "Noto Serif", serif;
-}
-</style>

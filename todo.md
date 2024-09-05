@@ -1,6 +1,5 @@
 **TODO:**
 
- - 开一个独立的数据库存 note 的评论
  - ScrollReveal 导致评论系统功能按钮有时候不显示
  - 评论系统支持 cursor.js
 

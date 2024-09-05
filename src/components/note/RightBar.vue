@@ -101,7 +101,7 @@ watch(
 @media (prefers-color-scheme: dark) {
     * {
         --theme-color: #87b3ea;
-        --background-color: linear-gradient(90deg, #19191980, #191919f5);
+        --background-color: linear-gradient(90deg, #10101080, #101010f5);
         --bar-background-color: #363636;
         --bar-active-background-color: #9e9e9e;
         --item-color: #c4c6ce;

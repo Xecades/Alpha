@@ -24,14 +24,14 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         const route_path: string =
             "/" + item.pathname.replace(/(\/?index)?\.md$/, "");
 
+        const is_index: boolean = item.pathname.endsWith("index.md");
+        const is_404: boolean = item.pathname === `${base}/404.md`;
+
         const category: string =
-            route_path === "index" ? "" : route_path.split("/")[0];
+            route_path === `/${base}` || is_404 ? "" : route_path.split("/")[2];
 
         const import_slot: string = "<IMP_SLOT>";
         const component_slot: string = "<COM_SLOT>";
-
-        const is_index: boolean = item.pathname.endsWith("index.md");
-        const is_404: boolean = item.pathname === `${base}/404.md`;
 
         const route = {
             path: is_404 ? `/${base}/:pathMatch(.*)` : route_path,

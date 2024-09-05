@@ -262,13 +262,13 @@ onMounted(() => {
 @media (prefers-color-scheme: dark) {
     * {
         --theme-color: #87b3ea;
-        --background: linear-gradient(90deg, #1f1f1ff5, #1f1f1f80);
+        --background: linear-gradient(90deg, #131313f5, #13131380);
         --nav-color: #676767;
         --nav-hover-color: #a9a9a9;
-        --nav-hover-background-color: #3b3b3bc4;
+        --nav-hover-background-color: #212121c4;
         --item-color: #cbcfd2;
         --item-underline-color: #5d5f61;
-        --item-hover-background-color: #3b3b3bc4;
+        --item-hover-background-color: #212121c4;
         --content-color: #c5ccd0;
     }
 }

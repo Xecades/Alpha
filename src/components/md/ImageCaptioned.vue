@@ -47,6 +47,12 @@ onMounted(() => {
 :root {
     --overlay-color: #47484a85;
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --overlay-color: #0e0e0ed6;
+    }
+}
 </style>
 
 <style scoped>
@@ -75,6 +81,12 @@ figcaption {
     text-align: center;
     text-decoration: underline dotted;
     text-underline-offset: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+    img {
+        filter: brightness(0.8);
+    }
 }
 
 @media (max-width: 768px) {

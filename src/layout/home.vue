@@ -192,15 +192,16 @@ logger.nbsp("Home layout loaded");
 
 @media (prefers-color-scheme: dark) {
     .home-layout {
-        --hover-color: #2a2a2a;
+        --hover-color: #181818;
     }
 
     .home-layout .sponsor img {
         border-color: #4a525a;
+        filter: brightness(0.8);
     }
 
     .home-layout .timeline .year {
-        color: #2a2a2a;
+        color: #1a1a1a;
     }
 }
 

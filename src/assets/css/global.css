@@ -1,20 +1,47 @@
 /* Styles applied before app loads, which prevents flickering. */
 
 @import url("https://fonts.loli.net/css2?family=EB+Garamond&display=swap");
-@import url("https://fonts.loli.net/css2?family=Noto+Serif&display=swap");
 @import url("https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700&display=swap");
 
 :root {
     --font-color: #4b5563;
     --font-family: "EB Garamond", "Georgia", "Noto Serif SC", songti sc, serif;
     --selection-bg: #bbddfb80;
+    --background-image: radial-gradient(
+            circle at 28% 29%,
+            #ededed06 0%,
+            #ededed06 50%,
+            #88888806 50%,
+            #88888806 100%
+        ),
+        radial-gradient(
+            circle at 8% 78%,
+            #9c9c9c06 0%,
+            #9c9c9c06 50%,
+            #25252506 50%,
+            #25252506 100%
+        );
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: #171717;
         --font-color: #d1d5db;
         --selection-bg: #6567694f;
+        --background-color: #0e0e0e;
+        --background-image: radial-gradient(
+                circle at 28% 29%,
+                #ededed03 0%,
+                #ededed03 50%,
+                #88888803 50%,
+                #88888803 100%
+            ),
+            radial-gradient(
+                circle at 8% 78%,
+                #9c9c9c03 0%,
+                #9c9c9c03 50%,
+                #25252503 50%,
+                #25252503 100%
+            );
     }
 }
 
@@ -54,20 +81,7 @@ body {
 
 /* Background Image */
 body {
-    background-image: radial-gradient(
-            circle at 28% 29%,
-            #ededed06 0%,
-            #ededed06 50%,
-            #88888806 50%,
-            #88888806 100%
-        ),
-        radial-gradient(
-            circle at 8% 78%,
-            #9c9c9c06 0%,
-            #9c9c9c06 50%,
-            #25252506 50%,
-            #25252506 100%
-        );
+    background-image: var(--background-image);
     background-color: var(--background-color, none);
     background-repeat: no-repeat;
     background-attachment: fixed;
