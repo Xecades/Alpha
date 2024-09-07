@@ -1,11 +1,11 @@
 <script setup lang="tsx">
-import { nextTick, onMounted, onUpdated, ref, watch, type Ref } from "vue";
+import { defineAsyncComponent, nextTick, onMounted, onUpdated, ref, watch, type Ref } from "vue";
 import { useRoute } from "vue-router";
 import { render_list } from "@/assets/js/note/leftbar";
 import cursor from "@/assets/js/cursor";
 
 // Components
-import Search from "./Search.vue";
+const Search = defineAsyncComponent(()=>import("./Search.vue"))
 
 // Cache
 import _config_untyped from "@cache/note/config";

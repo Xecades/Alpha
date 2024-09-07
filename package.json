@@ -26,6 +26,7 @@
         "is-mobile": "^4.0.0",
         "katex": "^0.16.11",
         "medium-zoom": "^1.1.0",
+        "overlayscrollbars": "^2.10.0",
         "overlayscrollbars-vue": "^0.5.9",
         "scrollreveal": "^4.0.9",
         "vue": "^3.4.29",
