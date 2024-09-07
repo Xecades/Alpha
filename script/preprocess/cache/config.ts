@@ -5,6 +5,7 @@
 
 import fs from "fs-extra";
 import yaml from "yaml";
+import {join} from "path"
 
 import type {
     BASE,
@@ -40,6 +41,7 @@ const parse_nav = (
     base: BASE
 ): NavNode[] => {
     const name_of = (node: RawNavNode) => Object.keys(node)[0];
+    
     const title_of = (pathname: string) =>
         parsed.filter((d) => d.pathname === pathname)[0].attr.title;
 
@@ -50,7 +52,10 @@ const parse_nav = (
         if (typeof branch === "string") {
             // Leaf node
             const name: string = branch;
-            path += "/" + name;
+
+            // Use path.join() instead of String+'/'+String to
+            // ensure the capability of both Windows and Linux
+            path = join(path,name)
 
             const pathname: string = path + ".md";
 
@@ -63,9 +68,13 @@ const parse_nav = (
         } else {
             // Branch node, i.e. `/index.md`
             const name: string = name_of(branch);
-            path += "/" + name;
 
-            const pathname: string = path + "/index.md";
+
+            // Use path.join() instead of String+'/'+String to
+            // ensure the capability of both Windows and Linux
+            path = join(path,name)
+
+            const pathname: string = join(path,"/index.md");
 
             const res: NavNode = {
                 title: title_of(pathname),
