@@ -1,6 +1,3 @@
-import _search_untyped from "@cache/note/search";
-const search_internal = _search_untyped as CacheSearch;
-
 import type { FuseResult, FuseResultMatch, RangeTuple } from "fuse.js";
 import type { CacheSearch, SearchTarget } from "@script/types";
 
@@ -22,6 +19,8 @@ export type Result = {
 /** Maximum characters before highlight */
 const BEFORE_CNT: number = 10;
 
+let search_internal: CacheSearch;
+
 /**
  * Search and return parsed results.
  *
@@ -32,6 +31,11 @@ export const search = async (query: string): Promise<Result[]> => {
     const range = (i: RangeTuple): number => i[1] - i[0];
     const longest = (indices: readonly RangeTuple[]): RangeTuple =>
         indices.reduce((acc, cur) => (range(cur) > range(acc) ? cur : acc));
+
+    if (search_internal === undefined) {
+        const _search_untyped = (await import("@cache/note/search")).default;
+        search_internal = _search_untyped as CacheSearch;
+    }
 
     let searchResults: FuseResult<SearchTarget>[] | Result[] =
         search_internal(query);

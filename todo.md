@@ -1,13 +1,16 @@
 **TODO:**
 
+ - rightbar hover 逻辑
+ - 处理内存泄漏，listener
+ - Router view transition https://router.vuejs.org/zh/guide/advanced/router-view-slot.html#KeepAlive-Transition
+
+ - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important）（放 rightbar）
  - ScrollReveal 导致评论系统功能按钮有时候不显示
  - 评论系统支持 cursor.js
-
  - 页面宽度改变时，Leftbar 实现动态响应
  - 测试平板上的显示效果
  - 测试移动设备上，当 Leftbar 目录太长时的显示效果（折行？）
  - 添加 index 页面的目录自动生成功能（写成一个 Markdown 组件？）
- - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important）
  - 在合适的地方加上版权声明
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）（放 index 页的 Vue components 里？）
  - 优化 boundle 大小

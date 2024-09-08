@@ -160,7 +160,9 @@ onMounted(() => {
         <!-- https://cn.vuejs.org/guide/built-ins/teleport.html -->
         <Teleport to="body">
             <Transition name="search">
-                <Search v-show="is_searching" @close="search_fn.hide" />
+                <KeepAlive>
+                    <Search v-if="is_searching" @close="search_fn.hide" />
+                </KeepAlive>
             </Transition>
         </Teleport>
     </div>
