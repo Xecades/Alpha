@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from "vue";
+import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import cursor from "@/assets/js/cursor";
 import { navigate, normalize_toc } from "@/assets/js/note/rightbar";
 
 // Types
+import type { Ref } from "vue";
 import type { HeaderRef } from "@/assets/js/note/rightbar";
 import type { MarkdownHeader } from "@script/types";
 
@@ -34,6 +35,7 @@ watch(
 </script>
 
 <template>
+    <!-- https://cn.vuejs.org/guide/built-ins/transition.html#transition-on-appear -->
     <Transition name="rightbar" appear>
         <div
             id="right"
@@ -41,20 +43,24 @@ watch(
             @mouseenter="mouse_fn.enter"
             @mouseleave="mouse_fn.leave"
         >
+            <!-- https://cn.vuejs.org/guide/built-ins/transition.html#javascript-hooks -->
             <Transition name="bars" @enter="cursor.refresh()">
+                <!-- bar -->
                 <div class="toc" v-if="!showtext">
                     <template v-for="(item, idx) in toc">
                         <div
-                            class="bar item cursor"
+                            class="bar cursor"
                             :style="{ width: item.width }"
                             :class="{ active: idx === in_view }"
                         ></div>
                     </template>
                 </div>
+
+                <!-- detail -->
                 <div class="toc" v-else>
                     <template v-for="(item, idx) in toc">
                         <a
-                            class="detail item cursor"
+                            class="detail cursor"
                             :href="'#' + item.link"
                             @click.prevent="navigate(item.link)"
                             :style="{ marginRight: item.indent }"
@@ -77,7 +83,7 @@ watch(
 <style scoped>
 * {
     --offset-top: 28px;
-    --offset-right: 35px;
+    --offset-right: 51px;
 
     --width: 298px;
     --height: calc(100vh - var(--offset-top) * 2);
@@ -90,11 +96,10 @@ watch(
 
     --toc-background-image: linear-gradient(90deg, #f7f7f780, #f7f7f7f5);
     --toc-border-radius: 4px;
-    --toc-title-indent: 0.5rem;
     --toc-translate-offset: 7px;
 
-    --item-color: #6e758c;
-    --item-hover-color: #60a5fa;
+    --detail-color: #6e758c;
+    --detail-title-indent: 0.5rem;
 
     --bar-background-color: #e3e2e0;
     --bar-active-background-color: #bdbbb8;
@@ -109,10 +114,11 @@ watch(
     * {
         --theme-color: #87b3ea;
         --toc-background-image: linear-gradient(90deg, #10101080, #101010f5);
+
         --bar-background-color: #363636;
         --bar-active-background-color: #9e9e9e;
-        --item-color: #c4c6ce;
-        --item-hover-color: #87b3ea;
+
+        --detail-color: #c4c6ce;
         --detail-color-passed: #5f6064;
     }
 }
@@ -137,6 +143,8 @@ watch(
     right: 0;
     padding: var(--toc-padding);
     margin: var(--toc-margin);
+    /** To avoid flickering on hovering edges */
+    margin-right: var(--toc-translate-offset);
     background-image: var(--toc-background-image);
     border-radius: var(--toc-border-radius);
 }
@@ -158,21 +166,9 @@ watch(
     font-weight: bold;
 }
 
-.item {
-    margin-left: auto;
-    display: inline-block;
-    color: var(--item-color);
-    font-size: 0.95rem;
-    transition: color 0.05s;
-    position: relative;
-}
-
-.item:hover {
-    color: var(--item-hover-color);
-}
-
 .bar {
     margin-top: var(--bar-padding);
+    margin-left: auto;
     background-color: var(--bar-background-color);
     border-radius: 4px;
     height: var(--bar-height);
@@ -186,6 +182,11 @@ watch(
 .detail {
     line-height: 1.6rem;
     transition: color 0.15s;
+    margin-left: auto;
+    display: inline-block;
+    color: var(--detail-color);
+    font-size: 0.95rem;
+    position: relative;
 }
 
 .detail.active {
@@ -207,7 +208,7 @@ watch(
 }
 
 .detail .text {
-    padding-right: var(--toc-title-indent);
+    padding-right: var(--detail-title-indent);
 }
 
 .detail:hover .text {

@@ -343,6 +343,11 @@ onMounted(() => {
     display: block;
 }
 
+.nav .btn:hover {
+    background-color: var(--nav-hover-background-color);
+    color: var(--nav-hover-color);
+}
+
 .category {
     position: absolute;
     display: flex;
@@ -376,11 +381,6 @@ onMounted(() => {
 
 .category .item:hover {
     background-color: var(--item-hover-background-color);
-}
-
-.nav .btn:hover {
-    background-color: var(--nav-hover-background-color);
-    color: var(--nav-hover-color);
 }
 
 @media (max-width: 768px) {

@@ -221,3 +221,15 @@ export enum NOTE_L_STATUS {
      */
     ALWAYS_SHOW,
 }
+
+/** Global color scheme. */
+export enum COLOR_SCHEME {
+    /** Light theme */
+    LIGHT,
+
+    /** Dark theme */
+    DARK,
+
+    /** Depends on system */
+    SYSTEM,
+}
