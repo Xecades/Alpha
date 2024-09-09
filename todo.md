@@ -50,8 +50,12 @@
 
 ## 长期
 
- - 搓一个评论系统
+ - 搓一个评论系统（考虑使用 Serverless）
  - CDN
  - Status 页面（如果有了后端）
  - Typst 支持（预先 `typst c -f svg xxx.typ` 编译得到 svg）
  - 联动 Cursor.js（参考 iPad 光标效果）
+
+## 有丶意思
+
+https://vercel.com/docs/image-optimization
