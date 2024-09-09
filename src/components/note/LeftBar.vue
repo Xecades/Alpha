@@ -258,7 +258,7 @@ onMounted(() => {
     --content-color: #787f83;
 
     --width: calc(var(--cate-offset-left) + var(--cate-width));
-    --height: 100vh;
+    --height: calc(100vh - var(--offset-top) * 2);
 }
 
 @media (prefers-color-scheme: dark) {

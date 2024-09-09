@@ -35,9 +35,14 @@ watch(
 
 <template>
     <Transition name="rightbar" appear>
-        <div id="right" :key="$route.path">
+        <div
+            id="right"
+            :key="$route.path"
+            @mouseenter="mouse_fn.enter"
+            @mouseleave="mouse_fn.leave"
+        >
             <Transition name="bars" @enter="cursor.refresh()">
-                <div class="toc" v-if="!showtext" @mouseenter="mouse_fn.enter">
+                <div class="toc" v-if="!showtext">
                     <template v-for="(item, idx) in toc">
                         <div
                             class="bar item cursor"
@@ -46,7 +51,7 @@ watch(
                         ></div>
                     </template>
                 </div>
-                <div class="toc" v-else @mouseleave="mouse_fn.leave">
+                <div class="toc" v-else>
                     <template v-for="(item, idx) in toc">
                         <a
                             class="detail item cursor"
@@ -71,37 +76,39 @@ watch(
 
 <style scoped>
 * {
-    --padding: 0.5rem;
-    --margin: 1.5rem;
+    --offset-top: 28px;
+    --offset-right: 35px;
+
+    --width: 298px;
+    --height: calc(100vh - var(--offset-top) * 2);
     --theme-color: #60a5fa;
 
-    --offset-top: 11rem;
-    --offset-right: calc(70px - var(--padding) - var(--margin));
+    --toc-gap: 15px;
+    --toc-padding: 0.5rem;
+    --toc-margin: 1.5rem;
+    --toc-offset-top: calc(11rem - var(--offset-top));
+
+    --toc-background-image: linear-gradient(90deg, #f7f7f780, #f7f7f7f5);
+    --toc-border-radius: 4px;
+    --toc-title-indent: 0.5rem;
+    --toc-translate-offset: 7px;
 
     --item-color: #6e758c;
     --item-hover-color: #60a5fa;
 
-    --background-color: linear-gradient(90deg, #f7f7f780, #f7f7f7f5);
-    --background-radius: 4px;
-
-    --translate-offset: 7px;
-
     --bar-background-color: #e3e2e0;
     --bar-active-background-color: #bdbbb8;
 
-    --gap: 15px;
     --bar-height: 4px;
     --bar-padding: 4px;
 
     --detail-color-passed: #acb1c1;
-
-    --toc-title-indent: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
     * {
         --theme-color: #87b3ea;
-        --background-color: linear-gradient(90deg, #10101080, #101010f5);
+        --toc-background-image: linear-gradient(90deg, #10101080, #101010f5);
         --bar-background-color: #363636;
         --bar-active-background-color: #9e9e9e;
         --item-color: #c4c6ce;
@@ -112,25 +119,26 @@ watch(
 
 #right {
     position: fixed;
-    width: 0;
+    width: var(--width);
+    height: var(--height);
     top: var(--offset-top);
     z-index: 100;
     /** To avoid scrollbar flickering. */
-    left: calc(100vw - var(--offset-right));
+    left: calc(100vw - var(--offset-right) - var(--width));
 }
 
 .toc {
     width: max-content;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--gap) - 2 * var(--bar-padding));
+    gap: calc(var(--toc-gap) - 2 * var(--bar-padding));
     position: absolute;
-    top: 0;
+    top: var(--toc-offset-top);
     right: 0;
-    padding: var(--padding);
-    margin: var(--margin);
-    background-image: var(--background-color);
-    border-radius: var(--background-radius);
+    padding: var(--toc-padding);
+    margin: var(--toc-margin);
+    background-image: var(--toc-background-image);
+    border-radius: var(--toc-border-radius);
 }
 
 :global(#right .toc .katex) {
@@ -248,6 +256,6 @@ watch(
 .bars-enter-from,
 .bars-leave-to {
     opacity: 0;
-    transform: translateX(var(--translate-offset));
+    transform: translateX(var(--toc-translate-offset));
 }
 </style>
