@@ -1,54 +1,57 @@
-**亟待解决:**
+## 亟待解决
 
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）（放 index 页的 Vue components 里？）
- - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important）（放 rightbar？）
-
-**TODO:**
-
- - 处理内存泄漏，listener
- - Router view transition https://router.vuejs.org/zh/guide/advanced/router-view-slot.html#KeepAlive-Transition
-
+ - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
+ - ScrollReveal 导致评论系统回复评论的窗口不显示
  - ScrollReveal 导致评论系统功能按钮有时候不显示
- - 评论系统支持 cursor.js
+
+## 当前 TODO
+
+ - Markdown 引用图片，相对路径的处理
+ - 评论系统支持 Cursor.js
  - 页面宽度改变时，Leftbar 实现动态响应
  - 测试平板上的显示效果
  - 测试移动设备上，当 Leftbar 目录太长时的显示效果（折行？）
  - 添加 index 页面的目录自动生成功能（写成一个 Markdown 组件？）
  - 在合适的地方加上版权声明
- - 优化 boundle 大小
  - 页面高度不够时，左右栏加上滚动
  - 搜索点进去自动跳转到对应位置
  - Note 404 页面加上一些自定义组件
 
-**不重要的 TODO:**
+## 暂时不重要的 TODO
 
  - 打印样式
- - Vitest 测试
+ - 动画顺序有问题
+ - 导航时标题有些时候动画会消失
  - Markdown 图片加载时的处理
  - Markdown 图片加载失败时的处理
  - 添加 HTML `<meta>` 那一堆属性 
  - 在较窄的移动设备上，主页的 ruby text 折行会出问题
- - 测试 Safari 上那一堆 logo 的显示
- - 导航时标题有些时候会闪
  - 字体异步加载
- - DOM 渲染完成后再加载 KaTeX
- - 卸载 DOM 的时候很卡（Safari）
  - 搜索拿 parser 处理：或许可以用 https://github.com/fb55/htmlparser2
- - 完善文件夹监听，目前只有保存的时候才会触发，加上删除等操作
+ - 完善文件夹监听（目前只有保存的时候才会触发，需要加上删除等操作）
  - 想办法过滤掉 \`[公式]\` 等 slot 内容
- - 搜索保留 latex 源码
- - safari 控制台字体问题
- - safari favicon 显示问题
- - 排版系统，因为 justify 导致间距不一致
- - 搜索数据库中空格的处理，要不直接删掉？
- - 加一些彩蛋
- - 联动 cursor
- - 动画顺序有问题
- - 评论系统（自己写？）
+ - 搜索功能保留 LaTeX 源码（？）
+ - Safari 上那一堆 favicon 的显示
+ - Safari 卸载 DOM 的时候很卡（DOM 渲染完成后再加载 KaTeX？）
+ - Safari 控制台字体问题
+ - 标点挤压，需要中英文排版系统
+ - justify 导致间距不一致
+ - 搜索数据库中空格的处理（要不直接删掉？）
+ - 加一些彩蛋（例如 https://www.kirilv.com/canvas-confetti/）
+ - CI 流程：目前是本地预处理后连着 cache 一起上传，考虑配置 Vercel 保存临时文件
 
 ## Markdown
 
+ - emoji snippet 支持
  - 代码块功能按钮（复制，etc.）
  - TikZ 支持
- - Snippet 支持：https://xdino.vercel.app/articles/FunctionModuleTest
+ - Snippet 支持：参考 https://xdino.vercel.app/articles/FunctionModuleTest
+
+## 长期
+
+ - 搓一个评论系统
+ - CDN
+ - Status 页面（如果有了后端）
  - Typst 支持（预先 `typst c -f svg xxx.typ` 编译得到 svg）
+ - 联动 Cursor.js（参考 iPad 光标效果）
