@@ -24,7 +24,7 @@
     --block-code-border: #ededed;
     --block-code-text: #383a42;
 
-    --table-border: #0000001f;
+    --table-border: #eaeaea;
     --table-hover-background: #00000009;
 }
 
@@ -41,7 +41,7 @@
         --block-code-background: #1b1b1b;
         --block-code-border: #252525;
         --block-code-text: #c1c4d1;
-        --table-border: #ffffff36;
+        --table-border: #353535;
         --table-hover-background: #ffffff12;
     }
 }
@@ -127,6 +127,7 @@
     position: relative;
     margin: 1.6rem 0;
     color: var(--heading-color);
+    font-weight: 500;
 }
 
 /* hr 标签 */
@@ -360,5 +361,10 @@
     /* 引言 */
     .markdown blockquote {
         padding: 0.3rem 0.9rem;
+    }
+
+    /* 表格 */
+    .markdown table tbody tr:hover {
+        background-color: unset;
     }
 }

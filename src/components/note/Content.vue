@@ -190,6 +190,7 @@ h1 {
     color: var(--header-color);
     letter-spacing: 0.12rem;
     line-height: var(--header-line-height);
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
