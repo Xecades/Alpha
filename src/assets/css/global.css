@@ -1,11 +1,12 @@
 /* Styles applied before app loads, which prevents flickering. */
 
-@import url("https://fonts.loli.net/css2?family=EB+Garamond&display=swap");
+/* @import url("https://fonts.loli.net/css2?family=EB+Garamond&display=swap"); */
 @import url("https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 :root {
     --font-color: #4b5563;
-    --font-family: "EB Garamond", "Georgia", "Noto Serif SC", songti sc, serif;
+    --font-family: "PT Serif", "Georgia", "Noto Serif SC", songti sc, serif;
     --selection-bg: #bbddfb80;
     --background-image: radial-gradient(
             circle at 28% 29%,
