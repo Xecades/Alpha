@@ -187,7 +187,10 @@ const block_wrapper = (args) => (state, start, end, silent) => {
 
 export default function wrapper_plugin(md, args) {
     args.name = "wrapper_" + args.name;
-    const handler = (tokens, idx) => args.renderer(tokens[idx].content);
+
+    const parser = args.parser || ((content) => content);
+    const handler = (tokens, idx, options, env, self) =>
+        args.renderer(parser(tokens[idx].content));
 
     if (args.type === "inline") {
         md.inline.ruler.after("escape", args.name, inline_wrapper(args));

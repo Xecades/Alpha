@@ -15,6 +15,7 @@ import MarkdownItWrapper from "../markdown-it-wrapper";
 
 import extractText from "../preprocess/utils/md/text";
 import getEmoji from "../preprocess/utils/md/emoji";
+import { blockSnippet } from "../preprocess/utils/md/snippet";
 
 /**
  * Get a markdown-it instance with full support, which is used for main content rendering.
@@ -79,7 +80,19 @@ export default (): MarkdownIt => {
         type: "inline",
         name: "emoji_inline",
         marker: ":",
-        renderer: (c: string) => getEmoji(c),
+        renderer: getEmoji,
+    });
+
+    md.use(MarkdownItWrapper, {
+        type: "block",
+        name: "snippet_block",
+        marker: ":::",
+        parser: (c: string) => {
+            const meta: string = c.trim().split("\n")[0];
+            const slot: string = c.trim().split("\n").slice(1).join("\n");
+            return meta + "\n" + md.render(slot);
+        },
+        renderer: blockSnippet,
     });
 
     /**

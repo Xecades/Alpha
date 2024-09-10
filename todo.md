@@ -7,6 +7,9 @@
 
 ## 当前 TODO
 
+ - 研究 markdown-it-mdc：https://github.com/antfu/markdown-it-mdc
+ - Snippet 支持：参考 https://xdino.vercel.app/articles/FunctionModuleTest，https://squidfunk.github.io/mkdocs-material/reference/admonitions/
+ - 刷新记忆阅读进度
  - Markdown 引用图片，相对路径的处理
  - 评论系统支持 Cursor.js
  - 页面宽度改变时，Leftbar 实现动态响应
@@ -20,6 +23,7 @@
 
 ## 暂时不重要的 TODO
 
+ - Ctrl+K 快捷键打开搜索
  - 打印样式
  - 动画顺序有问题
  - 导航时标题有些时候动画会消失
@@ -45,7 +49,6 @@
 
  - 代码块功能按钮（复制，etc.）
  - TikZ 支持
- - Snippet 支持：参考 https://xdino.vercel.app/articles/FunctionModuleTest
 
 ## 长期
 

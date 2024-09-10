@@ -26,23 +26,37 @@
 
     --table-border: #eaeaea;
     --table-hover-background: #00000009;
+
+    --quote-color: #6a737d;
+    --quote-padding-lr: 3rem;
+    --quote-background-opacity: 0.2;
+    --quote-background-invert: 0;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --hr-color: #3a3a3a;
         --heading-color: #e1e1e1;
+
         --checkbox-background: #999a9b;
         --checkbox-background-checked: #2f77c4;
+
         --blockquote-border: #373839;
         --blockquote-background: #242424b5;
         --blockquote-text: #b5babf;
+
         --inline-code-background: #333434bf;
+
         --block-code-background: #1b1b1b;
         --block-code-border: #252525;
         --block-code-text: #c1c4d1;
+
         --table-border: #353535;
         --table-hover-background: #ffffff12;
+
+        --quote-color: #989ca0;
+        --quote-background-opacity: 0.3;
+        --quote-background-invert: 1;
     }
 }
 
@@ -142,9 +156,16 @@
 /* s 标签 */
 /* .markdown s {} */
 
-/* strong 标签 */
-.markdown strong {
+/* strong, b 标签 */
+.markdown strong,
+.markdown b {
     font-weight: bold;
+}
+
+/* right 标签 */
+.markdown right {
+    display: block;
+    text-align: right;
 }
 
 /* em 标签 */
@@ -310,6 +331,45 @@
 
 .markdown table tbody tr:hover {
     background-color: var(--table-hover-background);
+}
+
+/* Snippet Quote */
+
+.markdown snippet[quote] {
+    display: block;
+    margin: 5.5rem 0;
+    padding: 0 var(--quote-padding-lr);
+    color: var(--quote-color);
+}
+
+.markdown snippet[quote] > * {
+    text-align: center;
+}
+
+.markdown snippet[quote]::before,
+.markdown snippet[quote]::after {
+    position: absolute;
+    display: block;
+    height: 1.5rem;
+    width: 100%;
+    margin: 0 calc(var(--quote-padding-lr) * -1);
+    background-repeat: no-repeat;
+    background-size: 22px 22px;
+    opacity: var(--quote-background-opacity);
+    content: "";
+    filter: invert(var(--quote-background-invert));
+}
+
+.markdown snippet[quote]::before {
+    top: -1.25rem;
+    background-image: url(@/assets/img/quote-left.svg);
+    background-position: 0 -4px;
+}
+
+.markdown snippet[quote]::after {
+    bottom: -1.25rem;
+    background-image: url(@/assets/img/quote-right.svg);
+    background-position: 100% 7px;
 }
 
 @media (max-width: 768px) {

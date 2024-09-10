@@ -6,7 +6,7 @@
 :root {
     --font-color: #4b5563;
     --font-family: "PT Serif", "Georgia", "Noto Serif SC", songti sc, serif;
-    --selection-bg: #bbddfb80;
+    --selection-bg: #b3b3b34f;
     --background-image: radial-gradient(
             circle at 28% 29%,
             #ededed06 0%,

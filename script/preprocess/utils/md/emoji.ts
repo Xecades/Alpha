@@ -12,7 +12,8 @@ export default (name: string): string => {
     const res = Emoji.get(name);
 
     if (res === undefined) {
-        throw new Error(`Invalid emoji: ${name}`);
+        console.error(`[!] Invalid emoji: ${name}`);
+        return ":" + name + ":";
     }
     return res;
 };
