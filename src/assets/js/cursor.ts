@@ -53,7 +53,7 @@ export interface CursorConfig {
 const DefaultConfig: CursorConfig = {
     lerp_coeff: 0.1,
     id: "cursor",
-    target: ".cursor",
+    target: ".cursor, .markdown table tbody tr, .os-scrollbar-handle",
 };
 
 interface Cursor {

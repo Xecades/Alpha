@@ -10,15 +10,22 @@
 
     --hr-color: #e3e3e3;
     --heading-color: #2e2e2e;
+
     --checkbox-background: none;
     --checkbox-background-checked: #56a0ef;
+
     --blockquote-border: #e6e7e8;
     --blockquote-background: #f2f2f2b5;
     --blockquote-text: #4b5563;
+
     --inline-code-background: #edeeeebf;
+
     --block-code-background: #fafafa;
     --block-code-border: #ededed;
     --block-code-text: #383a42;
+
+    --table-border: #0000001f;
+    --table-hover-background: #00000009;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,6 +41,8 @@
         --block-code-background: #1b1b1b;
         --block-code-border: #252525;
         --block-code-text: #c1c4d1;
+        --table-border: #ffffff36;
+        --table-hover-background: #ffffff12;
     }
 }
 
@@ -237,6 +246,8 @@
     white-space: normal;
     font-size: 0.9em;
     line-height: 1em;
+    padding: 0.15em 0.3em;
+    word-break: break-word;
 }
 
 .markdown code.inline-code ::selection {
@@ -269,6 +280,35 @@
 
 .markdown pre.block-code ::selection {
     background-color: var(--selection-bg);
+}
+
+/* 表格 */
+.markdown table {
+    border-collapse: collapse;
+    margin: 2rem var(--block-extend);
+    border: 1px solid var(--table-border);
+    border-radius: 2px;
+    display: block;
+}
+
+.markdown table th {
+    font-weight: bold;
+    padding: 0.9em 1.25em;
+    text-align: unset;
+    min-width: 5rem;
+}
+
+.markdown table td {
+    border-top: 1px solid var(--table-border);
+    padding: 0.9em 1.25em;
+}
+
+.markdown table tbody tr {
+    transition: background-color 0.125s;
+}
+
+.markdown table tbody tr:hover {
+    background-color: var(--table-hover-background);
 }
 
 @media (max-width: 768px) {

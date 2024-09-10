@@ -64,6 +64,70 @@ export default [
 <p><code class="inline-code">scanf()</code> 用于输入数据，而 <code class="inline-code">printf()</code> 用于输出数据。</p>
 </blockquote>,
 <hr />,
+<p>表格</p>,
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code class="inline-code">%</code></td>
+<td>Prints <code class="inline-code">%</code>.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">d</code></td>
+<td>Decimal <code class="inline-code">signed int</code>.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">u</code></td>
+<td>Decimal <code class="inline-code">unsigned int</code>.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">o</code></td>
+<td>Octal <code class="inline-code">unsigned int</code>.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">x</code>, <code class="inline-code">X</code></td>
+<td>Hexadecimal <code class="inline-code">unsigned int</code>. <code class="inline-code">x</code> for lower-case and <code class="inline-code">X</code> for upper-case.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">f</code></td>
+<td>Float-point types in fixed-point notation.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">e</code>, <code class="inline-code">E</code></td>
+<td>Float-point types in exponential notation: <code class="inline-code">d.ddde±dd</code>. <code class="inline-code">e</code> for lower-case “e” and <code class="inline-code">E</code> for upper-case.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">g</code>, <code class="inline-code">G</code></td>
+<td>Float-point types in either fixed-point or exponential notation, whichever is more appropriate for its magnitude. <code class="inline-code">g</code> for lower-case and <code class="inline-code">G</code> for upper-case.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">a</code>, <code class="inline-code">A</code></td>
+<td>Float-point in hexadecimal notation, starting with <code class="inline-code">0x</code> or <code class="inline-code">0X</code>. <code class="inline-code">a</code> for lower-case and <code class="inline-code">A</code> for upper-case.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">s</code></td>
+<td><code class="inline-code">null</code>-terminated string.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">c</code></td>
+<td><code class="inline-code">char</code>.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">p</code></td>
+<td><code class="inline-code">void*</code> in an implementation-defined format.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code class="inline-code">n</code></td>
+<td>Print nothing, but writes the number of characters written so far into an integer pointer parameter.</td>
+</tr>
+</tbody>
+</table>,
+<hr />,
 <p>代码块</p>,
 <blockcode lang="c" html="%3Ccode%20class%3D%22language-c%22%3E%3Cspan%20class%3D%22token%20macro%20property%22%3E%3Cspan%20class%3D%22token%20directive-hash%22%3E%23%3C%2Fspan%3E%3Cspan%20class%3D%22token%20directive%20keyword%22%3Einclude%3C%2Fspan%3E%20%3Cspan%20class%3D%22token%20string%22%3E%26lt%3Bstdio.h%3E%3C%2Fspan%3E%3C%2Fspan%3E%0A%0A%3Cspan%20class%3D%22token%20keyword%22%3Eint%3C%2Fspan%3E%20%3Cspan%20class%3D%22token%20function%22%3Emain%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E(%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E)%3C%2Fspan%3E%0A%3Cspan%20class%3D%22token%20punctuation%22%3E%7B%3C%2Fspan%3E%0A%20%20%20%20%3Cspan%20class%3D%22token%20function%22%3Eprintf%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E(%3C%2Fspan%3E%3Cspan%20class%3D%22token%20string%22%3E%22Hello%20world%5Cn%22%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E)%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3B%3C%2Fspan%3E%0A%20%20%20%20%3Cspan%20class%3D%22token%20function%22%3Eprintf%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E(%3C%2Fspan%3E%3Cspan%20class%3D%22token%20string%22%3E%22Nulla%20culpa%20ut%20laborum%20sint%20esse%20elit%20minim%20sit.%20Eiusmod%20et%20exercitation%20et%20laboris%20voluptate%20aute%20et%20veniam%20excepteur.%20Anim%20dolore%20culpa%20commodo%20adipisicing%20et%20aute.%20In%20est%20aliquip%20duis%20tempor%20cillum%20ullamco%20qui.%20Et%20officia%20cillum%20ex%20et%20dolor%20esse%20magna%20veniam.%20Dolor%20sint%20velit%20dolor%20commodo%20in.%20Irure%20excepteur%20adipisicing%20dolore%20ipsum%20velit%20ipsum%20nisi%20Lorem%20pariatur%20dolor%20excepteur%20dolor%20dolor.%5Cn%22%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E)%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3B%3C%2Fspan%3E%0A%20%20%20%20%3Cspan%20class%3D%22token%20keyword%22%3Ereturn%3C%2Fspan%3E%20%3Cspan%20class%3D%22token%20number%22%3E0%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3B%3C%2Fspan%3E%0A%3Cspan%20class%3D%22token%20punctuation%22%3E%7D%3C%2Fspan%3E%0A%3C%2Fcode%3E"></blockcode>,
 <blockcode lang="plain" html="%3Ccode%3E%E8%BF%99%E4%B8%AA%E4%BB%A3%E7%A0%81%E5%9D%97%E4%B8%8D%E5%B8%A6%E8%AF%AD%E8%A8%80%E6%A0%87%E8%AF%86%0Alet%20a%20%3D%201%3B%0A%3C%2Fcode%3E"></blockcode>,

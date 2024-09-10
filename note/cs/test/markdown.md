@@ -87,6 +87,26 @@ _斜体_、**粗体**、**_加粗斜体_**、~~删除线~~
 
 ---
 
+表格
+
+| Type | Description |
+| :--: | -- |
+| `%` | Prints `%`. |
+| `d` | Decimal `signed int`. |
+| `u` | Decimal `unsigned int`. |
+| `o` | Octal `unsigned int`. |
+| `x`, `X` | Hexadecimal `unsigned int`. `x` for lower-case and `X` for upper-case. |
+| `f` | Float-point types in fixed-point notation. |
+| `e`, `E` | Float-point types in exponential notation: `d.ddde±dd`. `e` for lower-case "e" and `E` for upper-case. |
+| `g`, `G` | Float-point types in either fixed-point or exponential notation, whichever is more appropriate for its magnitude. `g` for lower-case and `G` for upper-case. |
+| `a`, `A` | Float-point in hexadecimal notation, starting with `0x` or `0X`. `a` for lower-case and `A` for upper-case. |
+| `s` | `null`-terminated string. |
+| `c` | `char`. |
+| `p` | `void*` in an implementation-defined format. |
+| `n` | Print nothing, but writes the number of characters written so far into an integer pointer parameter. |
+
+---
+
 代码块
 
 ```c
