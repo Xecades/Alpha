@@ -41,7 +41,7 @@ const type_of = (x: RouteLocation): ROUTE_TYPE => {
 const setupTitle = (to: RouteLocation, type: ROUTE_TYPE) => {
     /**
      * -> Home: Xecades  /  Xecades | ${page title}
-     * -> Note: Xecades Notes  /  Xecades Notes | ${article title}
+     * -> Note: Xecades Notes  /  ${article title} | Xecades Notes
      * -> Blog: throw not implemented error
      */
 
@@ -58,7 +58,7 @@ const setupTitle = (to: RouteLocation, type: ROUTE_TYPE) => {
         }
         //
     } else if (type === ROUTE_TYPE.NOTE) {
-        // Xecades Notes  /  Xecades Notes | title
+        // Xecades Notes  /  title | Xecades Notes
         const meta: RouteMeta = to.meta as any;
         const title: string = meta.attr.title;
         const is_root: boolean = meta.category === "";
@@ -66,7 +66,7 @@ const setupTitle = (to: RouteLocation, type: ROUTE_TYPE) => {
         if (is_root) {
             document.title = `${prefix} Notes`;
         } else {
-            document.title = `${prefix} Notes | ${title}`;
+            document.title = `${title} | ${prefix} Notes`;
         }
         //
     } else if (type === ROUTE_TYPE.BLOG) {
