@@ -1,8 +1,5 @@
-import anchor from "@/components/md/Anchor.vue";
-import blockmath from "@/components/md/BlockMath.vue";
 import blockcode from "@/components/md/BlockCode.vue";
 import inlinemath from "@/components/md/InlineMath.vue";
-import imagecaptioned from "@/components/md/ImageCaptioned.vue";
 export default [
 <h2 id="t" tabindex="-1" class="heading">普通标题 <a class="cursor header-anchor" href="#t">¶</a></h2>,
 <h3 id="t-2" tabindex="-1" class="heading">1-1 <a class="cursor header-anchor" href="#t-2">¶</a></h3>,

@@ -262,6 +262,7 @@
 .markdown pre.block-code code {
     background: unset;
     white-space: pre !important;
+    padding: 0.2em 0;
     font-size: 0.97em;
     text-shadow: none;
 }

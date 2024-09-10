@@ -14,6 +14,7 @@ import MarkdownItTaskCheckbox from "markdown-it-task-checkbox";
 import MarkdownItWrapper from "../markdown-it-wrapper";
 
 import extractText from "../preprocess/utils/md/text";
+import getEmoji from "../preprocess/utils/md/emoji";
 
 /**
  * Get a markdown-it instance with full support, which is used for main content rendering.
@@ -72,6 +73,13 @@ export default (): MarkdownIt => {
         marker: "$$",
         renderer: (c: string) =>
             `<BlockMath data="${encodeURI(c)}"></BlockMath>`,
+    });
+
+    md.use(MarkdownItWrapper, {
+        type: "inline",
+        name: "emoji_inline",
+        marker: ":",
+        renderer: (c: string) => getEmoji(c),
     });
 
     /**

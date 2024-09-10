@@ -52,7 +52,9 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         let cache: string = "";
 
         for (const comp of injections) {
-            cache += `import ${comp.toLowerCase()} from "@/components/md/${comp}.vue";\n`;
+            if (item.html.includes(comp)) {
+                cache += `import ${comp.toLowerCase()} from "@/components/md/${comp}.vue";\n`;
+            }
         }
 
         cache += `export default [\n`;

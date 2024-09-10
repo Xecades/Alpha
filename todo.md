@@ -39,11 +39,10 @@
  - justify 导致间距不一致
  - 搜索数据库中空格的处理（要不直接删掉？）
  - 加一些彩蛋（例如 https://www.kirilv.com/canvas-confetti/）
- - CI 流程：目前是本地预处理后连着 cache 一起上传，考虑配置 Vercel 保存临时文件
+ - CI 流程：目前是本地预处理后连着 cache 一起上传，考虑配置 Vercel 保存临时文件（只有 Serverless 能用：https://medium.com/@nksCodingLearnings/how-to-read-and-write-files-in-next-js-on-a-vercel-deployed-website-c1e9ea606cb6，写个 Serverless？）
 
 ## Markdown
 
- - emoji snippet 支持
  - 代码块功能按钮（复制，etc.）
  - TikZ 支持
  - Snippet 支持：参考 https://xdino.vercel.app/articles/FunctionModuleTest

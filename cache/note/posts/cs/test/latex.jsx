@@ -1,8 +1,6 @@
 import anchor from "@/components/md/Anchor.vue";
 import blockmath from "@/components/md/BlockMath.vue";
-import blockcode from "@/components/md/BlockCode.vue";
 import inlinemath from "@/components/md/InlineMath.vue";
-import imagecaptioned from "@/components/md/ImageCaptioned.vue";
 export default [
 <p><strong>狄利克雷卷积</strong>（Dirichlet Convolution）在解析数论中是一个非常重要的工具.</p>,
 <p>使用狄利克雷卷积可以很方便地推出<strong>莫比乌斯反演</strong>（Möbius Inversion）相关重要函数和公式，它在信息学竞赛和解析数论中至关重要.</p>,

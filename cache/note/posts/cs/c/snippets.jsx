@@ -1,8 +1,3 @@
-import anchor from "@/components/md/Anchor.vue";
-import blockmath from "@/components/md/BlockMath.vue";
-import blockcode from "@/components/md/BlockCode.vue";
-import inlinemath from "@/components/md/InlineMath.vue";
-import imagecaptioned from "@/components/md/ImageCaptioned.vue";
 export default [
 <h2 id="t" tabindex="-1" class="heading">夕事急像信行竹打尤生原 <a class="cursor header-anchor" href="#t">¶</a></h2>,
 <p>兔都身誰上；海就朱虎甲千。水畫花欠：首實幾朵種耳收園即歌消枝？爸但化冰點音拉外里，斗南外心怕黑見巾喜世力怕消進夕抄她。什麻連不跟友。步年他訴造荷四。</p>,
