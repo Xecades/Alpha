@@ -2,6 +2,8 @@ import anchor from "@/components/md/Anchor.vue";
 import blockmath from "@/components/md/BlockMath.vue";
 import blockcode from "@/components/md/BlockCode.vue";
 import inlinemath from "@/components/md/InlineMath.vue";
+import linkcard from "@/components/md/LinkCard.vue";
+import note from "@/components/md/Note.vue";
 export default [
 <h2 id="t" tabindex="-1" class="heading">数学公式 <a class="cursor header-anchor" href="#t">¶</a></h2>,
 <p>利用 <anchor href="https://katex.org/">KaTeX</anchor> 渲染数学公式。</p>,
@@ -25,15 +27,30 @@ export default [
 <hr />,
 <h2 id="t-5" tabindex="-1" class="heading">引言 <a class="cursor header-anchor" href="#t-5">¶</a></h2>,
 <p>适合用于展示名言、引用等。</p>,
-<blockcode lang="md" html="%3Ccode%20class%3D%22language-md%22%3E%3A%3A%3A%20quote%0A%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%26lt%3B%3C%2Fspan%3E%E5%BC%95%E8%A8%80%E5%86%85%E5%AE%B9%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3E%3C%2Fspan%3E%3C%2Fspan%3E%0A%3A%3A%3A%0A%3C%2Fcode%3E"></blockcode>,
-<snippet quote><p>Two roads diverged in a wood, and I—<br />
+<blockcode lang="md" html="%3Ccode%20class%3D%22language-md%22%3E%3A%3Aquote%0A%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%26lt%3B%3C%2Fspan%3E%E5%BC%95%E8%A8%80%E5%86%85%E5%AE%B9%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3E%3C%2Fspan%3E%3C%2Fspan%3E%0A%3A%3A%0A%3C%2Fcode%3E"></blockcode>,
+<quote>Two roads diverged in a wood, and I—<br />
 I took <em>the one less traveled by</em>,<br />
 And that has made all the difference.<br />
-<right>—Robert Frost</right></p></snippet>,
-<snippet quote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></snippet>,
-<snippet quote><blockmath data="e%20%5E%20%7Bi%20%5Cpi%7D%20+%201%20=%200%0A"></blockmath></snippet>,
+<right>—Robert Frost</right></quote>,
+<quote>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</quote>,
+<quote>
+<blockmath data="e%20%5E%20%7Bi%20%5Cpi%7D%20+%201%20=%200%0A"></blockmath></quote>,
 <hr />,
 <h2 id="t-6" tabindex="-1" class="heading">Note <a class="cursor header-anchor" href="#t-6">¶</a></h2>,
 <p>功能上类似于 MkDocs Material 的 <anchor href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/">Admonitions</anchor>，用于提供额外信息。</p>,
-<p><em><strong>TBD</strong></em></p>,
+<blockcode lang="md" html="%3Ccode%20class%3D%22language-md%22%3E%3A%3Anote%7B%5Bdefault%5D%20%7C%20primary%20%7C%20success%20%7C%20info%20%7C%20warning%20%7C%20danger%7D%0A%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%26lt%3B%3C%2Fspan%3ENote%3C%2Fspan%3E%20%3Cspan%20class%3D%22token%20attr-name%22%3E%E5%86%85%E5%AE%B9%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3E%3C%2Fspan%3E%3C%2Fspan%3E%0A%3A%3A%0A%3C%2Fcode%3E"></blockcode>,
+<note>这里是 <code class="inline-code">note.default</code> 的内容</note>,
+<note primary="true">这里是 <code class="inline-code">note.primary</code> 的内容</note>,
+<note success="true">这里是 <code class="inline-code">note.success</code> 的内容</note>,
+<note info="true">这里是 <code class="inline-code">note.info</code> 的内容</note>,
+<note warning="true">这里是 <code class="inline-code">note.warning</code> 的内容</note>,
+<note danger="true">这里是 <code class="inline-code">note.danger</code> 的内容</note>,
+<note success="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</note>,
+<note danger="true"><inlinemath data="%5Ctext%7BP%7D%20%5Cneq%20%5Ctext%7BNP%7D"></inlinemath></note>,
+<hr />,
+<h2 id="t-7" tabindex="-1" class="heading">链接卡片 <a class="cursor header-anchor" href="#t-7">¶</a></h2>,
+<blockcode lang="md" html="%3Ccode%20class%3D%22language-md%22%3E%3A%3Alinkcard%7Bhref%3D%22%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%26lt%3B%3C%2Fspan%3E%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3E%3C%2Fspan%3E%3C%2Fspan%3E%22%7D%0A%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20tag%22%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%26lt%3B%3C%2Fspan%3E%E9%93%BE%E6%8E%A5%E5%90%8D%E7%A7%B0%3C%2Fspan%3E%3Cspan%20class%3D%22token%20punctuation%22%3E%3E%3C%2Fspan%3E%3C%2Fspan%3E%0A%3A%3A%0A%3C%2Fcode%3E"></blockcode>,
+<linkcard href="https://blog.xecades.xyz/">Xecades 的博客</linkcard>,
+<linkcard href="https://github.com/xecades/alpha"><inlinemath data="%5Cmathfrak%7BXecades%7D%20::%20%5Calpha"></inlinemath> 的 GitHub 仓库</linkcard>,
+<linkcard href="/">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</linkcard>,
 ];

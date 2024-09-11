@@ -3,6 +3,7 @@ import type Token from "markdown-it/lib/token.d.mts";
 
 import MarkdownItAnchor from "markdown-it-anchor";
 import MarkdownItPrism from "markdown-it-prism";
+import MarkdownItMDC from "markdown-it-mdc";
 
 // @ts-ignore
 import MarkdownItForInline from "markdown-it-for-inline";
@@ -15,7 +16,6 @@ import MarkdownItWrapper from "../markdown-it-wrapper";
 
 import extractText from "../preprocess/utils/md/text";
 import getEmoji from "../preprocess/utils/md/emoji";
-import { blockSnippet } from "../preprocess/utils/md/snippet";
 
 /**
  * Get a markdown-it instance with full support, which is used for main content rendering.
@@ -38,16 +38,20 @@ export default (): MarkdownIt => {
     /**
      * @name markdown-it-prism
      * @see https://github.com/jGleitz/markdown-it-prism
-     * @todo `{` 等特殊字符的处理，或许直接改成自定义组件
      */
     md.use(MarkdownItPrism, {
         highlightInlineCode: true,
     });
 
     /**
+     * @name markdown-it-mdc
+     * @see https://github.com/antfu/markdown-it-mdc
+     */
+    md.use(MarkdownItMDC);
+
+    /**
      * @name markdown-it-task-checkbox
      * @see https://github.com/linsir/markdown-it-task-checkbox
-     * @todo It produces rubbish code
      */
     md.use(MarkdownItTaskCheckbox, {
         divWrap: false,
@@ -81,18 +85,6 @@ export default (): MarkdownIt => {
         name: "emoji_inline",
         marker: ":",
         renderer: getEmoji,
-    });
-
-    md.use(MarkdownItWrapper, {
-        type: "block",
-        name: "snippet_block",
-        marker: ":::",
-        parser: (c: string) => {
-            const meta: string = c.trim().split("\n")[0];
-            const slot: string = c.trim().split("\n").slice(1).join("\n");
-            return meta + "\n" + md.render(slot);
-        },
-        renderer: blockSnippet,
     });
 
     /**

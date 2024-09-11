@@ -19,15 +19,24 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
     faAngleRight,
+    faArrowUpRightFromSquare,
+    faAsterisk,
     faBars,
     faCaretLeft,
     faCaretRight,
+    faCube,
+    faExclamationCircle,
+    faExclamationTriangle,
     faFaceFrown,
     faFile,
     faFolder,
+    faInfoCircle,
+    faLightbulb,
+    faLink,
     faMagnifyingGlass,
     faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
 
 // Wait for document ready
 const documentReady = () => {
@@ -82,7 +91,16 @@ async function main() {
         faXmark,
         faFile,
         faFolder,
-        faFaceFrown
+        faFaceFrown,
+        faAsterisk,
+        faCube,
+        faLightbulb,
+        faInfoCircle,
+        faExclamationCircle,
+        faExclamationTriangle,
+        faLink,
+        faArrowUpRightFromSquare,
+        faStar
     );
 
     const app = createApp(App);

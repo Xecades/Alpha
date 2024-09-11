@@ -51,27 +51,27 @@ $$
 适合用于展示名言、引用等。
 
 ```md
-::: quote
+::quote
 <引言内容>
-:::
+::
 ```
 
-::: quote
+::quote
 Two roads diverged in a wood, and I—\
 I took *the one less traveled by*,\
 And that has made all the difference.\
 <right>—Robert Frost</right>
-:::
+::
 
-::: quote
+::quote
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-:::
+::
 
-::: quote
+::quote
 $$
 e ^ {i \pi} + 1 = 0
 $$
-:::
+::
 
 ---
 
@@ -79,4 +79,62 @@ $$
 
 功能上类似于 MkDocs Material 的 [Admonitions](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)，用于提供额外信息。
 
-***TBD***
+```md
+::note{[default] | primary | success | info | warning | danger}
+<Note 内容>
+::
+```
+
+::note
+这里是 `note.default` 的内容
+::
+
+::note{primary}
+这里是 `note.primary` 的内容
+::
+
+::note{success}
+这里是 `note.success` 的内容
+::
+
+::note{info}
+这里是 `note.info` 的内容
+::
+
+::note{warning}
+这里是 `note.warning` 的内容
+::
+
+::note{danger}
+这里是 `note.danger` 的内容
+::
+
+::note{success}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+::
+
+::note{danger}
+$\text{P} \neq \text{NP}$
+::
+
+---
+
+## 链接卡片
+
+```md
+::linkcard{href="<链接地址>"}
+<链接名称>
+::
+```
+
+::linkcard{href="https://blog.xecades.xyz/"}
+Xecades 的博客
+::
+
+::linkcard{href="https://github.com/xecades/alpha"}
+$\mathfrak{Xecades} :: \alpha$ 的 GitHub 仓库
+::
+
+::linkcard{href="/"}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+::

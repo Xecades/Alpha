@@ -66,7 +66,7 @@ watch(
                             :style="{ marginRight: item.indent }"
                             :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }"
                         >
-                            <span class="text" v-html="item.title"></span>
+                            <span class="href" v-html="item.title"></span>
                             <span class="sign">
                                 <font-awesome-icon
                                     :icon="['fas', 'caret-left']"
@@ -207,7 +207,7 @@ watch(
     animation: shake-x 1s infinite ease-in-out;
 }
 
-.detail .text {
+.detail .href {
     padding-right: var(--detail-title-indent);
 }
 

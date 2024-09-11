@@ -1,3 +1,4 @@
+import anchor from "@/components/md/Anchor.vue";
 import blockcode from "@/components/md/BlockCode.vue";
 import inlinemath from "@/components/md/InlineMath.vue";
 export default [

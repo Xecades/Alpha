@@ -45,6 +45,8 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         "BlockCode",
         "InlineMath",
         "ImageCaptioned",
+        "LinkCard",
+        "Note",
     ];
 
     for (const item of parsed) {
@@ -52,7 +54,7 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         let cache: string = "";
 
         for (const comp of injections) {
-            if (item.html.includes(comp)) {
+            if (item.html.toLowerCase().includes(comp.toLowerCase())) {
                 cache += `import ${comp.toLowerCase()} from "@/components/md/${comp}.vue";\n`;
             }
         }

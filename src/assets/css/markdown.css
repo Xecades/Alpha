@@ -76,15 +76,11 @@
 
 /* KaTeX 数学公式 */
 .markdown .katex {
-    font-size: 1.1em;
+    font-size: 1.05em;
 }
 
 .markdown .katex-display {
     margin: 1.8em 0;
-}
-
-.markdown .katex-display .katex {
-    font-size: 1.21rem;
 }
 
 /* 锚点 */
@@ -334,20 +330,16 @@
 }
 
 /* Snippet Quote */
-
-.markdown snippet[quote] {
+.markdown quote {
     display: block;
     margin: 5.5rem 0;
     padding: 0 var(--quote-padding-lr);
     color: var(--quote-color);
-}
-
-.markdown snippet[quote] > * {
     text-align: center;
 }
 
-.markdown snippet[quote]::before,
-.markdown snippet[quote]::after {
+.markdown quote::before,
+.markdown quote::after {
     position: absolute;
     display: block;
     height: 1.5rem;
@@ -360,13 +352,13 @@
     filter: invert(var(--quote-background-invert));
 }
 
-.markdown snippet[quote]::before {
+.markdown quote::before {
     top: -1.25rem;
     background-image: url(@/assets/img/quote-left.svg);
     background-position: 0 -4px;
 }
 
-.markdown snippet[quote]::after {
+.markdown quote::after {
     bottom: -1.25rem;
     background-image: url(@/assets/img/quote-right.svg);
     background-position: 100% 7px;

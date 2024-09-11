@@ -12,8 +12,8 @@ export default [
 <h6 id="t-5" tabindex="-1" class="heading">六级标题 <a class="cursor header-anchor" href="#t-5">¶</a></h6>,
 <hr />,
 <ul class="task-list">
-<li class="task-list-item"><input type="checkbox" id="cbx_0" checked="true" disabled="true" /><label for="cbx_0"> 选中</label></li>
-<li class="task-list-item"><input type="checkbox" id="cbx_1" disabled="true" /><label for="cbx_1"> 未选中</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_0" checked="true" disabled="true" /><label for="cbx_0"><span>x</span> 选中</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_1" disabled="true" /><label for="cbx_1"><span> </span> 未选中</label></li>
 </ul>,
 <hr />,
 <p>Sunt ullamco esse esse sit aliquip aliquip ea laboris ea nulla. Quis eiusmod enim aliqua consectetur sit ea. Commodo anim enim sit qui nisi culpa labore fugiat nisi est nulla ad. Dolore dolor magna Lorem sunt dolor commodo eu ad aliquip officia officia incididunt deserunt. Adipisicing veniam aliquip incididunt et amet velit nulla quis magna culpa aliqua nulla. Lorem proident Lorem nostrud elit quis quis id duis incididunt reprehenderit.</p>,
@@ -21,7 +21,7 @@ export default [
 <p>Tempor voluptate aliquip consectetur excepteur culpa. Et dolor in adipisicing commodo ex magna dolore ut aliquip. Nulla nisi nulla commodo id proident sit proident dolor dolore ipsum ullamco. Fugiat Lorem est sunt excepteur Lorem officia labore. Ut et tempor in exercitation nostrud amet eiusmod.</p>,
 <p>Exercitation incididunt dolore cupidatat mollit veniam esse reprehenderit eiusmod cillum eu tempor dolor aliqua minim. Laboris voluptate consequat exercitation nisi ipsum. Cillum anim voluptate sunt est nostrud magna quis ad irure.</p>,
 <hr />,
-<p><em>斜体</em>、<strong>粗体</strong>、<strong><em>加粗斜体</em></strong>、<s>删除线</s></p>,
+<p><em>斜体</em>、<strong>粗体</strong>、<em><strong>加粗斜体</strong></em>、<s>删除线</s></p>,
 <hr />,
 <p>在一个段落中的<anchor href="https://www.baidu.com">文字链接</anchor>，然后是后面的文字。</p>,
 <hr />,
