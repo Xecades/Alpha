@@ -15,7 +15,7 @@ export const render_list = (node: NavNode, is_root: boolean = false): JSX.Elemen
     let { title, children, link } = node;
     link = "/" + link;
 
-    const text_comp: JSX.Element = <span class="href">{title}</span>;
+    const text_comp: JSX.Element = <span class="text">{title}</span>;
     const icon_comp: JSX.Element = <span class="sign"><FontAwesomeIcon class="icon" icon="fa-solid fa-caret-right" /></span>;
     const title_comp: JSX.Element = <RouterLink to={link} class="title cursor">{icon_comp}{text_comp}</RouterLink>;
 
