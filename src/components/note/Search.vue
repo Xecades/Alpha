@@ -41,6 +41,7 @@ watch(
                     v-model.trim="query"
                     type="text"
                     placeholder="Search in the void."
+                    @keydown.esc="$emit('close')"
                 />
 
                 <div class="icon cursor xmark" @click="$emit('close')">

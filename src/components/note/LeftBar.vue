@@ -1,8 +1,16 @@
 <script setup lang="tsx">
-import { nextTick, onMounted, onUpdated, ref, watch, type Ref } from "vue";
+import {
+    nextTick,
+    onBeforeUnmount,
+    onMounted,
+    onUpdated,
+    ref,
+    watch,
+} from "vue";
 import { useRoute } from "vue-router";
 import { render_list } from "@/assets/js/note/leftbar";
 import cursor from "@/assets/js/cursor";
+import hotkeys from "hotkeys-js";
 
 // Components
 import Search from "./Search.vue";
@@ -12,7 +20,9 @@ import _config_untyped from "@cache/note/config";
 const config = _config_untyped as Config;
 
 // Types
+import type { Ref } from "vue";
 import type { JSX } from "vue/jsx-runtime";
+import type { HotkeysEvent } from "hotkeys-js";
 import { NOTE_L_STATUS, type Config, type RouteMeta } from "@script/types";
 
 /** Attributes attached to a category */
@@ -112,6 +122,20 @@ const mouse_fn = {
     },
 };
 
+const key_fn = {
+    command_k: (event: KeyboardEvent, handler: HotkeysEvent) => {
+        if (!is_searching.value) {
+            search_fn.reveal();
+        }
+    },
+
+    esc: (event: KeyboardEvent, handler: HotkeysEvent) => {
+        if (is_searching.value) {
+            search_fn.hide();
+        }
+    },
+};
+
 const VBody_fn = () => () => render_list(config.nav[active_id.value], true);
 const VBody: Ref<() => JSX.Element> = ref(VBody_fn());
 
@@ -127,6 +151,13 @@ onMounted(() => {
     if (props.status === NOTE_L_STATUS.ALWAYS_SHOW) {
         category_fn.reveal();
     }
+    hotkeys("command+k,ctrl+k", key_fn.command_k);
+    hotkeys("esc", key_fn.esc);
+});
+
+onBeforeUnmount(() => {
+    hotkeys.unbind("command+k,ctrl+k");
+    hotkeys.unbind("esc");
 });
 </script>
 
