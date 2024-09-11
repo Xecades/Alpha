@@ -71,7 +71,7 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     overflow-wrap: break-word;
-    text-align: justify;
+    /* text-align: justify; */
 }
 
 /* KaTeX 数学公式 */
