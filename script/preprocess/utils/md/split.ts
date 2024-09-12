@@ -1,48 +1,62 @@
-import DomHandler from "domhandler";
-import DomSerializer from "dom-serializer";
-import { Parser } from "htmlparser2";
-
 import type { HTMLString } from "../../../types";
-import type { DomSerializerOptions } from "dom-serializer";
 
 /**
- * Split HTML string into HTML string array.
+ * Split JSX string into JSX string array.
  *
  * @note Comments and empty strings are ignored.
  *
- * @param html - HTML string
- * @returns HTML string array
- *
- * @see https://github.com/fb55/domhandler
- * @see https://github.com/cheeriojs/dom-serializer
+ * @param html - JSX string
+ * @returns JSX string array
  */
 export default (html: HTMLString): HTMLString[] => {
     const res: HTMLString[] = [];
-    const comment_pattern: RegExp = /<!--.*?-->/gs;
 
-    const options: DomSerializerOptions = {
-        selfClosingTags: true,
-        encodeEntities: "utf8",
+    const patterns = {
+        /** Matches <!-- text --> */
+        comment: /^<!--.*?-->$/gm,
+
+        /** Matches <tag> */
+        start: /^<[^<>\/]*>$/gm,
+
+        /** Matches </tag> */
+        end: /^<\/[^<>]*>$/gm,
     };
 
-    const handler = new DomHandler((error, dom) => {
-        if (error) {
-            throw error;
+    // Syntax like `text\` will start a new line, delete it.
+    html = html.replaceAll("<br />\n", "<br />");
+
+    const fragments: HTMLString[] = html.split("\n");
+
+    for (let i = 0; i < fragments.length; i++) {
+        // Ignore comments
+        if (patterns.comment.test(fragments[i])) {
+            continue;
         }
 
-        for (const node of dom) {
-            const s: string = DomSerializer(node, options).trim();
+        // Encounter start tag, find the corresponding end tag
+        if (patterns.start.test(fragments[i])) {
+            let j = i + 1;
+            let stack = 1;
 
-            if (s !== "") {
-                res.push(s);
+            while (stack > 0 && j < fragments.length) {
+                if (patterns.start.test(fragments[j])) {
+                    stack++;
+                } else if (patterns.end.test(fragments[j])) {
+                    stack--;
+                }
+
+                j++;
             }
+
+            res.push(fragments.slice(i, j).join("\n"));
+            i = j - 1;
+
+            continue;
         }
-    });
 
-    const parser = new Parser(handler);
-
-    parser.write(html.replaceAll(comment_pattern, ""));
-    parser.end();
+        // Normal tag
+        res.push(fragments[i]);
+    }
 
     return res;
 };

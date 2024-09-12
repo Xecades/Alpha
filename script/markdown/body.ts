@@ -17,6 +17,7 @@ import MarkdownItWrapper from "../markdown-it-wrapper";
 import extractText from "../preprocess/utils/md/text";
 import getEmoji from "../preprocess/utils/md/emoji";
 import typst from "../preprocess/utils/md/typst";
+import tab from "../preprocess/utils/md/tab";
 
 /**
  * Get a markdown-it instance with full support, which is used for main content rendering.
@@ -91,6 +92,14 @@ export default (): MarkdownIt => {
         name: "emoji_inline",
         marker: ":",
         renderer: getEmoji,
+    });
+
+    md.use(MarkdownItWrapper, {
+        type: "block",
+        name: "tab_block",
+        marker: "@@@",
+        parser: md.render.bind(md),
+        renderer: tab,
     });
 
     /**
@@ -198,9 +207,9 @@ export default (): MarkdownIt => {
             let html = originalFence(tokens, idx, options, env, self).trim();
 
             html = html.replace(/^<pre.*?>(.*)<\/pre>$/gs, (...m) => m[1]);
-            html = encodeURIComponent(html);
+            html = html.replaceAll('"', '\\"').replaceAll("\n", "\\n");
 
-            return `<BlockCode lang="${lang}" html="${html}"></BlockCode>`;
+            return `<BlockCode lang="${lang}" html={"${html}"}></BlockCode>`;
             //
         }
     };

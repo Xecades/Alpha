@@ -60,9 +60,20 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         let cache: string = "";
 
         for (const comp of injections) {
-            if (item.html.toLowerCase().includes(comp.toLowerCase())) {
-                cache += `import ${comp.toLowerCase()} from "@/components/md/${comp}.vue";\n`;
-            }
+            // Search whether the markdown file contains the component, then get its name (Case-sensitive).
+            // This is based on the assumption that the component is enclosed by `<Name>` and `</Name>`
+            // or `<Name ... />`.
+            const reg: RegExp = new RegExp(
+                `<\/(${comp})>|<(${comp})[^<>]*\/>`,
+                "mi"
+            );
+
+            const matches = reg.exec(item.html);
+
+            if (!matches) continue;
+
+            const name = matches[1];
+            cache += `import ${name} from "@/components/md/${comp}.vue";\n`;
         }
 
         cache += `export default [\n`;

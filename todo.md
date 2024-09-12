@@ -7,6 +7,7 @@
 
 ## 当前 TODO
 
+ - Code block 添加标题
  - block code meta 参数的处理（转义、引号）
  - Typst 添加中文字体的支持
  - 搜索支持上下键选择，回车跳转

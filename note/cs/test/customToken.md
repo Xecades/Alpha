@@ -145,8 +145,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 基于 [Typst.ts](https://myriad-dreamin.github.io/typst.ts) 实现 Typst 的渲染。
 
-### 全文渲染
-
 ~~~
 ```typst [标题]
 <Typst 代码>
@@ -171,3 +169,36 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     )
 })
 ```
+
+---
+
+## 选项卡
+
+@@@
+@ 选项卡 1
+
+这里是「**选项卡 1**」 的内容
+
+@ 选项卡 2
+
+这里是「**选项卡 2**」 的内容
+
+@ $\LaTeX$ 公式
+
+选项卡也是支持 $\LaTeX$ 的！
+
+$$
+\begin{aligned}
+&\Bigl(f*g\Bigr)(6) \\
+=&\sum_{d\mid 6}f(d)g\biggl(\dfrac{6}{d}\biggr) \\
+=&f(1)g(6)+f(2)g(3)+f(3)g(2)+f(6)g(1)
+\end{aligned}
+$$
+
+@ Lorem
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+@ 空选项卡
+
+@@@
