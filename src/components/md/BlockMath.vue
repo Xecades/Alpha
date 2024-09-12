@@ -8,7 +8,7 @@ const props = defineProps<{ data: string }>();
 
 const parsed: string = render_block(props.data);
 
-/** @see https://github.com/KingSora/OverlayScrollbars/tree/master */
+/** @see https://github.com/KingSora/OverlayScrollbars/ */
 const osOptions: PartialOptions = {
     scrollbars: {
         autoHide: "move",

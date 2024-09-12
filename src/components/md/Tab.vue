@@ -1,42 +1,94 @@
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
+import AnimateHeight from "vue-animate-height";
+
+import type { Ref } from "vue";
 import type { JSX } from "vue/jsx-runtime";
+import type { PartialOptions } from "overlayscrollbars";
 
 const props = defineProps<{
     data: {
-        title: () => JSX.Element;
-        content: () => JSX.Element;
+        title: JSX.Element;
+        content: JSX.Element;
     }[];
 }>();
 
+/** @see https://github.com/KingSora/OverlayScrollbars/ */
+const osOptions: PartialOptions = {
+    scrollbars: {
+        autoHide: "move",
+        autoHideDelay: 500,
+    },
+    overflow: { y: "visible-hidden" },
+};
+
 const active: Ref<number> = ref(0);
+const height: Ref<number | string> = ref("auto");
+
+let observer: ResizeObserver;
+
+onMounted(() => {
+    const target = document.querySelector(".height-listener") as HTMLElement;
+
+    observer = new ResizeObserver(() => {
+        height.value = target.clientHeight;
+    });
+
+    observer.observe(target);
+});
+
+onBeforeUnmount(() => {
+    observer.disconnect();
+});
 </script>
 
 <template>
     <div class="tab">
-        <div class="header">
+        <OverlayScrollbarsComponent
+            element="div"
+            :options="(osOptions as any)"
+            class="header"
+        >
             <div
                 class="cursor item"
                 v-for="(tab, idx) in props.data"
                 @click="active = idx"
                 :class="{ active: idx === active }"
             >
-                <component :is="tab.title()" />
+                <component :is="tab.title" />
             </div>
-        </div>
+        </OverlayScrollbarsComponent>
         <div class="content">
-            <component :is="props.data[active].content()" />
+            <!-- @see https://www.npmjs.com/package/vue-animate-height -->
+            <AnimateHeight contentClass="height-listener" :height="height">
+                <component :is="props.data[active].content" />
+            </AnimateHeight>
         </div>
     </div>
 </template>
 
 <style scoped>
 * {
+    --header-height: 3rem;
+
     --border-color: #222223;
+    --header-color: #b9bcc0;
     --content-background-color: #141415;
     --header-background-color: #1a1a1b;
     --title-hover-color: #242425;
     --title-underline-color: #5d5f61;
+}
+
+@media (prefers-color-scheme: light) {
+    * {
+        --border-color: #e0e0e0;
+        --header-color: #6d6e75;
+        --content-background-color: #f9f9f9;
+        --header-background-color: #f1f1f1;
+        --title-hover-color: #e0e0e0;
+        --title-underline-color: #6e6f77;
+    }
 }
 
 .tab {
@@ -47,17 +99,21 @@ const active: Ref<number> = ref(0);
 }
 
 .header {
-    display: flex;
+    text-wrap: nowrap;
     width: 100%;
+    height: var(--header-height);
     background-color: var(--header-background-color);
     border-bottom: 1px solid var(--border-color);
+    color: var(--header-color);
 }
 
 .header .item {
     display: inline-block;
     padding: 0.5rem 1rem;
+    height: var(--header-height);
+    line-height: calc(var(--header-height) - 1rem);
     font-size: 0.85em;
-
+    flex-shrink: 0;
     transition: background-color 0.2s ease;
 }
 
@@ -65,7 +121,24 @@ const active: Ref<number> = ref(0);
     background-color: var(--title-hover-color);
 }
 
+.header .item::before {
+    content: "";
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.5s ease;
+}
+
 .header .item.active {
+    position: relative;
+}
+
+.header .item.active::before {
+    /** A CSS hack to avoid skipping ink on specific tags :-) */
+    content: "....................................................................";
+    user-select: none;
+    color: transparent;
+    width: calc(100% - 1rem * 2);
+    overflow: hidden;
+    position: absolute;
     text-decoration-line: underline;
     text-underline-offset: 5px;
     text-decoration-style: wavy;
@@ -73,7 +146,22 @@ const active: Ref<number> = ref(0);
 }
 
 .content {
+    --block-extend: 0;
+
     padding: 0.5rem 1.4rem;
     background-color: var(--content-background-color);
+    max-height: 100vh;
+    transition: max-height 0.5s ease;
+}
+
+:global(.height-listener) {
+    /** Fix margin collapse */
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    * {
+        --title-hover-color: none;
+    }
 }
 </style>

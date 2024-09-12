@@ -1,4 +1,4 @@
-const delim: RegExp = /^<p>@ (.*?)<\/p>$/gm;
+const delim: RegExp = /<p>@ (.*?)<\/p>/g;
 const PLACEHOLDER: string = "<TAB_PLACEHOLDER_@@@>";
 
 /**
@@ -8,8 +8,6 @@ const PLACEHOLDER: string = "<TAB_PLACEHOLDER_@@@>";
  * @returns Translated Vue component
  */
 export default (raw: string): string => {
-    // console.log(raw);
-
     const titles: string[] = [];
 
     raw = raw.replace(delim, (_, t) => {
@@ -33,7 +31,7 @@ export default (raw: string): string => {
         const c = content[idx].replaceAll("\n", "");
 
         if (idx !== 0) tabs += ", ";
-        tabs += `{ "title": ()=><>${t}</>, "content": ()=><>${c}</> }`;
+        tabs += `{ "title": <>${t}</>, "content": <>${c}</> }`;
     });
 
     return `<Tab data={[${tabs}]}></Tab>`;

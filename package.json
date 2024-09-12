@@ -34,6 +34,7 @@
         "overlayscrollbars-vue": "^0.5.9",
         "scrollreveal": "^4.0.9",
         "vue": "^3.4.29",
+        "vue-animate-height": "^1.1.2",
         "vue-router": "^4.3.3",
         "vue-scroll-reveal": "^2.1.0"
     },

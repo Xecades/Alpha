@@ -174,6 +174,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## 选项卡
 
+```
+@@@
+@ <选项卡 1>
+
+<选项卡 1 内容>
+
+@ <选项卡 2>
+
+<选项卡 2 内容>
+
+[...]
+
+@@@
+```
+
 @@@
 @ 选项卡 1
 
@@ -199,6 +214,10 @@ $$
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-@ 空选项卡
+@ 一个名字很长很长很长很长的选项卡（而且还有 `code`）
+
+```python
+print("Hello World")
+```
 
 @@@
