@@ -5,8 +5,8 @@ import type { Ref } from "vue";
 import type { JSX } from "vue/jsx-runtime";
 
 const props = defineProps<{
-    /** JSX elements to be lazy-loaded */
-    data: JSX.Element[];
+    /** JSX element to be lazy-loaded */
+    data: JSX.Element;
 }>();
 
 const emit = defineEmits<{
@@ -17,14 +17,15 @@ const emit = defineEmits<{
     update: [index: number];
 }>();
 
+const children: JSX.Element[] = props.data.children as JSX.Element[];
 const queue: Ref<JSX.Element[]> = ref([]);
 
 onMounted(() => {
     let render_cnt: number = 0;
 
     const render = () => {
-        if (render_cnt < props.data.length) {
-            queue.value.push(props.data[render_cnt]);
+        if (render_cnt < children.length) {
+            queue.value.push(children[render_cnt]);
             nextTick(() => emit("update", render_cnt));
 
             render_cnt++;

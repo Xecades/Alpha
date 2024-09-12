@@ -23,7 +23,7 @@ const osOptions: PartialOptions = {
         element="pre"
         :class="`language-${lang} block-code`"
         :options="(osOptions as any)"
-        v-html="decodeURIComponent(html)"
+        v-html="html"
     />
 </template>
 

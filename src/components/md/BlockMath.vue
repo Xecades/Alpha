@@ -6,8 +6,7 @@ import type { PartialOptions } from "overlayscrollbars";
 
 const props = defineProps<{ data: string }>();
 
-const raw: string = decodeURI(props.data);
-const parsed: string = render_block(raw);
+const parsed: string = render_block(props.data);
 
 /** @see https://github.com/KingSora/OverlayScrollbars/tree/master */
 const osOptions: PartialOptions = {

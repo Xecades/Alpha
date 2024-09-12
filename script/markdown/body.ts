@@ -19,6 +19,9 @@ import getEmoji from "../preprocess/utils/md/emoji";
 import typst from "../preprocess/utils/md/typst";
 import tab from "../preprocess/utils/md/tab";
 
+const escape = (s: string): string =>
+    s.replaceAll("\\", "\\\\").replaceAll('"', '\\"').replaceAll("\n", "\\n");
+
 /**
  * Get a markdown-it instance with full support, which is used for main content rendering.
  *
@@ -76,7 +79,7 @@ export default (): MarkdownIt => {
         name: "katex_inline",
         marker: "$",
         renderer: (c: string) =>
-            `<InlineMath data="${encodeURI(c)}"></InlineMath>`,
+            `<InlineMath data={"${escape(c)}"}></InlineMath>`,
     });
 
     md.use(MarkdownItWrapper, {
@@ -84,7 +87,7 @@ export default (): MarkdownIt => {
         name: "katex_block",
         marker: "$$",
         renderer: (c: string) =>
-            `<BlockMath data="${encodeURI(c)}"></BlockMath>`,
+            `<BlockMath data={"${escape(c)}"}></BlockMath>`,
     });
 
     md.use(MarkdownItWrapper, {
@@ -198,16 +201,16 @@ export default (): MarkdownIt => {
             let cap_html = md.renderInline(cap);
             let alt = extractText(cap_html) || "空";
 
-            svg = encodeURIComponent(svg);
+            svg = escape(svg);
 
-            return `<SVGCaptioned svg="${svg}" alt="${alt}">${cap_html}</SVGCaptioned>`;
+            return `<SVGCaptioned svg={"${svg}"} alt="${alt}">${cap_html}</SVGCaptioned>`;
             //
         } else {
             // Process other code block
             let html = originalFence(tokens, idx, options, env, self).trim();
 
             html = html.replace(/^<pre.*?>(.*)<\/pre>$/gs, (...m) => m[1]);
-            html = html.replaceAll('"', '\\"').replaceAll("\n", "\\n");
+            html = escape(html);
 
             return `<BlockCode lang="${lang}" html={"${html}"}></BlockCode>`;
             //

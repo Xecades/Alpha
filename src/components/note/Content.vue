@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 /**
  * @todo 图片缓存，不能每次都重新加载一遍
  */
@@ -29,7 +29,7 @@ const jsx: ComputedRef<() => Promise<any>> = computed(
     () => route.meta.body as any
 );
 
-const body: ShallowRef<JSX.Element[]> = shallowRef([]);
+const body: ShallowRef<JSX.Element> = shallowRef(<></>);
 const lazyload_key: Ref<string> = ref("");
 const rendering: Ref<boolean> = ref(true);
 const navigation: Ref<boolean> = ref(false);

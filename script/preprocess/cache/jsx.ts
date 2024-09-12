@@ -76,11 +76,10 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
             cache += `import ${name} from "@/components/md/${comp}.vue";\n`;
         }
 
-        cache += `export default [\n`;
-        for (const part of item.parts) {
-            cache += `${part},\n`;
-        }
-        cache += `];\n`;
+        // Remove comments from the JSX content.
+        const html: string = item.html.replace(/<!--.*?-->/g, "");
+
+        cache += `export default <>${html}</>`;
 
         await fs.outputFile(dist, cache);
     }

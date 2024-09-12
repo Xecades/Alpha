@@ -2,14 +2,12 @@ import fs from "fs/promises";
 
 import traverse from "../traverse";
 import _render from "./render";
-import _split from "./split";
 import _text from "./text";
 import _toc from "./toc";
 import _fm from "./fm";
 
 import type {
     ComponentString,
-    HTMLString,
     MarkdownContent,
     MarkdownHeader,
     ParsedMarkdown,
@@ -41,11 +39,10 @@ export default async (src: string): Promise<ParsedMarkdown[]> => {
 
         const toc: MarkdownHeader[] = _toc(content);
         const html: ComponentString = _render(content);
-        const parts: HTMLString[] = _split(html);
 
         const text: string = _text(html);
 
-        res.push({ pathname, stats, attr, raw, toc, html, text, parts });
+        res.push({ pathname, stats, attr, raw, toc, html, text });
     }
 
     return res;

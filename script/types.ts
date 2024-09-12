@@ -96,9 +96,6 @@ export interface ParsedMarkdown extends TraverseResult {
     /** Rendered HTML */
     html: ComponentString;
 
-    /** HTML parts */
-    parts: HTMLString[];
-
     /** Plain text extracted from HTML */
     text: string;
 }

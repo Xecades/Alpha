@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const props = defineProps<{ svg: string; alt: string }>();
-const svg = decodeURIComponent(props.svg);
 </script>
 
 <template>
