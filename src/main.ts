@@ -37,6 +37,8 @@ import {
     faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
+// @ts-ignore
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // Wait for document ready
 const documentReady = () => {
@@ -100,7 +102,8 @@ async function main() {
         faExclamationTriangle,
         faLink,
         faArrowUpRightFromSquare,
-        faStar
+        faStar,
+        faGithub
     );
 
     const app = createApp(App);

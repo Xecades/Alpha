@@ -46,9 +46,14 @@ export default (): MarkdownIt => {
 
     /**
      * @name markdown-it-mdc
+     * @note Disable `inlineSpan` to avoid conflict with {@link markdown-it-task-checkbox}
      * @see https://github.com/antfu/markdown-it-mdc
      */
-    md.use(MarkdownItMDC);
+    md.use(MarkdownItMDC, {
+        syntax: {
+            inlineSpan: false,
+        },
+    });
 
     /**
      * @name markdown-it-task-checkbox

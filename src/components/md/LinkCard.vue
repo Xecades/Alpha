@@ -3,6 +3,8 @@ import LinkTo from "../LinkTo.vue";
 
 const props = defineProps<{ href: string }>();
 const external: boolean = !props.href.startsWith("/");
+
+const isGitHub: boolean = /github\.com/.test(props.href);
 </script>
 
 <template>
@@ -25,7 +27,8 @@ const external: boolean = !props.href.startsWith("/");
 
             <!-- Right -->
             <div class="logo">
-                <font-awesome-icon :icon="['fas', 'link']" />
+                <font-awesome-icon v-if="isGitHub" :icon="['fab', 'github']" />
+                <font-awesome-icon v-else :icon="['fas', 'link']" />
             </div>
         </LinkTo>
     </div>
@@ -63,8 +66,8 @@ const external: boolean = !props.href.startsWith("/");
 }
 
 .linkcard > * {
-    display: block;
     width: var(--width);
+    max-width: calc(100% - 1.5rem * 2 - 0.5rem);
     height: var(--height);
     margin: 2rem auto;
     padding: 0.75rem 1.5rem;
@@ -92,6 +95,7 @@ const external: boolean = !props.href.startsWith("/");
 
 .content {
     flex: 1;
+    width: calc(100% - var(--logo-size) - var(--gap));
 }
 
 .content .item {
@@ -100,7 +104,6 @@ const external: boolean = !props.href.startsWith("/");
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: calc(var(--width) - var(--logo-size) - var(--gap));
 }
 
 .content .item.title {

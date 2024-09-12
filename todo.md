@@ -7,8 +7,8 @@
 
 ## 当前 TODO
 
+ - block code meta 参数的处理（转义、引号）
  - Typst 添加中文字体的支持
- - <li class="task-list-item"><input type="checkbox" id="cbx_0" checked="true" disabled="true" /><label for="cbx_0"><span>x</span> 选中</label></li> span x 去掉
  - 搜索支持上下键选择，回车跳转
  - Snippet 支持：参考 https://xdino.vercel.app/articles/FunctionModuleTest，https://squidfunk.github.io/mkdocs-material/reference/admonitions/
  - 刷新记忆阅读进度
