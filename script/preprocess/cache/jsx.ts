@@ -9,6 +9,19 @@ import path from "path";
 import type { BASE, ParsedMarkdown } from "../../types";
 
 /**
+ * Get names of markdown components in the directory.
+ *
+ * @param dir - The directory where markdown components are stored
+ * @returns Names of markdown components
+ */
+const getMarkdownComps = (dir: string): string[] => {
+    const files = fs.readdirSync(dir);
+    return files
+        .filter((file) => file.endsWith(".vue"))
+        .map((file) => file.replace(/\.vue$/, ""));
+};
+
+/**
  * Convert local markdown file path to JSX path.
  *
  * @param pathname - Path to local markdown file
@@ -39,15 +52,8 @@ export const to_JSX_path = (pathname: string, base: BASE): string => {
  * @param base - The base name for markdown caching.
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
-    const injections: string[] = [
-        "Anchor",
-        "BlockMath",
-        "BlockCode",
-        "InlineMath",
-        "ImageCaptioned",
-        "LinkCard",
-        "Note",
-    ];
+    const MD_DIR = "./src/components/md";
+    const injections: string[] = getMarkdownComps(MD_DIR);
 
     for (const item of parsed) {
         const dist: string = to_JSX_path(item.pathname, base);

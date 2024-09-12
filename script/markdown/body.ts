@@ -16,6 +16,7 @@ import MarkdownItWrapper from "../markdown-it-wrapper";
 
 import extractText from "../preprocess/utils/md/text";
 import getEmoji from "../preprocess/utils/md/emoji";
+import typst from "../preprocess/utils/md/typst";
 
 /**
  * Get a markdown-it instance with full support, which is used for main content rendering.
@@ -171,15 +172,32 @@ export default (): MarkdownIt => {
 
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
         const { info } = tokens[idx];
+        const lang = info.split(" ")[0] || "plain";
+        const meta = info.split(" ").slice(1).join(" ");
 
-        const lang = info || "plain";
+        /** @todo 处理 meta 中的转义、引号等 */
 
-        let html = originalFence(tokens, idx, options, env, self).trim();
+        if (lang === "typst" || lang === "typ") {
+            // Process Typst code block
+            let svg = typst(tokens[idx].content);
+            let cap = meta || "";
+            let cap_html = md.renderInline(cap);
+            let alt = extractText(cap_html) || "空";
 
-        html = html.replace(/^<pre.*?>(.*)<\/pre>$/gs, (...m) => m[1]);
-        html = encodeURIComponent(html);
+            svg = encodeURIComponent(svg);
 
-        return `<BlockCode lang="${lang}" html="${html}"></BlockCode>`;
+            return `<SVGCaptioned svg="${svg}" alt="${alt}">${cap_html}</SVGCaptioned>`;
+            //
+        } else {
+            // Process other code block
+            let html = originalFence(tokens, idx, options, env, self).trim();
+
+            html = html.replace(/^<pre.*?>(.*)<\/pre>$/gs, (...m) => m[1]);
+            html = encodeURIComponent(html);
+
+            return `<BlockCode lang="${lang}" html="${html}"></BlockCode>`;
+            //
+        }
     };
 
     return md;

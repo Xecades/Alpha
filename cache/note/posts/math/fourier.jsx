@@ -1,6 +1,6 @@
 import anchor from "@/components/md/Anchor.vue";
-import blockmath from "@/components/md/BlockMath.vue";
 import blockcode from "@/components/md/BlockCode.vue";
+import blockmath from "@/components/md/BlockMath.vue";
 import inlinemath from "@/components/md/InlineMath.vue";
 import note from "@/components/md/Note.vue";
 export default [

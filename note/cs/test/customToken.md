@@ -8,7 +8,7 @@ title: 自定义语法
 
 ### 行内公式
 
-```md
+```
 ... $<公式内容>$ ...
 ```
 
@@ -18,7 +18,7 @@ title: 自定义语法
 
 ### 行间公式
 
-```md
+```
 $$
 <公式内容>
 $$
@@ -38,7 +38,7 @@ $$
 
 使用 [`Node-emoji` 库](https://github.com/omnidan/node-emoji)转译 Emoji。
 
-```md
+```
 ... :<emoji>: ...
 ```
 
@@ -50,7 +50,7 @@ $$
 
 适合用于展示名言、引用等。
 
-```md
+```
 ::quote
 <引言内容>
 ::
@@ -79,7 +79,7 @@ $$
 
 功能上类似于 MkDocs Material 的 [Admonitions](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)，用于提供额外信息。
 
-```md
+```
 ::note{[default] | primary | success | info | warning | danger}
 <Note 内容>
 ::
@@ -121,7 +121,7 @@ $\text{P} \neq \text{NP}$
 
 ## 链接卡片
 
-```md
+```
 ::linkcard{href="<链接地址>"}
 <链接名称>
 ::
@@ -138,3 +138,36 @@ $\mathfrak{Xecades} :: \alpha$ 的 GitHub 仓库
 ::linkcard{href="/"}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 ::
+
+---
+
+## Typst 渲染
+
+基于 [Typst.ts](https://myriad-dreamin.github.io/typst.ts) 实现 Typst 的渲染。
+
+### 全文渲染
+
+~~~
+```typst [标题]
+<Typst 代码>
+```
+~~~
+
+```typst 一棵来自 ***Typst*** 的树
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([15], ([13], [12], [14]), ([17], [16], ([18], [], [18])))
+    )
+})
+```

@@ -7,6 +7,7 @@
 
 ## 当前 TODO
 
+ - Typst 添加中文字体的支持
  - <li class="task-list-item"><input type="checkbox" id="cbx_0" checked="true" disabled="true" /><label for="cbx_0"><span>x</span> 选中</label></li> span x 去掉
  - 搜索支持上下键选择，回车跳转
  - Snippet 支持：参考 https://xdino.vercel.app/articles/FunctionModuleTest，https://squidfunk.github.io/mkdocs-material/reference/admonitions/
@@ -24,7 +25,6 @@
 
 ## 暂时不重要的 TODO
 
- - Ctrl+K 快捷键打开搜索
  - 打印样式
  - 动画顺序有问题
  - 导航时标题有些时候动画会消失
@@ -41,7 +41,6 @@
  - Safari 卸载 DOM 的时候很卡（DOM 渲染完成后再加载 KaTeX？）
  - Safari 控制台字体问题
  - 标点挤压，需要中英文排版系统
- - justify 导致间距不一致
  - 搜索数据库中空格的处理（要不直接删掉？）
  - 加一些彩蛋（例如 https://www.kirilv.com/canvas-confetti/）
  - CI 流程：目前是本地预处理后连着 cache 一起上传，考虑配置 Vercel 保存临时文件（只有 Serverless 能用：https://medium.com/@nksCodingLearnings/how-to-read-and-write-files-in-next-js-on-a-vercel-deployed-website-c1e9ea606cb6，写个 Serverless？）
@@ -49,14 +48,12 @@
 ## Markdown
 
  - 代码块功能按钮（复制，etc.）
- - TikZ 支持
 
 ## 长期
 
  - 搓一个评论系统（考虑使用 Serverless）
  - CDN
  - Status 页面（如果有了后端）
- - Typst 支持（预先 `typst c -f svg xxx.typ` 编译得到 svg）
  - 联动 Cursor.js（参考 iPad 光标效果）
 
 ## 有丶意思
