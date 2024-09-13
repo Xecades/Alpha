@@ -6,13 +6,14 @@
  - ScrollReveal 导致评论系统功能按钮有时候不显示
 
 ## 当前 TODO
-
+ 
+ - KaTeX 中文字体，手机上不显示
+ - 完成折叠面板
  - Code block 添加标题
  - block code meta 参数的处理（转义、引号）
  - Typst 添加中文字体的支持
- - 搜索支持上下键选择，回车跳转
- - Snippet 支持：参考 https://xdino.vercel.app/articles/FunctionModuleTest，https://squidfunk.github.io/mkdocs-material/reference/admonitions/
  - 刷新记忆阅读进度
+ - 搜索支持上下键选择，回车跳转
  - Markdown 引用图片，相对路径的处理
  - 评论系统支持 Cursor.js
  - 页面宽度改变时，Leftbar 实现动态响应

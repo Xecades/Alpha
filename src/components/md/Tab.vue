@@ -48,15 +48,17 @@ onBeforeUnmount(() => {
         <OverlayScrollbarsComponent
             element="div"
             :options="(osOptions as any)"
-            class="header"
+            class="header-container"
         >
-            <div
-                class="cursor item"
-                v-for="(tab, idx) in props.data"
-                @click="active = idx"
-                :class="{ active: idx === active }"
-            >
-                <component :is="tab.title" />
+            <div class="header">
+                <div
+                    class="cursor item"
+                    v-for="(tab, idx) in props.data"
+                    @click="active = idx"
+                    :class="{ active: idx === active }"
+                >
+                    <component :is="tab.title" />
+                </div>
             </div>
         </OverlayScrollbarsComponent>
         <div class="content">
@@ -98,23 +100,26 @@ onBeforeUnmount(() => {
     overflow: hidden;
 }
 
-.header {
-    text-wrap: nowrap;
-    width: 100%;
+.header-container {
     height: var(--header-height);
-    background-color: var(--header-background-color);
     border-bottom: 1px solid var(--border-color);
+    background-color: var(--header-background-color);
+}
+
+.header {
+    display: flex;
     color: var(--header-color);
+    height: var(--header-height);
 }
 
 .header .item {
     display: inline-block;
     padding: 0.5rem 1rem;
-    height: var(--header-height);
     line-height: calc(var(--header-height) - 1rem);
     font-size: 0.85em;
     flex-shrink: 0;
     transition: background-color 0.2s ease;
+    position: relative;
 }
 
 .header .item:hover {
@@ -127,13 +132,9 @@ onBeforeUnmount(() => {
     transition: text-decoration-color 0.5s ease;
 }
 
-.header .item.active {
-    position: relative;
-}
-
 .header .item.active::before {
     /** A CSS hack to avoid skipping ink on specific tags :-) */
-    content: "....................................................................";
+    content: "............................................................................................................................................................................................................";
     user-select: none;
     color: transparent;
     width: calc(100% - 1rem * 2);
