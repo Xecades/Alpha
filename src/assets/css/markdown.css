@@ -336,6 +336,7 @@
     padding: 0 var(--quote-padding-lr);
     color: var(--quote-color);
     text-align: center;
+    position: relative;
 }
 
 .markdown quote::before,

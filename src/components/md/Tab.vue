@@ -3,7 +3,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
 import AnimateHeight from "vue-animate-height";
 
-import type { Ref } from "vue";
+import type { Ref, VNodeRef } from "vue";
 import type { JSX } from "vue/jsx-runtime";
 import type { PartialOptions } from "overlayscrollbars";
 
@@ -25,17 +25,19 @@ const osOptions: PartialOptions = {
 
 const active: Ref<number> = ref(0);
 const height: Ref<number | string> = ref("auto");
+const target: VNodeRef = ref();
 
 let observer: ResizeObserver;
 
 onMounted(() => {
-    const target = document.querySelector(".height-listener") as HTMLElement;
+    const el = target.value.$el.querySelector(
+        ".height-listener"
+    ) as HTMLElement;
 
     observer = new ResizeObserver(() => {
-        height.value = target.clientHeight;
+        height.value = el.clientHeight;
     });
-
-    observer.observe(target);
+    observer.observe(el);
 });
 
 onBeforeUnmount(() => {
@@ -63,7 +65,11 @@ onBeforeUnmount(() => {
         </OverlayScrollbarsComponent>
         <div class="content">
             <!-- @see https://www.npmjs.com/package/vue-animate-height -->
-            <AnimateHeight contentClass="height-listener" :height="height">
+            <AnimateHeight
+                ref="target"
+                contentClass="height-listener"
+                :height="height"
+            >
                 <component :is="props.data[active].content" />
             </AnimateHeight>
         </div>
@@ -155,14 +161,16 @@ onBeforeUnmount(() => {
     transition: max-height 0.5s ease;
 }
 
-:global(.height-listener) {
-    /** Fix margin collapse */
-    overflow: hidden;
-}
-
 @media (max-width: 768px) {
     * {
         --title-hover-color: none;
     }
+}
+</style>
+
+<style>
+.height-listener {
+    /** Fix margin collapse */
+    overflow: hidden;
 }
 </style>
