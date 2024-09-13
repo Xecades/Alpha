@@ -7,10 +7,13 @@
 
 ## 当前 TODO
 
- - watch 改 watchEffect
+ - quote right 的 custom-element warning
+ - fold 内的代码块也 immensive
+ - tab fold 嵌套，高度改变会出问题
+ - :xxx: 语法支持 fontawesome
+ - fold、tab 等支持搜索
  - 右边栏改 JSX
  - KaTeX 中文字体，手机上不显示
- - 完成折叠面板
  - Code block 添加标题
  - block code meta 参数的处理（转义、引号）
  - Typst 添加中文字体的支持

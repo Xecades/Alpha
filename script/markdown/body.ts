@@ -308,5 +308,19 @@ export default (): MarkdownIt => {
         );
     };
 
+    // The original h1 syntax is banned, instead it is used as tab panel delimiter.
+    // So iterate through all h1 tokens and replace them with `delim`.
+    md.core.ruler.before("anchor", "snippet_tab_replace_h1", (state) => {
+        for (let i = 0; i < state.tokens.length; i++) {
+            if (state.tokens[i].tag !== "h1") continue;
+
+            let is_open: boolean = state.tokens[i].type === "heading_open";
+
+            state.tokens[i].type = "delim_" + (is_open ? "open" : "close");
+        }
+    });
+
+    // console.log(md.core.ruler.__rules__.map((r) => r.name));
+
     return md;
 };

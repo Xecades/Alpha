@@ -10,7 +10,7 @@ import type { MarkdownContent, MarkdownHeader } from "../../../types";
  * @returns Headers extracted from markdown
  */
 export default (content: MarkdownContent): MarkdownHeader[] => {
-    const header_match = /^ *#{1,6} /s;
+    const header_match = /^ *#{2,6} /s;
     const md: MarkdownIt = tocMD();
 
     let lines = content.split("\n");

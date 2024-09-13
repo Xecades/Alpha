@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import {
+    computed,
+    nextTick,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    useSlots,
+    watch,
+} from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
 import AnimateHeight from "vue-animate-height";
 
@@ -7,12 +15,30 @@ import type { Ref, VNodeRef } from "vue";
 import type { JSX } from "vue/jsx-runtime";
 import type { PartialOptions } from "overlayscrollbars";
 
-const props = defineProps<{
-    data: {
-        title: JSX.Element;
-        content: JSX.Element;
-    }[];
-}>();
+type TabData = {
+    title: JSX.Element[];
+    content: JSX.Element[];
+};
+
+/** Map slots to tab data. */
+const mapData = (parts: JSX.Element[]): TabData[] => {
+    const res: TabData[] = [];
+
+    for (const part of parts) {
+        // <h1> is used as title
+        if (part.type === "h1") {
+            res.push({
+                title: part.children as JSX.Element[],
+                content: [],
+            });
+        } else {
+            const last = res.length - 1;
+            res[last].content.push(part);
+        }
+    }
+
+    return res;
+};
 
 /** @see https://github.com/KingSora/OverlayScrollbars/ */
 const osOptions: PartialOptions = {
@@ -25,16 +51,39 @@ const osOptions: PartialOptions = {
 
 const active: Ref<number> = ref(0);
 const height: Ref<number | string> = ref("auto");
+
 const target: VNodeRef = ref();
+const listener: Ref<HTMLElement> = computed(() =>
+    target.value.$el.querySelector(".height-listener")
+);
+
+const parts: Ref<JSX.Element[]> = computed(() => useSlots().default!());
+const data: Ref<TabData[]> = computed(() => mapData(parts.value));
+
+const is_immensive: Ref<boolean> = ref(false);
 
 let observer: ResizeObserver;
 
-onMounted(() => {
-    const el = target.value.$el.querySelector(
-        ".height-listener"
-    ) as HTMLElement;
+// If current tab is a single block, then set immensive mode.
+watch(
+    active,
+    async () => {
+        await nextTick();
+        const children = listener.value.children;
 
-    observer = new ResizeObserver(() => {
+        is_immensive.value =
+            children.length === 1 &&
+            (children[0].classList.contains("block-code") ||
+                children[0].tagName === "QUOTE");
+    },
+    { immediate: true }
+);
+
+onMounted(() => {
+    const el: HTMLElement = listener.value;
+
+    observer = new ResizeObserver(async () => {
+        await nextTick();
         height.value = el.clientHeight;
     });
     observer.observe(el);
@@ -55,22 +104,22 @@ onBeforeUnmount(() => {
             <div class="header">
                 <div
                     class="cursor item"
-                    v-for="(tab, idx) in props.data"
+                    v-for="(tab, idx) in data"
                     @click="active = idx"
                     :class="{ active: idx === active }"
                 >
-                    <component :is="tab.title" />
+                    <component :is="() => tab.title" />
                 </div>
             </div>
         </OverlayScrollbarsComponent>
-        <div class="content">
+        <div class="content" :class="{ immensive: is_immensive }">
             <!-- @see https://www.npmjs.com/package/vue-animate-height -->
             <AnimateHeight
                 ref="target"
                 contentClass="height-listener"
                 :height="height"
             >
-                <component :is="props.data[active].content" />
+                <component :is="() => data[active].content" />
             </AnimateHeight>
         </div>
     </div>
@@ -85,7 +134,7 @@ onBeforeUnmount(() => {
     --content-background-color: #f9f9f9;
     --header-background-color: #f1f1f1;
     --title-hover-color: #e0e0e0;
-    --title-underline-color: #6e6f77;
+    --title-underline-color: #9e9ea2;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -110,6 +159,10 @@ onBeforeUnmount(() => {
     height: var(--header-height);
     border-bottom: 1px solid var(--border-color);
     background-color: var(--header-background-color);
+}
+
+.header-container :global(.os-scrollbar-horizontal) {
+    --os-size: 7px;
 }
 
 .header {
@@ -154,21 +207,34 @@ onBeforeUnmount(() => {
 
 .content {
     --block-extend: 0;
+    --listener-padding: 0.5rem 1.4rem;
 
-    padding: 0.5rem 1.4rem;
     background-color: var(--content-background-color);
+}
+
+.content.immensive {
+    --listener-padding: 0;
+}
+
+.content :global(.height-listener) {
+    padding: var(--listener-padding);
+    /** Fix margin collapse */
+    overflow: hidden;
+}
+
+.content.immensive .block-code {
+    margin: 0;
+    border: none;
+    background: unset;
+}
+
+.content.immensive quote {
+    margin: 3rem 1.4rem;
 }
 
 @media (max-width: 768px) {
     * {
         --title-hover-color: none;
     }
-}
-</style>
-
-<style>
-.height-listener {
-    /** Fix margin collapse */
-    overflow: hidden;
 }
 </style>
