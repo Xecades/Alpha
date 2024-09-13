@@ -185,7 +185,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <选项卡 2 内容>
 
 [...]
-
 @@@
 ```
 
@@ -214,10 +213,79 @@ $$
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-@ 一个名字很长很长很长很长的选项卡（而且还有 `code`）
+@ 一个名字很长很长很长很长很长很长的选项卡（而且名字里面还有 `code`）
 
 ```python
 print("Hello World")
 ```
+@@@
 
 @@@
+@ 唯一一个 Tab！
+
+::note
+这个选项卡只有这一个 Tab
+::
+@@@
+
+---
+
+## 折叠面板
+
+```
+::fold{title="[标题]" [expand] [default] | primary | success | info | warning | danger}
+<折叠内容>
+::
+```
+
+::fold{title="默认展开的 `default` 折叠面板" expand}
+这里是 `fold.default` 的内容
+::
+
+::fold{title="`primary` 折叠面板" primary}
+这里是 `fold.primary` 的内容
+::
+
+::fold{title="`success` 折叠面板" success}
+这里是 `fold.success` 的内容
+::
+
+::fold{title="`info` 折叠面板" info}
+这里是 `fold.info` 的内容
+::
+
+::fold{title="`warning` 折叠面板" warning}
+这里是 `fold.warning` 的内容
+::
+
+::fold{title="`danger` 折叠面板" danger}
+这里是 `fold.danger` 的内容
+::
+
+::fold{title="标题是支持 $\LaTeX$ 的" expand success}
+折叠面板也支持 $\LaTeX$！
+
+$$
+\begin{aligned}
+&\Bigl(f*g\Bigr)(6) \\
+=&\sum_{d\mid 6}f(d)g\biggl(\dfrac{6}{d}\biggr) \\
+=&f(1)g(6)+f(2)g(3)+f(3)g(2)+f(6)g(1)
+\end{aligned}
+$$
+::
+
+::fold{title="Lorem" danger}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Veniam irure ipsum dolore dolore Lorem voluptate adipisicing eiusmod minim. Eu incididunt enim irure nisi. Amet eu nostrud irure Lorem mollit eu ipsum excepteur cillum irure in sint reprehenderit deserunt. Occaecat adipisicing culpa excepteur magna id dolor exercitation ut ea dolor ut veniam est eiusmod. Consequat qui ut labore dolor ut. Ipsum ullamco commodo veniam occaecat fugiat sint consectetur nisi deserunt sunt ullamco et veniam. Do commodo mollit voluptate veniam ipsum irure dolore nisi.
+::
+
+::fold{primary}
+这个折叠面板没有标题
+::
+
+::fold{title="这个折叠面板的标题真的真的真的真的真的真的真的真的真的真的真的真的非常的长，而且里面还有 `code` 块"}
+```python
+print("Hello World")
+```
+::

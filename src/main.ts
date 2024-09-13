@@ -18,6 +18,7 @@ import "overlayscrollbars/overlayscrollbars.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
+    faAngleDown,
     faAngleRight,
     faArrowUpRightFromSquare,
     faAsterisk,
@@ -86,6 +87,7 @@ async function main() {
 
     library.add(
         faAngleRight,
+        faAngleDown,
         faBars,
         faMagnifyingGlass,
         faCaretRight,

@@ -6,7 +6,9 @@
  - ScrollReveal 导致评论系统功能按钮有时候不显示
 
 ## 当前 TODO
- 
+
+ - watch 改 watchEffect
+ - 右边栏改 JSX
  - KaTeX 中文字体，手机上不显示
  - 完成折叠面板
  - Code block 添加标题

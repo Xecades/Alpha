@@ -3,6 +3,8 @@ import bodyMD from "../../../markdown/body";
 import type MarkdownIt from "markdown-it";
 import type { ComponentString, MarkdownContent } from "../../../types";
 
+const md: MarkdownIt = bodyMD();
+
 /**
  * Render markdown content to HTML.
  *
@@ -10,7 +12,5 @@ import type { ComponentString, MarkdownContent } from "../../../types";
  * @returns HTML string, which may contain JSX / Vue element(s)
  */
 export default (content: MarkdownContent): ComponentString => {
-    const md: MarkdownIt = bodyMD();
-
     return md.render(content);
 };

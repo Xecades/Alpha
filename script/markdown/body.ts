@@ -1,5 +1,6 @@
 import MarkdownIt from "markdown-it";
 import type Token from "markdown-it/lib/token.d.mts";
+import type { RenderRule } from "markdown-it/lib/renderer.mjs";
 
 import MarkdownItAnchor from "markdown-it-anchor";
 import MarkdownItPrism from "markdown-it-prism";
@@ -154,6 +155,9 @@ export default (): MarkdownIt => {
     /**
      * Custom Functions
      */
+    const defaultRender: RenderRule = (tokens, idx, options, env, self) =>
+        self.renderToken(tokens, idx, options);
+
     // 图片渲染成 Vue 组件
     md.renderer.rules.image = function (tokens, idx, options, env, self) {
         let src = tokens[idx].attrGet("src");
@@ -169,11 +173,7 @@ export default (): MarkdownIt => {
     };
 
     // 标题渲染成 Vue 组件
-    const originalHeadingOpen =
-        md.renderer.rules.heading_open ||
-        function (tokens, idx, options, env, self) {
-            return self.renderToken(tokens, idx, options);
-        };
+    const originalHeadingOpen = md.renderer.rules.heading_open || defaultRender;
 
     md.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
         tokens[idx].attrSet("class", "heading");
@@ -181,11 +181,7 @@ export default (): MarkdownIt => {
     };
 
     // 代码块渲染成 Vue 组件
-    const originalFence =
-        md.renderer.rules.fence ||
-        function (tokens, idx, options, env, self) {
-            return self.renderToken(tokens, idx, options);
-        };
+    const originalFence = md.renderer.rules.fence || defaultRender;
 
     md.renderer.rules.fence = (tokens, idx, options, env, self) => {
         const { info } = tokens[idx];
@@ -215,6 +211,101 @@ export default (): MarkdownIt => {
             return `<BlockCode lang="${lang}" html={"${html}"}></BlockCode>`;
             //
         }
+    };
+
+    // MDC 预处理
+    const originalMdcBlockOpen =
+        md.renderer.rules.mdc_block_open || defaultRender;
+
+    const clearAttr = (token: Token, name: string) => {
+        let idx = token.attrIndex(name);
+        if (idx !== -1) {
+            token.attrs!.splice(idx, 1);
+        }
+    };
+
+    md.renderer.rules.mdc_block_open = (tokens, idx, options, env, self) => {
+        const token = tokens[idx];
+        let override: string | undefined = undefined;
+
+        // Translate boolean types to type attribute
+        // e.g. <note default="true">  ->  <note type="default">
+        if (token.info === "fold" || token.info === "note") {
+            const TYPES: string[] = [
+                "default",
+                "primary",
+                "success",
+                "info",
+                "warning",
+                "danger",
+            ];
+
+            for (let type of TYPES) {
+                if (token.attrGet(type) === "true") {
+                    token.attrSet("type", type);
+                }
+                clearAttr(token, type);
+            }
+        }
+
+        // Parse markdown string in attributes
+        // e.g. <fold title="**primary**"> ->  <fold title={<strong>primary</strong>}>
+        //
+        // This is achieved by firstly replacing the markdown string with a placeholder,
+        // then rendering the markdown string and replacing the placeholder.
+        const placeholder = (id: string) => `__mdc_placeholder_[[${id}]]__`;
+        const MD_TARGETS: Record<string, string[]> = {
+            fold: ["title"],
+        };
+
+        if (MD_TARGETS[token.info]) {
+            let attrs = MD_TARGETS[token.info];
+            let values: Record<string, string> = {};
+
+            for (let attr of attrs) {
+                let value = token.attrGet(attr);
+                if (value !== null) {
+                    let ph = placeholder(attr);
+                    token.attrSet(attr, ph);
+                    values[attr] = value;
+                }
+            }
+
+            override = originalMdcBlockOpen(tokens, idx, options, env, self);
+
+            for (let attr of attrs) {
+                if (values.hasOwnProperty(attr)) {
+                    let ph = placeholder(attr);
+                    let rendered = md.renderInline(values[attr]).trim();
+
+                    override = override.replace(
+                        `"${ph}"`,
+                        `{<>${rendered}</>}`
+                    );
+                }
+            }
+        }
+
+        // Translate string "true" / "false" to boolean true / false
+        // e.g. <fold expand="true">  ->  <fold expand>
+        const BOOL_TARGETS: Record<string, string[]> = {
+            fold: ["expand"],
+        };
+
+        if (BOOL_TARGETS[token.info]) {
+            override =
+                override ||
+                originalMdcBlockOpen(tokens, idx, options, env, self);
+
+            let attrs = BOOL_TARGETS[token.info];
+            for (let attr of attrs) {
+                override = override.replace(` ${attr}="true"`, ` ${attr}`);
+            }
+        }
+
+        return (
+            override || originalMdcBlockOpen(tokens, idx, options, env, self)
+        );
     };
 
     return md;

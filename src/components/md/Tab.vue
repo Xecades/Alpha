@@ -80,22 +80,22 @@ onBeforeUnmount(() => {
 * {
     --header-height: 3rem;
 
-    --border-color: #222223;
-    --header-color: #b9bcc0;
-    --content-background-color: #141415;
-    --header-background-color: #1a1a1b;
-    --title-hover-color: #242425;
-    --title-underline-color: #5d5f61;
+    --border-color: #e0e0e0;
+    --header-color: #6d6e75;
+    --content-background-color: #f9f9f9;
+    --header-background-color: #f1f1f1;
+    --title-hover-color: #e0e0e0;
+    --title-underline-color: #6e6f77;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
     * {
-        --border-color: #e0e0e0;
-        --header-color: #6d6e75;
-        --content-background-color: #f9f9f9;
-        --header-background-color: #f1f1f1;
-        --title-hover-color: #e0e0e0;
-        --title-underline-color: #6e6f77;
+        --border-color: #222223;
+        --header-color: #b9bcc0;
+        --content-background-color: #141415;
+        --header-background-color: #1a1a1b;
+        --title-hover-color: #242425;
+        --title-underline-color: #5d5f61;
     }
 }
 
@@ -157,8 +157,6 @@ onBeforeUnmount(() => {
 
     padding: 0.5rem 1.4rem;
     background-color: var(--content-background-color);
-    max-height: 100vh;
-    transition: max-height 0.5s ease;
 }
 
 @media (max-width: 768px) {

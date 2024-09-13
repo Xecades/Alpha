@@ -365,6 +365,49 @@
     background-position: 100% 7px;
 }
 
+/* Note & Fold color theme */
+.colors.default {
+    --background-color: #7777771a;
+    --icon-color: #77777799;
+    --content-code-color: #7777771c;
+    --border-color: #7777772b;
+}
+
+.colors.primary {
+    --background-color: #d400ff1a;
+    --icon-color: #d400ff99;
+    --content-code-color: #d400ff1c;
+    --border-color: #d400ff2b;
+}
+
+.colors.info {
+    --background-color: #0070f31a;
+    --icon-color: #0070f399;
+    --content-code-color: #0070f31c;
+    --border-color: #0070f32b;
+}
+
+.colors.success {
+    --background-color: #19cc961a;
+    --icon-color: #19cc9699;
+    --content-code-color: #19cc961c;
+    --border-color: #19cc962b;
+}
+
+.colors.warning {
+    --background-color: #f5a6231a;
+    --icon-color: #f5a62399;
+    --content-code-color: #f5a6231c;
+    --border-color: #f5a6232b;
+}
+
+.colors.danger {
+    --background-color: #ee00001a;
+    --icon-color: #ee000099;
+    --content-code-color: #ee00001c;
+    --border-color: #ee00002b;
+}
+
 @media (max-width: 768px) {
     :root {
         --block-extend: -1rem;
