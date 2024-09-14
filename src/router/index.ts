@@ -5,8 +5,16 @@ import setupGuards from "./guards";
 
 import type { RouterScrollBehavior } from "vue-router";
 
-const scrollBehavior: RouterScrollBehavior = (_, __, saved) =>
-    saved ?? { left: 0, top: 0 };
+const scrollBehavior: RouterScrollBehavior = (_, __, saved) => {
+    let target = saved ?? { left: 0, top: 0 };
+
+    const el = document.getElementById("app")!;
+    const minHeight = target.top + window.innerHeight;
+
+    el.style.setProperty("min-height", `${minHeight}px`);
+
+    return target;
+};
 
 const router = createRouter({
     routes,

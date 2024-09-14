@@ -20,7 +20,6 @@
  - Code block 添加标题
  - block code meta 参数的处理（转义、引号）
  - Typst 添加中文字体的支持
- - 刷新记忆阅读进度
  - 搜索支持上下键选择，回车跳转
  - Markdown 引用图片，相对路径的处理
  - 评论系统支持 Cursor.js

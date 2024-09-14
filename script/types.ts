@@ -184,6 +184,9 @@ export interface RouteMeta {
 
     /** Page type */
     type: "index" | "post";
+
+    /** Route scroll to */
+    scrollTo: { left: number; top: number };
 }
 
 /** Cached search function. */
