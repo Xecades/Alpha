@@ -7,12 +7,14 @@
 
 ## 当前 TODO
 
+ - customToken 源代码，加上 icon
+ - 手机上 tab title 点击反馈不够
+ - 手机上 “Typst 渲染” 点 “源码” 点不动
  - quote right 的 custom-element warning
  - fold 内的代码块也 immensive
  - tab fold 嵌套，高度改变会出问题
  - :xxx: 语法支持 fontawesome
  - fold、tab 等支持搜索
- - 右边栏改 JSX
  - KaTeX 中文字体，手机上不显示
  - Code block 添加标题
  - block code meta 参数的处理（转义、引号）
