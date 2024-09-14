@@ -81,7 +81,9 @@ And that has made all the difference.<br />
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Veniam irure ipsum dolore dolore Lorem voluptate adipisicing eiusmod minim. Eu incididunt enim irure nisi. Amet eu nostrud irure Lorem mollit eu ipsum excepteur cillum irure in sint reprehenderit deserunt. Occaecat adipisicing culpa excepteur magna id dolor exercitation ut ea dolor ut veniam est eiusmod. Consequat qui ut labore dolor ut. Ipsum ullamco commodo veniam occaecat fugiat sint consectetur nisi deserunt sunt ullamco et veniam. Do commodo mollit voluptate veniam ipsum irure dolore nisi.</p>
 </fold>
-<fold type="primary">这个折叠面板没有标题</fold>
+<fold type="primary">
+<quote>这个折叠面板没有标题</quote>
+</fold>
 <fold title={<>这个折叠面板的标题真的真的真的真的真的真的真的真的真的真的真的真的非常的长，而且里面还有 <code class="inline-code">code</code> 块</>}>
 <BlockCode lang="python" html={"<code class=\"language-python\"><span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Hello World\"</span><span class=\"token punctuation\">)</span>\n</code>"}></BlockCode></fold>
 <hr />

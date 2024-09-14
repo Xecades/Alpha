@@ -231,10 +231,4 @@ onBeforeUnmount(() => {
 .content.immensive quote {
     margin: 3rem 1.4rem;
 }
-
-@media (max-width: 768px) {
-    * {
-        --title-hover-color: none;
-    }
-}
 </style>

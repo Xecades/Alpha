@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
+import { onMounted, ref } from "vue";
 import AnimateHeight from "vue-animate-height";
+
+import type { Ref, VNodeRef } from "vue";
 import type { JSX } from "vue/jsx-runtime";
 
 enum TYPE {
@@ -29,6 +31,19 @@ const props = defineProps<{
 
 const type: TYPE = props.type || TYPE.DEFAULT;
 const expanded: Ref<boolean> = ref(props.expand || false);
+
+const target: VNodeRef = ref();
+const is_immensive: Ref<boolean> = ref(false);
+
+onMounted(() => {
+    const el: HTMLElement = target.value.$el.querySelector(".wrapper")!;
+    const children = el.children;
+
+    is_immensive.value =
+        children.length === 1 &&
+        (children[0].classList.contains("block-code") ||
+            children[0].tagName === "QUOTE");
+});
 </script>
 
 <template>
@@ -40,17 +55,18 @@ const expanded: Ref<boolean> = ref(props.expand || false);
             <div class="title">
                 <component :is="title" v-if="title" />
             </div>
-            <div
-                class="expand"
-                :style="{ transform: `rotate(${expanded ? 90 : 0}deg)` }"
-            >
-                <font-awesome-icon :icon="['fas', 'angle-right']" />
+            <div class="expand">
+                <font-awesome-icon
+                    :icon="['fas', 'angle-right']"
+                    :style="{ transform: `rotate(${expanded ? 90 : 0}deg)` }"
+                />
             </div>
         </div>
 
-        <div class="content">
+        <div class="content" :class="{ immensive: is_immensive }">
             <!-- @see https://www.npmjs.com/package/vue-animate-height -->
             <AnimateHeight
+                ref="target"
                 :height="expanded ? 'auto' : 0"
                 contentClass="wrapper"
             >
@@ -107,12 +123,33 @@ const expanded: Ref<boolean> = ref(props.expand || false);
 
 .expand {
     margin-left: 7px;
+}
+
+.expand svg {
     transition: transform 0.2s ease;
+}
+
+.content {
+    --wrapper-padding: 0.8rem 1.4rem;
+}
+
+.content.immensive {
+    --wrapper-padding: 0;
 }
 
 .content :global(.wrapper) {
     --block-extend: 0;
 
-    padding: 0.8rem 1.4rem;
+    padding: var(--wrapper-padding);
+}
+
+.content.immensive .block-code {
+    margin: 0;
+    border: none;
+    background: unset;
+}
+
+.content.immensive quote {
+    margin: 3rem 1.4rem;
 }
 </style>

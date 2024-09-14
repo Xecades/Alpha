@@ -260,7 +260,9 @@ Veniam irure ipsum dolore dolore Lorem voluptate adipisicing eiusmod minim. Eu i
 ::
 
 ::fold{primary}
+:::quote
 这个折叠面板没有标题
+:::
 ::
 
 ::fold{title="这个折叠面板的标题真的真的真的真的真的真的真的真的真的真的真的真的非常的长，而且里面还有 `code` 块"}
