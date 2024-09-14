@@ -13,7 +13,7 @@ const compiler: NodeCompiler = NodeCompiler.create();
 export default (code: string): string => {
     compiler.evictCache(10);
 
-    code = `#set page(width: auto, height: auto, margin: 5pt)\n#set text(size: 16pt)\n${code}`;
+    code = `#set page(width: auto, height: auto, margin: 5pt)\n#set text(size: 18pt)\n${code}`;
 
     const svg = compiler.svg({
         mainFileContent: code,

@@ -317,7 +317,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 # 效果
 ```typst 一棵来自 ***Typst*** 的树
 #import "@preview/cetz:0.2.2": canvas, draw, tree
-#canvas(length: 2cm, {
+#canvas(length: 2.5cm, {
     import draw: *
     tree.tree(
         draw-node: (node, ..) => {
@@ -338,7 +338,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ~~~md
 ```typst 一棵来自 ***Typst*** 的树
 #import "@preview/cetz:0.2.2": canvas, draw, tree
-#canvas(length: 2cm, {
+#canvas(length: 2.5cm, {
     import draw: *
     tree.tree(
         draw-node: (node, ..) => {
