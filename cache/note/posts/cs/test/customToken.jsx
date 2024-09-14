@@ -34,15 +34,15 @@ export default <><h2 id="t" tabindex="-1" class="heading">数学公式 <a class=
 <p>适合用于展示名言、引用等。</p>
 <BlockCode lang="md" html={"<code class=\"language-md\">::quote\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>引言内容</span><span class=\"token punctuation\">></span></span>\n::\n</code>"}></BlockCode><tab>
 <h1>效果</h1>
-<quote>Two roads diverged in a wood, and I—<br />
+<div class="quote">Two roads diverged in a wood, and I—<br />
 I took <em>the one less traveled by</em>,<br />
 And that has made all the difference.<br />
-<right>—Robert Frost</right></quote>
+<div class="right">—Robert Frost</div></div>
 <h1>源码</h1>
 <BlockCode lang="md" html={"<code class=\"language-md\">:::quote\nTwo roads diverged in a wood, and I—\\\nI took <span class=\"token italic\"><span class=\"token punctuation\">*</span><span class=\"token content\">the one less traveled by</span><span class=\"token punctuation\">*</span></span>,\\\nAnd that has made all the difference.\\\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>right</span><span class=\"token punctuation\">></span></span>—Robert Frost<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>right</span><span class=\"token punctuation\">></span></span>\n:::\n</code>"}></BlockCode></tab>
-<quote>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</quote>
-<quote>
-<BlockMath data={"e ^ {i \\pi} + 1 = 0\n"}></BlockMath></quote>
+<div class="quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+<div class="quote">
+<BlockMath data={"e ^ {i \\pi} + 1 = 0\n"}></BlockMath></div>
 <hr />
 <h2 id="t-6" tabindex="-1" class="heading">Note <a class="cursor header-anchor" href="#t-6">¶</a></h2>
 <p>功能上类似于 MkDocs Material 的 <Anchor href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/">Admonitions</Anchor>，用于提供额外信息。</p>
@@ -82,7 +82,7 @@ And that has made all the difference.<br />
 <p>Veniam irure ipsum dolore dolore Lorem voluptate adipisicing eiusmod minim. Eu incididunt enim irure nisi. Amet eu nostrud irure Lorem mollit eu ipsum excepteur cillum irure in sint reprehenderit deserunt. Occaecat adipisicing culpa excepteur magna id dolor exercitation ut ea dolor ut veniam est eiusmod. Consequat qui ut labore dolor ut. Ipsum ullamco commodo veniam occaecat fugiat sint consectetur nisi deserunt sunt ullamco et veniam. Do commodo mollit voluptate veniam ipsum irure dolore nisi.</p>
 </fold>
 <fold type="primary">
-<quote>这个折叠面板没有标题</quote>
+<div class="quote">这个折叠面板没有标题</div>
 </fold>
 <fold title={<>这个折叠面板的标题真的真的真的真的真的真的真的真的真的真的真的真的非常的长，而且里面还有 <code class="inline-code">code</code> 块</>}>
 <BlockCode lang="python" html={"<code class=\"language-python\"><span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Hello World\"</span><span class=\"token punctuation\">)</span>\n</code>"}></BlockCode></fold>

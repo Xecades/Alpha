@@ -311,12 +311,44 @@ export default (): MarkdownIt => {
     // The original h1 syntax is banned, instead it is used as tab panel delimiter.
     // So iterate through all h1 tokens and replace them with `delim`.
     md.core.ruler.before("anchor", "snippet_tab_replace_h1", (state) => {
-        for (let i = 0; i < state.tokens.length; i++) {
-            if (state.tokens[i].tag !== "h1") continue;
+        for (const token of state.tokens) {
+            if (token.tag !== "h1") continue;
 
-            let is_open: boolean = state.tokens[i].type === "heading_open";
+            let is_open: boolean = token.type === "heading_open";
 
-            state.tokens[i].type = "delim_" + (is_open ? "open" : "close");
+            token.type = "delim_" + (is_open ? "open" : "close");
+        }
+    });
+
+    // Some special tags like <quote> or <right> cause a warning in Vue.
+    // So normalize them to ordinary tags.
+    // e.g. <quote>  ->  <div class="quote">
+    md.core.ruler.push("normalize_tags", (state) => {
+        for (const token of state.tokens) {
+            const type: string = token.type;
+            const tag: string = token.tag;
+
+            if (tag === "quote") {
+                token.tag = "div";
+
+                if (type === "mdc_block_open") {
+                    token.attrSet("class", "quote");
+                }
+            }
+
+            if (type === "inline") {
+                const children = token.children!;
+
+                for (const child of children) {
+                    if (child.type === "html_inline") {
+                        if (child.content === "<right>") {
+                            child.content = '<div class="right">';
+                        } else if (child.content === "</right>") {
+                            child.content = "</div>";
+                        }
+                    }
+                }
+            }
         }
     });
 

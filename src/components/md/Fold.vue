@@ -42,7 +42,7 @@ onMounted(() => {
     is_immensive.value =
         children.length === 1 &&
         (children[0].classList.contains("block-code") ||
-            children[0].tagName === "QUOTE");
+            children[0].classList.contains("quote"));
 });
 </script>
 
@@ -149,7 +149,7 @@ onMounted(() => {
     background: unset;
 }
 
-.content.immensive quote {
+.content.immensive div.quote {
     margin: 3rem 1.4rem;
 }
 </style>

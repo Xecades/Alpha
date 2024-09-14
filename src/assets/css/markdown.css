@@ -158,8 +158,8 @@
     font-weight: bold;
 }
 
-/* right 标签 */
-.markdown right {
+/* div.right 标签 */
+.markdown div.right {
     display: block;
     text-align: right;
 }
@@ -330,7 +330,7 @@
 }
 
 /* Snippet Quote */
-.markdown quote {
+.markdown div.quote {
     display: block;
     margin: 5.5rem 0;
     padding: 0 var(--quote-padding-lr);
@@ -339,8 +339,8 @@
     position: relative;
 }
 
-.markdown quote::before,
-.markdown quote::after {
+.markdown div.quote::before,
+.markdown div.quote::after {
     position: absolute;
     display: block;
     height: 1.5rem;
@@ -353,13 +353,13 @@
     filter: invert(var(--quote-background-invert));
 }
 
-.markdown quote::before {
+.markdown div.quote::before {
     top: -1.25rem;
     background-image: url(@/assets/img/quote-left.svg);
     background-position: 0 -4px;
 }
 
-.markdown quote::after {
+.markdown div.quote::after {
     bottom: -1.25rem;
     background-image: url(@/assets/img/quote-right.svg);
     background-position: 100% 7px;
