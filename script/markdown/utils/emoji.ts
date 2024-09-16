@@ -15,5 +15,6 @@ export default (name: string): string => {
         console.error(`[!] Invalid emoji: ${name}`);
         return ":" + name + ":";
     }
+
     return res;
 };

@@ -7,6 +7,8 @@
 
 ## 当前 TODO
 
+ - MDC 块，写一个 transform name 的函数，例如把 fold 转化成 Fold
+ - 搜索改成 token 级别的
  - 添加多个 block 在同一行的支持（分栏）
  - customToken 源代码，加上 icon
  - 手机上 “Typst 渲染” 点 “源码” 点不动
