@@ -2,19 +2,18 @@ import fs from "fs/promises";
 
 import traverse from "../traverse";
 import _render from "./render";
+import _parse from "./parse";
 import _text from "./text";
 import _toc from "./toc";
 import _fm from "./fm";
 
 import type {
-    ComponentString,
-    MarkdownContent,
     MarkdownHeader,
     ParsedMarkdown,
     PathnameFilter,
-    PlainMarkdownContent,
     TraverseResult,
 } from "../../../types";
+import type Token from "markdown-it/lib/token.mjs";
 
 /**
  * Read and parse markdown files.
@@ -29,17 +28,15 @@ export default async (src: string): Promise<ParsedMarkdown[]> => {
     const files: TraverseResult[] = await traverse(src, filter);
 
     for (const { pathname, stats } of files) {
-        const plain: PlainMarkdownContent = await fs.readFile(
-            pathname,
-            "utf-8"
-        );
+        const plain: string = await fs.readFile(pathname, "utf-8");
 
         const { attr, raw } = _fm(plain);
-        const content: MarkdownContent = raw;
+        const content: string = raw;
 
-        const toc: MarkdownHeader[] = _toc(content);
-        const html: ComponentString = _render(content);
+        const tokens: Token[] = _parse(content);
+        const toc: MarkdownHeader[] = _toc(tokens);
 
+        const html: string = _render(tokens);
         const text: string = _text(html);
 
         res.push({ pathname, stats, attr, raw, toc, html, text });

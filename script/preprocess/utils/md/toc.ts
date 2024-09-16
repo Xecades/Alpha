@@ -1,46 +1,48 @@
-import tocMD from "../../../markdown/toc";
+import { md } from "./parse";
 
-import type MarkdownIt from "markdown-it";
-import type { MarkdownContent, MarkdownHeader } from "../../../types";
+import type Token from "markdown-it/lib/token.mjs";
+import type { MarkdownHeader } from "../../../types";
 
 /**
- * Generate TOC based on markdown content.
+ * Generate TOC from tokens.
  *
- * @param markdown - Markdown content
- * @returns Headers extracted from markdown
+ * @param tokens - Tokens
+ * @returns Headers extracted from tokens
  */
-export default (content: MarkdownContent): MarkdownHeader[] => {
-    const header_match = /^ *#{2,6} /s;
-    const md: MarkdownIt = tocMD();
+export default (tokens: Token[]): MarkdownHeader[] => {
+    let headers: MarkdownHeader[] = [];
 
-    let lines = content.split("\n");
-    let headers = [];
+    for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
 
-    let is_in_codeblock = false;
+        if (token.type === "heading_open") {
+            const level: number = parseInt(token.tag.slice(1));
 
-    for (let i = 0; i < lines.length; i++) {
-        // `#` in code block is not a header
-        if (lines[i].startsWith("```")) {
-            is_in_codeblock = !is_in_codeblock;
-        }
+            console.assert(tokens[i + 2].type === "heading_close");
+            console.assert(level !== 1);
 
-        if (!is_in_codeblock && header_match.test(lines[i])) {
-            headers.push(lines[i].trim());
+            const children: Token[] = tokens[i + 1].children!;
+
+            console.assert(children !== null);
+
+            // These tokens are injected by markdown-it-anchor, remove them.
+            console.assert(children.at(-3)!.type === "link_open");
+            console.assert(children.at(-2)!.type === "html_inline");
+            console.assert(children.at(-1)!.type === "link_close");
+
+            const title: string = md.renderer.renderInline(
+                children.slice(0, -3),
+                md.options,
+                {}
+            );
+
+            headers.push({
+                level: level,
+                title: title.trim(),
+                link: headers.length === 0 ? "t" : `t-${headers.length + 1}`,
+            });
         }
     }
-
-    headers = headers.map((h, idx) => {
-        let whitespace_offset = h.indexOf(" ");
-
-        let level = h.slice(0, whitespace_offset).length;
-        let title = h.slice(whitespace_offset + 1).trim();
-
-        return {
-            level: level,
-            title: md.renderInline(title),
-            link: idx == 0 ? "t" : `t-${idx + 1}`,
-        } as MarkdownHeader;
-    });
 
     return headers;
 };

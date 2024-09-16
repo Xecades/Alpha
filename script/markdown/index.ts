@@ -13,7 +13,7 @@ import delim from "./plugins/delim";
 import tags from "./plugins/tags";
 
 /**
- * Get a markdown-it instance with full support, which is used for main content rendering.
+ * Get a markdown-it instance.
  *
  * @returns MarkdownIt instance
  */

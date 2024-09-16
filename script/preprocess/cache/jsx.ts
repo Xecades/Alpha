@@ -1,20 +1,8 @@
 import fs from "fs-extra";
 import path from "path";
+import injection from "../utils/injection";
 
 import type { BASE, ParsedMarkdown } from "../../types";
-
-/**
- * Get names of markdown components in the directory.
- *
- * @param dir - The directory where markdown components are stored
- * @returns Names of markdown components
- */
-const getMarkdownComps = (dir: string): string[] => {
-    const files = fs.readdirSync(dir);
-    return files
-        .filter((file) => file.endsWith(".vue"))
-        .map((file) => file.replace(/\.vue$/, ""));
-};
 
 /**
  * Convert local markdown file path to JSX path.
@@ -47,26 +35,9 @@ export const to_JSX_path = (pathname: string, base: BASE): string => {
  * @param base - The base name for markdown caching.
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
-    const MD_DIR = "./src/components/md";
-    const injections: string[] = getMarkdownComps(MD_DIR);
-
     for (const item of parsed) {
         const dist: string = to_JSX_path(item.pathname, base);
-        let cache: string = "";
-
-        for (const comp of injections) {
-            // Search whether the markdown file contains the component.
-            // This is based on the assumption that the component is enclosed by `<Name>` and `</Name>`
-            // or `<Name ... />`.
-            const reg: RegExp = new RegExp(
-                `<\/${comp}>|<${comp}[^<>]*\/>`,
-                "m"
-            );
-
-            if (!reg.test(item.html)) continue;
-
-            cache += `import ${comp} from "@/components/md/${comp}.vue";\n`;
-        }
+        let cache: string = injection();
 
         // Remove comments from the JSX content.
         const html: string = item.html.replace(/<!--.*?-->/g, "");

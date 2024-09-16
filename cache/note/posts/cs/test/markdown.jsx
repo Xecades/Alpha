@@ -1,7 +1,13 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
+import BlockMath from "@/components/md/BlockMath.vue";
+import Fold from "@/components/md/Fold.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
 import InlineMath from "@/components/md/InlineMath.vue";
+import LinkCard from "@/components/md/LinkCard.vue";
+import Note from "@/components/md/Note.vue";
+import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
+import Tab from "@/components/md/Tab.vue";
 export default <><p>普通文字</p>
 <hr />
 <h2 id="t" tabindex="-1" class="heading">二级标题 <a class="cursor header-anchor" href="#t">¶</a></h2>

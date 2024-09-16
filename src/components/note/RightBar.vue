@@ -8,7 +8,7 @@ import { navigate, normalize_toc } from "@/assets/js/note/rightbar";
 // Types
 import type { Ref } from "vue";
 import type { HeaderRef } from "@/assets/js/note/rightbar";
-import type { MarkdownHeader } from "@script/types";
+import type { MarkdownHeaderJsx } from "@script/types";
 
 const props = defineProps<{ in_view: number | null }>();
 const route = useRoute();
@@ -28,7 +28,7 @@ const mouse_fn = {
 watch(
     () => route.path,
     async () => {
-        toc.value = normalize_toc(route.meta.toc as MarkdownHeader[]);
+        toc.value = normalize_toc(route.meta.toc as MarkdownHeaderJsx[]);
     },
     { immediate: true }
 );
@@ -66,7 +66,9 @@ watch(
                             :style="{ marginRight: item.indent }"
                             :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }"
                         >
-                            <span class="text" v-html="item.title"></span>
+                            <span class="text">
+                                <component :is="item.title" />
+                            </span>
                             <span class="sign">
                                 <font-awesome-icon
                                     :icon="['fas', 'caret-left']"

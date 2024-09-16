@@ -1,8 +1,8 @@
 import type { Ref } from "vue";
-import type { MarkdownHeader } from "@script/types";
+import type { MarkdownHeaderJsx } from "@script/types";
 
 /** Header type used for ref rendering */
-export type HeaderRef = MarkdownHeader & {
+export type HeaderRef = MarkdownHeaderJsx & {
     readonly width: string;
     readonly indent: string;
 };
@@ -16,7 +16,7 @@ const indent_preset: string[] = ["0rem", "1rem", "1.7rem", "2.3rem", "2.8rem"];
  * @param toc - Raw TOC data imported from json
  * @returns Normalized TOC data
  */
-export const normalize_toc = (toc: MarkdownHeader[]): HeaderRef[] => {
+export const normalize_toc = (toc: MarkdownHeaderJsx[]): HeaderRef[] => {
     const levels: number[] = toc.map((item) => item.level);
 
     const maxLevel: number = Math.max(...levels);

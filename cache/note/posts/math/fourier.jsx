@@ -1,7 +1,13 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Fold from "@/components/md/Fold.vue";
+import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
 import InlineMath from "@/components/md/InlineMath.vue";
+import LinkCard from "@/components/md/LinkCard.vue";
+import Note from "@/components/md/Note.vue";
+import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
+import Tab from "@/components/md/Tab.vue";
 export default <><p><strong>离散傅里叶变换</strong>（Discrete Fourier Transform, DFT）和<strong>离散傅里叶反变换</strong>（Inverse Discrete Fourier Transform, IDFT） 是鼎鼎大名的<strong>快速傅里叶变换</strong>（Fast Fourier Transform, FFT）的前置知识.</p>
 <p>其中 FFT 用于加速两个多项式 <InlineMath data={"A(x)"}></InlineMath>、<InlineMath data={"B(x)"}></InlineMath> 的乘积 <InlineMath data={"C(x)"}></InlineMath> 的计算，DFT 和 IDFT 是 FFT 的两个中间步骤.</p>
 

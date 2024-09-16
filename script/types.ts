@@ -1,39 +1,6 @@
-/**
- * Store types for preprocessors
- *
- * @module types
- */
-
 import type { Stats } from "fs";
 import type { FuseResult } from "fuse.js";
-
-/**
- * Markdown content retrived directly from .md files, which contains unparsed front-matter.
- *
- * @note Usually named as `plain`.
- */
-export type PlainMarkdownContent = string;
-
-/**
- * Typical markdown content with front-matter purged.
- *
- * @note Usually named as `content`.
- */
-export type MarkdownContent = string;
-
-/**
- * HTML string, without JSX / Vue elements.
- *
- * @note Usually named as `html`.
- */
-export type HTMLString = string;
-
-/**
- * HTML string, with JSX / Vue elements.
- *
- * @note Usually named as `html`.
- */
-export type ComponentString = string;
+import type { JSX } from "vue/jsx-runtime";
 
 /** Front matter interface for markdown files. */
 export interface MarkdownFrontMatter {
@@ -53,7 +20,7 @@ export interface MarkdownFrontMatterParsed {
     attr: MarkdownFrontMatter;
 
     /** Raw markdown content */
-    raw: MarkdownContent;
+    raw: string;
 }
 
 /** Header extracted from markdown. */
@@ -62,7 +29,19 @@ export interface MarkdownHeader {
     level: number;
 
     /** Header title HTML */
-    title: HTMLString;
+    title: string;
+
+    /** Header permalink */
+    link: string;
+}
+
+/** Header extracted from markdown, title is JSX element */
+export interface MarkdownHeaderJsx {
+    /** Header level */
+    level: number;
+
+    /** Header title */
+    title: JSX.Element;
 
     /** Header permalink */
     link: string;
@@ -88,13 +67,13 @@ export interface ParsedMarkdown extends TraverseResult {
     attr: MarkdownFrontMatter;
 
     /** Raw markdown content */
-    raw: MarkdownContent;
+    raw: string;
 
     /** Table of contents */
     toc: MarkdownHeader[];
 
     /** Rendered HTML */
-    html: ComponentString;
+    html: string;
 
     /** Plain text extracted from HTML */
     text: string;
@@ -174,7 +153,7 @@ export interface RouteMeta {
     attr: MarkdownFrontMatter;
 
     /** Table of contents */
-    toc: MarkdownHeader[];
+    toc: MarkdownHeaderJsx[];
 
     /** Creation time */
     birthtime: Date;

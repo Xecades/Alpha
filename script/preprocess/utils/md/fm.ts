@@ -3,7 +3,6 @@ import fm from "front-matter";
 import type {
     MarkdownFrontMatter,
     MarkdownFrontMatterParsed,
-    PlainMarkdownContent,
 } from "../../../types";
 
 /**
@@ -12,7 +11,7 @@ import type {
  * @param plain - Raw markdown content
  * @returns Parsed front matter
  */
-export default (plain: PlainMarkdownContent): MarkdownFrontMatterParsed => {
+export default (plain: string): MarkdownFrontMatterParsed => {
     const { attributes: attr, body: raw } = fm<MarkdownFrontMatter>(plain);
     return { attr, raw };
 };

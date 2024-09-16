@@ -1,16 +1,13 @@
-import bodyMD from "../../../markdown/body";
+import { md } from "./parse";
 
-import type MarkdownIt from "markdown-it";
-import type { ComponentString, MarkdownContent } from "../../../types";
-
-const md: MarkdownIt = bodyMD();
+import type Token from "markdown-it/lib/token.mjs";
 
 /**
- * Render markdown content to HTML.
+ * Render tokens to JSX string.
  *
- * @param content - Markdown content
- * @returns HTML string, which may contain JSX / Vue element(s)
+ * @param tokens - Tokens
+ * @returns JSX string
  */
-export default (content: MarkdownContent): ComponentString => {
-    return md.render(content);
+export default (tokens: Token[]): string => {
+    return md.renderer.render(tokens, md.options, {});
 };
