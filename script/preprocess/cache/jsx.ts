@@ -1,8 +1,3 @@
-/**
- * @file sfc.ts
- * @description Parse markdown files and cache them as SFCs.
- */
-
 import fs from "fs-extra";
 import path from "path";
 
@@ -60,20 +55,17 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         let cache: string = "";
 
         for (const comp of injections) {
-            // Search whether the markdown file contains the component, then get its name (Case-sensitive).
+            // Search whether the markdown file contains the component.
             // This is based on the assumption that the component is enclosed by `<Name>` and `</Name>`
             // or `<Name ... />`.
             const reg: RegExp = new RegExp(
-                `<\/(${comp})>|<(${comp})[^<>]*\/>`,
-                "mi"
+                `<\/${comp}>|<${comp}[^<>]*\/>`,
+                "m"
             );
 
-            const matches = reg.exec(item.html);
+            if (!reg.test(item.html)) continue;
 
-            if (!matches) continue;
-
-            const name = matches[1];
-            cache += `import ${name} from "@/components/md/${comp}.vue";\n`;
+            cache += `import ${comp} from "@/components/md/${comp}.vue";\n`;
         }
 
         // Remove comments from the JSX content.

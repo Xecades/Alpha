@@ -16,7 +16,7 @@ const placeholder = (id: string) => `__mdc_placeholder_[[${id}]]__`;
  * @param token - Token to transform
  * @param targets - Attributes to transform
  */
-const convertThemeAttribute = (token: Token, targets: Targets) => {
+const convertToAttribute = (token: Token, targets: Targets) => {
     if (targets[token.info]) {
         let attrs = targets[token.info];
 
@@ -74,7 +74,7 @@ const convertToPlaceholder = (
  * @param values - Original values of the attributes
  * @returns Transformed string
  */
-const transformJSX = (
+const transformToJsx = (
     token: Token,
     md: MarkdownIt,
     rendered: string,
@@ -107,7 +107,7 @@ const transformJSX = (
  * @param targets - Attributes to transform
  * @returns Transformed string
  */
-const transformBoolean = (
+const transformToBoolean = (
     token: Token,
     rendered: string,
     targets: Targets
@@ -133,7 +133,7 @@ export default (md: MarkdownIt) => {
      * @see https://github.com/antfu/markdown-it-mdc
      */
 
-    /** @note Disable `inlineSpan` to avoid conflict with {@link checkbox} */
+    /** @note Disable `inlineSpan` to avoid conflict with {@link checkbox}. */
     md.use(MarkdownItMdc, {
         syntax: {
             inlineSpan: false,
@@ -159,12 +159,12 @@ export default (md: MarkdownIt) => {
             },
         };
 
-        convertThemeAttribute(token, targets.theme);
+        convertToAttribute(token, targets.theme);
         let jsxVal = convertToPlaceholder(token, targets.jsx);
 
         let res: string = originalMdcBlockOpen(tokens, idx, options, env, self);
-        res = transformJSX(token, md, res, targets.jsx, jsxVal);
-        res = transformBoolean(token, res, targets.bool);
+        res = transformToJsx(token, md, res, targets.jsx, jsxVal);
+        res = transformToBoolean(token, res, targets.bool);
 
         return res;
     };

@@ -1,8 +1,3 @@
-/**
- * @file config.ts
- * @description Parse raw config data, e.g. nav, and cache them.
- */
-
 import fs from "fs-extra";
 import yaml from "yaml";
 
