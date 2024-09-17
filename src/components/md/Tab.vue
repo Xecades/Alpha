@@ -10,6 +10,7 @@ import {
 } from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
 import AnimateHeight from "vue-animate-height";
+import cursor from "@/assets/js/cursor";
 
 import type { Ref, VNodeRef } from "vue";
 import type { JSX } from "vue/jsx-runtime";
@@ -75,6 +76,8 @@ watch(
             children.length === 1 &&
             (children[0].classList.contains("block-code") ||
                 children[0].classList.contains("quote"));
+
+        cursor.refresh();
     },
     { immediate: true }
 );
@@ -119,7 +122,9 @@ onBeforeUnmount(() => {
                 contentClass="height-listener"
                 :height="height"
             >
-                <component :is="() => data[active].content" />
+                <KeepAlive>
+                    <component :is="() => data[active].content" />
+                </KeepAlive>
             </AnimateHeight>
         </div>
     </div>
