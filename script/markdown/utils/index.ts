@@ -33,6 +33,5 @@ export const THEMES: string[] = [
 ];
 
 export { default as typst } from "./typst";
-export { default as getEmoji } from "./emoji";
 export { default as extractText } from "../../preprocess/utils/md/text";
 export { default as MarkdownItWrapper } from "../../markdown-it-wrapper";

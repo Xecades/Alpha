@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import path from "path";
+import camelCase from "camelcase";
 import injection from "../utils/injection";
 
 import type { BASE, ParsedMarkdown } from "../../types";
@@ -26,6 +27,29 @@ export const to_JSX_path = (pathname: string, base: BASE): string => {
     return res;
 };
 
+const injectFontAwesome = (html: string): string => {
+    const iconRegex: RegExp = /<font-awesome-icon class="icon" icon="(.*?)" \/>/gs;
+    const to_module_name = (icon: string) => camelCase("fa-" + icon);
+
+    const icons = new Set<string>();
+
+    let match;
+    while ((match = iconRegex.exec(html))) {
+        icons.add(to_module_name(match[1]));
+    }
+
+    if (icons.size === 0) return "";
+
+    let res: string =
+        'import { library } from "@fortawesome/fontawesome-svg-core";\n';
+    for (const icon of icons) {
+        res += `import { ${icon} } from "@fortawesome/free-solid-svg-icons";\n`;
+    }
+    res += "library.add(" + Array.from(icons).join(", ") + ");\n";
+
+    return res;
+};
+
 /**
  * Cache parsed HTML and save them as JSXs in `./cache/${base}/posts/*`.
  *
@@ -42,6 +66,7 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         // Remove comments from the JSX content.
         const html: string = item.html.replace(/<!--.*?-->/g, "");
 
+        cache += injectFontAwesome(html);
         cache += `export default <>${html}</>`;
 
         await fs.outputFile(dist, cache);

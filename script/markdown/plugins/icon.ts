@@ -1,10 +1,9 @@
-import { getEmoji } from "../utils";
 import markdownItWrapper from "../../markdown-it-wrapper";
 
 import type MarkdownIt from "markdown-it";
 
 /**
- * Transform `:...:` into emoji components.
+ * Transform `:...:` into FontAwesome components.
  *
  * @param md - MarkdownIt instance
  */
@@ -13,6 +12,8 @@ export default (md: MarkdownIt) => {
         type: "inline",
         name: "emoji_inline",
         marker: ":",
-        renderer: getEmoji,
+        renderer: (name: string) => {
+            return `<font-awesome-icon class="icon" icon="${name}" />`;
+        },
     });
 };

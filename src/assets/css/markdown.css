@@ -365,6 +365,12 @@
     background-position: 100% 7px;
 }
 
+/* FontAwesome icons */
+.markdown svg.icon {
+    padding: 0 0.2em;
+    opacity: 0.9;
+}
+
 /* Note & Fold color theme */
 .colors.default {
     --background-color: #7777771a;

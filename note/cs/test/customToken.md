@@ -14,12 +14,12 @@ title: 自定义语法
 
 
 ::tab
-# 效果
+# :flask: 效果
 可以不难推得 $\varphi(n):=n\prod_{p\mid n}(1-\frac{1}{p})$。
 
 $\mathfrak{Xecades}$ 这个名字来源于单词 Decade：$\text{10 Decades}\rightarrow \text{X Decades}\rightarrow \text{Xecades}$。
 
-# 源码
+# :code: 源码
 ```md
 可以不难推得 $\varphi(n):=n\prod_{p\mid n}(1-\frac{1}{p})$。
 
@@ -38,7 +38,7 @@ $$
 
 
 ::tab
-# 效果
+# :flask: 效果
 $$
 \begin{aligned}
 &\Bigl(f*g\Bigr)(6) \\
@@ -47,7 +47,7 @@ $$
 \end{aligned}
 $$
 
-# 源码
+# :code: 源码
 ```md
 $$
 \begin{aligned}
@@ -62,22 +62,23 @@ $$
 
 ---
 
-## Emoji
+## Icon
 
-使用 [`Node-emoji` 库](https://github.com/omnidan/node-emoji)转译 Emoji。
+使用 [FontAwesome](https://fontawesome.com) 加载 SVG 图标。
 
 ```md
-... :<emoji>: ...
+... :<icon>: ...
 ```
 
 
 ::tab
-# 效果
-诶，:nerd_face: :point_up_2: 我有一计！
+# :flask: 效果
 
-# 源码
+The *magic spell* :arrow-up: :arrow-up: :arrow-down: :arrow-down: :arrow-left: :arrow-right: :arrow-left: :arrow-right: :a: :b: :a: :b: will lead you to the treasure :sack-dollar:.
+
+# :code: 源码
 ```md
-诶，:nerd_face: :point_up_2: 我有一计！
+The *magic spell* :arrow-up: :arrow-up: :arrow-down: :arrow-down: :arrow-left: :arrow-right: :arrow-left: :arrow-right: :a: :b: :a: :b: will lead you to the treasure :sack-dollar:.
 ```
 ::
 
@@ -96,7 +97,7 @@ $$
 
 
 ::tab
-# 效果
+# :flask: 效果
 :::quote
 Two roads diverged in a wood, and I—\
 I took *the one less traveled by*,\
@@ -104,7 +105,7 @@ And that has made all the difference.\
 <right>—Robert Frost</right>
 :::
 
-# 源码
+# :code: 源码
 ```md
 :::quote
 Two roads diverged in a wood, and I—\
@@ -141,12 +142,12 @@ $$
 ```
 
 ::tab
-# 效果
+# :flask: 效果
 :::note
 这里是 `note.default` 的内容
 :::
 
-# 源码
+# :code: 源码
 ```md
 :::note
 这里是 `note.default` 的内容
@@ -156,12 +157,12 @@ $$
 
 
 ::tab
-# 效果
+# :flask: 效果
 :::note{danger}
 $\text{P} \neq \text{NP}$
 :::
 
-# 源码
+# :code: 源码
 ```md
 :::note{danger}
 $\text{P} \neq \text{NP}$
@@ -207,12 +208,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 
 ::tab
-# 效果
+# :flask: 效果
 :::fold{title="默认展开的 `default` 折叠面板" expand}
 这里是 `fold.default` 的内容
 :::
 
-# 源码
+# :code: 源码
 ```md
 :::fold{title="默认展开的 `default` 折叠面板" expand}
 这里是 `fold.default` 的内容
@@ -282,12 +283,12 @@ print("Hello World")
 ```
 
 ::tab
-# 效果
+# :flask: 效果
 :::linkcard{href="https://blog.xecades.xyz/"}
 Xecades 的博客
 :::
 
-# 源码
+# :code: 源码
 ```md
 :::linkcard{href="https://blog.xecades.xyz/"}
 Xecades 的博客
@@ -316,7 +317,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ~~~
 
 ::tab
-# 效果
+# :flask: 效果
 ```typst 一棵来自 ***Typst*** 的树
 #import "@preview/cetz:0.2.2": canvas, draw, tree
 #canvas(length: 2.5cm, {
@@ -336,7 +337,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 })
 ```
 
-# 源码
+# :code: 源码
 ~~~md
 ```typst 一棵来自 ***Typst*** 的树
 #import "@preview/cetz:0.2.2": canvas, draw, tree
@@ -408,7 +409,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 print("Hello World")
 ```
 
-# 源码
+# :code: 源码
 
 ~~~md
 :::tab

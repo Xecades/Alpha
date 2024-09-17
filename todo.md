@@ -12,7 +12,6 @@
  - customToken 源代码，加上 icon
  - 手机上 “Typst 渲染” 点 “源码” 点不动
  - tab fold 嵌套，高度改变会出问题
- - :xxx: 语法支持 fontawesome
  - fold、tab 等支持搜索
  - KaTeX 中文字体，手机上不显示
  - Code block 添加标题

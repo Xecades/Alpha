@@ -3,7 +3,7 @@ import MarkdownIt from "markdown-it";
 import codeBlock from "./plugins/code-block";
 import codeInline from "./plugins/code-inline";
 import math from "./plugins/math";
-import emoji from "./plugins/emoji";
+import icon from "./plugins/icon";
 import link from "./plugins/link";
 import heading from "./plugins/heading";
 import image from "./plugins/image";
@@ -33,7 +33,7 @@ export default (): MarkdownIt => {
     md.use(codeBlock);
     md.use(codeInline);
     md.use(math);
-    md.use(emoji);
+    md.use(icon);
     md.use(link);
     md.use(heading);
     md.use(image);
