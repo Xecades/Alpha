@@ -22,7 +22,6 @@ const props = defineProps<{ svg: string; alt: string }>();
 
 .svg {
     width: fit-content;
-    max-height: 20em;
 }
 
 .svg > * {
