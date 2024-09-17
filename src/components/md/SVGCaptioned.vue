@@ -41,10 +41,4 @@ figcaption {
         filter: invert(0.75);
     }
 }
-
-@media (max-width: 768px) {
-    .svg {
-        max-height: 15em;
-    }
-}
 </style>
