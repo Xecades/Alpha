@@ -454,3 +454,204 @@ print("Hello World")
 这个选项卡只有这一个 Tab
 :::
 ::
+
+---
+
+## Grid
+
+```md
+::grid
+:sep{width="<宽度>"}
+
+<内容 1>
+
+:sep{width="<宽度>"}
+
+<内容 2>
+
+[...]
+::
+```
+
+::tab
+# :flask: 效果
+
+:::grid
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 1
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([20], ([16], [13], [18]), ([25], [21], [28]))
+    )
+})
+```
+
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 2
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([10], ([5], [2], [7]), [15])
+    )
+})
+```
+
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 3
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([15], ([13], [12], [14]), ([17], [16], ([18], [], [18])))
+    )
+})
+```
+
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 4
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([16], ([10], ([7], [1], []), [15]), ([19], ([17], [], [18]), [20]))
+    )
+})
+```
+
+:::
+
+# :code: 源码
+
+~~~md
+:::grid
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 1
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([20], ([16], [13], [18]), ([25], [21], [28]))
+    )
+})
+```
+
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 2
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([10], ([5], [2], [7]), [15])
+    )
+})
+```
+
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 3
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([15], ([13], [12], [14]), ([17], [16], ([18], [], [18])))
+    )
+})
+```
+
+:sep{width="50%"}
+
+```typst **二叉搜索树**例 4
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    tree.tree(
+        draw-node: (node, ..) => {
+            if node.content == [] { return none }
+            circle((), radius: .35, stroke: black)
+            content((), [#node.content])
+        },
+        draw-edge: (from, to, pa, child) => {
+            if child.content == [] { return none }
+            tree.default-draw-edge(from, to, pa, child)
+        },
+        ([16], ([10], ([7], [1], []), [15]), ([19], ([17], [], [18]), [20]))
+    )
+})
+```
+
+:::
+~~~
+
+::

@@ -25,6 +25,10 @@ const props = defineProps<{ svg: string; alt: string }>();
     max-height: 20em;
 }
 
+.svg > * {
+    max-width: 100%;
+}
+
 figcaption {
     font-size: 0.8em;
     color: #8d8d8d;

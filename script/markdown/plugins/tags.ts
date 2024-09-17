@@ -46,6 +46,30 @@ const transformRight = (token: Token): boolean => {
 };
 
 /**
+ * Transform a mdc shorthand tag to another tag.
+ *
+ * @example `<sep>` => `<h1>`
+ *
+ * @param token - Token
+ * @returns Whether the token is transformed
+ */
+const transformMdcShorthand = (token: Token): boolean => {
+    const pairs: Record<string, string> = {
+        sep: "h1",
+    };
+
+    if (token.type === "mdc_block_shorthand") {
+        const tag = pairs[token.tag];
+        if (tag) {
+            token.tag = tag;
+            return true;
+        }
+    }
+
+    return false;
+};
+
+/**
  * Transform a mdc tag to a component tag.
  *
  * @example `<fold>` => `<Fold>`
@@ -59,6 +83,7 @@ const transformMdc = (token: Token): boolean => {
         tab: "Tab",
         note: "Note",
         linkcard: "LinkCard",
+        grid: "Grid",
     };
 
     if (token.type === "mdc_block_open" || token.type === "mdc_block_close") {
@@ -90,6 +115,7 @@ export default (md: MarkdownIt) => {
             // Block Transform
             if (transformQuote(token)) continue;
             if (transformMdc(token)) continue;
+            if (transformMdcShorthand(token)) continue;
 
             // Inline Transform
             if (type === "inline") {
