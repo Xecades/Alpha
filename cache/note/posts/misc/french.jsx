@@ -22,90 +22,90 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <tbody>
 <tr>
 <td style="text-align:center">Aa</td>
-<td style="text-align:center"><code class="inline-code">[a]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[a]"}</code></td>
 <td style="text-align:center">Nn</td>
-<td style="text-align:center"><code class="inline-code">[ɛn]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ɛn]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Bb</td>
-<td style="text-align:center"><code class="inline-code">[be]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[be]"}</code></td>
 <td style="text-align:center">Oo</td>
-<td style="text-align:center"><code class="inline-code">[o]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[o]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Cc</td>
-<td style="text-align:center"><code class="inline-code">[se]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[se]"}</code></td>
 <td style="text-align:center">Pp</td>
-<td style="text-align:center"><code class="inline-code">[pe]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[pe]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Dd</td>
-<td style="text-align:center"><code class="inline-code">[de]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[de]"}</code></td>
 <td style="text-align:center">Qq</td>
-<td style="text-align:center"><code class="inline-code">[ky]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ky]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Ee</td>
-<td style="text-align:center"><code class="inline-code">[ə]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ə]"}</code></td>
 <td style="text-align:center">Rr</td>
-<td style="text-align:center"><code class="inline-code">[ɛr]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ɛr]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Ff</td>
-<td style="text-align:center"><code class="inline-code">[ɛf]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ɛf]"}</code></td>
 <td style="text-align:center">Ss</td>
-<td style="text-align:center"><code class="inline-code">[ɛs]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ɛs]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Gg</td>
-<td style="text-align:center"><code class="inline-code">[ʒe]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ʒe]"}</code></td>
 <td style="text-align:center">Tt</td>
-<td style="text-align:center"><code class="inline-code">[te]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[te]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Hh</td>
-<td style="text-align:center"><code class="inline-code">[aʃ]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[aʃ]"}</code></td>
 <td style="text-align:center">Uu</td>
-<td style="text-align:center"><code class="inline-code">[y]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[y]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Ii</td>
-<td style="text-align:center"><code class="inline-code">[i]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[i]"}</code></td>
 <td style="text-align:center">Vv</td>
-<td style="text-align:center"><code class="inline-code">[ve]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ve]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Jj</td>
-<td style="text-align:center"><code class="inline-code">[ʒi]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ʒi]"}</code></td>
 <td style="text-align:center">Ww</td>
-<td style="text-align:center"><code class="inline-code">[dubləve]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[dubləve]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Kk</td>
-<td style="text-align:center"><code class="inline-code">[ka]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ka]"}</code></td>
 <td style="text-align:center">Xx</td>
-<td style="text-align:center"><code class="inline-code">[iks]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[iks]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Ll</td>
-<td style="text-align:center"><code class="inline-code">[ɛl]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ɛl]"}</code></td>
 <td style="text-align:center">Yy</td>
-<td style="text-align:center"><code class="inline-code">[iɡrɛk]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[iɡrɛk]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center">Mm</td>
-<td style="text-align:center"><code class="inline-code">[ɛm]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ɛm]"}</code></td>
 <td style="text-align:center">Zz</td>
-<td style="text-align:center"><code class="inline-code">[zɛd]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[zɛd]"}</code></td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="t-2" tabindex="-1" class="heading">音素 <a class="cursor header-anchor" href="#t-2">¶</a></h2>
 <ul>
-<li><strong>元音</strong>：<code class="inline-code">[a] [ɔ] [œ] [ɛ] [o] [ø] [e] [ə] [u] [y] [i] [ɑ̃] [ɛ̃] [œ̃] [ɔ̃]</code></li>
-<li><strong>辅音</strong>：<code class="inline-code">[p] [b] [t] [d] [f] [v] [k] [g] [s] [z] [ʃ] [ʒ] [m] [n] [ɲ] [l] [r]</code></li>
-<li><strong>半元音</strong>：<code class="inline-code">[j] [ч] [w]</code></li>
+<li><strong>元音</strong>：<code class="inline-code">{"[a] [ɔ] [œ] [ɛ] [o] [ø] [e] [ə] [u] [y] [i] [ɑ̃] [ɛ̃] [œ̃] [ɔ̃]"}</code></li>
+<li><strong>辅音</strong>：<code class="inline-code">{"[p] [b] [t] [d] [f] [v] [k] [g] [s] [z] [ʃ] [ʒ] [m] [n] [ɲ] [l] [r]"}</code></li>
+<li><strong>半元音</strong>：<code class="inline-code">{"[j] [ч] [w]"}</code></li>
 </ul>
 <hr />
 <h2 id="t-3" tabindex="-1" class="heading">发音规则 <a class="cursor header-anchor" href="#t-3">¶</a></h2>
@@ -120,12 +120,12 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><code class="inline-code">[a]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[a]"}</code></td>
 <td>a, à, â</td>
 <td style="text-align:center">sa, là, âme</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[ɛ]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ɛ]"}</code></td>
 <td>è, ê</td>
 <td style="text-align:center">mère, fête</td>
 </tr>
@@ -150,7 +150,7 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <td style="text-align:center">filet</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[i]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[i]"}</code></td>
 <td>i, î, ï</td>
 <td style="text-align:center">mie, île, maïs</td>
 </tr>
@@ -160,7 +160,7 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <td style="text-align:center">style</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[e]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[e]"}</code></td>
 <td>é</td>
 <td style="text-align:center">bébé</td>
 </tr>
@@ -172,22 +172,22 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <tr>
 <td style="text-align:center"></td>
 <td>er, ez 在词末</td>
-<td style="text-align:center">fêter <code class="inline-code">[fɛte]</code>, aidez <code class="inline-code">[ɛde]</code></td>
+<td style="text-align:center">fêter <code class="inline-code">{"[fɛte]"}</code>, aidez <code class="inline-code">{"[ɛde]"}</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[y]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[y]"}</code></td>
 <td>u, û</td>
-<td style="text-align:center">tu <code class="inline-code">[ty]</code>, dû, culture <code class="inline-code">[kyltyr]</code></td>
+<td style="text-align:center">tu <code class="inline-code">{"[ty]"}</code>, dû, culture <code class="inline-code">{"[kyltyr]"}</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[ə]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ə]"}</code></td>
 <td>e 在词首开音节中</td>
-<td style="text-align:center">chemise <code class="inline-code">ʃəmiz</code></td>
+<td style="text-align:center">chemise <code class="inline-code">{"ʃəmiz"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td>e 在单音节词中</td>
-<td style="text-align:center">ce <code class="inline-code">[sə]</code></td>
+<td style="text-align:center">ce <code class="inline-code">{"[sə]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
@@ -195,14 +195,14 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <td style="text-align:center">vendredi</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[ã]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ã]"}</code></td>
 <td>am, an 后无 m, n 或元音字母</td>
 <td style="text-align:center">lampe, dans</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td>em, en 后无 m, n 或元音字母</td>
-<td style="text-align:center">temps <code class="inline-code">[tã]</code>, vent <code class="inline-code">[vã]</code>, an <code class="inline-code">[ã]</code></td>
+<td style="text-align:center">temps <code class="inline-code">{"[tã]"}</code>, vent <code class="inline-code">{"[vã]"}</code>, an <code class="inline-code">{"[ã]"}</code></td>
 </tr>
 </tbody>
 </table>
@@ -218,7 +218,7 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><code class="inline-code">[s]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[s]"}</code></td>
 <td>s</td>
 <td style="text-align:center">tasse</td>
 </tr>
@@ -233,17 +233,17 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <td style="text-align:center">face, cidre, cycle</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[t]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[t]"}</code></td>
 <td>t, th</td>
 <td style="text-align:center">ta, thé</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[d]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[d]"}</code></td>
 <td>d</td>
 <td style="text-align:center">date</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[f]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[f]"}</code></td>
 <td>f</td>
 <td style="text-align:center">fade</td>
 </tr>
@@ -253,24 +253,24 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <td style="text-align:center">phare</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[v]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[v]"}</code></td>
 <td>v</td>
 <td style="text-align:center">vie</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[m]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[m]"}</code></td>
 <td>m</td>
 <td style="text-align:center">mais</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[ʃ]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ʃ]"}</code></td>
 <td>ch</td>
-<td style="text-align:center">chaise <code class="inline-code">[ʃɛz]</code>, chine <code class="inline-code">[ʃin]</code></td>
+<td style="text-align:center">chaise <code class="inline-code">{"[ʃɛz]"}</code>, chine <code class="inline-code">{"[ʃin]"}</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[ʒ]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[ʒ]"}</code></td>
 <td>j</td>
-<td style="text-align:center">jupe <code class="inline-code">[ʒyp]</code>, déjà <code class="inline-code">[deʒa]</code></td>
+<td style="text-align:center">jupe <code class="inline-code">{"[ʒyp]"}</code>, déjà <code class="inline-code">{"[deʒa]"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
@@ -278,27 +278,27 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <td style="text-align:center">âge, gile, gymnase</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[k]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[k]"}</code></td>
 <td>k</td>
 <td style="text-align:center">kaki</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td>c 在元音字母 a, o, u 或辅音字母前</td>
-<td style="text-align:center">car, code <code class="inline-code">[kɔd]</code>, cube, classe</td>
+<td style="text-align:center">car, code <code class="inline-code">{"[kɔd]"}</code>, cube, classe</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td>c 在词尾</td>
-<td style="text-align:center">lac <code class="inline-code">lak</code></td>
+<td style="text-align:center">lac <code class="inline-code">{"lak"}</code></td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td>qu</td>
-<td style="text-align:center">quel <code class="inline-code">[kɛl]</code></td>
+<td style="text-align:center">quel <code class="inline-code">{"[kɛl]"}</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[g]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[g]"}</code></td>
 <td>g 在元音字母 a, o, u 或辅音字母前</td>
 <td style="text-align:center">gare, gomme, légume, glace</td>
 </tr>
@@ -308,12 +308,12 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 <td style="text-align:center">guerre, guide</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[r]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[r]"}</code></td>
 <td>r</td>
-<td style="text-align:center">rire, revue <code class="inline-code">[rəvy]</code></td>
+<td style="text-align:center">rire, revue <code class="inline-code">{"[rəvy]"}</code></td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">[z]</code></td>
+<td style="text-align:center"><code class="inline-code">{"[z]"}</code></td>
 <td>z</td>
 <td style="text-align:center">zèle</td>
 </tr>

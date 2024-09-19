@@ -6,8 +6,18 @@ nav:
                 - splay-tree
                 - red-black-tree
                 - b-plus-tree
+          - others:
+                - mit-missing-semester
+                - c-language-cheatsheet
+                - manuals-standards
     - math:
-          - fourier
+          - ma:
+                - cheatsheet
+                - prove-that
+                - completeness-of-real-numbers
+          - la:
+                - prove-that
+                - what-is
     - misc:
           - french
           - test:

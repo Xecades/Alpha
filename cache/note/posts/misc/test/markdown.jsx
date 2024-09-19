@@ -45,7 +45,7 @@ export default <><p>普通文字</p>
 <hr />
 <p>图片展示</p>
 <p><ImageCaptioned alt="这里是图片标题，支持 [公式] 和 加粗 文字" src="https://medium-zoom.francoischalifour.com/image-3.a41d7456.jpg">这里是图片标题，支持 <InlineMath data={"\\LaTeX"}></InlineMath> 和<strong>加粗</strong>文字</ImageCaptioned></p>
-<p><ImageCaptioned alt="cat /data/flag" src="https://medium-zoom.francoischalifour.com/image-4.a4d08f7d.jpg"><code>cat /data/flag</code></ImageCaptioned></p>
+<p><ImageCaptioned alt="{"cat /data/flag"}" src="https://medium-zoom.francoischalifour.com/image-4.a4d08f7d.jpg"><code class="inline-code">{"cat /data/flag"}</code></ImageCaptioned></p>
 <p><ImageCaptioned alt="空" src="https://s2.loli.net/2022/07/09/pTQyYHRSXjLCtFU.png"></ImageCaptioned></p>
 <hr />
 <blockquote>
@@ -65,9 +65,9 @@ export default <><p>普通文字</p>
 <p>Cupidatat consequat incididunt nostrud laborum incididunt in sunt aute. Elit consectetur consectetur qui fugiat incididunt laborum amet officia quis cupidatat amet ut ullamco. Esse sunt aliqua commodo qui laboris sint enim.</p>
 </blockquote>
 <hr />
-<p>行内代码块 <code class="inline-code">#include&lt;iostream&gt;</code>。Mollit dolore est in et aliquip adipisicing et nulla id nulla esse laborum minim nulla. In ad irure qui magna Lorem ad eiusmod do do <code class="inline-code">laborum ex duis</code>. Reprehenderit nulla nisi laborum incididunt voluptate sunt et cupidatat commodo consectetur deserunt. Non officia aliquip enim duis. Ea irure magna excepteur labore eiusmod officia sit id sint anim ipsum duis labore Lorem. Culpa cillum <code class="inline-code">voluptate duis exercitation cillum esse incididunt laborum magna</code>. Est ut commodo non magna nisi sit proident deserunt consectetur ut anim ullamco ut adipisicing.</p>
+<p>行内代码块 <code class="inline-code">{"#include<iostream>"}</code>。Mollit dolore est in et aliquip adipisicing et nulla id nulla esse laborum minim nulla. In ad irure qui magna Lorem ad eiusmod do do <code class="inline-code">{"laborum ex duis"}</code>. Reprehenderit nulla nisi laborum incididunt voluptate sunt et cupidatat commodo consectetur deserunt. Non officia aliquip enim duis. Ea irure magna excepteur labore eiusmod officia sit id sint anim ipsum duis labore Lorem. Culpa cillum <code class="inline-code">{"voluptate duis exercitation cillum esse incididunt laborum magna"}</code>. Est ut commodo non magna nisi sit proident deserunt consectetur ut anim ullamco ut adipisicing.</p>
 <blockquote>
-<p><code class="inline-code">scanf()</code> 用于输入数据，而 <code class="inline-code">printf()</code> 用于输出数据。</p>
+<p><code class="inline-code">{"scanf()"}</code> 用于输入数据，而 <code class="inline-code">{"printf()"}</code> 用于输出数据。</p>
 </blockquote>
 <hr />
 <p>表格</p>
@@ -80,55 +80,55 @@ export default <><p>普通文字</p>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><code class="inline-code">%</code></td>
-<td>Prints <code class="inline-code">%</code>.</td>
+<td style="text-align:center"><code class="inline-code">{"%"}</code></td>
+<td>Prints <code class="inline-code">{"%"}</code>.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">d</code></td>
-<td>Decimal <code class="inline-code">signed int</code>.</td>
+<td style="text-align:center"><code class="inline-code">{"d"}</code></td>
+<td>Decimal <code class="inline-code">{"signed int"}</code>.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">u</code></td>
-<td>Decimal <code class="inline-code">unsigned int</code>.</td>
+<td style="text-align:center"><code class="inline-code">{"u"}</code></td>
+<td>Decimal <code class="inline-code">{"unsigned int"}</code>.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">o</code></td>
-<td>Octal <code class="inline-code">unsigned int</code>.</td>
+<td style="text-align:center"><code class="inline-code">{"o"}</code></td>
+<td>Octal <code class="inline-code">{"unsigned int"}</code>.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">x</code>, <code class="inline-code">X</code></td>
-<td>Hexadecimal <code class="inline-code">unsigned int</code>. <code class="inline-code">x</code> for lower-case and <code class="inline-code">X</code> for upper-case.</td>
+<td style="text-align:center"><code class="inline-code">{"x"}</code>, <code class="inline-code">{"X"}</code></td>
+<td>Hexadecimal <code class="inline-code">{"unsigned int"}</code>. <code class="inline-code">{"x"}</code> for lower-case and <code class="inline-code">{"X"}</code> for upper-case.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">f</code></td>
+<td style="text-align:center"><code class="inline-code">{"f"}</code></td>
 <td>Float-point types in fixed-point notation.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">e</code>, <code class="inline-code">E</code></td>
-<td>Float-point types in exponential notation: <code class="inline-code">d.ddde±dd</code>. <code class="inline-code">e</code> for lower-case “e” and <code class="inline-code">E</code> for upper-case.</td>
+<td style="text-align:center"><code class="inline-code">{"e"}</code>, <code class="inline-code">{"E"}</code></td>
+<td>Float-point types in exponential notation: <code class="inline-code">{"d.ddde±dd"}</code>. <code class="inline-code">{"e"}</code> for lower-case “e” and <code class="inline-code">{"E"}</code> for upper-case.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">g</code>, <code class="inline-code">G</code></td>
-<td>Float-point types in either fixed-point or exponential notation, whichever is more appropriate for its magnitude. <code class="inline-code">g</code> for lower-case and <code class="inline-code">G</code> for upper-case.</td>
+<td style="text-align:center"><code class="inline-code">{"g"}</code>, <code class="inline-code">{"G"}</code></td>
+<td>Float-point types in either fixed-point or exponential notation, whichever is more appropriate for its magnitude. <code class="inline-code">{"g"}</code> for lower-case and <code class="inline-code">{"G"}</code> for upper-case.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">a</code>, <code class="inline-code">A</code></td>
-<td>Float-point in hexadecimal notation, starting with <code class="inline-code">0x</code> or <code class="inline-code">0X</code>. <code class="inline-code">a</code> for lower-case and <code class="inline-code">A</code> for upper-case.</td>
+<td style="text-align:center"><code class="inline-code">{"a"}</code>, <code class="inline-code">{"A"}</code></td>
+<td>Float-point in hexadecimal notation, starting with <code class="inline-code">{"0x"}</code> or <code class="inline-code">{"0X"}</code>. <code class="inline-code">{"a"}</code> for lower-case and <code class="inline-code">{"A"}</code> for upper-case.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">s</code></td>
-<td><code class="inline-code">null</code>-terminated string.</td>
+<td style="text-align:center"><code class="inline-code">{"s"}</code></td>
+<td><code class="inline-code">{"null"}</code>-terminated string.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">c</code></td>
-<td><code class="inline-code">char</code>.</td>
+<td style="text-align:center"><code class="inline-code">{"c"}</code></td>
+<td><code class="inline-code">{"char"}</code>.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">p</code></td>
-<td><code class="inline-code">void*</code> in an implementation-defined format.</td>
+<td style="text-align:center"><code class="inline-code">{"p"}</code></td>
+<td><code class="inline-code">{"void*"}</code> in an implementation-defined format.</td>
 </tr>
 <tr>
-<td style="text-align:center"><code class="inline-code">n</code></td>
+<td style="text-align:center"><code class="inline-code">{"n"}</code></td>
 <td>Print nothing, but writes the number of characters written so far into an integer pointer parameter.</td>
 </tr>
 </tbody>

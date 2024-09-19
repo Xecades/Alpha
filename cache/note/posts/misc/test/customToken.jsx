@@ -61,7 +61,7 @@ And that has made all the difference.<br />
 <p>功能上类似于 MkDocs Material 的 <Anchor href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/">Admonitions</Anchor>，用于提供额外信息。</p>
 <BlockCode lang="md" html={"<code class=\"language-md\">::note{[default] | primary | success | info | warning | danger}\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Note</span> <span class=\"token attr-name\">内容</span><span class=\"token punctuation\">></span></span>\n::\n</code>"}></BlockCode><Tab>
 <h1><font-awesome-icon class="icon" icon="flask" /> 效果</h1>
-<Note>这里是 <code class="inline-code">note.default</code> 的内容</Note>
+<Note>这里是 <code class="inline-code">{"note.default"}</code> 的内容</Note>
 <h1><font-awesome-icon class="icon" icon="code" /> 源码</h1>
 <BlockCode lang="md" html={"<code class=\"language-md\">:::note\n这里是 <span class=\"token code-snippet code keyword\">`note.default`</span> 的内容\n:::\n</code>"}></BlockCode></Tab>
 <Tab>
@@ -69,24 +69,24 @@ And that has made all the difference.<br />
 <Note type="danger"><InlineMath data={"\\text{P} \\neq \\text{NP}"}></InlineMath></Note>
 <h1><font-awesome-icon class="icon" icon="code" /> 源码</h1>
 <BlockCode lang="md" html={"<code class=\"language-md\">:::note{danger}\n$\\text{P} \\neq \\text{NP}$\n:::\n</code>"}></BlockCode></Tab>
-<Note type="primary">这里是 <code class="inline-code">note.primary</code> 的内容</Note>
-<Note type="success">这里是 <code class="inline-code">note.success</code> 的内容</Note>
-<Note type="info">这里是 <code class="inline-code">note.info</code> 的内容</Note>
-<Note type="warning">这里是 <code class="inline-code">note.warning</code> 的内容</Note>
-<Note type="danger">这里是 <code class="inline-code">note.danger</code> 的内容</Note>
+<Note type="primary">这里是 <code class="inline-code">{"note.primary"}</code> 的内容</Note>
+<Note type="success">这里是 <code class="inline-code">{"note.success"}</code> 的内容</Note>
+<Note type="info">这里是 <code class="inline-code">{"note.info"}</code> 的内容</Note>
+<Note type="warning">这里是 <code class="inline-code">{"note.warning"}</code> 的内容</Note>
+<Note type="danger">这里是 <code class="inline-code">{"note.danger"}</code> 的内容</Note>
 <Note type="success">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Note>
 <hr />
 <h2 id="t-7" tabindex="-1" class="heading">折叠面板 <a class="cursor header-anchor" href="#t-7">¶</a></h2>
 <BlockCode lang="md" html={"<code class=\"language-md\">::fold{title=\"[标题]\" <span class=\"token url\">[<span class=\"token content\">expand</span>] [<span class=\"token variable\">default</span>]</span> | primary | success | info | warning | danger}\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>折叠内容</span><span class=\"token punctuation\">></span></span>\n::\n</code>"}></BlockCode><Tab>
 <h1><font-awesome-icon class="icon" icon="flask" /> 效果</h1>
-<Fold title={<>默认展开的 <code class="inline-code">default</code> 折叠面板</>} expand>这里是 <code class="inline-code">fold.default</code> 的内容</Fold>
+<Fold title={<>默认展开的 <code class="inline-code">{"default"}</code> 折叠面板</>} expand>这里是 <code class="inline-code">{"fold.default"}</code> 的内容</Fold>
 <h1><font-awesome-icon class="icon" icon="code" /> 源码</h1>
 <BlockCode lang="md" html={"<code class=\"language-md\">:::fold{title=\"默认展开的 <span class=\"token code-snippet code keyword\">`default`</span> 折叠面板\" expand}\n这里是 <span class=\"token code-snippet code keyword\">`fold.default`</span> 的内容\n:::\n</code>"}></BlockCode></Tab>
-<Fold title={<><code class="inline-code">primary</code> 折叠面板</>} type="primary">这里是 <code class="inline-code">fold.primary</code> 的内容</Fold>
-<Fold title={<><code class="inline-code">success</code> 折叠面板</>} type="success">这里是 <code class="inline-code">fold.success</code> 的内容</Fold>
-<Fold title={<><code class="inline-code">info</code> 折叠面板</>} type="info">这里是 <code class="inline-code">fold.info</code> 的内容</Fold>
-<Fold title={<><code class="inline-code">warning</code> 折叠面板</>} type="warning">这里是 <code class="inline-code">fold.warning</code> 的内容</Fold>
-<Fold title={<><code class="inline-code">danger</code> 折叠面板</>} type="danger">这里是 <code class="inline-code">fold.danger</code> 的内容</Fold>
+<Fold title={<><code class="inline-code">{"primary"}</code> 折叠面板</>} type="primary">这里是 <code class="inline-code">{"fold.primary"}</code> 的内容</Fold>
+<Fold title={<><code class="inline-code">{"success"}</code> 折叠面板</>} type="success">这里是 <code class="inline-code">{"fold.success"}</code> 的内容</Fold>
+<Fold title={<><code class="inline-code">{"info"}</code> 折叠面板</>} type="info">这里是 <code class="inline-code">{"fold.info"}</code> 的内容</Fold>
+<Fold title={<><code class="inline-code">{"warning"}</code> 折叠面板</>} type="warning">这里是 <code class="inline-code">{"fold.warning"}</code> 的内容</Fold>
+<Fold title={<><code class="inline-code">{"danger"}</code> 折叠面板</>} type="danger">这里是 <code class="inline-code">{"fold.danger"}</code> 的内容</Fold>
 <Fold title={<>标题是支持 <InlineMath data={"\\LaTeX"}></InlineMath> 的</>} expand type="success">
 <p>折叠面板也支持 <InlineMath data={"\\LaTeX"}></InlineMath>！</p>
 <BlockMath data={"\\begin{aligned}\n&\\Bigl(f*g\\Bigr)(6) \\\\\n=&\\sum_{d\\mid 6}f(d)g\\biggl(\\dfrac{6}{d}\\biggr) \\\\\n=&f(1)g(6)+f(2)g(3)+f(3)g(2)+f(6)g(1)\n\\end{aligned}\n"}></BlockMath></Fold>
@@ -97,7 +97,7 @@ And that has made all the difference.<br />
 <Fold type="primary">
 <div class="quote">这个折叠面板没有标题</div>
 </Fold>
-<Fold title={<>这个折叠面板的标题真的真的真的真的真的真的真的真的真的真的真的真的非常的长，而且里面还有 <code class="inline-code">code</code> 块</>}>
+<Fold title={<>这个折叠面板的标题真的真的真的真的真的真的真的真的真的真的真的真的非常的长，而且里面还有 <code class="inline-code">{"code"}</code> 块</>}>
 <BlockCode lang="python" html={"<code class=\"language-python\"><span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Hello World\"</span><span class=\"token punctuation\">)</span>\n</code>"}></BlockCode></Fold>
 <hr />
 <h2 id="t-8" tabindex="-1" class="heading">链接卡片 <a class="cursor header-anchor" href="#t-8">¶</a></h2>
@@ -126,7 +126,7 @@ And that has made all the difference.<br />
 <p>选项卡也是支持 <InlineMath data={"\\LaTeX"}></InlineMath> 的！</p>
 <BlockMath data={"\\begin{aligned}\n&\\Bigl(f*g\\Bigr)(6) \\\\\n=&\\sum_{d\\mid 6}f(d)g\\biggl(\\dfrac{6}{d}\\biggr) \\\\\n=&f(1)g(6)+f(2)g(3)+f(3)g(2)+f(6)g(1)\n\\end{aligned}\n"}></BlockMath><h1>Lorem</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<h1>一个名字很长很长很长很长很长很长的选项卡（而且名字里面还有 <code class="inline-code">code</code>）</h1>
+<h1>一个名字很长很长很长很长很长很长的选项卡（而且名字里面还有 <code class="inline-code">{"code"}</code>）</h1>
 <BlockCode lang="python" html={"<code class=\"language-python\"><span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Hello World\"</span><span class=\"token punctuation\">)</span>\n</code>"}></BlockCode><h1><font-awesome-icon class="icon" icon="code" /> 源码</h1>
 <BlockCode lang="md" html={"<code class=\"language-md\">:::tab\n<span class=\"token title important\"><span class=\"token punctuation\">#</span> 选项卡 1</span>\n\n这里是「<span class=\"token bold\"><span class=\"token punctuation\">**</span><span class=\"token content\">选项卡 1</span><span class=\"token punctuation\">**</span></span>」 的内容\n\n<span class=\"token title important\"><span class=\"token punctuation\">#</span> 选项卡 2</span>\n\n这里是「<span class=\"token bold\"><span class=\"token punctuation\">**</span><span class=\"token content\">选项卡 2</span><span class=\"token punctuation\">**</span></span>」 的内容\n\n<span class=\"token title important\"><span class=\"token punctuation\">#</span> $\\LaTeX$ 公式</span>\n\n选项卡也是支持 $\\LaTeX$ 的！\n\n$$\n\\begin{aligned}\n&amp;\\Bigl(f*g\\Bigr)(6) \\\\\n=&amp;\\sum_{d\\mid 6}f(d)g\\biggl(\\dfrac{6}{d}\\biggr) \\\\\n=&amp;f(1)g(6)+f(2)g(3)+f(3)g(2)+f(6)g(1)\n\\end{aligned}\n$$\n\n<span class=\"token title important\"><span class=\"token punctuation\">#</span> Lorem</span>\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n<span class=\"token title important\"><span class=\"token punctuation\">#</span> 一个名字很长很长很长很长很长很长的选项卡（而且名字里面还有 `code`）</span>\n\n<span class=\"token code\"><span class=\"token punctuation\">```</span><span class=\"token code-language\">python</span>\n<span class=\"token code-block language-python\"><span class=\"token keyword\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Hello World\"</span><span class=\"token punctuation\">)</span></span>\n<span class=\"token punctuation\">```</span></span>\n:::\n</code>"}></BlockCode></Tab>
 <Tab>
