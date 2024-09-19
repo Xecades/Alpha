@@ -44,7 +44,7 @@ export default <><p>普通文字</p>
 </ol>
 <hr />
 <p>图片展示</p>
-<p><ImageCaptioned alt="这里是图片标题，支持 和 加粗 文字" src="https://medium-zoom.francoischalifour.com/image-3.a41d7456.jpg">这里是图片标题，支持 <InlineMath data={"\\LaTeX"}></InlineMath> 和<strong>加粗</strong>文字</ImageCaptioned></p>
+<p><ImageCaptioned alt="这里是图片标题，支持 [公式] 和 加粗 文字" src="https://medium-zoom.francoischalifour.com/image-3.a41d7456.jpg">这里是图片标题，支持 <InlineMath data={"\\LaTeX"}></InlineMath> 和<strong>加粗</strong>文字</ImageCaptioned></p>
 <p><ImageCaptioned alt="cat /data/flag" src="https://medium-zoom.francoischalifour.com/image-4.a4d08f7d.jpg"><code>cat /data/flag</code></ImageCaptioned></p>
 <p><ImageCaptioned alt="空" src="https://s2.loli.net/2022/07/09/pTQyYHRSXjLCtFU.png"></ImageCaptioned></p>
 <hr />
