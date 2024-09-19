@@ -303,10 +303,12 @@
 /* 表格 */
 .markdown table {
     border-collapse: collapse;
-    margin: 2rem var(--block-extend);
     border: 1px solid var(--table-border);
     border-radius: 2px;
     display: block;
+    width: max-content;
+    margin: 2rem auto;
+    max-width: calc(100% - var(--block-extend) * 2);
 }
 
 .markdown table th {
