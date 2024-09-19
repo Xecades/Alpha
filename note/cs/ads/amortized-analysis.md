@@ -556,7 +556,7 @@ $$
 \end{align*}
 $$
 
-这是一种非常优美的结构，因为对于一个完整的查询、插入、删除操作，它都是由一系列 Zig、Zig-Zag、Zig-Zig 子操作组成的，而这些子操作中的 $\hat{c_i}$ 累加后 $\operatorname{rank}X$ 相互抵消，只剩下初末状态的 $\operatorname{rank}$ 差值，而我们知道末状态下 $X$ 就是根节点，也就是说
+这是一种非常优美的结构，因为对于一个完整的查询、插入、删除操作，它都是由一系列 Zig、Zig-Zag、Zig-Zig 子操作组成的，而这些子操作中的 $\hat{c_i}$ 累加后 $\operatorname{rank}X$ 相互抵消，只剩下初末状态的 $\operatorname{rank}$ 差值，同时我们知道末状态下 $X$ 就是根节点，也就是说
 
 $$
 \hat{c_i} \leqslant 1 + 3(\operatorname{rank} T - \operatorname{rank} X) = O(\log N)
