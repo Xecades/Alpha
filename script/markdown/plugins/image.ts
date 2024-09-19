@@ -1,4 +1,4 @@
-import { extractText } from "../utils";
+import { escape, extractText } from "../utils";
 
 import type MarkdownIt from "markdown-it";
 import type Token from "markdown-it/lib/token.mjs";
@@ -18,7 +18,8 @@ export default (md: MarkdownIt) => {
         );
 
         let alt = extractText(caption) || "空";
+        alt = escape(alt);
 
-        return `<ImageCaptioned alt="${alt}" src="${src}">${caption}</ImageCaptioned>`;
+        return `<ImageCaptioned alt={"${alt}"} src="${src}">${caption}</ImageCaptioned>`;
     };
 };

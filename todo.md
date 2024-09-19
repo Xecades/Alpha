@@ -1,5 +1,6 @@
 ## 亟待解决
 
+ - 文章创建日期，git checkout 等操作后会刷新，改成从 front matter 读取，当前正确的日期从 ec8f9a2db 里面找
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）（放 index 页的 Vue components 里？）
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - ScrollReveal 导致评论系统回复评论的窗口不显示
