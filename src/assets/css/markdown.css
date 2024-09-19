@@ -309,6 +309,8 @@
     width: max-content;
     margin: 2rem auto;
     max-width: calc(100% - var(--block-extend) * 2);
+    transform: translateX(var(--block-extend));
+    overflow-x: auto;
 }
 
 .markdown table th {
