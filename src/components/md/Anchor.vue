@@ -1,13 +1,20 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+import cursor from "@/assets/js/cursor";
+
 const props = defineProps<{ href: string }>();
-const is_internal: boolean = props.href.startsWith("/");
+const is_internal: boolean = !props.href.startsWith("http");
+
+onMounted(() => {
+    cursor.refresh();
+});
 </script>
 
 <template>
     <router-link :to="encodeURI(href)" v-if="is_internal" class="cursor">
         <slot />
     </router-link>
-    <a :href="href" v-else class="cursor" target="_blank">
+    <a :href="href" v-else class="cursor external" target="_blank">
         <slot />
     </a>
 </template>
@@ -34,7 +41,7 @@ a:hover {
     color: var(--hover-color);
 }
 
-a::after {
+a.external::after {
     content: "✦";
     font-size: 0.7em;
     line-height: 1em;

@@ -2,7 +2,7 @@
 import LinkTo from "../LinkTo.vue";
 
 const props = defineProps<{ href: string }>();
-const external: boolean = !props.href.startsWith("/");
+const external: boolean = props.href.startsWith("http");
 
 const isGitHub: boolean = /github\.com/.test(props.href);
 </script>
