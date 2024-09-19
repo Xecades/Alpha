@@ -7,7 +7,12 @@ nav:
           - latex
           - markdown
           - toc
-      - ads
+      - ads:
+          - avl-tree
+          - amortized-analysis
+          - splay-tree
+          - red-black-tree
+          - b-plus-tree
   - math:
       - fourier
       - dm
