@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import injection from "../utils/injection";
+import { timeDataOf } from "../utils/git";
 import { to_JSX_path } from "./jsx";
 
 import type { BASE, ParsedMarkdown, RouteMeta } from "../../types";
@@ -32,6 +33,8 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
         const category: string =
             route_path === `/${base}` || is_404 ? "" : route_path.split("/")[2];
 
+        const timeData = await timeDataOf(item.pathname);
+
         const import_slot: string = "<IMP_SLOT>";
         const component_slot: string = "<COM_SLOT>";
         const toc_slot: string = "<TOC_SLOT>";
@@ -61,8 +64,8 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
                 body: import_slot as any,
                 attr: item.attr,
                 toc: toc_slot as any,
-                birthtime: item.stats.birthtime,
-                mtime: item.stats.mtime,
+                birthtime: timeData.created,
+                mtime: timeData.updated,
                 type: is_index ? "index" : "post",
             } as RouteMeta,
         };
