@@ -5,7 +5,7 @@ import type { IFuseOptions } from "fuse.js";
 import type { BASE, ParsedMarkdown, SearchTarget } from "../../types";
 
 /** @see https://www.fusejs.io/api/options.html */
-const options: IFuseOptions<string> = {
+const options: IFuseOptions<SearchTarget> = {
     keys: ["title", "content"],
     includeMatches: true,
     ignoreLocation: true,
@@ -13,7 +13,7 @@ const options: IFuseOptions<string> = {
 };
 
 /**
- * Cache search database to `./cache/${base}/search.js`, which yields a `fuse.js` object.
+ * Cache search database to `./cache/${base}/search.ts`, which yields a `fuse.js` object.
  *
  * @note This module caches the purged html (.text).
  *
@@ -22,7 +22,7 @@ const options: IFuseOptions<string> = {
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
     const md_ext: RegExp = /(\/index)?\.md$/g;
-    const dist: string = `./cache/${base}/search.js`;
+    const dist: string = `./cache/${base}/search.ts`;
 
     const link_of = (post: ParsedMarkdown): string =>
         "/" + post.pathname.replace(md_ext, "");
@@ -41,16 +41,26 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
             })
         );
 
-    const index = Fuse.createIndex((options as any).keys, searchTarget);
+    const index = Fuse.createIndex<SearchTarget>(options.keys!, searchTarget);
 
     let cache: string = "";
     cache += 'import Fuse from "fuse.js";\n';
+    cache +=
+        'import type { CachedSearchFn, SearchTarget } from "@script/types";\n';
+    cache += 'import type { FuseIndex, IFuseOptions } from "fuse.js";\n';
     cache += "const idx = " + JSON.stringify(index.toJSON()) + ";\n";
-    cache += "const db = " + JSON.stringify(searchTarget) + ";\n";
-    cache += "const config = " + JSON.stringify(options) + ";\n";
-    cache += "const index = Fuse.parseIndex(idx);\n";
-    cache += "const fuse = new Fuse(db, config, index);\n";
-    cache += "export default t => t ? fuse.search(t) : db;\n";
+    cache +=
+        "const db: SearchTarget[] = " + JSON.stringify(searchTarget) + ";\n";
+    cache +=
+        "const config: IFuseOptions<SearchTarget> = " +
+        JSON.stringify(options) +
+        ";\n";
+    cache +=
+        "const index: FuseIndex<SearchTarget> = Fuse.parseIndex<SearchTarget>(idx);\n";
+    cache += "const fuse: Fuse<SearchTarget> = new Fuse(db, config, index);\n";
+    cache +=
+        "const search: CachedSearchFn = (t: string) => (t ? fuse.search(t) : db);\n";
+    cache += "export default search;\n";
 
     await fs.outputFile(dist, cache);
 };

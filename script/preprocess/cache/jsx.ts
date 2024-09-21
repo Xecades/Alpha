@@ -6,13 +6,13 @@ import injection from "../utils/injection";
 import type { BASE, ParsedMarkdown } from "../../types";
 
 /**
- * Convert local markdown file path to JSX path.
+ * Convert local markdown file path to TSX path.
  *
  * @param pathname - Path to local markdown file
- * @param dist - The directory where the JSX are stored
- * @returns - The path to JSX
+ * @param dist - The directory where the TSX are stored
+ * @returns - The path to TSX
  */
-export const to_JSX_path = (pathname: string, base: BASE): string => {
+export const to_TSX_path = (pathname: string, base: BASE): string => {
     console.assert(
         pathname.endsWith(".md"),
         `Invalid markdown file: ${pathname}`
@@ -21,14 +21,15 @@ export const to_JSX_path = (pathname: string, base: BASE): string => {
     const dist = `./cache/${base}/posts`;
 
     let res = pathname.replace(/^.+?\//, "");
-    res = res.replace(/\.md$/, ".jsx");
+    res = res.replace(/\.md$/, ".tsx");
     res = path.join(dist, res);
 
     return res;
 };
 
 const injectFontAwesome = (html: string): string => {
-    const iconRegex: RegExp = /<font-awesome-icon class="icon" icon="(.*?)" \/>/gs;
+    const iconRegex: RegExp =
+        /<font-awesome-icon class="icon" icon="(.*?)" \/>/gs;
     const to_module_name = (icon: string) => camelCase("fa-" + icon);
 
     const icons = new Set<string>();
@@ -51,23 +52,25 @@ const injectFontAwesome = (html: string): string => {
 };
 
 /**
- * Cache parsed HTML and save them as JSXs in `./cache/${base}/posts/*`.
+ * Cache parsed HTML and save them as TSXs in `./cache/${base}/posts/*`.
  *
- * @note This module caches Vue components as JSX.
+ * @note This module caches Vue components as TSX.
  *
  * @param parsed - Parsed markdown data.
  * @param base - The base name for markdown caching.
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
     for (const item of parsed) {
-        const dist: string = to_JSX_path(item.pathname, base);
+        const dist: string = to_TSX_path(item.pathname, base);
         let cache: string = injection();
 
         // Remove comments from the JSX content.
         const html: string = item.html.replace(/<!--.*?-->/g, "");
 
         cache += injectFontAwesome(html);
-        cache += `export default <>${html}</>`;
+        cache += `import type { JSX } from "vue/jsx-runtime";\n`;
+        cache += `const jsx: JSX.Element = (<>${html}</>)\n`;
+        cache += `export default jsx;\n`;
 
         await fs.outputFile(dist, cache);
     }

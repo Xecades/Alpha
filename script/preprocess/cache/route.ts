@@ -1,12 +1,12 @@
 import fs from "fs-extra";
 import injection from "../utils/injection";
 import { timeDataOf } from "../utils/git";
-import { to_JSX_path } from "./jsx";
+import { to_TSX_path } from "./jsx";
 
 import type { BASE, ParsedMarkdown, RouteMeta } from "../../types";
 
 /**
- * Generate `./cache/${base}/routes.jsx` from parsed markdown data.
+ * Generate `./cache/${base}/routes.tsx` from parsed markdown data.
  *
  * @note This module generates children routes for Vue SFCs.
  *
@@ -14,16 +14,18 @@ import type { BASE, ParsedMarkdown, RouteMeta } from "../../types";
  * @param base - The base name for markdown caching.
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
-    const dist: string = `./cache/${base}/routes.jsx`;
+    const dist: string = `./cache/${base}/routes.tsx`;
 
     let cache: string = injection();
     cache += `import ${base} from "@/layout/${base}.vue";\n`;
-    cache += "export default [\n";
+    cache += `import type { CachedRouteRecord } from "@script/types";\n`;
+    cache += "const routes: CachedRouteRecord[] = [\n";
 
     let error_cache: string = "";
 
     for (const item of parsed) {
-        const JSX_path: string = "@" + to_JSX_path(item.pathname, base);
+        const TSX_path: string =
+            "@" + to_TSX_path(item.pathname, base).replace(/\.tsx$/, "");
         const route_path: string =
             "/" + item.pathname.replace(/(\/?index)?\.md$/, "");
 
@@ -64,15 +66,15 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
                 body: import_slot as any,
                 attr: item.attr,
                 toc: toc_slot as any,
-                birthtime: timeData.created,
-                mtime: timeData.updated,
+                created: timeData.created,
+                updated: timeData.updated,
                 type: is_index ? "index" : "post",
             } as RouteMeta,
         };
 
         const stringified: string =
             JSON.stringify(route)
-                .replace(`"${import_slot}"`, `() => import("${JSX_path}")`)
+                .replace(`"${import_slot}"`, `() => import("${TSX_path}")`)
                 .replace(`"${component_slot}"`, base)
                 .replace(`"${toc_slot}"`, toc) + ",\n";
 
@@ -81,7 +83,8 @@ export default async (parsed: ParsedMarkdown[], base: BASE) => {
     }
 
     cache += error_cache;
-    cache += "];";
+    cache += "];\n";
+    cache += "export default routes;\n";
 
     await fs.outputFile(dist, cache);
 };

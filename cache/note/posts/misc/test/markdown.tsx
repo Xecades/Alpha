@@ -1,6 +1,7 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Delimiter from "@/components/md/Delimiter.vue";
 import Fold from "@/components/md/Fold.vue";
 import Grid from "@/components/md/Grid.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
@@ -9,7 +10,8 @@ import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
 import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
-export default <><p>普通文字</p>
+import type { JSX } from "vue/jsx-runtime";
+const jsx: JSX.Element = (<><p>普通文字</p>
 <hr />
 <h2 id="t" tabindex="-1" class="heading">二级标题 <a class="cursor header-anchor" href="#t">¶</a></h2>
 <h3 id="t-2" tabindex="-1" class="heading">三级标题 <a class="cursor header-anchor" href="#t-2">¶</a></h3>
@@ -135,4 +137,5 @@ export default <><p>普通文字</p>
 </table>
 <hr />
 <p>代码块</p>
-<BlockCode lang="c" html={"<code class=\"language-c\"><span class=\"token macro property\"><span class=\"token directive-hash\">#</span><span class=\"token directive keyword\">include</span> <span class=\"token string\">&lt;stdio.h></span></span>\n\n<span class=\"token keyword\">int</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n<span class=\"token punctuation\">{</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Hello world\\n\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Nulla culpa ut laborum sint esse elit minim sit. Eiusmod et exercitation et laboris voluptate aute et veniam excepteur. Anim dolore culpa commodo adipisicing et aute. In est aliquip duis tempor cillum ullamco qui. Et officia cillum ex et dolor esse magna veniam. Dolor sint velit dolor commodo in. Irure excepteur adipisicing dolore ipsum velit ipsum nisi Lorem pariatur dolor excepteur dolor dolor.\\n\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token keyword\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n</code>"}></BlockCode><BlockCode lang="plain" html={"<code>这个代码块不带语言标识\nlet a = 1;\n</code>"}></BlockCode></>
+<BlockCode lang="c" html={"<code class=\"language-c\"><span class=\"token macro property\"><span class=\"token directive-hash\">#</span><span class=\"token directive keyword\">include</span> <span class=\"token string\">&lt;stdio.h></span></span>\n\n<span class=\"token keyword\">int</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n<span class=\"token punctuation\">{</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Hello world\\n\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Nulla culpa ut laborum sint esse elit minim sit. Eiusmod et exercitation et laboris voluptate aute et veniam excepteur. Anim dolore culpa commodo adipisicing et aute. In est aliquip duis tempor cillum ullamco qui. Et officia cillum ex et dolor esse magna veniam. Dolor sint velit dolor commodo in. Irure excepteur adipisicing dolore ipsum velit ipsum nisi Lorem pariatur dolor excepteur dolor dolor.\\n\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token keyword\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n</code>"}></BlockCode><BlockCode lang="plain" html={"<code>这个代码块不带语言标识\nlet a = 1;\n</code>"}></BlockCode></>)
+export default jsx;

@@ -18,8 +18,8 @@ const route = useRoute();
 const format_string: string = "YYYY-MM-DD HH:mm:ss";
 
 const meta: RouteMeta = route.meta as unknown as RouteMeta;
-const creation: Dayjs = dayjs(meta.birthtime);
-const modify: Dayjs = dayjs(meta.mtime);
+const creation: Dayjs = dayjs(meta.created);
+const modify: Dayjs = dayjs(meta.updated);
 
 const title: string =
     `创建于 ${creation.format(format_string)}\n` +

@@ -26,10 +26,11 @@ const mapData = (parts: JSX.Element[]): TabData[] => {
     const res: TabData[] = [];
 
     for (const part of parts) {
-        // <h1> is used as title
-        if (part.type === "h1") {
+        // @ts-expect-error
+        if (part.type.__name === "Delimiter") {
             res.push({
-                title: part.children as JSX.Element[],
+                // @ts-expect-error
+                title: part.children.default() as JSX.Element[],
                 content: [],
             });
         } else {

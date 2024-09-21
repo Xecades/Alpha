@@ -1,12 +1,5 @@
 <script setup lang="ts">
-enum TYPE {
-    DEFAULT = "default",
-    PRIMARY = "primary",
-    SUCCESS = "success",
-    INFO = "info",
-    WARNING = "warning",
-    DANGER = "danger",
-}
+type TYPE = "default" | "primary" | "success" | "info" | "warning" | "danger";
 
 const icon: Record<TYPE, string> = {
     default: "asterisk",
@@ -18,7 +11,7 @@ const icon: Record<TYPE, string> = {
 };
 
 const props = defineProps<{ type?: TYPE }>();
-const type: TYPE = props.type || TYPE.DEFAULT;
+const type: TYPE = props.type || "default";
 </script>
 
 <template>

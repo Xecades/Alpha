@@ -14,8 +14,8 @@ const mapData = (parts: JSX.Element[]): GridData[] => {
     let res: GridData[] = [];
 
     for (const part of parts) {
-        // <h1> is used as seperator
-        if (part.type === "h1") {
+        // @ts-expect-error
+        if (part.type.__name === "Delimiter") {
             res.push({
                 content: [],
                 props: part.props ?? {},
@@ -52,7 +52,7 @@ const data: Ref<GridData[]> = computed(() => mapData(parts.value));
 }
 
 .grid {
-    margin: .5rem calc(-1 * var(--padding-lr));
+    margin: 0.5rem calc(-1 * var(--padding-lr));
     display: flex;
     flex-wrap: wrap;
 }

@@ -1,6 +1,7 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Delimiter from "@/components/md/Delimiter.vue";
 import Fold from "@/components/md/Fold.vue";
 import Grid from "@/components/md/Grid.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
@@ -9,7 +10,8 @@ import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
 import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
-export default <><p>C’mon, prove these linear algebra things!</p>
+import type { JSX } from "vue/jsx-runtime";
+const jsx: JSX.Element = (<><p>C’mon, prove these linear algebra things!</p>
 <Note type="info">For the content below, I use <InlineMath data={"W\\leqslant V"}></InlineMath> to denote <InlineMath data={"W"}></InlineMath> is a subspace of <InlineMath data={"V"}></InlineMath>, and <InlineMath data={"\\exists!"}></InlineMath> to denote “there exists a unique”.</Note>
 <h2 id="t" tabindex="-1" class="heading">Group, Ring &amp; Field <a class="cursor header-anchor" href="#t">¶</a></h2>
 <ol>
@@ -71,4 +73,5 @@ export default <><p>C’mon, prove these linear algebra things!</p>
 <li>Prove with matrix: if <InlineMath data={"\\dim V(\\mathbf{F})=m"}></InlineMath>, <InlineMath data={"\\dim W(\\mathbf{F})=n"}></InlineMath>, then <InlineMath data={"\\mathcal{L}(V, W)\\cong \\mathbf{F}^{m\\times n}"}></InlineMath>.</li>
 <li>Prove with matrix: <InlineMath data={"\\dim\\mathcal{L}(V, W)=\\dim V\\cdot\\dim W"}></InlineMath>.</li>
 </ol>
-</>
+</>)
+export default jsx;

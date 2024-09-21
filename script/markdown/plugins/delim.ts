@@ -1,7 +1,7 @@
 import type MarkdownIt from "markdown-it";
 
 /**
- * Iterate through all h1 tokens and transform them into `delim` tokens.
+ * Iterate through all h1 tokens and transform them into `delim` tags.
  *
  * @note The original h1 syntax is banned, instead it is used as tab panel delimiter.
  *
@@ -15,6 +15,7 @@ export default (md: MarkdownIt) => {
             let is_open: boolean = token.type === "heading_open";
 
             token.type = "delim_" + (is_open ? "open" : "close");
+            token.tag = "Delimiter";
         }
     });
 };

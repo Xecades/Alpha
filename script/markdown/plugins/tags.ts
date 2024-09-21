@@ -48,14 +48,14 @@ const transformRight = (token: Token): boolean => {
 /**
  * Transform a mdc shorthand tag to another tag.
  *
- * @example `<sep>` => `<h1>`
+ * @example `<sep>` => `<Delimiter>`
  *
  * @param token - Token
  * @returns Whether the token is transformed
  */
 const transformMdcShorthand = (token: Token): boolean => {
     const pairs: Record<string, string> = {
-        sep: "h1",
+        sep: "Delimiter",
     };
 
     if (token.type === "mdc_block_shorthand") {

@@ -1,6 +1,7 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Delimiter from "@/components/md/Delimiter.vue";
 import Fold from "@/components/md/Fold.vue";
 import Grid from "@/components/md/Grid.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
@@ -9,7 +10,8 @@ import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
 import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
-export default <><h2 id="t" tabindex="-1" class="heading">Semantic Versioning <a class="cursor header-anchor" href="#t">¶</a></h2>
+import type { JSX } from "vue/jsx-runtime";
+const jsx: JSX.Element = (<><h2 id="t" tabindex="-1" class="heading">Semantic Versioning <a class="cursor header-anchor" href="#t">¶</a></h2>
 <p><strong>Refer to</strong>: <Anchor href="https://semver.org/">Semantic Versioning</Anchor>.</p>
 <p>Given a version number <code class="inline-code">{"MAJOR.MINOR.PATCH"}</code>, increment the:</p>
 <ul>
@@ -35,4 +37,5 @@ export default <><h2 id="t" tabindex="-1" class="heading">Semantic Versioning <a
 </li>
 </ul>
 <p>Example:</p>
-<BlockCode lang="plain" html={"<code>chore!: drop support for Node 6\n\nBREAKING CHANGE: use JavaScript features not available in Node 6.\n</code>"}></BlockCode></>
+<BlockCode lang="plain" html={"<code>chore!: drop support for Node 6\n\nBREAKING CHANGE: use JavaScript features not available in Node 6.\n</code>"}></BlockCode></>)
+export default jsx;

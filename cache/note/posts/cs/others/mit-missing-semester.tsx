@@ -1,6 +1,7 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Delimiter from "@/components/md/Delimiter.vue";
 import Fold from "@/components/md/Fold.vue";
 import Grid from "@/components/md/Grid.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
@@ -9,7 +10,8 @@ import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
 import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
-export default <><p><strong>📖 COURSE-STARTED-AT</strong>: 2023-11-5</p>
+import type { JSX } from "vue/jsx-runtime";
+const jsx: JSX.Element = (<><p><strong>📖 COURSE-STARTED-AT</strong>: 2023-11-5</p>
 <p><strong>🔮 COURSE-FINISHED-AT</strong>: 2023-11-11</p>
 <p><strong>🔗 COURSE-SITE</strong>: <Anchor href="https://missing.csail.mit.edu/">missing.csail.mit.edu</Anchor></p>
 <hr />
@@ -148,4 +150,5 @@ export default <><p><strong>📖 COURSE-STARTED-AT</strong>: 2023-11-5</p>
 <p>Except for encrypting and decrypting data, <strong>asymmetric cryptography</strong> can also be used to sign and verify data. It uses a <strong>public key</strong> and a <strong>private key</strong>. The public key is used to encrypt data and verify signatures, while the private key is used to decrypt data and sign data. The model is</p>
 <BlockCode lang="plain" html={"<code>keygen() -&gt; (public-key, private-key)  (this function is randomized)\n\nencrypt(plaintext: array&lt;byte&gt;, public-key) -&gt; array&lt;byte&gt;  (the ciphertext)\ndecrypt(ciphertext: array&lt;byte&gt;, private-key) -&gt; array&lt;byte&gt;  (the plaintext)\n\nsign(message: array&lt;byte&gt;, private-key) -&gt; array&lt;byte&gt;  (the signature)\nverify(message: array&lt;byte&gt;, signature: array&lt;byte&gt;, public-key) -&gt; bool  (whether or not the signature is valid)\n</code>"}></BlockCode><p>As its name suggests, public key <em>can</em> be made public. Anyone can use the public key to encrypt data <em>for you</em>, but only you, with the corresponding private key, can decrypt it. That’s how private messaging apps like Telegram works.</p>
 <p>On the flip side, you can sign data using your private key. Others can then verify the signature using your public key. This mechanism is exemplified in practices such as verifying commits in Git through digital signatures.</p>
-</>
+</>)
+export default jsx;

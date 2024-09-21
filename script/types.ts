@@ -1,6 +1,9 @@
 import type { Stats } from "fs";
 import type { FuseResult } from "fuse.js";
+import type { RouteRecordSingleView } from "vue-router";
 import type { JSX } from "vue/jsx-runtime";
+
+export const assertType = <T>(value: any): T => value as unknown as T;
 
 /** Front matter interface for markdown files. */
 export interface MarkdownFrontMatter {
@@ -106,15 +109,11 @@ export interface SearchTarget {
 }
 
 /** Unparsed nav node. */
-export type RawNavNode = Record<string, any>;
+export type RawNavNode = Record<string, RawNavNode[] | string>;
 
 /** Unparsed YML configurations. */
 export interface RawConfig {
-    /**
-     * Navigation data.
-     *
-     * @todo Complete the recursive type structure.
-     */
+    /** Navigation data. */
     nav: RawNavNode[];
 }
 
@@ -147,7 +146,7 @@ export interface RouteMeta {
     category: string;
 
     /** Body component */
-    body: () => Promise<any>;
+    body: () => Promise<{ default: JSX.Element }>;
 
     /** Parsed front matter */
     attr: MarkdownFrontMatter;
@@ -156,20 +155,23 @@ export interface RouteMeta {
     toc: MarkdownHeaderJsx[];
 
     /** Creation time */
-    birthtime: Date;
+    created: string;
 
     /** Last modified time */
-    mtime: Date;
+    updated: string;
 
     /** Page type */
     type: "index" | "post";
 
     /** Route scroll to */
-    scrollTo: { left: number; top: number };
+    scrollTo?: { left: number; top: number };
 }
 
+/** Cached route record. */
+export type CachedRouteRecord = RouteRecordSingleView & { meta: RouteMeta };
+
 /** Cached search function. */
-export type CacheSearch = (
+export type CachedSearchFn = (
     query: string
 ) => SearchTarget[] | FuseResult<SearchTarget>[];
 

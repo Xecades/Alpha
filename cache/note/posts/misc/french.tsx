@@ -1,6 +1,7 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Delimiter from "@/components/md/Delimiter.vue";
 import Fold from "@/components/md/Fold.vue";
 import Grid from "@/components/md/Grid.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
@@ -9,7 +10,8 @@ import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
 import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
-export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cursor header-anchor" href="#t">¶</a></h2>
+import type { JSX } from "vue/jsx-runtime";
+const jsx: JSX.Element = (<><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cursor header-anchor" href="#t">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -324,4 +326,5 @@ export default <><h2 id="t" tabindex="-1" class="heading">字母表 <a class="cu
 </tr>
 </tbody>
 </table>
-</>
+</>)
+export default jsx;

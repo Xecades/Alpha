@@ -1,6 +1,7 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Delimiter from "@/components/md/Delimiter.vue";
 import Fold from "@/components/md/Fold.vue";
 import Grid from "@/components/md/Grid.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
@@ -9,7 +10,8 @@ import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
 import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
-export default <><Note type="success"><strong>Disclaimer</strong>: By saying “cheatsheet” I don’t mean something used for cheating, but rather a quick reference for the most important concepts and formulas. I don’t encourage cheating in any way.</Note>
+import type { JSX } from "vue/jsx-runtime";
+const jsx: JSX.Element = (<><Note type="success"><strong>Disclaimer</strong>: By saying “cheatsheet” I don’t mean something used for cheating, but rather a quick reference for the most important concepts and formulas. I don’t encourage cheating in any way.</Note>
 <h2 id="t" tabindex="-1" class="heading">Equivalent Infinitesimals <a class="cursor header-anchor" href="#t">¶</a></h2>
 <p>When <InlineMath data={"x\\to0"}></InlineMath>:</p>
 <ul>
@@ -57,4 +59,5 @@ export default <><Note type="success"><strong>Disclaimer</strong>: By saying “
 <li><InlineMath data={"\\arcsin x = x + \\dfrac{x^3}{6} + \\dfrac{3x^5}{40} + o(x^5)"}></InlineMath></li>
 <li><InlineMath data={"\\arccos x = \\dfrac{\\pi}{2} - \\arcsin x"}></InlineMath></li>
 </ul>
-</>
+</>)
+export default jsx;

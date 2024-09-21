@@ -6,14 +6,7 @@ import cursor from "@/assets/js/cursor";
 import type { Ref, VNodeRef } from "vue";
 import type { JSX } from "vue/jsx-runtime";
 
-enum TYPE {
-    DEFAULT = "default",
-    PRIMARY = "primary",
-    SUCCESS = "success",
-    INFO = "info",
-    WARNING = "warning",
-    DANGER = "danger",
-}
+type TYPE = "default" | "primary" | "success" | "info" | "warning" | "danger";
 
 const icon: Record<TYPE, string> = {
     default: "asterisk",
@@ -30,7 +23,7 @@ const props = defineProps<{
     type?: TYPE;
 }>();
 
-const type: TYPE = props.type || TYPE.DEFAULT;
+const type: TYPE = props.type || "default";
 const expanded: Ref<boolean> = ref(props.expand || false);
 
 const target: VNodeRef = ref();

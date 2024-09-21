@@ -9,6 +9,7 @@ import {
 } from "vue";
 import { useRoute } from "vue-router";
 import { render_list } from "@/assets/js/note/leftbar";
+import { assertType } from "@script/types";
 import cursor from "@/assets/js/cursor";
 import hotkeys from "hotkeys-js";
 
@@ -16,14 +17,13 @@ import hotkeys from "hotkeys-js";
 import Search from "./Search.vue";
 
 // Cache
-import _config_untyped from "@cache/note/config";
-const config = _config_untyped as Config;
+import config from "@cache/note/config";
 
 // Types
 import type { Ref } from "vue";
 import type { JSX } from "vue/jsx-runtime";
 import type { HotkeysEvent } from "hotkeys-js";
-import { NOTE_L_STATUS, type Config, type RouteMeta } from "@script/types";
+import { NOTE_L_STATUS, type RouteMeta } from "@script/types";
 
 /** Attributes attached to a category */
 type Category = {
@@ -35,7 +35,7 @@ type Category = {
 
 const props = defineProps<{ status: NOTE_L_STATUS }>();
 const route = useRoute();
-const meta: RouteMeta = route.meta as unknown as RouteMeta;
+const meta: RouteMeta = assertType<RouteMeta>(route.meta);
 
 /** Categories to be displayed as buttons. */
 const categories: Ref<Category[]> = ref(

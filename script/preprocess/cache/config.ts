@@ -69,7 +69,8 @@ const parse_nav = (
                 children: [],
             };
 
-            const children: RawNavNode[] = branch[name];
+            const children: RawNavNode[] | string = branch[name];
+
             for (const child of children) {
                 res.children.push(dfs(child, path));
             }
@@ -89,7 +90,7 @@ const parse_nav = (
 };
 
 /**
- * Parse and cache config (`./${base}/config.yml`) to `./cache/${base}/config.json`.
+ * Parse and cache config (`./${base}/config.yml`) to `./cache/${base}/config.ts`.
  *
  * @note This module caches `config.yml`.
  *
@@ -98,12 +99,17 @@ const parse_nav = (
  */
 export default async (parsed: ParsedMarkdown[], base: BASE) => {
     const config_path: string = `./${base}/config.yml`;
-    const dist: string = `./cache/${base}/config.json`;
+    const dist: string = `./cache/${base}/config.ts`;
 
     const rawConfig: RawConfig = await readYML(config_path);
-    const config: Config = rawConfig as Config;
+    const config: Config = { ...rawConfig, nav: [] };
 
     config.nav = parse_nav(rawConfig.nav, parsed, base);
 
-    await fs.outputJSON(dist, config);
+    let cache = "";
+    cache += 'import type { Config } from "@script/types";\n';
+    cache += `const config: Config = ${JSON.stringify(config)};\n`;
+    cache += "export default config;\n";
+
+    await fs.outputFile(dist, cache);
 };

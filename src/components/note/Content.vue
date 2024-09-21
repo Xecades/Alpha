@@ -6,6 +6,7 @@
 import { computed, ref, shallowRef, watch } from "vue";
 import { useRoute } from "vue-router";
 import { reveal_config } from "@/assets/js/reveal";
+import { assertType } from "@script/types";
 import ScrollReveal from "scrollreveal";
 
 import Metadata from "./Metadata.vue";
@@ -22,11 +23,11 @@ import type { JSX } from "vue/jsx-runtime";
 const emit = defineEmits(["update"]);
 const route = useRoute();
 
-const meta: ComputedRef<RouteMeta> = computed(
-    () => route.meta as unknown as RouteMeta
+const meta: ComputedRef<RouteMeta> = computed(() =>
+    assertType<RouteMeta>(route.meta)
 );
-const jsx: ComputedRef<() => Promise<any>> = computed(
-    () => route.meta.body as any
+const jsx: ComputedRef<() => Promise<{ default: JSX.Element }>> = computed(
+    () => meta.value.body
 );
 
 const body: ShallowRef<JSX.Element> = shallowRef(<></>);

@@ -1,6 +1,7 @@
 import Anchor from "@/components/md/Anchor.vue";
 import BlockCode from "@/components/md/BlockCode.vue";
 import BlockMath from "@/components/md/BlockMath.vue";
+import Delimiter from "@/components/md/Delimiter.vue";
 import Fold from "@/components/md/Fold.vue";
 import Grid from "@/components/md/Grid.vue";
 import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
@@ -9,7 +10,8 @@ import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
 import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
-export default <><p><strong>狄利克雷卷积</strong>（Dirichlet Convolution）在解析数论中是一个非常重要的工具.</p>
+import type { JSX } from "vue/jsx-runtime";
+const jsx: JSX.Element = (<><p><strong>狄利克雷卷积</strong>（Dirichlet Convolution）在解析数论中是一个非常重要的工具.</p>
 <p>使用狄利克雷卷积可以很方便地推出<strong>莫比乌斯反演</strong>（Möbius Inversion）相关重要函数和公式，它在信息学竞赛和解析数论中至关重要.</p>
 <p>很多初学者不能真正地理解莫比乌斯反演，或者说即使能使用最终的公式，也难以理清楚它是怎么推导的.</p>
 <p>本文中，我将尝试使用一种新的方式讲解狄利克雷卷积和莫比乌斯反演，希望能对大家有所帮助.</p>
@@ -186,4 +188,5 @@ export default <><p><strong>狄利克雷卷积</strong>（Dirichlet Convolution�
 <hr />
 <p>感谢阅读，如果发现有误或不当的地方，我诚恳地希望您在下方评论区指出.</p>
 <p>关于莫比乌斯反演公式的应用及延伸，我会在下一篇文章中提及，敬请期待.</p>
-</>
+</>)
+export default jsx;
