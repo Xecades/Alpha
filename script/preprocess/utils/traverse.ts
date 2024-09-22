@@ -1,8 +1,8 @@
 // @ts-ignore
 import Walk from "@root/walk";
 
-import type { PathnameFilter, TraverseResult } from "../../types";
-import type { Stats } from "fs";
+import type { PathnameFilter } from "../../types";
+import type { Dirent } from "fs";
 
 /**
  * Traverse a directory asynchronously.
@@ -16,17 +16,17 @@ import type { Stats } from "fs";
 export default async (
     src: string,
     filter: PathnameFilter
-): Promise<TraverseResult[]> => {
-    const res: TraverseResult[] = [];
-    const walk = Walk.create({ withFileStats: true });
+): Promise<string[]> => {
+    const res: string[] = [];
+    const walk = Walk.create();
 
-    await walk(src, async (err: unknown, pathname: string, stats: Stats) => {
+    await walk(src, async (err: unknown, pathname: string, dirent: Dirent) => {
         if (err) {
             throw err;
         }
 
         if (filter(pathname)) {
-            res.push({ pathname, stats });
+            res.push(pathname);
         }
     });
 

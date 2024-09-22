@@ -1,14 +1,8 @@
 import fs from "fs-extra";
 import yaml from "yaml";
+import { Post } from "../utils/post";
 
-import type {
-    BASE,
-    Config,
-    NavNode,
-    ParsedMarkdown,
-    RawConfig,
-    RawNavNode,
-} from "../../types";
+import type { BASE, Config, NavNode, RawConfig, RawNavNode } from "../../types";
 
 /**
  * Read and parse YML config file to object.
@@ -25,18 +19,18 @@ const readYML = async (path: string): Promise<RawConfig> => {
  * Parse raw nav data to nav nodes.
  *
  * @param rawNav - Raw nav data to be parsed.
- * @param parsed - Parsed markdown data.
+ * @param posts - Parsed post objects.
  * @param base - The base name for markdown caching.
  * @returns Parsed nav data.
  */
 const parse_nav = (
     rawNav: RawNavNode[],
-    parsed: ParsedMarkdown[],
+    posts: Post[],
     base: BASE
 ): NavNode[] => {
     const name_of = (node: RawNavNode) => Object.keys(node)[0];
     const title_of = (pathname: string) =>
-        parsed.filter((d) => d.pathname === pathname)[0].attr.title;
+        posts.filter((d) => d.pathname === pathname)[0].front_matter.title;
 
     /**
      * Recursively traverse and parse raw nav data.
@@ -94,17 +88,17 @@ const parse_nav = (
  *
  * @note This module caches `config.yml`.
  *
- * @param parsed - Parsed markdown data.
+ * @param posts - Parsed post objects.
  * @param base - The base name for markdown caching.
  */
-export default async (parsed: ParsedMarkdown[], base: BASE) => {
+export default async (posts: Post[], base: BASE) => {
     const config_path: string = `./${base}/config.yml`;
     const dist: string = `./cache/${base}/config.ts`;
 
     const rawConfig: RawConfig = await readYML(config_path);
     const config: Config = { ...rawConfig, nav: [] };
 
-    config.nav = parse_nav(rawConfig.nav, parsed, base);
+    config.nav = parse_nav(rawConfig.nav, posts, base);
 
     let cache = "";
     cache += 'import type { Config } from "@script/types";\n';

@@ -12,6 +12,7 @@ import type {
  * @returns Parsed front matter
  */
 export default (plain: string): MarkdownFrontMatterParsed => {
-    const { attributes: attr, body: raw } = fm<MarkdownFrontMatter>(plain);
-    return { attr, raw };
+    const { attributes: front_matter, body: markdown } =
+        fm<MarkdownFrontMatter>(plain);
+    return { front_matter, markdown };
 };

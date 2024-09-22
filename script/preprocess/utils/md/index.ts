@@ -1,46 +1,17 @@
-import fs from "fs/promises";
-
+import { Post } from "../post";
 import traverse from "../traverse";
-import _render from "./render";
-import _parse from "./parse";
-import _text from "./text";
-import _toc from "./toc";
-import _fm from "./fm";
 
-import type {
-    MarkdownHeader,
-    ParsedMarkdown,
-    PathnameFilter,
-    TraverseResult,
-} from "../../../types";
-import type Token from "markdown-it/lib/token.mjs";
+import type { BASE, PathnameFilter } from "../../../types";
 
 /**
  * Read and parse markdown files.
  *
- * @param src - Source directory
- * @returns Parsed markdown data
+ * @param base - Source directory
+ * @returns Parsed post objects
  */
-export default async (src: string): Promise<ParsedMarkdown[]> => {
+export default async (base: BASE): Promise<Post[]> => {
     const filter: PathnameFilter = (x: string) => x.endsWith(".md");
+    const files: string[] = await traverse(base, filter);
 
-    const res: ParsedMarkdown[] = [];
-    const files: TraverseResult[] = await traverse(src, filter);
-
-    for (const { pathname, stats } of files) {
-        const plain: string = await fs.readFile(pathname, "utf-8");
-
-        const { attr, raw } = _fm(plain);
-        const content: string = raw;
-
-        const tokens: Token[] = _parse(content);
-        const toc: MarkdownHeader[] = _toc(tokens);
-
-        const html: string = _render(tokens);
-        const text: string = _text(html);
-
-        res.push({ pathname, stats, attr, raw, toc, html, text });
-    }
-
-    return res;
+    return files.map((pathname) => new Post(pathname, base));
 };

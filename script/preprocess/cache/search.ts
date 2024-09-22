@@ -1,8 +1,9 @@
 import fs from "fs-extra";
 import Fuse from "fuse.js";
+import { Post } from "../utils/post";
 
 import type { IFuseOptions } from "fuse.js";
-import type { BASE, ParsedMarkdown, SearchTarget } from "../../types";
+import type { BASE, SearchTarget } from "../../types";
 
 /** @see https://www.fusejs.io/api/options.html */
 const options: IFuseOptions<SearchTarget> = {
@@ -17,27 +18,20 @@ const options: IFuseOptions<SearchTarget> = {
  *
  * @note This module caches the purged html (.text).
  *
- * @param parsed - Parsed markdown data.
+ * @param posts - Parsed post objects.
  * @param base - The base name for markdown caching.
  */
-export default async (parsed: ParsedMarkdown[], base: BASE) => {
-    const md_ext: RegExp = /(\/index)?\.md$/g;
+export default async (posts: Post[], base: BASE) => {
     const dist: string = `./cache/${base}/search.ts`;
 
-    const link_of = (post: ParsedMarkdown): string =>
-        "/" + post.pathname.replace(md_ext, "");
-
-    const is_index = (post: ParsedMarkdown): boolean =>
-        post.pathname.endsWith("/index.md");
-
-    const searchTarget: SearchTarget[] = parsed
-        .filter((post): boolean => post.pathname !== `${base}/404.md`)
+    const searchTarget: SearchTarget[] = posts
+        .filter((post): boolean => post.type !== "404")
         .map(
             (post): SearchTarget => ({
-                title: post.attr.title,
+                title: post.front_matter.title,
                 content: post.text,
-                link: link_of(post),
-                is_index: is_index(post),
+                link: post.link,
+                is_index: post.type === "index",
             })
         );
 

@@ -17,7 +17,7 @@ const emit = defineEmits<{
     update: [index: number];
 }>();
 
-const children: JSX.Element[] = props.data.children as JSX.Element[];
+const children: JSX.Element[] = (props.data.children as JSX.Element[]) || [];
 const queue: Ref<JSX.Element[]> = ref([]);
 
 onMounted(() => {

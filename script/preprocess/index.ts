@@ -2,7 +2,8 @@ import hmr from "./utils/hmr";
 import cache from "./cache";
 import parse from "./utils/md";
 
-import { BASE, type ParsedMarkdown } from "../types";
+import { BASE } from "../types";
+import { Post } from "./utils/post";
 
 /**
  * Create a cache function for markdown files.
@@ -11,12 +12,12 @@ import { BASE, type ParsedMarkdown } from "../types";
  * @returns A function that caches markdown files.
  */
 const cache_fn_maker = (base: BASE) => async () => {
-    const parsed: ParsedMarkdown[] = await parse(base);
+    const posts: Post[] = await parse(base);
 
-    await cache.search(parsed, base);
-    await cache.config(parsed, base);
-    await cache.route(parsed, base);
-    await cache.jsx(parsed, base);
+    await cache.search(posts, base);
+    await cache.config(posts, base);
+    await cache.route(posts, base);
+    await cache.jsx(posts, base);
 };
 
 /**

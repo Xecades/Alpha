@@ -9,5 +9,7 @@ import type Token from "markdown-it/lib/token.mjs";
  * @returns JSX string
  */
 export default (tokens: Token[]): string => {
-    return md.renderer.render(tokens, md.options, {});
+    return md.renderer
+        .render(tokens, md.options, {})
+        .replace(/<!--.*?-->/g, "");
 };

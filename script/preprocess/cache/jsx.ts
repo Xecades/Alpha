@@ -1,31 +1,9 @@
 import fs from "fs-extra";
-import path from "path";
 import camelCase from "camelcase";
 import injection from "../utils/injection";
+import { Post } from "../utils/post";
 
-import type { BASE, ParsedMarkdown } from "../../types";
-
-/**
- * Convert local markdown file path to TSX path.
- *
- * @param pathname - Path to local markdown file
- * @param dist - The directory where the TSX are stored
- * @returns - The path to TSX
- */
-export const to_TSX_path = (pathname: string, base: BASE): string => {
-    console.assert(
-        pathname.endsWith(".md"),
-        `Invalid markdown file: ${pathname}`
-    );
-
-    const dist = `./cache/${base}/posts`;
-
-    let res = pathname.replace(/^.+?\//, "");
-    res = res.replace(/\.md$/, ".tsx");
-    res = path.join(dist, res);
-
-    return res;
-};
+import type { BASE } from "../../types";
 
 const injectFontAwesome = (html: string): string => {
     const iconRegex: RegExp =
@@ -56,20 +34,17 @@ const injectFontAwesome = (html: string): string => {
  *
  * @note This module caches Vue components as TSX.
  *
- * @param parsed - Parsed markdown data.
+ * @param posts - Parsed post objects.
  * @param base - The base name for markdown caching.
  */
-export default async (parsed: ParsedMarkdown[], base: BASE) => {
-    for (const item of parsed) {
-        const dist: string = to_TSX_path(item.pathname, base);
+export default async (posts: Post[], base: BASE) => {
+    for (const post of posts) {
+        const dist: string = post.tsx_pathname;
         let cache: string = injection();
 
-        // Remove comments from the JSX content.
-        const html: string = item.html.replace(/<!--.*?-->/g, "");
-
-        cache += injectFontAwesome(html);
+        cache += injectFontAwesome(post.html);
         cache += `import type { JSX } from "vue/jsx-runtime";\n`;
-        cache += `const jsx: JSX.Element = (<>${html}</>)\n`;
+        cache += `const jsx: JSX.Element = (<>${post.html}</>)\n`;
         cache += `export default jsx;\n`;
 
         await fs.outputFile(dist, cache);

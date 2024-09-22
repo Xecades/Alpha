@@ -1,4 +1,3 @@
-import type { Stats } from "fs";
 import type { FuseResult } from "fuse.js";
 import type { RouteRecordSingleView } from "vue-router";
 import type { JSX } from "vue/jsx-runtime";
@@ -20,10 +19,10 @@ export interface MarkdownFrontMatter {
 /** Parsed front matter. */
 export interface MarkdownFrontMatterParsed {
     /** Front matter attributes */
-    attr: MarkdownFrontMatter;
+    front_matter: MarkdownFrontMatter;
 
     /** Raw markdown content */
-    raw: string;
+    markdown: string;
 }
 
 /** Header extracted from markdown. */
@@ -53,33 +52,6 @@ export interface MarkdownHeaderJsx {
 /** Filter applied on traversal */
 export interface PathnameFilter {
     (pathname: string): boolean;
-}
-
-/** Result for directory traversal. */
-export interface TraverseResult {
-    /** Pathname of current file */
-    pathname: string;
-
-    /** Stat data */
-    stats: Stats;
-}
-
-/** Parsed markdown data. */
-export interface ParsedMarkdown extends TraverseResult {
-    /** Parsed front matter */
-    attr: MarkdownFrontMatter;
-
-    /** Raw markdown content */
-    raw: string;
-
-    /** Table of contents */
-    toc: MarkdownHeader[];
-
-    /** Rendered HTML */
-    html: string;
-
-    /** Plain text extracted from HTML */
-    text: string;
 }
 
 /**
@@ -161,7 +133,7 @@ export interface RouteMeta {
     updated: string;
 
     /** Page type */
-    type: "index" | "post";
+    type: "index" | "post" | "404";
 
     /** Route scroll to */
     scrollTo?: { left: number; top: number };
