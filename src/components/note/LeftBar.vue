@@ -295,7 +295,7 @@ onBeforeUnmount(() => {
 @media (prefers-color-scheme: dark) {
     * {
         --theme-color: #87b3ea;
-        --background: linear-gradient(90deg, #131313f5, #13131380);
+        --background: linear-gradient(90deg, #1d1e1ff5, #1d1e1f80);
         --nav-color: #676767;
         --nav-hover-color: #a9a9a9;
         --nav-hover-background-color: #212121c4;

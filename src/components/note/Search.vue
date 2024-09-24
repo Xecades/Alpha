@@ -141,7 +141,7 @@ watch(
         --line-color: #303030;
         --icon-color: #505256;
         --input-color: #c1c5cd;
-        --panel-background-color: #141414e6;
+        --panel-background-color: #1d1e1fe6;
         --xmark-hover-color: #9a9ca0;
         --empty-icon-color: #303030b5;
         --post-hover-color: #21212182;

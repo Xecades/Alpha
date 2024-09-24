@@ -145,10 +145,10 @@ onBeforeUnmount(() => {
 
 @media (prefers-color-scheme: dark) {
     * {
-        --border-color: #222223;
+        --border-color: #2a2a2b;
         --header-color: #b9bcc0;
-        --content-background-color: #141415;
-        --header-background-color: #1a1a1b;
+        --content-background-color: #1b1c1d;
+        --header-background-color: #1a1a1a;
         --title-hover-color: #242425;
         --title-underline-color: #5d5f61;
     }

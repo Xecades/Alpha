@@ -115,7 +115,7 @@ watch(
 @media (prefers-color-scheme: dark) {
     * {
         --theme-color: #87b3ea;
-        --toc-background-image: linear-gradient(90deg, #10101080, #101010f5);
+        --toc-background-image: linear-gradient(90deg, #1c1d1e80, #1c1d1ef5);
 
         --bar-background-color: #363636;
         --bar-active-background-color: #9e9e9e;
