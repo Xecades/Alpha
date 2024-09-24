@@ -26,7 +26,14 @@ onMounted(() => {
 
 <template>
     <figure>
-        <img ref="img" class="cursor" :alt="alt" :src="src" data-ic-zoomable />
+        <img
+            ref="img"
+            class="cursor"
+            :class="src.endsWith('.svg') && 'svg'"
+            :alt="alt"
+            :src="src"
+            data-ic-zoomable
+        />
         <figcaption v-if="alt" :title="alt">
             <slot />
         </figcaption>
@@ -86,6 +93,10 @@ figcaption {
 @media (prefers-color-scheme: dark) {
     img {
         filter: brightness(0.8);
+    }
+
+    img.svg {
+        filter: invert(0.75);
     }
 }
 
