@@ -12,7 +12,7 @@ nav:
                 - manuals-standards
     - sci:
           - phy:
-                - physics
+                - chapter-27
           - ma:
                 - cheatsheet
                 - prove-that
