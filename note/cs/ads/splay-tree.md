@@ -9,7 +9,7 @@ Splay Tree 的单次操作并不能达到 $O(\log N)$ 的时间复杂度（在�
 假如访问了节点 $X$（在查询、插入后，删除前）：
 
  - 如果 $X$ 是根节点，不进行任何操作；
- - 如果 $X$ 的父节点是根节点，对 $X$ 进行一次 **Single Rotation**（即 AVL Tree 的 LL- 或 RR-Rotation，或称 **Zig**），使得 $X$ 移动到根节点；
+ - 如果 $X$ 的父节点是根节点，对 $X$ 进行一次 **Single Rotation**（即 AVL Tree 的 LL- 或 RR-Rotation，或称 **Zig** 操作），使得 $X$ 移动到根节点；
  - 否则，记 $X$ 的父节点为 $P$，祖父节点为 $G$，分如下两种情况讨论。
 
 ---

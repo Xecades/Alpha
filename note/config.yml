@@ -10,7 +10,9 @@ nav:
                 - mit-missing-semester
                 - c-language-cheatsheet
                 - manuals-standards
-    - math:
+    - sci:
+          - phy:
+                - physics
           - ma:
                 - cheatsheet
                 - prove-that

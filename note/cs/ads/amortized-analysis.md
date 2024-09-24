@@ -2,13 +2,13 @@
 title: 摊还分析
 ---
 
-设想一个栈的数据结构，在其上定义三种操作：$\text{push}$、$\text{pop}$、$\text{multiPop}$。其中 $\text{push}$ 和 $\text{pop}$ 顾名思义，$\text{multiPop}(k)$ 指连续地 $\text{pop}$ 出栈中的 $k$ 个元素。
+设想一个栈，在其上定义三种操作：$\text{push}$、$\text{pop}$、$\text{multiPop}$。其中 $\text{push}$ 和 $\text{pop}$ 顾名思义，$\text{multiPop}(k)$ 指连续地 $\text{pop}$ 出栈中的 $k$ 个元素。
 
-显然，$\text{push}$ 和 $\text{pop}$ 都是 $O(1)$ 的时间复杂度，$\text{multiPop}$ 是 $O(n)$ 的复杂度，其中 $n$ 为栈中元素的个数。
+显然，$\text{push}$ 和 $\text{pop}$ 都是 $O(1)$ 的时间复杂度，而 $\text{multiPop}$ 是 $O(n)$ 的复杂度，其中 $n$ 为栈中元素的个数。
 
 如果按照最坏情况来计算这个数据结构的复杂度，那么只要一次性 $\text{multiPop}$ 出栈中所有 $n$ 个元素，就会消耗 $O(n)$ 的时间，也就是说**最坏时间复杂度**（*Worst-case Time Complexity*）是 $O(n)$。但这能够代表实际使用中的表现吗？并不能，因为要想能 $\text{multiPop}$ 出 $n$ 个元素，栈中必须至少有 $n$ 个元素，也就是说前面一定有不少于 $n$ 个复杂度为 $O(1)$ 的 $\text{push}$ 操作。这样一均摊下来，每次操作的复杂度就是 $O(1)$。
 
-像这样分析，我们得到整个数据结构的**平均时间复杂度**（*Average Time Complexity*）。但在实际研究中，要想达到真正的平均是很难的，因此我们引入**摊还时间复杂度**（*Amortized Time Complexity*）的概念，**它本质上是一个对平均时间复杂度的逼近**。
+像这样分析，我们得到整个数据结构的**平均时间复杂度**（*Average Time Complexity*）。但在实际研究中，要想达到真正的平均是很难的，因此我们引入**摊还时间复杂度**（*Amortized Time Complexity*）的概念，它本质上是**对平均时间复杂度上界的逼近**。
 
 ---
 
@@ -29,15 +29,15 @@ $$
 T_\text{amortized} \geqslant T_\text{average}
 $$
 
-这样，如果我们能够想办法证明 $T_\text{amortized} = O\bigl(f(n)\bigr)$ 的，那么同时也就证明了 $T_\text{average}$ 也是 $O\bigl(f(n)\bigr)$ 的。因此，我们希望 $T_\text{amortized}$ 和 $T_\text{average}$ 之间的差距尽可能小，即
+这样，如果我们能够想办法证明 $T_\text{amortized} = O\bigl(f(n)\bigr)$ 的，那么同时也就证明了 $T_\text{average}$ 也是 $O\bigl(f(n)\bigr)$ 的。据此，我们希望 $T_\text{amortized}$ 和 $T_\text{average}$ 之间的差距尽可能小，即
 
 $$
 \sum_{i=1}^M \Delta_i := \sum_{i=1}^M \hat{c_i} - c_i
 $$
 
-在满足非负的同时尽可能小。
+在满足**非负**的同时尽可能小。
 
-我们关注的重心即为如何构造这个 $\Delta_i$。
+我们关注的重点即为如何构造这个 $\Delta_i$。
 
 ---
 
@@ -51,7 +51,7 @@ $$
 \sum_{i=1}^M \Delta_i = \Phi(D_M) - \Phi(D_0)
 $$
 
-只要势函数 $\Phi$ 选择得合适，保证 $\Phi(D_i)$ 始终非负，且初始情况的势能 $\Phi(D_0)$ 为 $0$，那么就自然保证了 $\sum_{i=1}^M \Delta_i \geqslant 0$ 的条件。这种需求显然更容易实现。
+只要势函数 $\Phi$ 选择得合适，保证 $\Phi(D_i)$ 始终非负，如果初始情况的势能 $\Phi(D_0)$ 为 $0$，那么自然就保证了 $\sum_{i=1}^M \Delta_i \geqslant 0$ 的条件。这种需求显然更容易实现。
 
 ---
 
@@ -103,7 +103,7 @@ Splay Tree 的操作都由 Zig、Zag、Zig-Zag 三种子操作构成。我们对
 
 :sep{width="50%"}
 
-```typst 初始情况：$T_1$
+```typst 初始情况（$T_1$）
 #import "@preview/cetz:0.2.2": canvas, draw, tree
 #canvas(length: 2.5cm, {
     import draw: *
@@ -153,7 +153,7 @@ Splay Tree 的操作都由 Zig、Zag、Zig-Zag 三种子操作构成。我们对
 
 :sep{width="50%"}
 
-```typst 一次 Zig 操作后：$T_2$
+```typst 一次 Zig 操作后（$T_2$）
 #import "@preview/cetz:0.2.2": canvas, draw, tree
 #canvas(length: 2.5cm, {
     import draw: *
@@ -225,7 +225,7 @@ $$
 
 :sep{width="50%"}
 
-```typst 初始情况：$T_1$
+```typst 初始情况（$T_1$）
 #import "@preview/cetz:0.2.2": canvas, draw, tree
 #canvas(length: 2.5cm, {
     import draw: *
@@ -290,7 +290,7 @@ $$
 
 :sep{width="50%"}
 
-```typst 一次 Zig-Zag 操作后：$T_2$
+```typst 一次 Zig-Zag 操作后（$T_2$）
 #import "@preview/cetz:0.2.2": canvas, draw, tree
 #canvas(length: 2.5cm, {
     import draw: *
@@ -364,13 +364,11 @@ $$
 \end{align*}
 $$
 
-::note{info}
-这里 $c_i = 2$ 是因为 Zig-Zag 操作需要两次旋转。
-::
+> 这里 $c_i = 2$ 是因为 Zig-Zag 操作需要两次旋转。
 
 首先 $\operatorname{rank}_2 X = \operatorname{rank}_1 G$，两者抵消。
 
-同时我们注意到不等式 $4ab \leqslant (a + b) ^ 2$，左右同时取 $\log$（以 $2$ 为底），得到 $2 + \log a + \log b \leqslant 2\log(a + b)$。在其中令 $a = S_2(P)$，$b = S_2(G)$，则
+同时我们注意到不等式 $4ab \leqslant (a + b) ^ 2$ 恒成立，左右同时取以 $2$ 为底的对数，得到 $2 + \log a + \log b \leqslant 2\log(a + b)$。在其中令 $a = S_2(P)$，$b = S_2(G)$，则
 
 $$
 \begin{align*}
@@ -397,7 +395,7 @@ $$
 
 :sep{width="50%"}
 
-```typst 初始情况：$T_1$
+```typst 初始情况（$T_1$）
 #import "@preview/cetz:0.2.2": canvas, draw, tree
 #canvas(length: 2.5cm, {
     import draw: *
@@ -462,7 +460,7 @@ $$
 
 :sep{width="50%"}
 
-```typst 一次 Zig-Zig 操作后：$T_2$
+```typst 一次 Zig-Zig 操作后（$T_2$）
 #import "@preview/cetz:0.2.2": canvas, draw, tree
 #canvas(length: 2.5cm, {
     import draw: *
@@ -546,7 +544,7 @@ $$
 
 ### 摊还分析
 
-根据上面的分析，我们得到
+根据上面的分析，有
 
 $$
 \begin{align*}
@@ -556,7 +554,7 @@ $$
 \end{align*}
 $$
 
-这是一种非常优美的结构，因为对于一个完整的查询、插入、删除操作，它都是由一系列 Zig、Zig-Zag、Zig-Zig 子操作组成的，而这些子操作中的 $\hat{c_i}$ 累加后 $\operatorname{rank}X$ 相互抵消，只剩下初末状态的 $\operatorname{rank}$ 差值，同时我们知道末状态下 $X$ 就是根节点，也就是说
+这是一种非常优美的结构。对于一个完整的查询、插入、删除操作，它都是由一系列 Zig、Zig-Zag、Zig-Zig 子操作组成的，而这些子操作中的 $\hat{c_i}$ 累加后 $\operatorname{rank}X$ 相互抵消，只剩下初末状态的 $\operatorname{rank}$ 差值，同时我们知道末状态下 $X$ 就是根节点，也就是说
 
 $$
 \hat{c_i} \leqslant 1 + 3(\operatorname{rank} T - \operatorname{rank} X) = O(\log N)
@@ -570,7 +568,7 @@ $$
 
 ## 总结
 
-上面的分析基于一个重要的假设：$\Phi(D_i) \geqslant 0$，但这一条件在有些情况下并不一定成立（例如 Splay Tree 初始非空）。实际上，如果这个假设不成立了，我们仍然能够得到一个较弱的结论：只要操作次数 $M$ 足够大，总体实际表现出来的复杂度仍然为 $O\bigl(f(n)\bigr)$。
+上面的分析基于一个重要的假设：$\Phi(D_M) \geqslant \Phi(D_0)$，但这一条件在有些情况下并不一定成立（例如 Splay Tree 初始非空）。实际上，如果这个假设不成立了，我们仍然能够得到类似的结论：只要操作次数 $M$ 足够大，总体实际表现出来的复杂度仍然为 $O\bigl(f(n)\bigr)$。
 
 $$
 \begin{align*}
@@ -581,4 +579,4 @@ $$
 \end{align*}
 $$
 
-只要初始状态给定，$\Phi(D_0) / M$ 实际上是一个常数。在这种情况下直接说 $T_\text{average} = O(\log N)$ 也是合理的。如果想要更严谨一点，我们让 $M\rightarrow+\infty$，这个时候常数也可以忽略不计了。
+只要初始状态给定，$\Phi(D_0) / M$ 实际上是一个常数。在这种情况下甚至直接说 $T_\text{average} = O(\log N)$ 也是合理的。如果想要更严谨一点，我们让 $M\rightarrow+\infty$，这个时候常数也可以忽略不计了。

@@ -16,7 +16,7 @@ const jsx: JSX.Element = (<><p>在二叉搜索树的基础上，每次对节点�
 <p>假如访问了节点 <InlineMath data={"X"}></InlineMath>（在查询、插入后，删除前）：</p>
 <ul>
 <li>如果 <InlineMath data={"X"}></InlineMath> 是根节点，不进行任何操作；</li>
-<li>如果 <InlineMath data={"X"}></InlineMath> 的父节点是根节点，对 <InlineMath data={"X"}></InlineMath> 进行一次 <strong>Single Rotation</strong>（即 AVL Tree 的 LL- 或 RR-Rotation，或称 <strong>Zig</strong>），使得 <InlineMath data={"X"}></InlineMath> 移动到根节点；</li>
+<li>如果 <InlineMath data={"X"}></InlineMath> 的父节点是根节点，对 <InlineMath data={"X"}></InlineMath> 进行一次 <strong>Single Rotation</strong>（即 AVL Tree 的 LL- 或 RR-Rotation，或称 <strong>Zig</strong> 操作），使得 <InlineMath data={"X"}></InlineMath> 移动到根节点；</li>
 <li>否则，记 <InlineMath data={"X"}></InlineMath> 的父节点为 <InlineMath data={"P"}></InlineMath>，祖父节点为 <InlineMath data={"G"}></InlineMath>，分如下两种情况讨论。</li>
 </ul>
 <hr />
