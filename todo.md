@@ -4,6 +4,8 @@
 
 ## 当前 TODO
 
+ - URL 相对路径引用有问题
+ - Dark Mode 颜色得改一改
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）（放 index 页的 Vue components 里？）
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - ScrollReveal 导致评论系统回复评论的窗口不显示
