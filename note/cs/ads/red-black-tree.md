@@ -60,9 +60,324 @@ $$
 
 ## 插入
 
-首先以普通的二叉搜索树的方式插入节点 $z$，并将其颜色设为红色。然后调整树的结构（伪代码如下），使其满足红黑树的性质。
+首先以普通的二叉搜索树的方式插入节点 $z$，并将其颜色设为红色。然后调整树的结构，使其满足红黑树的性质。
 
-::fold{title="插入调整" expand success}
+记 $z$ 的父节点为 $P$，祖父节点为 $G$，祖父节点的另一个子节点（叔节点）为 $U$。
+
+如果 $P$ 为黑色，则无需任何调整；否则，$P$ 为红色，分以下三种情况讨论。
+
+---
+
+### 情况 1
+
+$U$ 为红色，则 $G$ 一定是黑色。无论 $z$ 是 $P$ 的左节点还是右节点，只要将 $G$ 的颜色传递给 $P$ 和 $U$ 即可。
+
+::grid
+:sep{width=50%}
+
+```typst 初始情况
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    set-style(radius: .35, stroke: (thickness: 1.4pt))
+
+    let rect-node(parent, name, height: 1.5, offset: -.7, rect-offset: .15, fill: none) = {
+        hide(circle(parent))
+        hide(circle((rel: (offset, -1)), name: name + "-circle"))
+        intersections(name + "-ins", {
+            rect((rel: (-rect-offset, .35)), (rel: (.7, -height)), name: name, fill: fill)
+            hide(circle(parent))
+            hide(line(parent + ".center", name + "-circle.center"))
+        })
+        line(name + "-ins.0", name + "-ins.1")
+    }
+
+    circle((0, 0), name: "G", fill: gray)
+    circle((-.7, -1), name: "P")
+    circle((.7, -1), name: "U")
+
+    line("G", "P")
+    line("G", "U")
+
+    rect-node("P", "P-child", height: 1.5, offset: 0, rect-offset: .35)
+    rect-node("U", "U-child", height: 1.5, offset: 0, rect-offset: .35)
+    rect-node("P", "Z", height: .5, offset: 0, rect-offset: .35)
+
+    content("G", $G$)
+    content("P", $P$)
+    content("U", $U$)
+
+    content("Z", $z$)
+})
+```
+
+:sep{width=50%}
+
+```typst 调整后
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    set-style(radius: .35, stroke: (thickness: 1.4pt))
+
+    let rect-node(parent, name, height: 1.5, offset: -.7, rect-offset: .15, fill: none) = {
+        hide(circle(parent))
+        hide(circle((rel: (offset, -1)), name: name + "-circle"))
+        intersections(name + "-ins", {
+            rect((rel: (-rect-offset, .35)), (rel: (.7, -height)), name: name, fill: fill)
+            hide(circle(parent))
+            hide(line(parent + ".center", name + "-circle.center"))
+        })
+        line(name + "-ins.0", name + "-ins.1")
+    }
+
+    circle((0, 0), name: "G")
+    circle((-.7, -1), name: "P", fill: gray)
+    circle((.7, -1), name: "U", fill: gray)
+
+    line("G", "P")
+    line("G", "U")
+
+    rect-node("P", "P-child", height: 1.5, offset: 0, rect-offset: .35)
+    rect-node("U", "U-child", height: 1.5, offset: 0, rect-offset: .35)
+    rect-node("P", "Z", height: .5, offset: 0, rect-offset: .35)
+
+    content("G", $G$)
+    content("P", $P$)
+    content("U", $U$)
+
+    content("Z", $z$)
+})
+```
+::
+
+$P$ 为 $G$ 右节点的情况同理。
+
+调整完成后，将 $G$ 作为新的 $z$ 继续向上调整。
+
+---
+
+### 情况 2
+
+$U$ 为黑色，$z$ 为 $P$ 的左节点，此时 $G$ 一定是黑色。
+
+情况 2 分为两步完成，第一步调整颜色，第二步在 $G$ 上进行 Right-Rotation。这样调整出来的树仍然满足红黑树的性质。
+
+::grid
+:sep{width=50%}
+
+```typst 初始情况
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    set-style(radius: .35, stroke: (thickness: 1.4pt))
+
+    let rect-node(parent, name, height: 1.5, offset: -.7, rect-offset: .15, fill: none) = {
+        hide(circle(parent))
+        hide(circle((rel: (offset, -1)), name: name + "-circle"))
+        intersections(name + "-ins", {
+            rect((rel: (-rect-offset, .35)), (rel: (.7, -height)), name: name, fill: fill)
+            hide(circle(parent))
+            hide(line(parent + ".center", name + "-circle.center"))
+        })
+        line(name + "-ins.0", name + "-ins.1")
+    }
+
+    circle((0, 0), name: "G", fill: gray)
+    circle((-.7, -1), name: "P")
+    circle((rel: (-.6, -1)), name: "Z")
+    circle((.7, -1), name: "U", fill: gray)
+
+    line("G", "P")
+    line("Z", "P")
+    line("G", "U")
+
+    rect-node("Z", "Z-child", height: .5, offset: 0, rect-offset: .35)
+    rect-node("P", "PR", height: .5, offset: .6, rect-offset: .55)
+    rect-node("U", "U-child", height: .5, offset: 0, rect-offset: .35)
+
+    content("G", $G$)
+    content("P", $P$)
+    content("U", $U$)
+    content("Z", $z$)
+})
+```
+
+:sep{width=50%}
+
+```typst 颜色调整
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    set-style(radius: .35, stroke: (thickness: 1.4pt))
+
+    let rect-node(parent, name, height: 1.5, offset: -.7, rect-offset: .15, fill: none) = {
+        hide(circle(parent))
+        hide(circle((rel: (offset, -1)), name: name + "-circle"))
+        intersections(name + "-ins", {
+            rect((rel: (-rect-offset, .35)), (rel: (.7, -height)), name: name, fill: fill)
+            hide(circle(parent))
+            hide(line(parent + ".center", name + "-circle.center"))
+        })
+        line(name + "-ins.0", name + "-ins.1")
+    }
+
+    circle((0, 0), name: "G")
+    circle((-.7, -1), name: "P", fill: gray)
+    circle((rel: (-.6, -1)), name: "Z")
+    circle((.7, -1), name: "U", fill: gray)
+
+    line("G", "P")
+    line("Z", "P")
+    line("G", "U")
+
+    rect-node("Z", "Z-child", height: .5, offset: 0, rect-offset: .35)
+    rect-node("P", "PR", height: .5, offset: .6, rect-offset: .55)
+    rect-node("U", "U-child", height: .5, offset: 0, rect-offset: .35)
+
+    content("G", $G$)
+    content("P", $P$)
+    content("U", $U$)
+    content("Z", $z$)
+})
+```
+
+:sep{width=50%}
+
+```typst Right-Rotation
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    set-style(radius: .35, stroke: (thickness: 1.4pt))
+
+    let rect-node(parent, name, height: 1.5, offset: -.7, rect-offset: .15, fill: none) = {
+        hide(circle(parent))
+        hide(circle((rel: (offset, -1)), name: name + "-circle"))
+        intersections(name + "-ins", {
+            rect((rel: (-rect-offset, .35)), (rel: (.7, -height)), name: name, fill: fill)
+            hide(circle(parent))
+            hide(line(parent + ".center", name + "-circle.center"))
+        })
+        line(name + "-ins.0", name + "-ins.1")
+    }
+
+    circle((0, 0), name: "P", fill: gray)
+    circle((-.7, -1), name: "Z")
+    circle((.7, -1), name: "G")
+    circle((rel: (.6, -1)), name: "U", fill: gray)
+
+    line("G", "P")
+    line("Z", "P")
+    line("G", "U")
+
+    rect-node("Z", "Z-child", height: .5, offset: 0, rect-offset: .35)
+    rect-node("G", "GL", height: .5, offset: -.6, rect-offset: .15)
+    rect-node("U", "U-child", height: .5, offset: 0, rect-offset: .35)
+
+    content("G", $G$)
+    content("P", $P$)
+    content("U", $U$)
+    content("Z", $z$)
+})
+```
+::
+
+对称情况同理。
+
+调整完成后，将 $P$ 作为新的 $z$ 继续向上调整。
+
+---
+
+### 情况 3
+
+$U$ 为黑色，$z$ 为 $P$ 的右节点。在 $P$ 上进行 Left-Rotation，将 $P$ 作为新的 $z$，转为情况 2 处理。
+
+::grid
+:sep{width=50%}
+
+```typst 初始情况
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    set-style(radius: .35, stroke: (thickness: 1.4pt))
+
+    let rect-node(parent, name, height: 1.5, offset: -.7, rect-offset: .15, fill: none) = {
+        hide(circle(parent))
+        hide(circle((rel: (offset, -1)), name: name + "-circle"))
+        intersections(name + "-ins", {
+            rect((rel: (-rect-offset, .35)), (rel: (.7, -height)), name: name, fill: fill)
+            hide(circle(parent))
+            hide(line(parent + ".center", name + "-circle.center"))
+        })
+        line(name + "-ins.0", name + "-ins.1")
+    }
+
+    circle((0, 0), name: "G", fill: gray)
+    circle((-.7, -1), name: "P")
+    circle((rel: (.5, -1)), name: "Z")
+    circle((.7, -1), name: "U", fill: gray)
+
+    line("G", "P")
+    line("Z", "P")
+    line("G", "U")
+
+    rect-node("Z", "Z-child", height: .5, offset: 0, rect-offset: .35)
+    rect-node("P", "PL", height: .5, offset: -.6, rect-offset: .15)
+    rect-node("U", "U-child", height: .5, offset: 0, rect-offset: .35)
+
+    content("G", $G$)
+    content("P", $P$)
+    content("U", $U$)
+    content("Z", $z$)
+})
+```
+
+:sep{width=50%}
+
+```typst Left-Rotation
+#import "@preview/cetz:0.2.2": canvas, draw, tree
+#canvas(length: 2.5cm, {
+    import draw: *
+    set-style(radius: .35, stroke: (thickness: 1.4pt))
+
+    let rect-node(parent, name, height: 1.5, offset: -.7, rect-offset: .15, fill: none) = {
+        hide(circle(parent))
+        hide(circle((rel: (offset, -1)), name: name + "-circle"))
+        intersections(name + "-ins", {
+            rect((rel: (-rect-offset, .35)), (rel: (.7, -height)), name: name, fill: fill)
+            hide(circle(parent))
+            hide(line(parent + ".center", name + "-circle.center"))
+        })
+        line(name + "-ins.0", name + "-ins.1")
+    }
+
+    circle((0, 0), name: "G", fill: gray)
+    circle((-.7, -1), name: "Z")
+    circle((rel: (-.6, -1)), name: "P")
+    circle((.7, -1), name: "U", fill: gray)
+
+    line("G", "Z")
+    line("Z", "P")
+    line("G", "U")
+
+    rect-node("P", "P-child", height: .5, offset: 0, rect-offset: .35)
+    rect-node("Z", "ZR", height: .5, offset: .6, rect-offset: .55)
+    rect-node("U", "U-child", height: .5, offset: 0, rect-offset: .35)
+
+    content("G", $G$)
+    content("P", $P$)
+    content("U", $U$)
+    content("Z", $z$)
+})
+```
+::
+
+---
+
+### 代码实现
+
+调整的伪代码实现如下：
+
+::fold{title="插入调整" expand}
 $$
 \begin{align*}
     &\bold{while}\ z.p.\text{color} = \text{RED}: \\
