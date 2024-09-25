@@ -60,7 +60,7 @@ export class Post {
                 res._html = undefined;
                 res._text = undefined;
 
-                console.log(`[Updated] ./${pathname}`);
+                console.log(`[Modified] ./${pathname}`);
             });
         }
 

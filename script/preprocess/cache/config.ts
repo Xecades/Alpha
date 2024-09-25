@@ -19,6 +19,7 @@ const readYML = (path: string): Ref<RawConfig> => {
     if (process.env.NODE_ENV == "development") {
         chokidar.watch(path).on("change", () => {
             raw.value = fs.readFileSync(path, "utf-8");
+            console.log(`[Modified] ${path}`);
         });
     }
 
