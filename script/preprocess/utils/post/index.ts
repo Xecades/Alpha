@@ -52,19 +52,23 @@ export class Post {
 
         if (process.env.NODE_ENV == "development") {
             chokidar.watch(pathname).on("change", () => {
-                res._raw = undefined;
-                res._front_matter = undefined;
-                res._markdown = undefined;
-                res._tokens = undefined;
-                res._toc = undefined;
-                res._html = undefined;
-                res._text = undefined;
-
+                res.reset();
                 console.log(`[Modified] ./${pathname}`);
             });
         }
 
         return res;
+    }
+
+    /** Reset all cached data. */
+    reset(): void {
+        this._raw = undefined;
+        this._front_matter = undefined;
+        this._markdown = undefined;
+        this._tokens = undefined;
+        this._toc = undefined;
+        this._html = undefined;
+        this._text = undefined;
     }
 
     /**
