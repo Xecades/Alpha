@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import camelCase from "camelcase";
 import injection from "../utils/injection";
 import { Post } from "../utils/post";
+import { watchEffect } from "vue";
 
 import type { BASE } from "../../types";
 
@@ -37,16 +38,21 @@ const injectFontAwesome = (html: string): string => {
  * @param posts - Parsed post objects.
  * @param base - The base name for markdown caching.
  */
-export default async (posts: Post[], base: BASE) => {
+export default (posts: Post[], base: BASE) => {
     for (const post of posts) {
-        const dist: string = post.tsx_pathname;
-        let cache: string = injection();
+        watchEffect(() => {
+            const dist: string = post.tsx_pathname;
 
-        cache += injectFontAwesome(post.html);
-        cache += `import type { JSX } from "vue/jsx-runtime";\n`;
-        cache += `const jsx: JSX.Element = (<>${post.html}</>)\n`;
-        cache += `export default jsx;\n`;
+            const cache: string =
+                injection() +
+                injectFontAwesome(post.html) +
+                `import type { JSX } from "vue/jsx-runtime";\n` +
+                `const jsx: JSX.Element = (<>${post.html}</>)\n` +
+                `export default jsx;\n`;
 
-        await fs.outputFile(dist, cache);
+            fs.outputFileSync(dist, cache);
+
+            console.log(`[Updated] ./${post.tsx_pathname}`);
+        });
     }
 };

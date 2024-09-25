@@ -49,11 +49,6 @@ export interface MarkdownHeaderJsx {
     link: string;
 }
 
-/** Filter applied on traversal */
-export interface PathnameFilter {
-    (pathname: string): boolean;
-}
-
 /**
  * Base names for markdown caching. Cache files are generated based on these names.
  *

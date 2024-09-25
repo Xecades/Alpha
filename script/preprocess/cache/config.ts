@@ -1,7 +1,10 @@
 import fs from "fs-extra";
 import yaml from "yaml";
+import chokidar from "chokidar";
+import { computed, ref, watchEffect } from "vue";
 import { Post } from "../utils/post";
 
+import type { Ref } from "vue";
 import type { BASE, Config, NavNode, RawConfig, RawNavNode } from "../../types";
 
 /**
@@ -10,9 +13,16 @@ import type { BASE, Config, NavNode, RawConfig, RawNavNode } from "../../types";
  * @param path - Path to the config file.
  * @returns Raw config data.
  */
-const readYML = async (path: string): Promise<RawConfig> => {
-    const raw: string = await fs.readFile(path, "utf-8");
-    return yaml.parse(raw);
+const readYML = (path: string): Ref<RawConfig> => {
+    const raw: Ref<string> = ref(fs.readFileSync(path, "utf-8"));
+
+    if (process.env.NODE_ENV == "development") {
+        chokidar.watch(path).on("change", () => {
+            raw.value = fs.readFileSync(path, "utf-8");
+        });
+    }
+
+    return computed(() => yaml.parse(raw.value));
 };
 
 /**
@@ -91,19 +101,22 @@ const parse_nav = (
  * @param posts - Parsed post objects.
  * @param base - The base name for markdown caching.
  */
-export default async (posts: Post[], base: BASE) => {
+export default (posts: Post[], base: BASE) => {
     const config_path: string = `./${base}/config.yml`;
     const dist: string = `./cache/${base}/config.ts`;
 
-    const rawConfig: RawConfig = await readYML(config_path);
-    const config: Config = { ...rawConfig, nav: [] };
+    const rawConfig: Ref<RawConfig> = readYML(config_path);
 
-    config.nav = parse_nav(rawConfig.nav, posts, base);
+    watchEffect(() => {
+        const config: Config = { ...rawConfig.value, nav: [] };
+        config.nav = parse_nav(rawConfig.value.nav, posts, base);
 
-    let cache = "";
-    cache += 'import type { Config } from "@script/types";\n';
-    cache += `const config: Config = ${JSON.stringify(config)};\n`;
-    cache += "export default config;\n";
+        const cache =
+            'import type { Config } from "@script/types";\n' +
+            `const config: Config = ${JSON.stringify(config)};\n` +
+            "export default config;\n";
 
-    await fs.outputFile(dist, cache);
+        fs.outputFileSync(dist, cache);
+        console.log(`[Updated] ${dist}`);
+    });
 };

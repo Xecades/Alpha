@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import Token from "markdown-it/lib/token.mjs";
+import chokidar from "chokidar";
+import { reactive } from "vue";
 import { timeDataOf } from "../git";
 
 import {
@@ -42,6 +44,27 @@ export class Post {
 
         this.pathname = pathname;
         this.base = base;
+    }
+
+    /** Create a reactive post object. */
+    static reactive(pathname: string, base: BASE): Post {
+        const res = reactive(new Post(pathname, base));
+
+        if (process.env.NODE_ENV == "development") {
+            chokidar.watch(pathname).on("change", () => {
+                res._raw = undefined;
+                res._front_matter = undefined;
+                res._markdown = undefined;
+                res._tokens = undefined;
+                res._toc = undefined;
+                res._html = undefined;
+                res._text = undefined;
+
+                console.log(`[Updated] ./${pathname}`);
+            });
+        }
+
+        return res;
     }
 
     /**

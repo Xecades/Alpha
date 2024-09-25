@@ -1,34 +1,17 @@
-// @ts-ignore
-import Walk from "@root/walk";
-
-import type { PathnameFilter } from "../../types";
-import type { Dirent } from "fs";
+import walkSync from "walk-sync";
 
 /**
- * Traverse a directory asynchronously.
+ * Traverse a directory synchronously.
  *
  * @param src - Source directory
- * @param filter - Pathname filter
  * @returns Traverse results
  *
- * @see https://www.npmjs.com/package/@root/walk
+ * @see https://www.npmjs.com/package/walk-sync
  */
-export default async (
-    src: string,
-    filter: PathnameFilter
-): Promise<string[]> => {
-    const res: string[] = [];
-    const walk = Walk.create();
-
-    await walk(src, async (err: unknown, pathname: string, dirent: Dirent) => {
-        if (err) {
-            throw err;
-        }
-
-        if (filter(pathname)) {
-            res.push(pathname);
-        }
+export default (src: string): string[] => {
+    return walkSync(src, {
+        directories: false,
+        globs: ["**/*.md"],
+        includeBasePath: true,
     });
-
-    return res;
 };
