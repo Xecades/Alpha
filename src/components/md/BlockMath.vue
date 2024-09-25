@@ -22,6 +22,7 @@ const osOptions: PartialOptions = {
     <OverlayScrollbarsComponent
         element="p"
         :options="(osOptions as any)"
+        class="block-math"
         v-html="parsed"
     />
 </template>

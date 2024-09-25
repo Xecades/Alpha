@@ -36,7 +36,8 @@ onMounted(() => {
     is_immensive.value =
         children.length === 1 &&
         (children[0].classList.contains("block-code") ||
-            children[0].classList.contains("quote"));
+            children[0].classList.contains("quote") ||
+            children[0].classList.contains("block-math"));
 
     cursor.refresh();
 });
@@ -147,5 +148,9 @@ onMounted(() => {
 
 .content.immensive div.quote {
     margin: 3rem 1.4rem;
+}
+
+:global(.fold .content.immensive .katex-display) {
+    margin: 0.3em 0;
 }
 </style>
