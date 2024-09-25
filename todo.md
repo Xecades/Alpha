@@ -4,6 +4,9 @@
 
 ## 当前 TODO
 
+ - Metadata timestamp 支持未提交的更改，否则只有 commit 后才能更新 timestamp，需要两次提交
+ - 左右栏 hover 的区域不要太大，不然很难受
+ - metadata 鼠标 hover 显示详情的区域不要太大
  - URL 相对路径引用有问题
  - Dark Mode 颜色得改一改
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）（放 index 页的 Vue components 里？）
