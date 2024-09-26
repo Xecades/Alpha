@@ -58,6 +58,7 @@ const data = {
             {
                 year: 2020,
                 meta: [
+                    { date: "3 月 28 日", desc: "开始正式学习前端" },
                     { date: "寒假", desc: "学习 npm、nodejs、vue" },
                     { date: "寒假", desc: "大幅更新 / 重构博客" },
                     { date: "补充", desc: "初识人工智能，编写其可视化程序" },
@@ -118,6 +119,7 @@ const data = {
                     { date: "8 月 17 日", desc: "担任图灵班 24 级学长组" },
                     { date: "8 月 20 日", desc: "收获一次完美的生日 party" },
                     { date: "8 月 21 日", desc: "以校榜第三的成绩进入浙江大学 AAA 战队" },
+                    { date: "9 月 16 日", desc: "加入浙江大学竺可桢学院学业指导中心社团" },
                 ]
             },
         ]),
