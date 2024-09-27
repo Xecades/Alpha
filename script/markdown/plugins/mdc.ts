@@ -62,7 +62,7 @@ const convertToPlaceholder = (
 /**
  * Transform markdown string in attributes to JSX.
  *
- * @example `<fold title="**primary**">` => `<fold title={<strong>primary</strong>}>`
+ * @example `<fold title="**success**">` => `<fold title={<strong>success</strong>}>`
  *
  * @note This is achieved by firstly replacing the markdown string with a placeholder,
  *       then rendering the markdown string and replacing the placeholder.

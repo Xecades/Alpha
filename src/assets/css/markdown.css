@@ -377,45 +377,75 @@
 
 /* Note & Fold color theme */
 .colors.default {
-    --background-color: #7777771a;
-    --icon-color: #77777799;
-    --content-code-color: #7777771c;
-    --border-color: #7777772b;
-}
-
-.colors.primary {
-    --background-color: #d400ff1a;
-    --icon-color: #d400ff99;
-    --content-code-color: #d400ff1c;
-    --border-color: #d400ff2b;
+    --background-color: #7777770d;
+    --icon-color: #77777780;
+    --content-code-color: #77777714;
+    --border-color: #7777771c;
 }
 
 .colors.info {
-    --background-color: #0070f31a;
-    --icon-color: #0070f399;
-    --content-code-color: #0070f31c;
-    --border-color: #0070f32b;
+    --background-color: #0070f30d;
+    --icon-color: #0070f380;
+    --content-code-color: #0070f314;
+    --border-color: #0070f31c;
 }
 
 .colors.success {
-    --background-color: #19cc961a;
-    --icon-color: #19cc9699;
-    --content-code-color: #19cc961c;
-    --border-color: #19cc962b;
+    --background-color: #19cc960d;
+    --icon-color: #19cc9680;
+    --content-code-color: #19cc9614;
+    --border-color: #19cc9620;
 }
 
 .colors.warning {
-    --background-color: #f5a6231a;
-    --icon-color: #f5a62399;
-    --content-code-color: #f5a6231c;
-    --border-color: #f5a6232b;
+    --background-color: #f5a6230d;
+    --icon-color: #f5a62380;
+    --content-code-color: #f5a62314;
+    --border-color: #f5a62329;
 }
 
 .colors.danger {
-    --background-color: #ee00001a;
-    --icon-color: #ee000099;
-    --content-code-color: #ee00001c;
-    --border-color: #ee00002b;
+    --background-color: #ee00000d;
+    --icon-color: #ee000080;
+    --content-code-color: #ee000014;
+    --border-color: #ee000017;
+}
+
+@media (prefers-color-scheme: dark) {
+    .colors.default {
+        --background-color: #7777771c;
+        --icon-color: #77777780;
+        --content-code-color: #77777724;
+        --border-color: #77777730;
+    }
+
+    .colors.info {
+        --background-color: #0070f31c;
+        --icon-color: #0070f380;
+        --content-code-color: #0070f324;
+        --border-color: #0070f330;
+    }
+
+    .colors.success {
+        --background-color: #19cc961c;
+        --icon-color: #19cc9680;
+        --content-code-color: #19cc9624;
+        --border-color: #19cc9630;
+    }
+
+    .colors.warning {
+        --background-color: #f5a6231c;
+        --icon-color: #f5a62380;
+        --content-code-color: #f5a62324;
+        --border-color: #f5a62330;
+    }
+
+    .colors.danger {
+        --background-color: #ee00001c;
+        --icon-color: #ee000080;
+        --content-code-color: #ee000024;
+        --border-color: #ee00003b;
+    }
 }
 
 @media (max-width: 768px) {

@@ -136,7 +136,7 @@ $$
 功能上类似于 MkDocs Material 的 [Admonitions](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)，用于提供额外信息。
 
 ```md
-::note{[default] | primary | success | info | warning | danger}
+::note{[default] | success | info | warning | danger}
 <Note 内容>
 ::
 ```
@@ -171,10 +171,6 @@ $\text{P} \neq \text{NP}$
 ::
 
 
-::note{primary}
-这里是 `note.primary` 的内容
-::
-
 ::note{success}
 这里是 `note.success` 的内容
 ::
@@ -201,7 +197,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## 折叠面板
 
 ```md
-::fold{title="[标题]" [expand] [default] | primary | success | info | warning | danger}
+::fold{title="[标题]" [expand] [default] | success | info | warning | danger}
 <折叠内容>
 ::
 ```
@@ -221,10 +217,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ```
 ::
 
-
-::fold{title="`primary` 折叠面板" primary}
-这里是 `fold.primary` 的内容
-::
 
 ::fold{title="`success` 折叠面板" success}
 这里是 `fold.success` 的内容
@@ -260,7 +252,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 Veniam irure ipsum dolore dolore Lorem voluptate adipisicing eiusmod minim. Eu incididunt enim irure nisi. Amet eu nostrud irure Lorem mollit eu ipsum excepteur cillum irure in sint reprehenderit deserunt. Occaecat adipisicing culpa excepteur magna id dolor exercitation ut ea dolor ut veniam est eiusmod. Consequat qui ut labore dolor ut. Ipsum ullamco commodo veniam occaecat fugiat sint consectetur nisi deserunt sunt ullamco et veniam. Do commodo mollit voluptate veniam ipsum irure dolore nisi.
 ::
 
-::fold{primary}
+::fold{success}
 :::quote
 这个折叠面板没有标题
 :::

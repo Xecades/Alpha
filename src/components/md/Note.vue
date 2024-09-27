@@ -1,9 +1,8 @@
 <script setup lang="ts">
-type TYPE = "default" | "primary" | "success" | "info" | "warning" | "danger";
+type TYPE = "default" | "success" | "info" | "warning" | "danger";
 
 const icon: Record<TYPE, string> = {
     default: "asterisk",
-    primary: "cube",
     success: "lightbulb",
     info: "info-circle",
     warning: "exclamation-circle",

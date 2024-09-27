@@ -135,10 +135,10 @@ onBeforeUnmount(() => {
 * {
     --header-height: 3rem;
 
-    --border-color: #e0e0e0;
+    --border-color: #eaeaea;
     --header-color: #6d6e75;
-    --content-background-color: #f9f9f9;
-    --header-background-color: #f1f1f1;
+    --content-background-color: #f9f9f9d4;
+    --header-background-color: #f4f4f4;
     --title-hover-color: #e0e0e0;
     --title-underline-color: #9e9ea2;
 }
@@ -147,8 +147,8 @@ onBeforeUnmount(() => {
     * {
         --border-color: #2a2a2b;
         --header-color: #b9bcc0;
-        --content-background-color: #1b1c1d;
-        --header-background-color: #1a1a1a;
+        --content-background-color: #1b1c1d52;
+        --header-background-color: #1a1a1a94;
         --title-hover-color: #242425;
         --title-underline-color: #5d5f61;
     }

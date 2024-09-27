@@ -25,7 +25,6 @@ export const removeAttr = (token: Token, name: string) => {
 /** Supported color themes. */
 export const THEMES: string[] = [
     "default",
-    "primary",
     "success",
     "info",
     "warning",
