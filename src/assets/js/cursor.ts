@@ -1,7 +1,3 @@
-/**
- * @todo 开关控制台偶尔会导致子光标卡住，当前 prod 环境也有这个问题
- */
-
 import { onMounted, onUpdated } from "vue";
 
 interface Coord {
@@ -81,8 +77,6 @@ interface Cursor {
 
 /**
  * Cursor class that handles cursor movement and state.
- *
- * @class
  */
 class Cursor {
     /**
@@ -91,7 +85,6 @@ class Cursor {
      * @param target - CSS selector for elements to attach
      * @param id - ID for the cursor element
      * @param lerp_coeff - The coefficient for lerp functions
-     * @public
      */
     constructor(config: CursorConfig = DefaultConfig) {
         this.config = config;
@@ -108,9 +101,8 @@ class Cursor {
      * Add state to cursor element.
      *
      * @param state - Cursor state
-     * @private
      */
-    append_state(state: State) {
+    private append_state(state: State) {
         this.cursor.classList.add(state);
     }
 
@@ -118,16 +110,13 @@ class Cursor {
      * Remove state from cursor element.
      *
      * @param state - Cursor state
-     * @private
      */
-    remove_state(state: State) {
+    private remove_state(state: State) {
         this.cursor.classList.remove(state);
     }
 
     /**
      * Refresh cursor instance, rebind event listeners.
-     *
-     * @public
      */
     refresh() {
         const that = this;
@@ -159,9 +148,8 @@ class Cursor {
      * Move cursor to the specified coordinates.
      *
      * @param coord - Target coordinate
-     * @private
      */
-    move(coord: Coord) {
+    private move(coord: Coord) {
         this.cursor.style["left"] = `${coord.x}px`;
         this.cursor.style["top"] = `${coord.y}px`;
     }
@@ -170,9 +158,8 @@ class Cursor {
      * Create a cursor element that is hidden by default.
      *
      * @returns Cursor element
-     * @private
      */
-    create_cursor(): HTMLDivElement {
+    private create_cursor(): HTMLDivElement {
         let cursor = document.createElement("div");
         cursor.id = this.config.id;
         cursor.classList.add(State.HIDDEN);
@@ -183,10 +170,8 @@ class Cursor {
 
     /**
      * Initialize cursor event listeners.
-     *
-     * @private
      */
-    init() {
+    private init() {
         document.onmousemove = (event) => {
             const OFFSET = 8;
 
@@ -214,10 +199,8 @@ class Cursor {
 
     /**
      * Render cursor movement.
-     *
-     * @private
      */
-    render() {
+    private render() {
         if (this.coords.curr && this.coords.prev) {
             this.coords.prev = lerp_coords(
                 this.coords.prev,
@@ -234,8 +217,6 @@ class Cursor {
 
     /**
      * Setup cursor instance for Vue.
-     *
-     * @public
      */
     setup() {
         onMounted(() => this.refresh());
