@@ -16,7 +16,7 @@ const data = {
             "，现任浙江大学 AAA 战队队员。如果你恰好也是这个学校的学生，欢迎来图灵 2302 班找我。",
         ],
         [
-            "我会在", link(ruby("博客", "/blog"), "/blog"),
+            "我会在", link(ruby("博客", "/blog"), "https://blog.xecades.xyz/"),
             "上记录我感兴趣的内容，也会记录自己的学习", link(ruby("笔记", "/note"), "/note"),
             "。有时，我会开发一些有趣的", link(ruby("项目", "/lab"), "/lab"),
             "。我乐于邂逅", link(ruby("有趣的灵魂", "/friend"), "/friend"),
