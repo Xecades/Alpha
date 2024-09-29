@@ -1,7 +1,8 @@
-import fs from "fs";
+import fs from "fs-extra";
 import path from "path";
 import Token from "markdown-it/lib/token.mjs";
 import chokidar from "chokidar";
+import { createHash } from "node:crypto";
 import { reactive } from "vue";
 import { timeDataOf } from "../git";
 
@@ -24,6 +25,10 @@ export interface Post {
      *  "note/cs/index.md"
      */
     pathname: string;
+    dependencies: {
+        src: string;
+        name: string;
+    }[];
     base: BASE;
 }
 
@@ -44,6 +49,7 @@ export class Post {
 
         this.pathname = pathname;
         this.base = base;
+        this.dependencies = [];
     }
 
     /** Create a reactive post object. */
@@ -69,6 +75,44 @@ export class Post {
         this._toc = undefined;
         this._html = undefined;
         this._text = undefined;
+        this.dependencies = [];
+    }
+
+    require(content: string, ext: string): string {
+        const filename: string =
+            this.filename +
+            "." +
+            this.dependencies.length +
+            "." +
+            createHash("md5")
+                .update(this.pathname + this.dependencies.length)
+                .digest("hex")
+                .slice(0, 8) +
+            ext;
+
+        const dist = `./cache/${this.base}/temp/${filename}`;
+        const name = `temp_${this.dependencies.length}`;
+
+        fs.outputFileSync(dist, content);
+
+        this.dependencies.push({
+            src: dist.slice(1),
+            name: name,
+        });
+
+        return name;
+    }
+
+    use(src: string): string {
+        const dist = "/" + path.join(path.dirname(this.pathname), src);
+        const name = `dep_${this.dependencies.length}`;
+
+        this.dependencies.push({
+            src: dist,
+            name: name,
+        });
+
+        return name;
     }
 
     /**
@@ -79,6 +123,15 @@ export class Post {
     get link(): string {
         const ext: RegExp = /(\/index)?\.md$/g;
         return "/" + this.pathname.replace(ext, "");
+    }
+
+    /**
+     * @example
+     *  "avl-tree"
+     *  "cs"
+     */
+    get filename(): string {
+        return path.basename(this.link);
     }
 
     /**
@@ -160,7 +213,7 @@ export class Post {
 
     get tokens(): Token[] {
         if (this._tokens === undefined) {
-            this._tokens = parse(this.markdown);
+            this._tokens = parse(this.markdown, this);
         }
         return this._tokens;
     }
@@ -174,7 +227,7 @@ export class Post {
 
     get html(): string {
         if (this._html === undefined) {
-            this._html = render(this.tokens);
+            this._html = render(this.tokens, this);
         }
         return this._html;
     }

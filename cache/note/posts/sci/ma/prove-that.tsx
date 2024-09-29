@@ -8,7 +8,6 @@ import ImageCaptioned from "@/components/md/ImageCaptioned.vue";
 import InlineMath from "@/components/md/InlineMath.vue";
 import LinkCard from "@/components/md/LinkCard.vue";
 import Note from "@/components/md/Note.vue";
-import SVGCaptioned from "@/components/md/SVGCaptioned.vue";
 import Tab from "@/components/md/Tab.vue";
 import type { JSX } from "vue/jsx-runtime";
 const jsx: JSX.Element = (<><p>Here are theorems and proofs that are essential in mathematical analysis. It would be nice if you could prove them smoothly.</p>

@@ -1,6 +1,7 @@
 import type { FuseResult } from "fuse.js";
 import type { RouteRecordSingleView } from "vue-router";
 import type { JSX } from "vue/jsx-runtime";
+import type { Post } from "./preprocess/utils/post";
 
 export const assertType = <T>(value: any): T => value as unknown as T;
 
@@ -47,6 +48,12 @@ export interface MarkdownHeaderJsx {
 
     /** Header permalink */
     link: string;
+}
+
+/** MarkdownIt environment. */
+export interface MarkdownItEnv {
+    /** Post object */
+    post: Post;
 }
 
 /**

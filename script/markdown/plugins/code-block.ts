@@ -2,6 +2,7 @@ import markdownItPrism from "markdown-it-prism";
 import { defaultRenderer, escape, extractText, typst } from "../utils";
 
 import type MarkdownIt from "markdown-it";
+import type { MarkdownItEnv } from "../../types";
 
 /**
  * Register code block syntax highlighting.
@@ -17,7 +18,13 @@ export default (md: MarkdownIt) => {
 
     const originalFence = md.renderer.rules.fence || defaultRenderer;
 
-    md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+    md.renderer.rules.fence = (
+        tokens,
+        idx,
+        options,
+        env: MarkdownItEnv,
+        self
+    ) => {
         const { info } = tokens[idx];
 
         const lang = info.split(" ")[0] || "plain";
@@ -32,9 +39,9 @@ export default (md: MarkdownIt) => {
             let cap_html = md.renderInline(cap);
             let alt = extractText(cap_html) || "空";
 
-            svg = escape(svg);
+            let name: string = env.post.require(svg, ".svg");
 
-            return `<SVGCaptioned svg={"${svg}"} alt="${alt}">${cap_html}</SVGCaptioned>`;
+            return `<ImageCaptioned alt={"${alt}"} src={${name}}>${cap_html}</ImageCaptioned>`;
             //
         } else {
             // Process normal code block

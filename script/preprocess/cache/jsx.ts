@@ -30,6 +30,17 @@ const injectFontAwesome = (html: string): string => {
     return res;
 };
 
+type Dependencies = typeof Post.prototype.dependencies;
+const injectDependencies = (dep: Dependencies): string => {
+    let res: string = "";
+
+    for (const { src, name } of dep) {
+        res += `import ${name} from "${src}";\n`;
+    }
+
+    return res;
+};
+
 /**
  * Cache parsed HTML and save them as TSXs in `./cache/${base}/posts/*`.
  *
@@ -46,6 +57,7 @@ export default (posts: Post[], base: BASE) => {
             const cache: string =
                 injection() +
                 injectFontAwesome(post.html) +
+                injectDependencies(post.dependencies) +
                 `import type { JSX } from "vue/jsx-runtime";\n` +
                 `const jsx: JSX.Element = (<>${post.html}</>)\n` +
                 `export default jsx;\n`;
