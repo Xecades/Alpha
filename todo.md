@@ -12,7 +12,6 @@
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - ScrollReveal 导致评论系统回复评论的窗口不显示
  - ScrollReveal 导致评论系统功能按钮有时候不显示
- - Typst 编译出来的 SVG 保存到单独的文件里面
  - ToC 层级关系看起来很怪
  - Table 加上滚动条
  - Note 404 页面加上一些自定义组件
@@ -24,7 +23,6 @@
  - Code block 添加标题
  - block code meta 参数的处理（转义、引号）
  - 搜索支持上下键选择，回车跳转
- - Markdown 引用图片，相对路径的处理
  - 评论系统支持 Cursor.js
  - 页面宽度改变时，Leftbar 实现动态响应
  - 测试平板上的显示效果
