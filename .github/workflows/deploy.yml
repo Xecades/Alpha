@@ -1,6 +1,7 @@
 name: Build and Deploy to Vercel
 
 on:
+    workflow_dispatch:
     push:
         branches:
             - main # 当推送到 main 分支时触发
@@ -20,6 +21,9 @@ jobs:
 
             - name: Install Dependencies
               run: npm install
+
+            - name: Generate Cache
+              run: npm run cache
 
             - name: Build Project
               run: npm run build

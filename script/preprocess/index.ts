@@ -19,9 +19,4 @@ const cache_base = (base: BASE) => {
     cache.jsx(posts, base);
 };
 
-/**
- * Preprocess files before Vue starts.
- */
-export default () => {
-    cache_base(BASE.NOTE);
-};
+cache_base(BASE.NOTE);
