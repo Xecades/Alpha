@@ -1,6 +1,8 @@
 import MarkdownItMdc from "markdown-it-mdc";
 import { defaultRenderer, removeAttr, THEMES } from "../utils";
+import { Post } from "../../preprocess/utils/post";
 
+import type { MarkdownItEnv } from "../../types";
 import type MarkdownIt from "markdown-it";
 import type Token from "markdown-it/lib/token.mjs";
 
@@ -57,6 +59,18 @@ const convertToPlaceholder = (
     }
 
     return values;
+};
+
+/**
+ * Attach attributes to the token.
+ *
+ * @param token - Token to attach attributes
+ */
+const attachAttributes = (token: Token, post: Post) => {
+    if (token.info === "index") {
+        // For <Index /> Tag, attach the `target` attribute
+        token.attrSet("target", post.link);
+    }
 };
 
 /**
@@ -143,7 +157,13 @@ export default (md: MarkdownIt) => {
     const originalMdcBlockOpen =
         md.renderer.rules.mdc_block_open || defaultRenderer;
 
-    md.renderer.rules.mdc_block_open = (tokens, idx, options, env, self) => {
+    md.renderer.rules.mdc_block_open = (
+        tokens,
+        idx,
+        options,
+        env: MarkdownItEnv,
+        self
+    ) => {
         const token = tokens[idx];
 
         const targets = {
@@ -160,6 +180,7 @@ export default (md: MarkdownIt) => {
         };
 
         convertToAttribute(token, targets.theme);
+        attachAttributes(token, env.post);
         let jsxVal = convertToPlaceholder(token, targets.jsx);
 
         let res: string = originalMdcBlockOpen(tokens, idx, options, env, self);

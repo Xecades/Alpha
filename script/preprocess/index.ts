@@ -10,8 +10,8 @@ import { Post } from "./utils/post";
  * @param base - The base name for markdown caching.
  * @returns A function that caches markdown files.
  */
-const cache_base = (base: BASE) => {
-    const posts: Post[] = parse(base);
+const cache_base = async (base: BASE) => {
+    const posts: Post[] = await parse(base);
 
     cache.search(posts, base);
     cache.config(posts, base);

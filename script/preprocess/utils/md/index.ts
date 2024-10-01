@@ -9,8 +9,13 @@ import type { BASE } from "../../../types";
  * @param base - Source directory
  * @returns Parsed reactive post objects
  */
-export default (base: BASE): Post[] => {
+export default async (base: BASE): Promise<Post[]> => {
     const files: string[] = traverse(base);
+    const posts: Post[] = [];
 
-    return files.map((pathname) => Post.reactive(pathname, base));
+    for (const pathname of files) {
+        posts.push(await Post.reactive(pathname, base));
+    }
+
+    return posts;
 };

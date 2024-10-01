@@ -84,6 +84,7 @@ const transformMdc = (token: Token): boolean => {
         note: "Note",
         linkcard: "LinkCard",
         grid: "Grid",
+        index: "Index",
     };
 
     if (token.type === "mdc_block_open" || token.type === "mdc_block_close") {

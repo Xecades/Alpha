@@ -30,6 +30,7 @@ export interface Post {
         name: string;
     }[];
     base: BASE;
+    time_data: { created: string; updated: string };
 }
 
 export class Post {
@@ -53,12 +54,14 @@ export class Post {
     }
 
     /** Create a reactive post object. */
-    static reactive(pathname: string, base: BASE): Post {
+    static async reactive(pathname: string, base: BASE): Promise<Post> {
         const res = reactive(new Post(pathname, base));
+        await res.update_time_data();
 
         if (process.env.NODE_ENV == "development") {
-            chokidar.watch(pathname).on("change", () => {
+            chokidar.watch(pathname).on("change", async () => {
                 res.reset();
+                await res.update_time_data();
                 console.log(`[Modified] ./${pathname}`);
             });
         }
@@ -67,7 +70,7 @@ export class Post {
     }
 
     /** Reset all cached data. */
-    reset(): void {
+    reset() {
         this._raw = undefined;
         this._front_matter = undefined;
         this._markdown = undefined;
@@ -76,6 +79,10 @@ export class Post {
         this._html = undefined;
         this._text = undefined;
         this.dependencies = [];
+    }
+
+    async update_time_data() {
+        this.time_data = await timeDataOf(this.pathname);
     }
 
     require(content: string, ext: string): string {
@@ -184,10 +191,6 @@ export class Post {
             return "index";
         }
         return "post";
-    }
-
-    get time_data(): Promise<{ created: string; updated: string }> {
-        return timeDataOf(this.pathname);
     }
 
     get raw(): string {

@@ -1,9 +1,6 @@
-## 亟待解决
-
- - 添加 index 页面的目录自动生成功能（写成一个 Markdown 组件？）
-
 ## 当前 TODO
 
+ - 改 ::note 的样式：https://note.tonycrane.cc/ctf/misc/steg/
  - 左右栏 hover 的区域不要太大，不然很难受
  - metadata 鼠标 hover 显示详情的区域不要太大
  - Dark Mode 颜色得改一改

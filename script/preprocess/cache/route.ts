@@ -25,7 +25,7 @@ export default (posts: Post[], base: BASE) => {
         let error_cache: string = "";
 
         for (const post of posts) {
-            const time_data = await post.time_data;
+            const time_data = post.time_data;
 
             const import_slot: string = "<IMP_SLOT>";
             const component_slot: string = "<COM_SLOT>";
@@ -35,15 +35,12 @@ export default (posts: Post[], base: BASE) => {
             const toc: string =
                 "[" +
                 post.toc
-                    .map((x) => {
-                        let title: string = x.title;
-                        x.title = toc_title_slot;
-
-                        return JSON.stringify(x).replace(
-                            `"${toc_title_slot}"`,
-                            `<>${title}</>`
-                        );
-                    })
+                    .map((x) =>
+                        JSON.stringify({
+                            ...x,
+                            title: toc_title_slot,
+                        }).replace(`"${toc_title_slot}"`, `<>${x.title}</>`)
+                    )
                     .join(",") +
                 "]";
 
