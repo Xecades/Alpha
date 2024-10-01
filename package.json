@@ -16,7 +16,8 @@
         "preview": "vite preview",
         "build-only": "vite build",
         "type-check": "vue-tsc --build --force",
-        "cache": "tsx ./script/preprocess/index.ts"
+        "cache": "tsx ./script/preprocess/index.ts",
+        "clean": "rm -rf dist cache"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.6.0",
