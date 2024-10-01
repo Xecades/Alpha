@@ -6,6 +6,8 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 import autoprefixer from "autoprefixer";
 
+import "./script/preprocess";
+
 const customElement = ["rb"];
 
 export default defineConfig({

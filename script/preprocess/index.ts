@@ -19,4 +19,13 @@ const cache_base = (base: BASE) => {
     cache.jsx(posts, base);
 };
 
-cache_base(BASE.NOTE);
+/**
+ * Run script when
+ *
+ *  - in development mode.  ->  npm run dev
+ *  - running script directly.  ->  npm run cache
+ *    (In this case, process.env.NODE_ENV === undefined.)
+ */
+if (process.env.NODE_ENV !== "production") {
+    cache_base(BASE.NOTE);
+}

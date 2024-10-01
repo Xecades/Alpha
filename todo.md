@@ -4,7 +4,6 @@
 
 ## 当前 TODO
 
- - Metadata timestamp 支持未提交的更改，否则只有 commit 后才能更新 timestamp，需要两次提交
  - 左右栏 hover 的区域不要太大，不然很难受
  - metadata 鼠标 hover 显示详情的区域不要太大
  - Dark Mode 颜色得改一改
@@ -53,7 +52,6 @@
  - 标点挤压，需要中英文排版系统
  - 搜索数据库中空格的处理（要不直接删掉？）
  - 加一些彩蛋（例如 https://www.kirilv.com/canvas-confetti/）
- - CI 流程：目前是本地预处理后连着 cache 一起上传，考虑配置 Vercel 保存临时文件（只有 Serverless 能用：https://medium.com/@nksCodingLearnings/how-to-read-and-write-files-in-next-js-on-a-vercel-deployed-website-c1e9ea606cb6，写个 Serverless？）
 
 ## Markdown
 
@@ -65,7 +63,3 @@
  - CDN
  - Status 页面（如果有了后端）
  - 联动 Cursor.js（参考 iPad 光标效果）
-
-## 有丶意思
-
-https://vercel.com/docs/image-optimization
