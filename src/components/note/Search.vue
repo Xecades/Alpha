@@ -11,6 +11,7 @@ import type { Result } from "@/assets/js/note/search";
 
 const query: Ref<string> = ref("");
 const results: Ref<Result[]> = ref([]);
+const isLoading: Ref<boolean> = ref(true);
 
 const osOptions: PartialOptions = {
     scrollbars: { autoHide: "move" },
@@ -20,7 +21,10 @@ const osOptions: PartialOptions = {
 watch(
     query,
     async () => {
-        results.value = await search(query.value);
+        results.value = await search(query.value, () => {
+            isLoading.value = false;
+        });
+
         await nextTick();
         cursor.refresh();
     },
@@ -58,7 +62,8 @@ watch(
                 <li class="empty" v-if="results.length === 0">
                     <font-awesome-icon
                         class="icon"
-                        :icon="['fas', 'face-frown']"
+                        :icon="['fas', isLoading ? 'spinner' : 'face-frown']"
+                        :spin="isLoading"
                     />
                 </li>
                 <li v-for="res in results">
@@ -172,8 +177,13 @@ watch(
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(6.7);
+    scale: 6.7;
+    translate: -50%, -50%;
     color: var(--empty-icon-color);
+}
+
+.results .empty .icon.fa-spin {
+    scale: 4;
 }
 
 .results .post {

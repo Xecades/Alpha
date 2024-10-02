@@ -35,6 +35,7 @@ import {
     faLightbulb,
     faLink,
     faMagnifyingGlass,
+    faSpinner,
     faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -105,7 +106,8 @@ async function main() {
         faLink,
         faArrowUpRightFromSquare,
         faStar,
-        faGithub
+        faGithub,
+        faSpinner
     );
 
     const app = createApp(App);

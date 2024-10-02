@@ -1,7 +1,15 @@
-## 当前 TODO
+## 长期
+
+ - 重构动画模块
+ - 重构 Cursor.js（参考 iPad 光标效果，或许可以联动 DOM 元素）
+ - 完善控制台日志系统
+ - 搓一个评论系统（考虑使用 Serverless）
+ - Status 页面（如果有了后端）
+ - CDN
+
+## 当前
 
  - AnimateHeight 嵌套的时候，第一次点击内部的 fold 会不反应（推测是 AnimateHeight 库的问题）
- - 搜索刚开始加载的时候，显示一个 loading 动画
  - 改 ::note 的样式：https://note.tonycrane.cc/ctf/misc/steg/
  - 左右栏 hover 的区域不要太大，不然很难受
  - metadata 鼠标 hover 显示详情的区域不要太大
@@ -27,13 +35,13 @@
  - 测试移动设备上，当 Leftbar 目录太长时的显示效果（折行？）
  - 在合适的地方加上版权声明
  - 页面高度不够时，左右栏加上滚动
- - 重构动画模块
 
 ## 暂时不重要的 TODO
 
+ - 代码块功能按钮（复制，etc.）
  - Typst 添加中文字体的支持
  - 代码块换行
- - 打印样式
+ - Command + P 打印样式
  - 动画顺序有问题
  - 导航时标题有些时候动画会消失
  - 双击标题有些时候动画会卡住
@@ -51,14 +59,3 @@
  - 标点挤压，需要中英文排版系统
  - 搜索数据库中空格的处理（要不直接删掉？）
  - 加一些彩蛋（例如 https://www.kirilv.com/canvas-confetti/）
-
-## Markdown
-
- - 代码块功能按钮（复制，etc.）
-
-## 长期
-
- - 搓一个评论系统（考虑使用 Serverless）
- - CDN
- - Status 页面（如果有了后端）
- - 联动 Cursor.js（参考 iPad 光标效果）

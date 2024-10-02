@@ -25,15 +25,20 @@ let search_internal: CachedSearchFn;
  * Search and return parsed results.
  *
  * @param query - Search query
+ * @param onAfterLoad - Callback after database is loaded
  * @returns Parsed search results
  */
-export const search = async (query: string): Promise<Result[]> => {
+export const search = async (
+    query: string,
+    onAfterLoad: () => void
+): Promise<Result[]> => {
     const range = (i: RangeTuple): number => i[1] - i[0];
     const longest = (indices: readonly RangeTuple[]): RangeTuple =>
         indices.reduce((acc, cur) => (range(cur) > range(acc) ? cur : acc));
 
     if (search_internal === undefined) {
         search_internal = (await import("@cache/note/search")).default;
+        onAfterLoad();
     }
 
     let searchResults: FuseResult<SearchTarget>[] | Result[] =
