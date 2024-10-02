@@ -46,7 +46,7 @@ const data: Ref<GridData[]> = computed(() => mapData(parts.value));
 </template>
 
 <style scoped>
-* {
+.grid {
     --padding-lr: 0.5rem;
     --min-width: 160px;
 }

@@ -1,5 +1,7 @@
 ## 当前 TODO
 
+ - AnimateHeight 嵌套的时候，第一次点击内部的 fold 会不反应（推测是 AnimateHeight 库的问题）
+ - 搜索刚开始加载的时候，显示一个 loading 动画
  - 改 ::note 的样式：https://note.tonycrane.cc/ctf/misc/steg/
  - 左右栏 hover 的区域不要太大，不然很难受
  - metadata 鼠标 hover 显示详情的区域不要太大

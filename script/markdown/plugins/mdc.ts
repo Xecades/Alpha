@@ -69,7 +69,9 @@ const convertToPlaceholder = (
 const attachAttributes = (token: Token, post: Post) => {
     if (token.info === "index") {
         // For <Index /> Tag, attach the `target` attribute
-        token.attrSet("target", post.link);
+        if (token.attrGet("target") === null) {
+            token.attrSet("target", post.link);
+        }
     }
 };
 

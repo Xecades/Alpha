@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { computed, onMounted, watch, type Ref } from "vue";
 import { render_index } from "@/assets/js/note/markdown";
 import cursor from "@/assets/js/cursor";
 
@@ -26,14 +26,19 @@ const locate = (nodes: NavNode[], target: string): NavNode | undefined => {
     }
 };
 
-const root: NavNode = locate(config.nav, props.target)!;
+const root: Ref<NavNode> = computed(() => locate(config.nav, props.target)!);
+const wrap: Ref<boolean> = computed(() =>
+    // Only wrap the toc when all children are post nodes.
+    root.value.children.every((node) => node.children.length === 0)
+);
 
-// Only wrap the toc when all children are post nodes.
-const wrap: boolean = root.children.every((node) => node.children.length === 0);
-
-onMounted(() => {
-    cursor.refresh();
-});
+watch(
+    () => props.target,
+    () => {
+        cursor.refresh();
+    },
+    { immediate: true }
+);
 </script>
 
 <template>

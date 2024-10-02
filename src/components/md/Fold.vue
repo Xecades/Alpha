@@ -29,7 +29,9 @@ const target: VNodeRef = ref();
 const is_immensive: Ref<boolean> = ref(false);
 
 onMounted(() => {
-    const el: HTMLElement = target.value.$el.querySelector(".wrapper")!;
+    const el: HTMLElement = target.value.$el.querySelector(
+        ".fold-height-listener"
+    )!;
     const children = el.children;
 
     is_immensive.value =
@@ -64,7 +66,7 @@ onMounted(() => {
             <AnimateHeight
                 ref="target"
                 :height="expanded ? 'auto' : 0"
-                contentClass="wrapper"
+                contentClass="fold-height-listener"
             >
                 <slot />
             </AnimateHeight>
@@ -73,12 +75,12 @@ onMounted(() => {
 </template>
 
 <style scoped>
-* {
+.fold {
     --header-color: #6d6e75;
 }
 
 @media (prefers-color-scheme: dark) {
-    * {
+    .fold {
         --header-color: #b9bcc0;
     }
 }
@@ -133,7 +135,7 @@ onMounted(() => {
     --wrapper-padding: 0;
 }
 
-.content :global(.wrapper) {
+.content :global(.fold-height-listener) {
     --block-extend: 0;
 
     padding: var(--wrapper-padding);

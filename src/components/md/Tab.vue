@@ -52,11 +52,11 @@ const osOptions: PartialOptions = {
 };
 
 const active: Ref<number> = ref(0);
-const height: Ref<number | string> = ref("auto");
+const height: Ref<number | "auto"> = ref("auto");
 
 const target: VNodeRef = ref();
 const listener: Ref<HTMLElement> = computed(() =>
-    target.value.$el.querySelector(".height-listener")
+    target.value.$el.querySelector(".tab-height-listener")
 );
 
 const parts: Ref<JSX.Element[]> = computed(() => useSlots().default!());
@@ -64,12 +64,18 @@ const data: Ref<TabData[]> = computed(() => mapData(parts.value));
 
 const is_immensive: Ref<boolean> = ref(false);
 
+let shifting = false;
 let observer: ResizeObserver;
+
+const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 // If current tab is a single block, then set immensive mode.
 watch(
     active,
     async () => {
+        shifting = true;
+
+        // Wait for the content to be rendered.
         await nextTick();
         const children = listener.value.children;
 
@@ -78,17 +84,24 @@ watch(
             (children[0].classList.contains("block-code") ||
                 children[0].classList.contains("quote"));
 
+        // Wait for immensive mode to be applied.
+        await nextTick();
+        height.value = listener.value.clientHeight;
+
         cursor.refresh();
+
+        // Wait for animation to finish.
+        await sleep(250);
+        shifting = false;
     },
     { immediate: true }
 );
 
 onMounted(() => {
     const el: HTMLElement = listener.value;
-
-    observer = new ResizeObserver(async () => {
-        await nextTick();
-        height.value = el.clientHeight;
+    observer = new ResizeObserver(() => {
+        if (shifting) return;
+        height.value = "auto";
     });
     observer.observe(el);
 });
@@ -120,7 +133,7 @@ onBeforeUnmount(() => {
             <!-- @see https://www.npmjs.com/package/vue-animate-height -->
             <AnimateHeight
                 ref="target"
-                contentClass="height-listener"
+                contentClass="tab-height-listener"
                 :height="height"
             >
                 <KeepAlive>
@@ -132,7 +145,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-* {
+.tab {
     --header-height: 3rem;
 
     --border-color: #eaeaea;
@@ -144,7 +157,7 @@ onBeforeUnmount(() => {
 }
 
 @media (prefers-color-scheme: dark) {
-    * {
+    .tab {
         --border-color: #2a2a2b;
         --header-color: #b9bcc0;
         --content-background-color: #1b1c1d52;
@@ -222,7 +235,7 @@ onBeforeUnmount(() => {
     --listener-padding: 0;
 }
 
-.content :global(.height-listener) {
+.content :global(.tab-height-listener) {
     padding: var(--listener-padding);
     /** Fix margin collapse */
     overflow: hidden;

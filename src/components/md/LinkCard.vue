@@ -35,7 +35,7 @@ const isGitHub: boolean = /github\.com/.test(props.href);
 </template>
 
 <style scoped>
-* {
+.linkcard {
     --width: 24rem;
     --height: 4.2rem;
 
@@ -53,7 +53,7 @@ const isGitHub: boolean = /github\.com/.test(props.href);
 }
 
 @media (prefers-color-scheme: dark) {
-    * {
+    .linkcard {
         --background: #222324;
         --border: #272829;
         --border-hover: #3d3f43;
