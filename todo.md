@@ -6,9 +6,23 @@
  - Status 页面（如果有了后端）
  - CDN
 
+## Index Comp
+
+重构 Index 模块，整合 Waterfall
+
+ - title 或许可以显示路径（装得下吗？）
+ - 可以考虑根据 category 显示不同的 icon（code，atom，xxxx）（放在右边，可以点进去）
+ - 太长的标题折行（？）（或者让 Index outdent 出去一点）
+ - post 项左右 margin 小一点
+ - timeago 不可选中，line-height 改一下，否则 select all 后不好看
+ - hover 的区域大一点，timeago 字体小一点
+ - 考虑不同 category 对应不同颜色？
+ - 目前 title 太厚重了，改小一点
+
 ## 当前
 
- - 重构 Index 模块，整合 Waterfall
+ - Metadata 不可选中
+ - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - 更深的 ScrollReveal 动画（例如 Waterfall 内部元素）
  - MDCShorthand 前加 MDCBlock，shorthand 会渲染失败
  - LeftBar 手机上显不显示？
@@ -16,7 +30,6 @@
  - 支持 Markdown 内部 style 标签
  - Tab 内图片，高度获取出了问题
  - AnimateHeight 嵌套的时候，第一次点击内部的 fold 会不反应（推测是 AnimateHeight 库的问题，手搓一个？）
- - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - ScrollReveal 导致评论系统回复评论的窗口、功能按钮不显示
  - ToC 层级关系看起来很怪
  - Table 加上滚动条（横向）
@@ -30,6 +43,8 @@
  - 评论系统支持 Cursor.js
  - 在合适的地方加上版权声明
  - 页面高度不够时，左右栏加上滚动
+
+以及代码中 @todo 项
 
 ## 暂时不重要的 TODO
 
