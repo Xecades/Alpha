@@ -2,6 +2,12 @@
 title: LaTeX 测试
 ---
 
+::note{info}
+以下文章仅作 $\LaTeX$ 测试用，完整文章见[《「狄利克雷卷积」和「莫比乌斯反演」》](https://blog.xecades.xyz/articles/DirichletConvolution/)
+::
+
+:asterisk
+
 **狄利克雷卷积**（Dirichlet Convolution）在解析数论中是一个非常重要的工具.
 
 使用狄利克雷卷积可以很方便地推出**莫比乌斯反演**（Möbius Inversion）相关重要函数和公式，它在信息学竞赛和解析数论中至关重要.

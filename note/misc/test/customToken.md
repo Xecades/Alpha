@@ -2,6 +2,12 @@
 title: 自定义语法
 ---
 
+::fold{expand info title="摘要"}
+基于 Markdown-it 实现的自定义语法。
+::
+
+:asterisk
+
 ## 数学公式
 
 利用 [KaTeX](https://katex.org/) 渲染数学公式。

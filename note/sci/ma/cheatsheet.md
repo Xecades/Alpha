@@ -2,8 +2,8 @@
 title: Cheatsheet
 ---
 
-::note{success}
-**Disclaimer**: By saying "cheatsheet" I don't mean something used for cheating, but rather a quick reference for the most important concepts and formulas. I don't encourage cheating in any way.
+::fold{expand success title="Disclaimer"}
+By saying "cheatsheet" I don't mean something used for cheating, but rather a quick reference for the most important concepts and formulas. I don't encourage cheating in any way.
 ::
 
 ## Equivalent Infinitesimals

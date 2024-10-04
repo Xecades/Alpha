@@ -2,6 +2,14 @@
 title: Français
 ---
 
+::fold{expand info title="摘要"}
+浙江大学《法语 I》课程笔记。
+
+修读时间：2024 年秋冬学期。
+::
+
+:asterisk
+
 ## 字母表
 
 | 字母 | 音标 | 字母 | 音标 |
