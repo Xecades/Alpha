@@ -53,7 +53,7 @@ export const render_index = (root: NavNode): RenderFunction => {
         link = "/" + link;
 
         let text_comp: JSX.Element = (
-            <span class="text">
+            <span class="text" title={title}>
                 {children.length === 0 ? (
                     <span class="icon">
                         <FontAwesomeIcon icon={["fas", "file"]} />

@@ -105,6 +105,7 @@ watch(
     padding: 0 var(--gap-lr);
     line-height: 3.5rem;
     height: 3.5rem;
+    gap: 1px;
 }
 
 .index-comp .nav .child.index {
@@ -134,6 +135,12 @@ watch(
 
 .index-comp .nav .child.post > .title .text {
     flex: 1;
+}
+
+.index-comp .nav .title .text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .index-comp .nav .title .text .icon {
