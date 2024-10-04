@@ -25,7 +25,8 @@ enum ROUTE_TYPE {
     BLOG = "blog",
 }
 
-const target: string = ".note-layout #content header h1, .note-layout #left";
+const target: string =
+    ".note-layout #content > header h1, .note-layout #content > .metadata, .note-layout #left";
 
 const type_of = (x: RouteLocation): ROUTE_TYPE => {
     if (x.path === "/" && x.name === undefined) return ROUTE_TYPE.ROOT;

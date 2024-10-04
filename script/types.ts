@@ -13,8 +13,8 @@ export interface MarkdownFrontMatter {
     /** Whether to show comments */
     comment?: boolean;
 
-    /** Whether to show metadata, i.e. Creation & Modification time */
-    metadata?: boolean;
+    /** Whether to show timestamp, i.e. Creation & Modification time */
+    timestamp?: boolean;
 }
 
 /** Parsed front matter. */
@@ -136,6 +136,9 @@ export interface RouteMeta {
 
     /** Page type */
     type: "index" | "post" | "404";
+
+    /** Back link */
+    back: { title: string; link: string };
 
     /** Route scroll to */
     scrollTo?: { left: number; top: number };

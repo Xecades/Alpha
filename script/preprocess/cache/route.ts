@@ -47,6 +47,24 @@ export default (posts: Post[], base: BASE) => {
             const path: string =
                 post.type === "404" ? `/${base}/:pathMatch(.*)` : post.link;
 
+            let back: RouteMeta["back"];
+            if (post.back_link !== null) {
+                let parent = posts.find((x) => x.link === post.back_link);
+                if (parent === undefined) {
+                    throw new Error(`Invalid back link: ${post.back_link}`);
+                }
+
+                back = {
+                    link: post.back_link,
+                    title: parent.front_matter.title,
+                };
+            } else {
+                back = {
+                    link: "/",
+                    title: "主页",
+                };
+            }
+
             const route = {
                 path: path,
                 component: component_slot,
@@ -59,6 +77,7 @@ export default (posts: Post[], base: BASE) => {
                     created: time_data.created,
                     updated: time_data.updated,
                     type: post.type,
+                    back,
                 } as RouteMeta,
             };
 

@@ -143,6 +143,21 @@ export class Post {
 
     /**
      * @example
+     *  "/note/cs/ads/avl-tree"  =>  "/note/cs/ads"
+     *  "/note"  =>  null
+     *  "/error"  =>  "/note"
+     */
+    get back_link(): string | null {
+        if (this.link === `/${this.base}`) {
+            return null;
+        } else if (this.type === "404") {
+            return `/${this.base}`;
+        }
+        return this.link.replace(/\/[^/]+$/, "");
+    }
+
+    /**
+     * @example
      *  "cache/note/posts/cs/ads/avl-tree.tsx"
      *  "cache/note/posts/cs/index.tsx"
      */

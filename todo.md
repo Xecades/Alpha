@@ -9,10 +9,12 @@
 
 ## 当前
 
+ - LeftBar 手机上显不显示？
+ - 添加 post 内跳转到 index nav 的入口
  - 支持 Markdown 内部 style 标签
  - Tab 内图片，高度获取出了问题
  - AnimateHeight 嵌套的时候，第一次点击内部的 fold 会不反应（推测是 AnimateHeight 库的问题）
- - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）（放 index 页的 Vue components 里？）
+ - 在哪儿放回主页的按钮？
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - ScrollReveal 导致评论系统回复评论的窗口不显示
  - ScrollReveal 导致评论系统功能按钮有时候不显示

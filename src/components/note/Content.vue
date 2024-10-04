@@ -9,44 +9,43 @@ import { reveal_config } from "@/assets/js/reveal";
 import { assertType } from "@script/types";
 import ScrollReveal from "scrollreveal";
 
-import Metadata from "./Metadata.vue";
+import Timestamp from "./Timestamp.vue";
 import Comment from "./Comment.vue";
+import Metadata from "./Metadata.vue";
 import JSXLazyLoad from "../JSXLazyLoad.vue";
 
 import "@/assets/css/markdown.css";
 
 // Types
-import type { ComputedRef, Ref, ShallowRef } from "vue";
+import type { Ref } from "vue";
 import type { RouteMeta } from "@script/types";
 import type { JSX } from "vue/jsx-runtime";
 
 const emit = defineEmits(["update"]);
 const route = useRoute();
 
-const meta: ComputedRef<RouteMeta> = computed(() =>
-    assertType<RouteMeta>(route.meta)
-);
-const jsx: ComputedRef<() => Promise<{ default: JSX.Element }>> = computed(
+const meta: Ref<RouteMeta> = computed(() => assertType<RouteMeta>(route.meta));
+const jsx: Ref<() => Promise<{ default: JSX.Element }>> = computed(
     () => meta.value.body
 );
 
-const body: ShallowRef<JSX.Element> = shallowRef(<></>);
+const body: Ref<JSX.Element> = shallowRef(<></>);
 const lazyload_key: Ref<string> = ref("");
 const rendering: Ref<boolean> = ref(true);
 const navigation: Ref<boolean> = ref(false);
 
 /**
- * Whether to show metadata.
+ * Whether to show timestamp.
  *
  * @note - If is rendering, return false.
  *       - If not specified in front-matter, return true if it is a post.
  *       - Otherwise, return the value in front-matter.
  */
-const show_metadata: ComputedRef<boolean> = computed(() => {
+const show_timestamp: Ref<boolean> = computed(() => {
     if (rendering.value) return false;
-    if (meta.value.attr.metadata === undefined)
+    if (meta.value.attr.timestamp === undefined)
         return meta.value.type === "post";
-    return meta.value.attr.metadata;
+    return meta.value.attr.timestamp;
 });
 
 /**
@@ -56,7 +55,7 @@ const show_metadata: ComputedRef<boolean> = computed(() => {
  *       - If not specified in front-matter, return true if it is a post.
  *       - Otherwise, return the value in front-matter.
  */
-const show_comment: ComputedRef<boolean> = computed(() => {
+const show_comment: Ref<boolean> = computed(() => {
     if (rendering.value) return false;
     if (meta.value.attr.comment === undefined)
         return meta.value.type === "post";
@@ -130,6 +129,7 @@ watch(
         <header :key="meta.attr.title">
             <h1>{{ meta.attr.title }}</h1>
         </header>
+        <Metadata :key="meta.attr.title" />
 
         <main class="markdown">
             <JSXLazyLoad
@@ -141,7 +141,7 @@ watch(
             />
         </main>
 
-        <Metadata v-if="show_metadata" />
+        <Timestamp v-if="show_timestamp" />
         <Comment v-if="show_comment" />
     </div>
 </template>
@@ -183,7 +183,7 @@ main {
 }
 
 header {
-    margin: var(--margin-top) var(--margin-lr) var(--header-main-spacing);
+    margin: var(--margin-top) var(--margin-lr) 0.6rem;
 }
 
 h1 {
