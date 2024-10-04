@@ -62,12 +62,12 @@ const convertToPlaceholder = (
 };
 
 /**
- * Attach attributes to the token.
+ * Convert shorthand tokens.
  *
- * @param token - Token to attach attributes
+ * @param token - Token to convert
  */
-const attachAttributes = (token: Token, post: Post) => {
-    if (token.info === "index") {
+const convertShorthand = (token: Token, post: Post) => {
+    if (token.tag === "Index") {
         // For <Index /> Tag, attach the `target` attribute
         if (token.attrGet("target") === null) {
             token.attrSet("target", post.link);
@@ -158,6 +158,8 @@ export default (md: MarkdownIt) => {
 
     const originalMdcBlockOpen =
         md.renderer.rules.mdc_block_open || defaultRenderer;
+    const originalMdcBlockShorthand =
+        md.renderer.rules.mdc_block_shorthand || defaultRenderer;
 
     md.renderer.rules.mdc_block_open = (
         tokens,
@@ -182,7 +184,6 @@ export default (md: MarkdownIt) => {
         };
 
         convertToAttribute(token, targets.theme);
-        attachAttributes(token, env.post);
         let jsxVal = convertToPlaceholder(token, targets.jsx);
 
         let res: string = originalMdcBlockOpen(tokens, idx, options, env, self);
@@ -190,5 +191,18 @@ export default (md: MarkdownIt) => {
         res = transformToBoolean(token, res, targets.bool);
 
         return res;
+    };
+
+    md.renderer.rules.mdc_block_shorthand = (
+        tokens,
+        idx,
+        options,
+        env: MarkdownItEnv,
+        self
+    ) => {
+        const token = tokens[idx];
+
+        convertShorthand(token, env.post);
+        return originalMdcBlockShorthand(tokens, idx, options, env, self);
     };
 };

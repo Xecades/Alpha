@@ -375,6 +375,18 @@
     opacity: 0.9;
 }
 
+/* div.asterisk 标签 */
+.markdown div.asterisk::after {
+    content: "＊＊＊";
+    text-align: center;
+    color: #999;
+    font-size: 0.75rem;
+    margin: 4rem 0;
+    letter-spacing: 6px;
+    user-select: none;
+    display: block;
+}
+
 /* Note & Fold color theme */
 .colors.default {
     --background-color: #7777770d;

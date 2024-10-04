@@ -82,7 +82,8 @@ watch(
         is_immensive.value =
             children.length === 1 &&
             (children[0].classList.contains("block-code") ||
-                children[0].classList.contains("quote"));
+                children[0].classList.contains("quote") ||
+                children[0].classList.contains("index-comp"));
 
         // Wait for immensive mode to be applied.
         await nextTick();
@@ -249,5 +250,9 @@ onBeforeUnmount(() => {
 
 .content.immensive div.quote {
     margin: 3rem 1.4rem;
+}
+
+.content.immensive .index-comp {
+    margin: 2rem 1.4rem;
 }
 </style>

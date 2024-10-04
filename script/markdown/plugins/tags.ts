@@ -1,21 +1,41 @@
+import { removeAttr } from "../utils";
 import type MarkdownIt from "markdown-it";
 import type Token from "markdown-it/lib/token.mjs";
 
 /**
- * Transform a quote tag to a div tag.
+ * Transform block tags.
  *
  * @example `<quote>` => `<div class="quote">`
  *
  * @param token - Token
  * @returns Whether the token is transformed
  */
-const transformQuote = (token: Token): boolean => {
+const transformBlock = (token: Token): boolean => {
     if (token.tag === "quote") {
         token.tag = "div";
 
         if (token.type === "mdc_block_open") {
             token.attrSet("class", "quote");
         }
+
+        return true;
+    } else if (token.tag === "asterisk") {
+        token.tag = "div";
+        console.assert(token.type === "mdc_block_shorthand");
+        token.attrSet("class", "asterisk");
+
+        return true;
+    } else if (token.tag === "v") {
+        token.tag = "div";
+        console.assert(token.type === "mdc_block_shorthand");
+        console.assert(
+            token.attrs && token.attrs.length === 1,
+            "v tag should have 1 attribute"
+        );
+
+        let value: string = token.attrs![0][0];
+        token.attrSet("style", `margin-top: ${value}`);
+        removeAttr(token, value);
 
         return true;
     }
@@ -56,6 +76,7 @@ const transformRight = (token: Token): boolean => {
 const transformMdcShorthand = (token: Token): boolean => {
     const pairs: Record<string, string> = {
         sep: "Delimiter",
+        index: "Index",
     };
 
     if (token.type === "mdc_block_shorthand") {
@@ -84,7 +105,6 @@ const transformMdc = (token: Token): boolean => {
         note: "Note",
         linkcard: "LinkCard",
         grid: "Grid",
-        index: "Index",
     };
 
     if (token.type === "mdc_block_open" || token.type === "mdc_block_close") {
@@ -114,7 +134,7 @@ export default (md: MarkdownIt) => {
             const type: string = token.type;
 
             // Block Transform
-            if (transformQuote(token)) continue;
+            if (transformBlock(token)) continue;
             if (transformMdc(token)) continue;
             if (transformMdcShorthand(token)) continue;
 
