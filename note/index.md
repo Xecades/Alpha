@@ -9,17 +9,12 @@ title: 笔记
 :asterisk
 :v{5rem}
 
-::tab
-# 计算机科学
-
-:index{target=/note/cs}
-
-# 数理
-
-:index{target=/note/sci}
-
-# 杂项
-
-:index{target=/note/misc}
-
+::waterfall{width=300}
+:index{target=/note/cs/ads}
+:index{target=/note/cs/others}
+:index{target=/note/sci/phy}
+:index{target=/note/sci/ma}
+:index{target=/note/sci/la}
+:index{target=/note/misc/lang}
+:index{target=/note/misc/test}
 ::

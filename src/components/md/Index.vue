@@ -45,7 +45,7 @@ watch(
 <template>
     <div class="index-comp" :data-wrap="wrap">
         <div class="nav">
-            <div class="header" v-if="wrap">文章目录</div>
+            <div class="header" v-if="wrap">{{ root.title }}</div>
             <component :is="render_index(root)" />
         </div>
     </div>
@@ -53,8 +53,6 @@ watch(
 
 <style>
 .index-comp {
-    margin: 3rem var(--block-extend);
-
     --gap-lr: 17px;
     --gap-tb: 14px;
 
@@ -206,11 +204,5 @@ watch(
 
 .index-comp .nav li {
     text-indent: 0;
-}
-
-@media (max-width: 768px) {
-    .index-comp .nav .child.post > .title .timeago {
-        display: none;
-    }
 }
 </style>

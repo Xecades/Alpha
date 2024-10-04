@@ -25,6 +25,7 @@
         "@fortawesome/free-regular-svg-icons": "^6.6.0",
         "@fortawesome/free-solid-svg-icons": "^6.6.0",
         "@fortawesome/vue-fontawesome": "^3.0.8",
+        "@yeger/vue-masonry-wall": "^5.0.15",
         "dayjs": "^1.11.13",
         "debounce": "^2.1.1",
         "fuse.js": "^7.0.0",

@@ -3,6 +3,7 @@ import { createApp } from "vue";
 
 // Vue
 import App from "./App.vue";
+import MasonryWall from "@yeger/vue-masonry-wall";
 
 // JS
 import router from "./router";
@@ -114,6 +115,7 @@ async function main() {
 
     const app = createApp(App);
     app.use(router);
+    app.use(MasonryWall);
     app.component("font-awesome-icon", FontAwesomeIcon);
 
     app.mount("#app");
