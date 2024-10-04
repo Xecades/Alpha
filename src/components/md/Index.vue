@@ -53,7 +53,7 @@ watch(
 
 <style>
 .index-comp {
-    margin: 3rem 0;
+    margin: 3rem var(--block-extend);
 
     --gap-lr: 17px;
     --gap-tb: 14px;
