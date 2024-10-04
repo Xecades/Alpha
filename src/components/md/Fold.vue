@@ -87,9 +87,9 @@ onMounted(() => {
 
 .fold {
     margin: 2rem var(--block-extend);
-    border: 1px solid var(--border-color);
     border-radius: 5px;
     overflow: hidden;
+    border-left: 4px solid var(--icon-color);
 }
 
 .header {
@@ -129,6 +129,8 @@ onMounted(() => {
 
 .content {
     --wrapper-padding: 0.8rem 1.4rem;
+    border-right: 1px solid var(--background-color);
+    border-bottom: 1px solid var(--background-color);
 }
 
 .content.immensive {

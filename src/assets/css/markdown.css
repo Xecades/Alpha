@@ -248,7 +248,7 @@
     border-left: 4px solid var(--blockquote-border);
     background-color: var(--blockquote-background);
     color: var(--blockquote-text);
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px;
 }
 
 .markdown > blockquote {

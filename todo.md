@@ -10,10 +10,6 @@
 ## 当前
 
  - AnimateHeight 嵌套的时候，第一次点击内部的 fold 会不反应（推测是 AnimateHeight 库的问题）
- - 改 ::note 的样式：https://note.tonycrane.cc/ctf/misc/steg/
- - 左右栏 hover 的区域不要太大，不然很难受
- - metadata 鼠标 hover 显示详情的区域不要太大
- - Dark Mode 颜色得改一改
  - 在哪儿放回主页的按钮？（两个主页：网站主页 + 笔记主页）（放 index 页的 Vue components 里？）
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - ScrollReveal 导致评论系统回复评论的窗口不显示
@@ -23,21 +19,17 @@
  - Note 404 页面加上一些自定义组件
  - 搜索改成 token 级别的
  - 手机上 “Typst 渲染” 点 “源码” 点不动
- - tab fold 嵌套，高度改变会出问题
  - fold、tab 等支持搜索
- - KaTeX 中文字体，手机上不显示
  - Code block 添加标题
  - block code meta 参数的处理（转义、引号）
  - 搜索支持上下键选择，回车跳转
  - 评论系统支持 Cursor.js
- - 页面宽度改变时，Leftbar 实现动态响应
- - 测试平板上的显示效果
- - 测试移动设备上，当 Leftbar 目录太长时的显示效果（折行？）
  - 在合适的地方加上版权声明
  - 页面高度不够时，左右栏加上滚动
 
 ## 暂时不重要的 TODO
 
+ - KaTeX 中文字体，手机上不显示
  - 代码块功能按钮（复制，etc.）
  - Typst 添加中文字体的支持
  - 代码块换行

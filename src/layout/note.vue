@@ -1,9 +1,4 @@
 <script setup lang="ts">
-/**
- * @todo index.md 页面应该写什么？只需要 abstract 即可，也可以省略不要
- * @todo index.md 添加 Vue 组件
- */
-
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { ScrollListener } from "@/assets/js/note/rightbar";

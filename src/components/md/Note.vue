@@ -26,16 +26,19 @@ const type: TYPE = props.type || "default";
 
 <style scoped>
 .note {
-    padding: 2rem 2.5rem;
-    margin: 2rem var(--block-extend);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem var(--block-extend);
     display: flex;
-    gap: 1.25rem;
-    border-radius: 2px;
+    gap: 1rem;
+    border-left: 4px solid var(--icon-color);
+    border-radius: 5px;
     background: var(--background-color);
 }
 
 .icon {
     font-size: 1.2em;
+    width: 20px;
+    text-align: center;
     color: var(--icon-color);
 }
 

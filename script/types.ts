@@ -169,12 +169,12 @@ export enum NOTE_L_STATUS {
     HOVER_TO_SHOW,
 
     /**
-     * Always show the leftbar.
+     * Only show the search button.
      *
-     * @note This status means the category list will always be shown.\
-     *       *BUT*, the detailed article list will **NEVER** be shown.
+     * @note This status means the category list and the detailed
+     *       article list will **NEVER** be shown.
      */
-    ALWAYS_SHOW,
+    ONLY_SEARCH_BUTTON,
 }
 
 /** Global color scheme. */

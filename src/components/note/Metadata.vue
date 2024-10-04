@@ -60,6 +60,7 @@ onMounted(async () => {
     font-size: 0.8rem;
     color: var(--color);
     line-height: 1.3rem;
+    width: max-content;
 }
 
 .line {

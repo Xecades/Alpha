@@ -84,11 +84,12 @@ watch(
 
 <style scoped>
 * {
-    --offset-top: 28px;
+    --offset-top: 10rem;
+    --offset-bottom: 5rem;
     --offset-right: 51px;
 
-    --width: 298px;
-    --height: calc(100vh - var(--offset-top) * 2);
+    --width: 270px;
+    --height: calc(100vh - var(--offset-top) - var(--offset-bottom));
     --theme-color: #60a5fa;
 
     --toc-gap: 15px;

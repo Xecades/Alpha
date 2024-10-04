@@ -148,9 +148,6 @@ onUpdated(() => {
 });
 
 onMounted(() => {
-    if (props.status === NOTE_L_STATUS.ALWAYS_SHOW) {
-        category_fn.reveal();
-    }
     hotkeys("command+k,ctrl+k", key_fn.command_k);
     hotkeys("esc", key_fn.esc);
 });
@@ -169,7 +166,7 @@ onBeforeUnmount(() => {
             </li>
         </ul>
 
-        <div class="category">
+        <div class="category" v-if="status == NOTE_L_STATUS.HOVER_TO_SHOW">
             <template v-for="(item, idx) in categories">
                 <a
                     class="item cursor"
@@ -206,7 +203,6 @@ onBeforeUnmount(() => {
     top: var(--cate-offset-top);
     width: var(--cate-width);
     display: block;
-    background-image: var(--background);
     border-radius: var(--background-radius);
     padding: 15px 0;
 }
@@ -263,7 +259,6 @@ onBeforeUnmount(() => {
     --offset-left: 35px;
 
     --theme-color: #60a5fa;
-    --background: linear-gradient(90deg, #fdfdfdf5, #fdfdfd80);
     --background-radius: 4px;
 
     --nav-width: 42px;
@@ -280,7 +275,7 @@ onBeforeUnmount(() => {
     --cate-translate-offset: -7px;
     --cate-offset-left: 28px;
     --cate-offset-top: calc(11px + var(--nav-height));
-    --cate-width: 270px;
+    --cate-width: 240px;
     --cate-title-height: 1.45rem;
     --cate-title-indent: 0.5rem;
 
@@ -295,7 +290,6 @@ onBeforeUnmount(() => {
 @media (prefers-color-scheme: dark) {
     * {
         --theme-color: #87b3ea;
-        --background: linear-gradient(90deg, #1d1e1ff5, #1d1e1f80);
         --nav-color: #676767;
         --nav-hover-color: #a9a9a9;
         --nav-hover-background-color: #212121c4;
@@ -389,7 +383,6 @@ onBeforeUnmount(() => {
     text-wrap: nowrap;
     overflow: hidden;
     border-radius: var(--background-radius);
-    background-image: var(--background);
     user-select: none;
 }
 
@@ -419,7 +412,6 @@ onBeforeUnmount(() => {
         --offset-top: 28px;
         --offset-left: 35px;
 
-        --background: unset;
         --item-hover-background-color: unset;
         --nav-hover-background-color: unset;
 
