@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, onMounted, watch, type Ref } from "vue";
+import { computed, watch } from "vue";
 import { render_index } from "@/assets/js/note/markdown";
 import cursor from "@/assets/js/cursor";
 
 import config from "@cache/note/config";
 
+import type { Ref } from "vue";
 import type { NavNode } from "@script/types";
 
 const props = defineProps<{ target: string }>();
@@ -126,7 +127,7 @@ watch(
 .index-comp .nav .child.index > .title {
     background-color: var(--index-background);
     padding: 0 var(--gap-lr);
-    gap: 60px;
+    gap: 10px;
 }
 
 .index-comp .nav .child.post > .title .text {
