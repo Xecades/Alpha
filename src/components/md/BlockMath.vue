@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { render_block } from "@/assets/js/latex";
+import { render_block } from "@/assets/ts/latex";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
 
 import type { PartialOptions } from "overlayscrollbars";

@@ -4,7 +4,7 @@ import ScrollReveal from "scrollreveal";
 import relativeTime from "dayjs/plugin/relativeTime";
 import locale_zhcn from "dayjs/locale/zh-cn";
 
-import { reveal_config } from "@/assets/js/reveal";
+import { reveal_config } from "@/assets/ts/reveal";
 import { useRoute } from "vue-router";
 import { onMounted } from "vue";
 

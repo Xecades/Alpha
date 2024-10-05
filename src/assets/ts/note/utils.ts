@@ -1,4 +1,4 @@
-import { isMobile, isWidthLessThan } from "@/assets/js/utils";
+import { isMobile, isWidthLessThan } from "@/assets/ts/utils";
 import { NOTE_L_STATUS, NOTE_R_STATUS } from "@script/types";
 
 /** The minimum screen width required for rightbar to display. */

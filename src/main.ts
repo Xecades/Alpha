@@ -7,7 +7,7 @@ import MasonryWall from "@yeger/vue-masonry-wall";
 
 // JS
 import router from "./router";
-import logger from "./assets/js/logger";
+import logger from "./assets/ts/logger";
 
 // CSS
 import "./assets/css/reset.css";
@@ -41,7 +41,6 @@ import {
     faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
-// @ts-ignore
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // Wait for document ready

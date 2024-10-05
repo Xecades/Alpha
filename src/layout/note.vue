@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { ScrollListener } from "@/assets/js/note/rightbar";
+import { ScrollListener } from "@/assets/ts/note/rightbar";
 import { NOTE_L_STATUS, NOTE_R_STATUS } from "@script/types";
 
 import LeftBar from "@/components/note/LeftBar.vue";
 import RightBar from "@/components/note/RightBar.vue";
 import Content from "@/components/note/Content.vue";
 
-import { leftbar_status, rightbar_status } from "@/assets/js/note/utils";
-import setupReveal from "@/assets/js/reveal";
-import cursor from "@/assets/js/cursor";
+import { leftbar_status, rightbar_status } from "@/assets/ts/note/utils";
+import setupReveal from "@/assets/ts/reveal";
+import cursor from "@/assets/ts/cursor";
 
 import type { Ref } from "vue";
 

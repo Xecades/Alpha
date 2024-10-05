@@ -2,8 +2,8 @@
 import { onMounted } from "vue";
 import ScrollReveal from "scrollreveal";
 
-import { loadJS } from "@/assets/js/utils";
-import { reveal_config } from "@/assets/js/reveal";
+import { loadJS } from "@/assets/ts/utils";
+import { reveal_config } from "@/assets/ts/reveal";
 
 import "@/assets/css/twikoo.css";
 

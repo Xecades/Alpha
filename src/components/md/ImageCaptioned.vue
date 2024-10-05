@@ -3,7 +3,7 @@
  * @todo 图片懒加载
  */
 
-import cursor from "@/assets/js/cursor";
+import cursor from "@/assets/ts/cursor";
 import { nextTick, onBeforeUnmount, onMounted, ref, type Ref } from "vue";
 
 import mediumZoom from "medium-zoom";

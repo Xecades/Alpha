@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { render_inline } from "@/assets/js/latex";
+import { render_inline } from "@/assets/ts/latex";
 
 const props = defineProps<{ data: string }>();
 

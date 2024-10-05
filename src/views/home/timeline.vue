@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import HomeLayout from "@/layout/home.vue";
-import { ruby, link, timeline } from "@/assets/js/home/partials";
+import { ruby, link, timeline } from "@/assets/ts/home/partials";
 
 const data = {
     "title": "时光",

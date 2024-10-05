@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import HomeLayout from "@/layout/home.vue";
-import { ruby, link, small, sponsor } from "@/assets/js/home/partials";
+import { ruby, link, small, sponsor } from "@/assets/ts/home/partials";
 
 import WechatQR from "@/assets/img/wechat.jpg";
 import AlipayQR from "@/assets/img/alipay.jpg";

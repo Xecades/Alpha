@@ -7,7 +7,7 @@
         "nightwatch.conf.*",
         "playwright.config.*",
         "script",
-        "src/assets/js/latex.ts",
+        "src/assets/ts/latex.ts",
         "env.d.ts"
     ],
     "compilerOptions": {

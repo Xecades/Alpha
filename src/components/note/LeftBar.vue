@@ -8,9 +8,9 @@ import {
     watch,
 } from "vue";
 import { useRoute } from "vue-router";
-import { render_list } from "@/assets/js/note/leftbar";
+import { render_list } from "@/assets/ts/note/leftbar";
 import { assertType } from "@script/types";
-import cursor from "@/assets/js/cursor";
+import cursor from "@/assets/ts/cursor";
 import hotkeys from "hotkeys-js";
 
 // Components

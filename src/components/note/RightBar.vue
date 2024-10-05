@@ -2,12 +2,12 @@
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
-import cursor from "@/assets/js/cursor";
-import { navigate, normalize_toc } from "@/assets/js/note/rightbar";
+import cursor from "@/assets/ts/cursor";
+import { navigate, normalize_toc } from "@/assets/ts/note/rightbar";
 
 // Types
 import type { Ref } from "vue";
-import type { HeaderRef } from "@/assets/js/note/rightbar";
+import type { HeaderRef } from "@/assets/ts/note/rightbar";
 import type { MarkdownHeaderJsx } from "@script/types";
 
 const props = defineProps<{ in_view: number | null }>();

@@ -1,17 +1,18 @@
 <script setup lang="ts">
-// @ts-ignore
-import { render } from "@/assets/js/home/partials";
+import { render } from "@/assets/ts/home/partials";
 import { isProxy, ref, watch } from "vue";
 
-import logger from "@/assets/js/logger";
-import setupReveal from "@/assets/js/reveal";
-import cursor from "@/assets/js/cursor";
+import logger from "@/assets/ts/logger";
+import setupReveal from "@/assets/ts/reveal";
+import cursor from "@/assets/ts/cursor";
+
+import type { Element } from "@/assets/ts/home/partials";
 import type { JSX } from "vue/jsx-runtime";
 
-interface HomeLayoutData {
+export interface HomeLayoutData {
     title: string;
     subtitle: string;
-    body: any[];
+    body: (Element | Element[])[];
 }
 
 const props = defineProps<{ data: HomeLayoutData }>();

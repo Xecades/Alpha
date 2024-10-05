@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { nextTick, ref, watch, type Ref } from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
-import { search } from "@/assets/js/note/search";
+import { search } from "@/assets/ts/note/search";
 
-import cursor from "@/assets/js/cursor";
+import cursor from "@/assets/ts/cursor";
 
 // Types
 import type { PartialOptions } from "overlayscrollbars";
-import type { Result } from "@/assets/js/note/search";
+import type { Result } from "@/assets/ts/note/search";
 
 const query: Ref<string> = ref("");
 const results: Ref<Result[]> = ref([]);

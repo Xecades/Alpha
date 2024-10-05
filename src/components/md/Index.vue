@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, watch } from "vue";
-import { render_index } from "@/assets/js/note/markdown";
-import cursor from "@/assets/js/cursor";
+import { render_index } from "@/assets/ts/note/markdown";
+import cursor from "@/assets/ts/cursor";
 
 import config from "@cache/note/config";
 

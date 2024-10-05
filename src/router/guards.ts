@@ -1,6 +1,6 @@
-import logger from "@/assets/js/logger";
+import logger from "@/assets/ts/logger";
 import ScrollReveal from "scrollreveal";
-import { reveal_config } from "@/assets/js/reveal";
+import { reveal_config } from "@/assets/ts/reveal";
 import { nextTick } from "vue";
 
 import type { RouteMeta } from "@script/types";

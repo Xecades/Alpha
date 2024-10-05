@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import cursor from "@/assets/js/cursor";
+import cursor from "@/assets/ts/cursor";
 
 const props = defineProps<{ href: string }>();
 const is_internal: boolean = !props.href.startsWith("http");

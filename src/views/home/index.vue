@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import HomeLayout from "@/layout/home.vue";
-import { ruby, link } from "@/assets/js/home/partials";
+import { ruby, link } from "@/assets/ts/home/partials";
 
 const data = {
     "title": "你好。",

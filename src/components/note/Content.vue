@@ -5,7 +5,7 @@
 
 import { computed, ref, shallowRef, watch } from "vue";
 import { useRoute } from "vue-router";
-import { reveal_config } from "@/assets/js/reveal";
+import { reveal_config } from "@/assets/ts/reveal";
 import { assertType } from "@script/types";
 import ScrollReveal from "scrollreveal";
 

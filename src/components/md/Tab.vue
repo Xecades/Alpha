@@ -10,7 +10,7 @@ import {
 } from "vue";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
 import AnimateHeight from "vue-animate-height";
-import cursor from "@/assets/js/cursor";
+import cursor from "@/assets/ts/cursor";
 
 import type { Ref, VNodeRef } from "vue";
 import type { JSX } from "vue/jsx-runtime";

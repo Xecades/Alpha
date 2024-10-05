@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import AnimateHeight from "vue-animate-height";
-import cursor from "@/assets/js/cursor";
+import cursor from "@/assets/ts/cursor";
 
 import type { Ref, VNodeRef } from "vue";
 import type { JSX } from "vue/jsx-runtime";
