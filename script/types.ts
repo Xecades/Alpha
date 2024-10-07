@@ -110,7 +110,7 @@ export interface NavNode {
 }
 
 /** Parsed configurations. */
-export type Config = RawConfig & { nav: NavNode[] };
+export type Config = Omit<RawConfig, "nav"> & { nav: NavNode[] };
 
 /** Route meta data. */
 export interface RouteMeta {
