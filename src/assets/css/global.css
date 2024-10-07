@@ -75,10 +75,13 @@ body > #global-background {
             rgba(37, 37, 37, var(--background-opacity)) 50%,
             rgba(37, 37, 37, var(--background-opacity)) 100%
         );
-    background-color: var(--background-color, none);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
+}
+
+body {
+    background-color: var(--background-color, none);
 }
 
 /* Scrollbar Flickering Prevention */
