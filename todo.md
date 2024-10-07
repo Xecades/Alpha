@@ -8,6 +8,7 @@
 
 ## Index Comp
 
+ - 加上 tag？（例如“课程笔记”）
  - 考虑不同 category 对应不同颜色？
 
 ## 当前
