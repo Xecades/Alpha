@@ -89,6 +89,9 @@ export type RawNavNode = Record<string, RawNavNode[] | string>;
 export interface RawConfig {
     /** Navigation data. */
     nav: RawNavNode[];
+
+    /** Category icons. */
+    icon: Record<string, string>;
 }
 
 /** Parsed nav node. */
@@ -107,9 +110,7 @@ export interface NavNode {
 }
 
 /** Parsed configurations. */
-export interface Config {
-    nav: NavNode[];
-}
+export type Config = RawConfig & { nav: NavNode[] };
 
 /** Route meta data. */
 export interface RouteMeta {

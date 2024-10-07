@@ -8,19 +8,12 @@
 
 ## Index Comp
 
-重构 Index 模块，整合 Waterfall
-
- - title 或许可以显示路径（装得下吗？）
- - 可以考虑根据 category 显示不同的 icon（code，atom，xxxx）（放在右边，可以点进去）
- - 太长的标题折行（？）（或者让 Index outdent 出去一点）
- - post 项左右 margin 小一点
- - timeago 不可选中，line-height 改一下，否则 select all 后不好看
- - hover 的区域大一点，timeago 字体小一点
  - 考虑不同 category 对应不同颜色？
- - 目前 title 太厚重了，改小一点
 
 ## 当前
 
+ - 让 preprocess 的 jsx 变成函数，这样可以避免一个 warning
+ - Home 页，最大的 title 和 body 之间的间距加大一点
  - Metadata 不可选中
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - 更深的 ScrollReveal 动画（例如 Waterfall 内部元素）

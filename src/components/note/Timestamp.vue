@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import dayjs from "dayjs";
+import dayjs from "@/assets/ts/dayjs";
 import ScrollReveal from "scrollreveal";
-import relativeTime from "dayjs/plugin/relativeTime";
-import locale_zhcn from "dayjs/locale/zh-cn";
 
 import { reveal_config } from "@/assets/ts/reveal";
 import { useRoute } from "vue-router";
@@ -10,9 +8,6 @@ import { onMounted } from "vue";
 
 import { assertType, type RouteMeta } from "@script/types";
 import type { Dayjs } from "dayjs";
-
-dayjs.extend(relativeTime);
-dayjs.locale(locale_zhcn);
 
 const route = useRoute();
 const format_string: string = "YYYY-MM-DD HH:mm:ss";

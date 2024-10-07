@@ -23,10 +23,13 @@ import {
     faAngleRight,
     faArrowUpRightFromSquare,
     faAsterisk,
+    faAtom,
     faBars,
+    faBoxArchive,
     faCaretLeft,
     faCaretRight,
     faChevronLeft,
+    faCode,
     faCube,
     faExclamationCircle,
     faExclamationTriangle,
@@ -109,7 +112,10 @@ async function main() {
         faStar,
         faGithub,
         faSpinner,
-        faChevronLeft
+        faChevronLeft,
+        faCode,
+        faAtom,
+        faBoxArchive
     );
 
     const app = createApp(App);
