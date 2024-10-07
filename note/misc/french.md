@@ -8,6 +8,14 @@ title: Français
 修读时间：2024 年秋冬学期。
 ::
 
+::quote
+On ne voit bien qu'avec le coeur.
+
+L'essentiel est invisible pour les yeux.
+
+<right>— *Le Petit Prince*</right>
+::
+
 :asterisk
 
 ## 字母表
@@ -43,7 +51,7 @@ title: Français
 ### 元音
 
 | 音素 | 读音规则 | 例词 |
-|:--:|--|:--:|
+|:--:|--|--|
 | `[a]` | a, à, â | sa, là, âme |
 | `[ɛ]` | è, ê | mère, fête |
 |       | ai, ei | fait, veine |
@@ -61,13 +69,30 @@ title: Français
 |       | e 在“辅辅 e 辅元”中 | vendredi |
 | `[ã]` | am, an 后无 m, n 或元音字母 | lampe, dans |
 |       | em, en 后无 m, n 或元音字母 | temps `[tã]`, vent `[vã]`, an `[ã]` |
+| `[u]` | ou, où, oû | sou, où, vous `[vu]` |
+| `[o]` | o 在词末开音节中 | lot, mot `[mo]`, numéro `[nymero]` |
+|       | o 在 `[z]` 音前 | rose |
+|       | ô | tôt `[to]`, hôtel `[otɛl]` |
+|       | au, eau | auto, peau `[po]`, beau `[bo]` |
+| `[ɔ̃]` | om, on 后无 m, n 或元音字母 | tombe, bon |
+| `[ɔ]` | o 除了发 `[o]` 的情况外 | vol, mode, photo `[fɔto]` |
+|       | au 在 `[r]` 前或极少数词中 | aurore `[ɔrɔr]`, Paul `[pɔl]` |
+
+---
+
+### 半元音
+
+| 音素 | 读音规则 | 例词 |
+|:--:|--|--|
+| `[w]` | ou 在元音前 | oui `[wi]`, douane `[dwan]`, ouest `[wɛst]` |
+|       | w 在个别外来词中 | week-end `[wikɛnd]` |
 
 ---
 
 ### 辅音
 
 | 音素 | 读音规则 | 例词 |
-|:--:|--|:--:|
+|:--:|--|--|
 | `[s]` | s | tasse |
 |       | ç | ça, français |
 |       | c 在元音字母 e, i, y 前 | face, cidre, cycle |
@@ -89,3 +114,8 @@ title: Français
 | `[r]` | r | rire, revue `[rəvy]` |
 | `[z]` | z | zèle |
 |       | s 在两个元音字母之间 | Asie |
+| `[p]` | p | palais `[palɛ]` |
+| `[b]` | b | bâton `[batɔ̃]` |
+| `[l]` | l | melon `[məlɔ̃]` |
+| `[n]` | n | nom `[nɔ̃]` |
+|       | mn 在少数词中 | automne `[otɔn]` |
