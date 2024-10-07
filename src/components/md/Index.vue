@@ -139,6 +139,25 @@ const leaf_mounted = async () => {
     --c-meta-color: #787b7e;
 }
 
+@media (prefers-color-scheme: dark) {
+    .index-comp {
+        --border-color: #333333c4;
+
+        /* header */
+        --h-background: #2d2d2d6e;
+        --h-color: #c6c6c6;
+        --h-hover-color: #87b3ea;
+        --h-icon-color: #787b7c9e;
+        --h-icon-hover-color: #c6c6c6;
+
+        /* child */
+        --c-color: #c6c6c6;
+        --c-hover-color: #87b3ea;
+        --c-icon-color: #787b7c9e;
+        --c-meta-color: #919599;
+    }
+}
+
 .leaf {
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -196,6 +215,11 @@ const leaf_mounted = async () => {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    color: var(--c-color);
+}
+
+.child .title:hover {
+    color: var(--c-hover-color);
 }
 
 .child .title .icon {
@@ -206,12 +230,7 @@ const leaf_mounted = async () => {
 }
 
 .child .title .text {
-    color: var(--c-color);
     transition: color 0.15s ease-out;
-}
-
-.child .title:hover .text {
-    color: var(--c-hover-color);
 }
 
 .child .meta {
