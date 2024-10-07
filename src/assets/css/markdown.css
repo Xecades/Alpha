@@ -79,10 +79,6 @@
     font-size: 1.05em;
 }
 
-.markdown .katex-display {
-    margin: 1.8em 0;
-}
-
 /* 锚点 */
 .markdown .header-anchor {
     opacity: 0;
@@ -468,10 +464,6 @@
     /* KaTeX 数学公式 */
     .markdown .katex {
         font-size: 1em;
-    }
-
-    .markdown .katex-display {
-        margin: 1.3em 0;
     }
 
     .markdown .katex-display .katex {
