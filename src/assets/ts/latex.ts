@@ -6,7 +6,7 @@ const _render = (options: KatexOptions) => (raw: string) => {
         return katex.renderToString(raw, options);
     } catch (error) {
         console.error(error);
-        return `<div style="color: red">${raw}</div>`;
+        return `<span style="color: red">${raw}</span>`;
     }
 };
 
