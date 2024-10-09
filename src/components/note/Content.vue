@@ -25,11 +25,11 @@ const emit = defineEmits(["update"]);
 const route = useRoute();
 
 const meta: Ref<RouteMeta> = computed(() => assertType<RouteMeta>(route.meta));
-const jsx: Ref<() => Promise<{ default: JSX.Element }>> = computed(
+const jsx: Ref<() => Promise<{ default: () => JSX.Element }>> = computed(
     () => meta.value.body
 );
 
-const body: Ref<JSX.Element> = shallowRef(<></>);
+const body: Ref<() => JSX.Element> = shallowRef(() => <></>);
 const lazyload_key: Ref<string> = ref("");
 const rendering: Ref<boolean> = ref(true);
 const navigation: Ref<boolean> = ref(false);

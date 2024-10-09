@@ -13,7 +13,7 @@
 
 ## 当前
 
- - 让 preprocess 的 jsx 变成函数，这样可以避免一个 warning
+ - ThumbHash / BlurHash
  - Home 页，最大的 title 和 body 之间的间距加大一点
  - Metadata 不可选中
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）

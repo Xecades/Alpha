@@ -58,9 +58,7 @@ export default (posts: Post[], base: BASE) => {
                 injection() +
                 injectFontAwesome(post.html) +
                 injectDependencies(post.dependencies) +
-                `import type { JSX } from "vue/jsx-runtime";\n` +
-                `const jsx: JSX.Element = (<>${post.html}</>)\n` +
-                `export default jsx;\n`;
+                `export default () => (<>\n${post.html}</>);\n`;
 
             fs.outputFileSync(dist, cache);
 

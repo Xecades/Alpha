@@ -121,7 +121,7 @@ export interface RouteMeta {
     category: string;
 
     /** Body component */
-    body: () => Promise<{ default: JSX.Element }>;
+    body: () => Promise<{ default: () => JSX.Element }>;
 
     /** Parsed front matter */
     attr: MarkdownFrontMatter;

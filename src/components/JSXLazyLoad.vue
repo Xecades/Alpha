@@ -6,7 +6,7 @@ import type { JSX } from "vue/jsx-runtime";
 
 const props = defineProps<{
     /** JSX element to be lazy-loaded */
-    data: JSX.Element;
+    data: () => JSX.Element;
 }>();
 
 const emit = defineEmits<{
@@ -17,7 +17,7 @@ const emit = defineEmits<{
     update: [index: number];
 }>();
 
-const children: JSX.Element[] = (props.data.children as JSX.Element[]) || [];
+const children: JSX.Element[] = (props.data().children as JSX.Element[]) || [];
 const queue: Ref<JSX.Element[]> = ref([]);
 
 onMounted(() => {
