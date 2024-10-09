@@ -23,6 +23,7 @@ const meta: Ref<RouteMeta> = computed(() => assertType<RouteMeta>(route.meta));
 <style scoped>
 .metadata {
     margin: 0rem var(--margin-lr) var(--header-main-spacing);
+    user-select: none;
 
     --back-color: #7a7e83;
     --back-hover-color: #252f3a;

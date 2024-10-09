@@ -55,7 +55,7 @@ logger.nbsp("Home layout loaded");
     font-size: 3rem;
     letter-spacing: 0.05em;
     margin-bottom: 12px;
-    height: 3.5rem;
+    height: 4.5rem;
 }
 
 .home-layout .subtitle {
@@ -65,7 +65,7 @@ logger.nbsp("Home layout loaded");
 .home-layout .subtitle,
 .home-layout p {
     font-size: 1.125rem;
-    line-height: 2.2rem;
+    line-height: 2.4rem;
     margin-bottom: 0.5rem;
 }
 
@@ -202,28 +202,28 @@ logger.nbsp("Home layout loaded");
     }
 
     .home-layout .timeline .year {
-        color: #1a1a1a;
+        color: #292a2b;
     }
 }
 
 @media (max-width: 768px) {
     .home-layout {
         width: unset;
-        margin: 0 2rem;
+        margin: 0 2.8rem;
         padding-top: 5rem;
         padding-bottom: 5rem;
     }
 
     .home-layout .title {
         font-size: 2.5rem;
-        height: 3rem;
-        margin-bottom: 30px;
+        height: 4.5rem;
+        margin-bottom: 0;
     }
 
     .home-layout .subtitle,
     .home-layout p {
         font-size: 1rem;
-        line-height: 2.5rem;
+        line-height: 2.1rem;
     }
 
     /* hr */
