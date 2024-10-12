@@ -1,15 +1,36 @@
 <script setup lang="ts">
-/**
- * @todo 图片懒加载
- */
-
+import "lazysizes";
 import cursor from "@/assets/ts/cursor";
 import { nextTick, onBeforeUnmount, onMounted, ref, type Ref } from "vue";
 
 import mediumZoom from "medium-zoom";
 
-const props = defineProps<{ alt: string; src: string }>();
+const props = defineProps<{
+    alt: string;
+    src: string;
+    size: {
+        width: number;
+        height: number;
+    };
+}>();
+
+const placehold = (width: number, height: number): string => {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+        ctx.fillStyle = "#52525229";
+        ctx.fillRect(0, 0, width, height);
+    }
+
+    return canvas.toDataURL();
+};
+
+const { width, height } = props.size;
 const img: Ref<HTMLImageElement | null> = ref(null);
+const placeholder: string = placehold(width, height);
 
 onMounted(() => {
     const zoom = mediumZoom(img.value as HTMLElement, {
@@ -28,10 +49,11 @@ onMounted(() => {
     <figure>
         <img
             ref="img"
-            class="cursor"
+            class="cursor lazyload"
             :class="src.endsWith('.svg') && 'svg'"
             :alt="alt"
-            :src="src"
+            :data-src="src"
+            :src="placeholder"
             data-ic-zoomable
         />
         <figcaption v-if="alt" :title="alt">

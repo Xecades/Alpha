@@ -41,6 +41,17 @@ const injectDependencies = (dep: Dependencies): string => {
     return res;
 };
 
+type Awaits = typeof Post.prototype.awaits;
+const injectAwaits = async (awaits: Awaits): Promise<string> => {
+    let res: string = "";
+
+    for (const { target, name } of awaits) {
+        res += `const ${name} = ${await target()};\n`;
+    }
+
+    return res;
+};
+
 /**
  * Cache parsed HTML and save them as TSXs in `./cache/${base}/posts/*`.
  *
@@ -51,13 +62,14 @@ const injectDependencies = (dep: Dependencies): string => {
  */
 export default (posts: Post[], base: BASE) => {
     for (const post of posts) {
-        watchEffect(() => {
+        watchEffect(async () => {
             const dist: string = post.tsx_pathname;
 
             const cache: string =
                 injection() +
                 injectFontAwesome(post.html) +
                 injectDependencies(post.dependencies) +
+                (await injectAwaits(post.awaits)) +
                 `export default () => (<>\n${post.html}</>);\n`;
 
             fs.outputFileSync(dist, cache);

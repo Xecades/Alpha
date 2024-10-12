@@ -29,6 +29,10 @@ export interface Post {
         src: string;
         name: string;
     }[];
+    awaits: {
+        target: () => Promise<string>;
+        name: string;
+    }[];
     base: BASE;
     time_data: { created: string; updated: string };
 }
@@ -51,6 +55,7 @@ export class Post {
         this.pathname = pathname;
         this.base = base;
         this.dependencies = [];
+        this.awaits = [];
     }
 
     /** Create a reactive post object. */
@@ -79,6 +84,7 @@ export class Post {
         this._html = undefined;
         this._text = undefined;
         this.dependencies = [];
+        this.awaits = [];
     }
 
     async update_time_data() {
@@ -119,6 +125,15 @@ export class Post {
             name: name,
         });
 
+        return name;
+    }
+
+    await(promise: () => Promise<string>): string {
+        const name = `await_${this.awaits.length}`;
+        this.awaits.push({
+            target: promise,
+            name: name,
+        });
         return name;
     }
 

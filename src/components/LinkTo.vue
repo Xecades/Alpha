@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import isRelativeUrl from "is-relative-url";
+
 type fn = () => void;
 
 const props = defineProps<{
@@ -7,7 +9,7 @@ const props = defineProps<{
 }>();
 
 const isButton: boolean = props.src instanceof Function;
-const inside: boolean = !isButton && (props.src as string).startsWith("/");
+const inside: boolean = !isButton && isRelativeUrl(props.src as string);
 const rmode: "stay" | "jump" = props.mode ?? (inside ? "stay" : "jump");
 </script>
 

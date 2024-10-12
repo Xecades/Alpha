@@ -13,7 +13,8 @@
 
 ## 当前
 
- - ThumbHash / BlurHash
+ - tab 和 fold 会导致内部 image 闪烁
+ - ThumbHash / BlurHash -> 考虑改成一个 API，试一下效果如何
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
  - 更深的 ScrollReveal 动画（例如 Waterfall 内部元素）
  - MDCShorthand 前加 MDCBlock，shorthand 会渲染失败

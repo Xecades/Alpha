@@ -40,8 +40,11 @@ export default (md: MarkdownIt) => {
             let alt = extractText(cap_html) || "空";
 
             let name: string = env.post.require(svg, ".svg");
+            let width: number = Number(svg.match(/^<svg.*?width="(\d+)/)![1]);
+            let height: number = Number(svg.match(/^<svg.*?height="(\d+)/)![1]);
+            let size: string = JSON.stringify({ width, height });
 
-            return `<ImageCaptioned alt={"${alt}"} src={${name}}>${cap_html}</ImageCaptioned>`;
+            return `<ImageCaptioned alt={"${alt}"} src={${name}} size={${size}}>${cap_html}</ImageCaptioned>`;
             //
         } else {
             // Process normal code block
