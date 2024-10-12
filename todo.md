@@ -2,6 +2,7 @@
 
  - 重构动画模块
  - 重构 Cursor.js（参考 iPad 光标效果，或许可以联动 DOM 元素）
+ - 图片懒加载用 ThumbHash / BlurHash（考虑改成一个 API）
  - 搓一个评论系统（考虑使用 Serverless）
  - Status 页面（如果有了后端）
  - CDN
@@ -14,11 +15,9 @@
 ## 当前
 
  - tab 和 fold 会导致内部 image 闪烁
- - ThumbHash / BlurHash -> 考虑改成一个 API，试一下效果如何
- - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？）
+ - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？或者不要也可以）
  - 更深的 ScrollReveal 动画（例如 Waterfall 内部元素）
  - MDCShorthand 前加 MDCBlock，shorthand 会渲染失败
- - LeftBar 手机上显不显示？
  - 支持 Markdown 内部 style 标签
  - Tab 内图片，高度获取出了问题
  - AnimateHeight 嵌套的时候，第一次点击内部的 fold 会不反应（推测是 AnimateHeight 库的问题，手搓一个？）

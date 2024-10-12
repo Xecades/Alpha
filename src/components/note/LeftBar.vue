@@ -6,6 +6,7 @@ import {
     onUpdated,
     ref,
     watch,
+    watchEffect,
 } from "vue";
 import { useRoute } from "vue-router";
 import { render_list } from "@/assets/ts/note/leftbar";
@@ -156,6 +157,12 @@ onBeforeUnmount(() => {
     hotkeys.unbind("command+k,ctrl+k");
     hotkeys.unbind("esc");
 });
+
+watchEffect(() => {
+    if (props.status === NOTE_L_STATUS.SHOW_SEARCH_AND_CATEGORY) {
+        category_fn.reveal();
+    }
+});
 </script>
 
 <template>
@@ -166,7 +173,7 @@ onBeforeUnmount(() => {
             </li>
         </ul>
 
-        <div class="category" v-if="status == NOTE_L_STATUS.HOVER_TO_SHOW">
+        <div class="category" v-if="status != NOTE_L_STATUS.ONLY_SEARCH_BUTTON">
             <template v-for="(item, idx) in categories">
                 <a
                     class="item cursor"
