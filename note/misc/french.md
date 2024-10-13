@@ -9,9 +9,9 @@ title: Français
 ::
 
 ::quote
-On ne voit bien qu'avec le coeur.
+On ne voit bien qu'avec le cœur .
 
-L'essentiel est invisible pour les yeux.
+L'essentiel est invisible pour les yeux .
 
 <right>— *Le Petit Prince*</right>
 ::
