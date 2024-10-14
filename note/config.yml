@@ -6,8 +6,9 @@ nav:
                 - splay-tree
                 - red-black-tree
                 - b-plus-tree
-                - leftist-heaps
-                - skew-heaps
+                - leftist-heap
+                - skew-heap
+                - binomial-queue
           - others:
                 - mit-missing-semester
                 - c-language-cheatsheet
