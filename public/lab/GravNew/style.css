@@ -1,0 +1,32 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+* {
+    user-select: none;
+}
+
+#canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#btn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: cyan;
+    cursor: pointer;
+}
+
+#data {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+}

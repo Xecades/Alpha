@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort | Xecades</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="ctrl">
+        <p>
+            <label for="algorithm">算法</label>
+            <select id="algorithm">
+                <option value="bubble">冒泡排序</option>
+                <option value="selection">选择排序</option>
+                <option value="insertion">插入排序</option>
+                <option value="merge">归并排序</option>
+                <option value="lomuto">快速排序 - Lomuto</option>
+                <option value="hoare">快速排序 - Hoare</option>
+            </select>
+            <span class="spacing"></span>
+            <label for="N">数组长度</label>
+            <input id="N" type="number" min="4" max="500">
+            <button id="N-plus-10">+10</button>
+            <button id="N-minus-10">-10</button>
+            <span class="spacing"></span>
+            <label for="delay">每次操作间隔时间 (ms)</label>
+            <input id="delay" type="number" min="1" max="2000">
+            <button id="delay-times-2">×2</button>
+            <button id="delay-div-2">÷2</button>
+            <span class="spacing"></span>
+            <button id="shuffle">打乱</button>
+            <button id="pause">运行</button>
+        </p>
+        <p>
+            图例：
+            <span style="padding: 0 .3rem; color: #000; background-color: lime">绿色</span>成对出现，表示交换操作；
+            <span style="padding: 0 .3rem; background-color: red">红色</span>成对出现，表示两元素间进行大小比较；
+            <span style="padding: 0 .3rem; background-color: #2929e5">蓝色背景</span>表示特殊元素，例如快速排序中的 <code>pivot</code>；
+            <span style="padding: 0 .3rem; background-color: #333">灰色背景</span>表示当前递归区间；
+            <span style="padding: 0 .3rem; color: #000; background-color: orange">橘色</span>和<span style="padding: 0 .3rem; color: #000; background-color: yellow">黄色</span>同时出现，表示将元素从<span style="color: orange">橘色</span>移向<span style="color: yellow">黄色</span>。
+        </p>
+    </div>
+    <div id="wrapper">
+        <div id="aux"><span>辅助数组 <code>tmp</code></span></div>
+        <div id="main"><span>排序数组 <code>arr</code></span></div>
+    </div>
+    <script src="dom.js"></script>
+    <script src="sort.js"></script>
+    <script src="util.js"></script>
+</body>
+
+</html>

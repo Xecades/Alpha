@@ -1,0 +1,11 @@
+*::-moz-selection {
+    background-color: rgba(187, 221, 251);
+}
+
+*::selection {
+    background-color: rgba(187, 221, 251);
+}
+
+.items {
+    background-color: #fefefe;
+}

@@ -1,0 +1,73 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.axis {
+    stroke: hsl(0, 0%, 70%);
+}
+
+.helperx,
+.helpery {
+    stroke: hsl(0, 0%, 30%);
+}
+
+.trace {
+    /* fill: rgba(70, 130, 180, .1); */
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+}
+
+.helperXPath,
+.helperYPath {
+    fill: none;
+    stroke: rgba(70, 130, 180, .5);
+    stroke-width: 2px;
+}
+
+.helperXDot,
+.helperYDot {
+    fill: steelblue;
+}
+
+.circleGroup .circle {
+    fill: none;
+    stroke: hsl(0, 0%, 70%);
+}
+
+.circleGroup:first-of-type .circle {
+    fill: none;
+    stroke: hsl(0, 0%, 30%);
+}
+
+.circleGroup .dot {
+    fill: rgba(25, 73, 112, 0.2);
+}
+
+.circleGroup .line {
+    stroke: hsl(0, 0%, 50%);
+}
+
+#dot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+}
+
+@keyframes svg-animation {
+    from {
+        offset-distance: 0%;
+    }
+
+    to {
+        offset-distance: 100%;
+    }
+}

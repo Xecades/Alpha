@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo | Xecades</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="btn">
+        <div onclick="addPlanet()">Add</div>
+        <div onclick="faster()">Faster</div>
+        <div onclick="slower()">Slower</div>
+        <div onclick="showInfo = !showInfo">Toggle Info</div>
+        <div onclick="showAxis = !showAxis">Toggle Axis</div>
+    </div>
+    <div id="data">
+        <div class="isPausing"></div>
+        <div class="scale"></div>
+        <div class="planetNum"></div>
+        <div class="timeScale"></div>
+        <div class="time"></div>
+    </div>
+    <script src="canvas.js"></script>
+</body>
+
+</html>
