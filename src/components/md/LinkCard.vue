@@ -2,14 +2,15 @@
 import LinkTo from "../LinkTo.vue";
 
 const props = defineProps<{ href: string }>();
-const external: boolean = props.href.startsWith("http");
+const external: boolean =
+    props.href.startsWith("http") || props.href.startsWith("/assets/");
 
 const isGitHub: boolean = /github\.com/.test(props.href);
 </script>
 
 <template>
     <div class="linkcard">
-        <LinkTo :src="href">
+        <LinkTo :src="href" :mode="external ? 'jump' : 'stay'">
             <!-- Left -->
             <div class="content">
                 <div class="item title"><slot /></div>
