@@ -33,6 +33,7 @@ import {
     faCube,
     faExclamationCircle,
     faExclamationTriangle,
+    faEye,
     faFaceFrown,
     faFile,
     faFlag,
@@ -117,7 +118,8 @@ async function main() {
         faCode,
         faAtom,
         faBoxArchive,
-        faFlag
+        faFlag,
+        faEye
     );
 
     const app = createApp(App);
