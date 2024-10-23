@@ -79,6 +79,10 @@
     font-size: 1.05em;
 }
 
+.markdown .katex-display {
+    margin: 1em 2px;
+}
+
 /* 锚点 */
 .markdown .header-anchor {
     opacity: 0;
@@ -152,6 +156,7 @@
 .markdown strong,
 .markdown b {
     font-weight: bold;
+    color: #8f6ce4;
 }
 
 /* div.right 标签 */

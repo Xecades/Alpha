@@ -13,6 +13,9 @@ nav:
                 - mit-missing-semester
                 - c-language-cheatsheet
                 - manuals-standards
+    - ctf:
+          - game:
+                - zjuctf2024
     - sci:
           - phy:
                 - chapter-27
@@ -36,5 +39,6 @@ nav:
 
 icon:
     cs: code
+    ctf: flag
     sci: atom
     misc: box-archive

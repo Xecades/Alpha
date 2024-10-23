@@ -9,4 +9,8 @@ title: 笔记
 :asterisk
 :v{5rem}
 
+::note{warning}
+本网站仍在开发阶段，未来将整合至 xecades.xyz，内容随时可能产生较大更改。
+::
+
 :index

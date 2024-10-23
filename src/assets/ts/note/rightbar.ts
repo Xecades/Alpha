@@ -5,10 +5,12 @@ import type { MarkdownHeaderJsx } from "@script/types";
 export type HeaderRef = MarkdownHeaderJsx & {
     readonly width: string;
     readonly indent: string;
+    readonly opacity: string;
 };
 
 const width_preset: string[] = ["50px", "40px", "30px", "20px", "13px"];
 const indent_preset: string[] = ["0rem", "1rem", "1.7rem", "2.3rem", "2.8rem"];
+const opacity_preset: string[] = ["1", "0.6", "0.6", "0.6", "0.6"];
 
 /**
  * Append width and indent properties to TOC data.
@@ -26,6 +28,7 @@ export const normalize_toc = (toc: MarkdownHeaderJsx[]): HeaderRef[] => {
         ...item,
         width: width_preset[4 + item.level - maxLevel],
         indent: indent_preset[item.level - minLevel],
+        opacity: opacity_preset[item.level - minLevel],
     }));
 };
 

@@ -94,6 +94,10 @@ watch(
         // Wait for animation to finish.
         await sleep(250);
         shifting = false;
+        
+        // For unknown reason when using block-code,
+        // the height is not calculated correctly.
+        height.value = listener.value.clientHeight;
     },
     { immediate: true }
 );

@@ -94,7 +94,7 @@ figure {
 }
 
 img {
-    max-width: var(--width);
+    max-width: 100%;
     max-height: 20em;
     margin: 0;
     padding: 0;

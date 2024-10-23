@@ -46,14 +46,18 @@ onMounted(() => {
 
 <template>
     <div class="fold colors" :class="type">
-        <div class="header cursor" @click="expanded = !expanded">
+        <div
+            class="header"
+            :class="{ cursor: !props.expand }"
+            @click="!props.expand && (expanded = !expanded)"
+        >
             <div class="icon">
                 <font-awesome-icon :icon="icon[type]" />
             </div>
             <div class="title">
                 <component :is="title" v-if="title" />
             </div>
-            <div class="expand">
+            <div class="expand" v-if="!props.expand">
                 <font-awesome-icon
                     :icon="['fas', 'angle-right']"
                     :style="{ transform: `rotate(${expanded ? 90 : 0}deg)` }"
@@ -86,8 +90,8 @@ onMounted(() => {
 }
 
 .fold {
-    margin: 2rem var(--block-extend);
     border-radius: 5px;
+    margin: 2rem var(--block-extend);
     overflow: hidden;
     border-left: 4px solid var(--icon-color);
 }
@@ -131,6 +135,8 @@ onMounted(() => {
     --wrapper-padding: 0.8rem 1.4rem;
     border-right: 1px solid var(--background-color);
     border-bottom: 1px solid var(--background-color);
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
 }
 
 .content.immensive {

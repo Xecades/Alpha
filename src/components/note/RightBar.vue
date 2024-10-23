@@ -63,7 +63,10 @@ watch(
                             class="detail cursor"
                             :href="'#' + item.link"
                             @click.prevent="navigate(item.link)"
-                            :style="{ marginRight: item.indent }"
+                            :style="{
+                                marginRight: item.indent,
+                                opacity: item.opacity,
+                            }"
                             :class="{ 'active': idx === in_view, 'passed': idx < (in_view as number) }"
                         >
                             <span class="text">

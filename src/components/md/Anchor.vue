@@ -41,11 +41,11 @@ a:hover {
     color: var(--hover-color);
 }
 
-a.external::after {
+/* a.external::after {
     content: "✦";
     font-size: 0.7em;
     line-height: 1em;
     padding: 0 2px;
     vertical-align: super;
-}
+} */
 </style>

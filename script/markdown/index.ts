@@ -25,7 +25,6 @@ export default (): MarkdownIt => {
      */
     const md = new MarkdownIt({
         html: true,
-        linkify: true,
         typographer: true,
         xhtmlOut: true,
     });

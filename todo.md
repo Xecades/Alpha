@@ -14,6 +14,11 @@
 
 ## 当前
 
+ - external link 换一个样式
+ - 目前为了避免 fold 折叠时 scrollreveal 出问题，设置如果有 expand，就不允许折叠
+ - Cursor 换 web worker
+ - /lab 页，由于去掉了 trailing slash，导致 js 无法加载
+ - vue-virtual-scroll-list
  - tab 和 fold 会导致内部 image 闪烁
  - 深色模式切换按钮（切换的时候给所有元素设置临时的 transition !important？）（放 rightbar？或者不要也可以）
  - 更深的 ScrollReveal 动画（例如 Waterfall 内部元素）

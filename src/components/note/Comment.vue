@@ -20,14 +20,15 @@ onMounted(async () => {
         envId: "https://twikoo-blog.xecades.xyz/",
         el: "#twikoo",
         onCommentLoaded: () => {
-            ScrollReveal().reveal(
-                ".tk-comments-container > *:not(.tk-comments-no)",
-                reveal_config
-            );
+            // ScrollReveal().reveal(
+            //     ".tk-comments-container > *:not(.tk-comments-no)",
+            //     reveal_config
+            // );
+            ScrollReveal().reveal("#twikoo", reveal_config);
         },
     });
 
-    ScrollReveal().reveal(".tk-submit .tk-row", reveal_config);
+    // ScrollReveal().reveal(".tk-submit .tk-row", reveal_config);
 });
 </script>
 
@@ -177,6 +178,5 @@ onMounted(async () => {
 }
 
 @media (max-width: 768px) {
-
 }
 </style>

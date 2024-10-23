@@ -97,8 +97,9 @@ html.sr .note-layout #content > .metadata,
 html.sr .note-layout #content .markdown > *,
 html.sr .note-layout #left,
 html.sr .note-layout .timestamp > *,
-html.sr .note-layout #twikoo .tk-submit .tk-row,
-html.sr .note-layout #twikoo .tk-comments-container > *:not(.tk-comments-no) {
+/* html.sr .note-layout #twikoo .tk-submit .tk-row,
+html.sr .note-layout #twikoo .tk-comments-container > *:not(.tk-comments-no) { */
+html.sr .note-layout #twikoo {
     visibility: hidden;
 }
 

@@ -35,6 +35,7 @@ import {
     faExclamationTriangle,
     faFaceFrown,
     faFile,
+    faFlag,
     faFolder,
     faInfoCircle,
     faLightbulb,
@@ -115,7 +116,8 @@ async function main() {
         faChevronLeft,
         faCode,
         faAtom,
-        faBoxArchive
+        faBoxArchive,
+        faFlag
     );
 
     const app = createApp(App);
