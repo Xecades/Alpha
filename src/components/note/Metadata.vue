@@ -25,7 +25,7 @@ onMounted(async () => {
             <span class="text">{{ meta.back.title }}</span>
         </router-link>
 
-        <span class="viewcount">
+        <span class="viewcount" v-if="meta.type === 'post'">
             <span class="icon">
                 <font-awesome-icon :icon="['fas', 'eye']" />
             </span>
