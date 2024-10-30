@@ -12,10 +12,8 @@ const data = {
                 meta: [
                     { date: "上半年", desc: "首次接触 C 语言" },
                     { date: "9 月 19 日 13:53", desc: "注册第一个 OJ：openjudge" },
-                    { date: "9 月 29 日", desc: "提交第一个程序 超级玛丽（但是 WA 了）" },
-                    { date: "9 月 29 日", desc: "第一次 AC 题目" },
-                    { date: "10 月 8 日", desc: "AC 超级玛丽" },
-                    { date: "10 月 8 日", desc: "完成 openjudge 的 1.1 全部题目" },
+                    { date: "9 月 29 日", desc: "提交第一个程序 超级玛丽（但是错了）" },
+                    { date: "9 月 29 日", desc: "通过人生中第一道信竞题目" },
                     { date: "下半年", desc: "学习 C++" },
                 ]
             },
@@ -23,7 +21,7 @@ const data = {
                 year: 2017,
                 meta: [
                     { date: "上半年", desc: "暂时中断 OI 学习" },
-                    { date: "上半年", desc: "完全从 C 转入 C++" },
+                    { date: "上半年", desc: "从 C 转入 C++" },
                     { date: "10 月 14 日 14:30", desc: "NOIP2017 普及组初赛" },
                     { date: "10 月 18 日 13:54", desc: "注册洛谷账号" },
                     { date: "11 月", desc: "惊喜地得知进入复赛" },
@@ -45,12 +43,11 @@ const data = {
             {
                 year: 2019,
                 meta: [
-                    { date: "3 月 11 日", desc: "签约东辰" },
-                    { date: "3 月 14 日", desc: "签约绵中" },
+                    { date: "3 月 11 日", desc: "中考签约东辰" },
+                    { date: "3 月 14 日", desc: "中考签约绵中" },
                     { date: "6 月 16 日", desc: "成都七中自主招生考试" },
                     { date: "6 月 18 日左右", desc: "成都七中录取通知" },
-                    { date: "7 月", desc: "跟着七中的叶老学信息学" },
-                    { date: "8 月", desc: "大幅度更新博客" },
+                    { date: "8 月", desc: "博客得到大幅更新" },
                     { date: "8 月 31 日", desc: "成都七中开学" },
                     { date: "11 月 16 日", desc: "CSP-S 2019 复赛" },
                 ]
@@ -59,7 +56,7 @@ const data = {
                 year: 2020,
                 meta: [
                     { date: "3 月 28 日", desc: "开始正式学习前端" },
-                    { date: "寒假", desc: "学习 npm、nodejs、vue" },
+                    { date: "寒假", desc: "学习 npm、node.js、vue" },
                     { date: "寒假", desc: "大幅更新 / 重构博客" },
                     { date: "补充", desc: "初识人工智能，编写其可视化程序" },
                     { date: "补充", desc: "完成 TIY 网页编辑器，里程碑式的进展" },
@@ -112,14 +109,15 @@ const data = {
                     { date: "1 月 31 日", desc: "为图灵班编写的通识课评价系统投入使用！" },
                     { date: "2 月", desc: "成为 TuringCourses 周年活动委员会成员" },
                     { date: "2 月 9 日", desc: "为周年活动编写的排行榜上线" },
-                    { date: "2 月", desc: "自制树莓派相机" },
+                    { date: "2 月", desc: "自制了一个树莓派相机" },
                     { date: "2 月 14 日", desc: "一个特殊的日子" },
                     { date: "4 月 26 日", desc: "一些更正" },
-                    { date: "8 月", desc: "担任图灵班学长组网站总负责" },
+                    { date: "8 月", desc: "负责图灵班学长组网站编写" },
                     { date: "8 月 17 日", desc: "担任图灵班 24 级学长组" },
                     { date: "8 月 20 日", desc: "收获一次完美的生日 party" },
                     { date: "8 月 21 日", desc: "以校榜第三的成绩进入浙江大学 AAA 战队" },
-                    { date: "9 月 16 日", desc: "加入浙江大学竺可桢学院学业指导中心社团" },
+                    { date: "9 月 16 日", desc: "加入浙江大学竺可桢学院学业指导中心" },
+                    { date: "10 月 15 日", desc: "第一次参与浙大上交联合 CTF 校赛赛题出题" },
                 ]
             },
         ]),

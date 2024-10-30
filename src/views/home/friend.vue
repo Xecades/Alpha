@@ -38,7 +38,7 @@ const data = {
                 url: "https://mem.ac/",
             }
         ]),
-        ["除此之外，你可以点", link(ruby("这里", "/index"), "/"), "回到主页。"],
+        ["你可以点", link(ruby("这里", "/index"), "/"), "回到主页。"],
     ]
 };
 </script>

@@ -7,16 +7,16 @@ const data = {
     "subtitle": "有一些好玩的东西。",
     "body": [
         table([
-            {
-                name: "Artificial Intelligence",
-                desc: "BP 神经网络数字识别可视化",
-                url: "https://ai.xecades.xyz/"
-            },
-            {
-                name: "TIY",
-                desc: "在线运行 HTML 代码",
-                url: "https://tiy.xecades.xyz/"
-            },
+            // {
+            //     name: "Artificial Intelligence",
+            //     desc: "BP 神经网络数字识别可视化",
+            //     url: "https://ai.xecades.xyz/"
+            // },
+            // {
+            //     name: "TIY",
+            //     desc: "在线运行 HTML 代码",
+            //     url: "https://tiy.xecades.xyz/"
+            // },
             {
                 name: "Postcard API",
                 desc: "个人身份卡片 API 及生成器",
