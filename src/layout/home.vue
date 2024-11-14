@@ -143,6 +143,10 @@ logger.nbsp("Home layout loaded");
     position: absolute;
 }
 
+.home-layout .timeline ul.yr {
+    min-height: 210px;
+}
+
 .home-layout .timeline li.yr {
     font-size: 1rem;
     line-height: 2.25rem;

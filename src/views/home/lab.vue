@@ -28,25 +28,30 @@ const data = {
                 url: "https://github.com/Xecades/hexo-tag-tiy"
             },
             {
-                name: "Fourier Transform",
-                desc: "傅里叶级数绘图可视化",
-                url: "/lab/Fourier/"
+                name: "markdown-it-typst",
+                desc: "Markdown-it 的 Typst 插件",
+                url: "https://github.com/Xecades/markdown-it-typst"
             },
-            {
-                name: "Cube Simulator",
-                desc: "魔方模拟器",
-                url: "/lab/Cube/"
-            },
-            {
-                name: "Gravitation Simulator",
-                desc: "二维星体运动模拟器",
-                url: "/lab/Gravitation/"
-            },
-            {
-                name: "Sort",
-                desc: "排序算法可视化",
-                url: "/lab/Sort/"
-            },
+            // {
+            //     name: "Fourier Transform",
+            //     desc: "傅里叶级数绘图可视化",
+            //     url: "/lab/Fourier/"
+            // },
+            // {
+            //     name: "Cube Simulator",
+            //     desc: "魔方模拟器",
+            //     url: "/lab/Cube/"
+            // },
+            // {
+            //     name: "Gravitation Simulator",
+            //     desc: "二维星体运动模拟器",
+            //     url: "/lab/Gravitation/"
+            // },
+            // {
+            //     name: "Sort",
+            //     desc: "排序算法可视化",
+            //     url: "/lab/Sort/"
+            // },
         ]),
         ["对了，你可以点", link(ruby("这里", "/index"), "/"), "回到主页。"],
     ]
