@@ -9,7 +9,10 @@ title: Ch.2 随机变量与分布函数
 $\xi$ 恒为常数 $c$，即 $P(\xi=c)=1$.
 
 $$
-p_{\xi}(k)=1,\quad k=c
+\begin{align*}
+p_{\xi}(k)&=1,\quad k=c \\
+\mathbb{E}(\xi)&=c
+\end{align*}
 $$
 
 ---
@@ -28,10 +31,13 @@ $$
 其中 $A$ 发生的概率为 $p$，则
 
 $$
-p_{\xi}(k)=\begin{cases}
+\begin{align*}
+p_{\xi}(k)&=\begin{cases}
 p & k=1 \\
 1-p & k=0
-\end{cases}
+\end{cases} \\
+\mathbb{E}(\xi)&=p
+\end{align*}
 $$
 
 记作 $\xi\sim B(1,p)$.
@@ -43,7 +49,10 @@ $$
 $\xi$ 为 $n$ 次独立重复试验中事件 $A$ 发生的次数.
 
 $$
-p_{\xi}(k)=\binom{n}{k} p^kq^{n-k}:=b(k;n,p),\quad k=0,1,2,\cdots,n
+\begin{align*}
+p_{\xi}(k)&=\binom{n}{k} p^kq^{n-k}:=b(k;n,p),\quad k=0,1,2,\cdots,n \\
+\mathbb{E}(\xi)&=np
+\end{align*}
 $$
 
 记作 $\xi\sim B(n,p)$.
@@ -68,7 +77,10 @@ $$
 由泊松定理引入，$\xi$ 取一切非负整数.
 
 $$
-p_{\xi}(k)=\frac{\lambda^k}{k!}e^{-\lambda}:=p(k;\lambda),\quad \lambda>0,\ k=0,1,2,\cdots
+\begin{align*}
+p_{\xi}(k)&=\frac{\lambda^k}{k!}e^{-\lambda}:=p(k;\lambda),\quad \lambda>0,\ k=0,1,2,\cdots \\
+\mathbb{E}(\xi)&=\lambda
+\end{align*}
 $$
 
 记作 $\xi\sim P(\lambda)$.
@@ -80,7 +92,10 @@ $$
 $\xi$ 为伯努利试验首次成功的次数.
 
 $$
-p_{\xi}(k)=pq^{k-1}:=g(k;p),\quad k=1,2,3\cdots
+\begin{align*}
+p_{\xi}(k)&=pq^{k-1}:=g(k;p),\quad k=1,2,3\cdots \\
+\mathbb{E}(\xi)&=\frac{1}{p}
+\end{align*}
 $$
 
 **无记忆性**：$P(\xi>k+m\mid \xi>m)=P(\xi>k)$.
@@ -94,7 +109,10 @@ $$
 $N$ 件产品中有 $M$ 件次品，从中抽取 $n$ 件，其中次品数为 $\xi$.
 
 $$
-p_{\xi}(k)=\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}},\quad k=0,1,2,\cdots,\min(n,M)
+\begin{align*}
+p_{\xi}(k)&=\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}},\quad k=0,1,2,\cdots,\min(n,M) \\
+\mathbb{E}(\xi)&=n \frac{M}{N}
+\end{align*}
 $$
 
 ---
@@ -104,7 +122,10 @@ $$
 $\xi$ 为得到第 $r$ 次成功时的伯努利试验次数.
 
 $$
-p_{\xi}(k)=\binom{k-1}{r-1}p^r q^{k-r},\quad k=r,r+1,r+2,\cdots
+\begin{align*}
+p_{\xi}(k)&=\binom{k-1}{r-1}p^r q^{k-r},\quad k=r,r+1,r+2,\cdots \\
+\mathbb{E}(\xi)&=\frac{r}{p}
+\end{align*}
 $$
 
 ---
@@ -116,10 +137,13 @@ $$
 $\xi$ 在区间 $[a,b]$ 上均匀取值.
 
 $$
-p_{\xi}(x)=\begin{cases}
+\begin{align*}
+p_{\xi}(x)&=\begin{cases}
 \frac{1}{b-a} & a\leqslant x\leqslant b \\
 0 & \text{otherwise}
-\end{cases}
+\end{cases} \\
+\mathbb{E}(\xi)&=\frac{a+b}{2}
+\end{align*}
 $$
 
 记作 $\xi\sim U(a,b)$.
@@ -129,7 +153,10 @@ $$
 ### 正态分布 / 高斯分布
 
 $$
-p_{\xi}(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left\{{-\frac{(x-a)^2}{2\sigma^2}}\right\},\quad -\infty<x<\infty
+\begin{align*}
+p_{\xi}(x)&=\frac{1}{\sqrt{2\pi}\sigma}\exp\left\{{-\frac{(x-a)^2}{2\sigma^2}}\right\},\quad -\infty<x<\infty \\
+\mathbb{E}(\xi)&=a
+\end{align*}
 $$
 
 记作 $\xi\sim N(a,\sigma^2)$.
@@ -148,10 +175,13 @@ $$
 ### 指数分布
 
 $$
-p_{\xi}(x)=\begin{cases}
+\begin{align*}
+p_{\xi}(x)&=\begin{cases}
 \lambda e^{-\lambda x} & x\geqslant 0 \\
 0 & x<0
-\end{cases}\qquad \lambda>0
+\end{cases}\qquad \lambda>0 \\
+\mathbb{E}(\xi)&=\frac{1}{\lambda}
+\end{align*}
 $$
 
 分布函数
@@ -168,10 +198,13 @@ $$
 ### $\Gamma$ 分布
 
 $$
-p_{\xi}(x)=\begin{cases}
+\begin{align*}
+p_{\xi}(x)&=\begin{cases}
 \frac{\lambda^r}{\Gamma(r)}x^{r-1}e^{-\lambda x} & x\geqslant 0 \\
 0 & x<0
-\end{cases}\qquad \lambda>0,\ r>0
+\end{cases}\qquad \lambda>0,\ r>0 \\
+\mathbb{E}(\xi)&=\frac{r}{\lambda}
+\end{align*}
 $$
 
 其中 $\Gamma(r)$ 为第一类欧拉积分.
@@ -204,3 +237,20 @@ $$
 
 的函数 $p(x)$ 为 $\xi$ 的**密度函数**，$\xi$ 称为**连续型随机变量**.
 
+---
+
+## 期望
+
+对于分布函数 $F(x)$，若 $\int_{-\infty}^{\infty}|x|\mathrm{d}F(x)<\infty$，则称
+
+$$
+\mathbb{E}(\xi)=\int_{-\infty}^{\infty}x\mathrm{d}F(x)
+$$
+
+为 $\xi$ 的**期望**. （这种积分形式称作 **Stieltjes 积分**）
+
+变形可得
+
+$$
+\mathbb{E}(\xi)=\int_0^{\infty}P(\xi>t)\,\mathrm{d}t-\int_{-\infty}^0P(\xi\leqslant t)\,\mathrm{d}t
+$$
