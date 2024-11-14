@@ -14,6 +14,8 @@
 
 ## 当前
 
+ - 长时间不动隐藏 cursor
+ - Dark Mode code block prism css error（目前是在 twikoo 中设置 theme 为 none）
  - external link 换一个样式
  - 目前为了避免 fold 折叠时 scrollreveal 出问题，设置如果有 expand，就不允许折叠
  - Cursor 换 web worker
