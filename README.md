@@ -11,4 +11,4 @@ A total refactoring of my website, including:
 Will be integrated as a single website to improve consistency.
 
  - **Tech stack**: Vue.js
- - **Preview**: [alpha.xecades.xyz](https://alpha.xecades.xyz/)
+ - **Preview**: [xecades.xyz](https://xecades.xyz/)
