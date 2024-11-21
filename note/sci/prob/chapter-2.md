@@ -2,255 +2,105 @@
 title: Ch.2 随机变量与分布函数
 ---
 
-## 离散型随机变量
-
-### 退化分布 / 单点分布
-
-$\xi$ 恒为常数 $c$，即 $P(\xi=c)=1$.
-
-$$
-\begin{align*}
-p_{\xi}(k)&=1,\quad k=c \\
-\mathbb{E}(\xi)&=c
-\end{align*}
-$$
-
----
-
-### 两点分布 / 伯努利分布 / 01 分布
-
-$\xi$ 为事件 $A$ 的示性函数：
-
-$$
-\xi=\begin{cases}
-1 & \text{如果 } A \text{ 发生} \\
-0 & \text{如果 } A \text{ 不发生}
-\end{cases}
-$$
-
-其中 $A$ 发生的概率为 $p$，则
-
-$$
-\begin{align*}
-p_{\xi}(k)&=\begin{cases}
-p & k=1 \\
-1-p & k=0
-\end{cases} \\
-\mathbb{E}(\xi)&=p
-\end{align*}
-$$
-
-记作 $\xi\sim B(1,p)$.
-
----
-
-### 二项分布
-
-$\xi$ 为 $n$ 次独立重复试验中事件 $A$ 发生的次数.
-
-$$
-\begin{align*}
-p_{\xi}(k)&=\binom{n}{k} p^kq^{n-k}:=b(k;n,p),\quad k=0,1,2,\cdots,n \\
-\mathbb{E}(\xi)&=np
-\end{align*}
-$$
-
-记作 $\xi\sim B(n,p)$.
-
-1. $b(k;n,p) = b(n-k;n,1-p)$.
-2. $k=m$ 时 $b(k;n,p)$ 达到最大，$m$ 称为最可能成功次数.
-    - 若 $(n+1)p$ 是整数，则 $m=(n+1)p$ 或 $m=(n+1)p-1$；
-    - 若 $(n+1)p$ 不是整数，则 $m=\lfloor (n+1)p \rfloor$.
-3. 若 $\xi\sim B(n,p)$，则
-   $$
-   P(\xi=k+1)=\frac{p(n-k)}{q(k+1)}P(\xi=k).
-   $$
-4. （**泊松定理**）假设 $p$ 与 $n$ 有关，记作 $p_n$，若 $\lim\limits_{n\to\infty}np_n=\lambda$，则
-   $$
-   \lim_{n\to\infty}b(k;n,p_n)=\frac{\lambda^k}{k!}e^{-\lambda}.
-   $$
-
----
-
-### 泊松分布
-
-由泊松定理引入，$\xi$ 取一切非负整数.
-
-$$
-\begin{align*}
-p_{\xi}(k)&=\frac{\lambda^k}{k!}e^{-\lambda}:=p(k;\lambda),\quad \lambda>0,\ k=0,1,2,\cdots \\
-\mathbb{E}(\xi)&=\lambda
-\end{align*}
-$$
-
-记作 $\xi\sim P(\lambda)$.
-
----
-
-### 几何分布
-
-$\xi$ 为伯努利试验首次成功的次数.
-
-$$
-\begin{align*}
-p_{\xi}(k)&=pq^{k-1}:=g(k;p),\quad k=1,2,3\cdots \\
-\mathbb{E}(\xi)&=\frac{1}{p}
-\end{align*}
-$$
-
-**无记忆性**：$P(\xi>k+m\mid \xi>m)=P(\xi>k)$.
-
-如果前 $m$ 次试验都失败，那么从第 $m+1$ 次开始到成功的次数 $\eta$ 仍服从几何分布.
-
----
-
-### 超几何分布
-
-$N$ 件产品中有 $M$ 件次品，从中抽取 $n$ 件，其中次品数为 $\xi$.
-
-$$
-\begin{align*}
-p_{\xi}(k)&=\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}},\quad k=0,1,2,\cdots,\min(n,M) \\
-\mathbb{E}(\xi)&=n \frac{M}{N}
-\end{align*}
-$$
-
----
-
-### 巴斯卡分布
-
-$\xi$ 为得到第 $r$ 次成功时的伯努利试验次数.
-
-$$
-\begin{align*}
-p_{\xi}(k)&=\binom{k-1}{r-1}p^r q^{k-r},\quad k=r,r+1,r+2,\cdots \\
-\mathbb{E}(\xi)&=\frac{r}{p}
-\end{align*}
-$$
-
----
-
-## 连续型随机变量
-
-### 均匀分布
-
-$\xi$ 在区间 $[a,b]$ 上均匀取值.
-
-$$
-\begin{align*}
-p_{\xi}(x)&=\begin{cases}
-\frac{1}{b-a} & a\leqslant x\leqslant b \\
-0 & \text{otherwise}
-\end{cases} \\
-\mathbb{E}(\xi)&=\frac{a+b}{2}
-\end{align*}
-$$
-
-记作 $\xi\sim U(a,b)$.
-
----
-
-### 正态分布 / 高斯分布
-
-$$
-\begin{align*}
-p_{\xi}(x)&=\frac{1}{\sqrt{2\pi}\sigma}\exp\left\{{-\frac{(x-a)^2}{2\sigma^2}}\right\},\quad -\infty<x<\infty \\
-\mathbb{E}(\xi)&=a
-\end{align*}
-$$
-
-记作 $\xi\sim N(a,\sigma^2)$.
-
-当 $a=0$，$\sigma=1$ 时，称为**标准正态分布**，其密度及分布函数分别记作 $\varphi(x)$ 和 $\Phi(x)$.
-
-$$
-\begin{align*}
-\varphi(x)&=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \\[1em]
-\Phi(x)&=\int_{-\infty}^x\varphi(t)\,\mathrm{d}t=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-\frac{t^2}{2}}\,\mathrm{d}t
-\end{align*}
-$$
-
----
-
-### 指数分布
-
-$$
-\begin{align*}
-p_{\xi}(x)&=\begin{cases}
-\lambda e^{-\lambda x} & x\geqslant 0 \\
-0 & x<0
-\end{cases}\qquad \lambda>0 \\
-\mathbb{E}(\xi)&=\frac{1}{\lambda}
-\end{align*}
-$$
-
-分布函数
-
-$$
-F(x)=\begin{cases}
-1-e^{-\lambda x} & x\geqslant 0 \\
-0 & x<0
-\end{cases}
-$$
-
----
-
-### $\Gamma$ 分布
-
-$$
-\begin{align*}
-p_{\xi}(x)&=\begin{cases}
-\frac{\lambda^r}{\Gamma(r)}x^{r-1}e^{-\lambda x} & x\geqslant 0 \\
-0 & x<0
-\end{cases}\qquad \lambda>0,\ r>0 \\
-\mathbb{E}(\xi)&=\frac{r}{\lambda}
-\end{align*}
-$$
-
-其中 $\Gamma(r)$ 为第一类欧拉积分.
-
-参数为 $\lambda$ 和 $r$ 的 $\Gamma$ 分布记作 $\Gamma(\lambda,r)$.
-
-当 $r$ 为整数时也称**爱尔兰分布**. $r=1$ 时，退化为指数分布.
-
----
-
-### TBD
-
----
-
 ## 分布函数
 
-称
+### 一元
 
-$$
-F(x)=P(\xi\leqslant x),\quad -\infty<x<\infty
-$$
+**分布函数 $F(x)$** $=P(\xi\leqslant x)$，$-\infty<x<\infty$. 注意可以取等.
 
-为随机变量 $\xi$ 的**分布函数**.
-
-称满足
-
-$$
-F(x)=\int_{-\infty}^x p(t)\,\mathrm{d}t
-$$
-
-的函数 $p(x)$ 为 $\xi$ 的**密度函数**，$\xi$ 称为**连续型随机变量**.
+**密度函数 $p(x)$** $=\dfrac{\mathrm{d}F(x)}{\mathrm{d}x}$. 满足 $F(x)=\displaystyle\int_{-\infty}^x p(t)\,\mathrm{d}t$. 此时的 $\xi$ 称为**连续型随机变量**.
 
 ---
 
-## 期望
+### 多元
 
-对于分布函数 $F(x)$，若 $\int_{-\infty}^{\infty}|x|\mathrm{d}F(x)<\infty$，则称
+**联合分布函数 $F(x, y)$** $=P(\xi\leqslant x, \eta\leqslant y)$.
+
+**边际分布函数 $F_{\xi}(x)$** $=P(\xi\leqslant x, -\infty<y<\infty)=F(x,\infty)$.
+
+**联合密度函数 $p(x, y)$** $=\dfrac{\partial^2 F(x, y)}{\partial x\partial y}$. 注意只有 $(\xi, \eta)$ 为**连续型随机向量**时才有 $p(x, y)$.
+
+**边际密度函数 $p_{\xi}(x)$** $=\dfrac{\mathrm{d} F_{\xi}(x)}{\mathrm{d} x}=\displaystyle\int_{-\infty}^{\infty}p(x, y)\,\mathrm{d}y$.
+
+---
+
+## 随机变量的关系
+
+**$\xi$，$\eta$ 相互独立**：$F(x, y)=F_{\xi}(x)F_{\eta}(y)$. 对于连续型随机向量：$p(x, y)=p_{\xi}(x)p_{\eta}(y)$.
+
+**离散型条件分布**：$\xi=x_i$ 条件下 $\eta$ 的
+
+ - **条件概率分布列 $p_{\eta\mid\xi}(y_j\mid x_i)$** $=P(\eta=y_j\mid \xi=x_i)=\dfrac{P(\xi=x_i, \eta=y_j)}{P(\xi=x_i)}$.
+ - **条件分布**：$P(\eta\leqslant y\mid \xi=x_i)=\displaystyle\sum_{y_j\leqslant y}p_{\eta\mid\xi}(y_j\mid x_i)$.
+
+**连续型条件分布**：$\xi=x$ 条件下 $\eta$ 的
+
+ - **条件密度 $p_{\eta\mid\xi}(y\mid x)$** $=\dfrac{p(x, y)}{p_{\xi}(x)}$.
+ - **条件分布 $F_{\eta\mid\xi}(y\mid x)$** $=P(\eta\leqslant y\mid \xi=x)=\displaystyle\int_{-\infty}^y p_{\eta\mid\xi}(v\mid x)\,\mathrm{d}v$.
+
+::fold{title="连续型贝叶斯公式" expand success}
+由 $p(x, y)=p_{\xi\mid\eta}(x\mid y)p_{\eta}(y)=p_{\eta\mid\xi}(y\mid x)p_{\xi}(x)$，可得
 
 $$
-\mathbb{E}(\xi)=\int_{-\infty}^{\infty}x\mathrm{d}F(x)
+p_{\eta\mid\xi}(y\mid x)=\frac{p_{\xi\mid\eta}(x\mid y)p_{\eta}(y)}{p_{\xi}(x)}
 $$
 
-为 $\xi$ 的**期望**. （这种积分形式称作 **Stieltjes 积分**）
-
-变形可得
+将分母的 $p_{\xi}(x)$ 替换为 $\displaystyle\int_{-\infty}^{\infty}p_{\xi\mid\eta}(x\mid v)p_{\eta}(v)\,\mathrm{d}v$（**连续型全概率公式**），得到**连续型贝叶斯公式**
 
 $$
-\mathbb{E}(\xi)=\int_0^{\infty}P(\xi>t)\,\mathrm{d}t-\int_{-\infty}^0P(\xi\leqslant t)\,\mathrm{d}t
+p_{\eta\mid\xi}(y\mid x)=\frac{p_{\xi\mid\eta}(x\mid y)p_{\eta}(y)}{\displaystyle\int_{-\infty}^{\infty}p_{\xi\mid\eta}(x\mid v)p_{\eta}(v)\,\mathrm{d}v}
 $$
+::
+
+---
+
+## 随机变量的函数
+
+**卷积公式**：若 $\xi$ 与 $\eta$ 相互独立，则 $p_{\xi+\eta}(z)=\displaystyle\int_{-\infty}^{\infty}p_{\xi}(z-y)p_{\eta}(y)\,\mathrm{d}y$. 离散情况类似.
+
+**次序统计量**：设 $\xi_1,\xi_2,\cdots,\xi_n$ 独立同分布，分布函数为 $F(x)$. 把它们从小到大排列，所得随机变量 $\xi_1^*\leqslant\xi_2^*\leqslant\cdots\leqslant\xi_n^*$ 称为其**次序统计量**. 按定义，$\xi_1^*=\min\{\xi_1,\xi_2,\cdots,\xi_n\}$，$\xi_n^*=\max\{\xi_1,\xi_2,\cdots,\xi_n\}$. 则
+
+ - **$\xi_n^*$ 的分布函数** $F_{\xi_n^*}(x)=P(\xi_n^*\leqslant x)=P(\xi_1\leqslant x,\xi_2\leqslant x,\cdots,\xi_n\leqslant x)=F^n(x)$.
+ - **$\xi_1^*$ 的分布函数** $F_{\xi_1^*}(x)=1-P(\xi_1^*>x)=1-[1-F(x)]^n$.
+ - **$(\xi_1^*, \xi_n^*)$ 的联合分布函数**
+   $$
+   \begin{align*}
+      F(x, y)&=P(\xi_1^*\leqslant x,\xi_n^*\leqslant y) \\
+      &=P(\xi_n^*\leqslant y)-P(\xi_1^*>x,\xi_n^*\leqslant y) \\
+      &=F^n(y)-P\left(\bigcap_{i=1}^n(x<\xi_n\leqslant y)\right) \\[1em]
+      &=\begin{cases}
+         F^n(x)-[F(y)-F(x)]^n & x<y \\[1em]
+         F^n(y) & x\geqslant y
+      \end{cases}
+   \end{align*}
+   $$
+
+**随机变量的变换**：$(\xi_1,\cdots,\xi_n)\to(\eta_1,\cdots,\eta_n)$，每个 $\eta_i$ 为 $\boldsymbol\xi$ 的函数，写出反函数 $x_i=x_i(y_1,\cdots,y_n)$，则 $\boldsymbol\eta$ 的联合密度 $q(y_1,\cdots,y_n)=p(x_1(y_1,\cdots,y_n),\cdots,x_n(y_1,\cdots,y_n))\left|J\right|$. 其中 $J$ 为 **Jacobi 行列式** $\dfrac{\partial(x_1,\cdots,x_n)}{\partial(y_1,\cdots,y_n)}\neq0$.
+
+**多维正态随机向量的可逆线性变换仍是正态随机向量**.
+
+::fold{title="随机变量变换 Example" info expand}
+> $\xi$，$\eta$ 相互独立，都服从参数为 $1$ 的指数分布，分别求 $\alpha=\xi+\eta$ 与 $\beta=\dfrac{\xi}{\eta}$ 的密度.
+
+$x,y>0$ 时，$p(x,y)=e^{-(x+y)}$，这是 $(\xi,\eta)$ 的联合密度.
+
+函数组 $\begin{cases} u=x+y \\ v=x/y \end{cases}$ 存在反函数，当 $x,y>0$，$u,v>0$ 时
+
+$$
+\begin{align*}
+J^{-1}&=\dfrac{\partial(u,v)}{\partial(x,y)}=\begin{vmatrix} 1 & 1 \\[.5em] \frac{1}{y} & -\frac{x}{y^2}\end{vmatrix} \\[2em]
+&=-\dfrac{x+y}{y^2}=-\dfrac{(1+v)^2}{u}
+\end{align*}
+$$
+
+故 $|J|=\dfrac{u}{(1+v)^2}$. 因此 $(\alpha,\beta)$ 的联合密度为
+
+$$
+q(u,v)=\begin{cases}
+\dfrac{ue^{-u}}{(1+v)^2} & u>0,\ v>0 \\[1em]
+0 & \text{otherwise}
+\end{cases}
+$$
+
+$\alpha$ 和 $\beta$ 各自的密度即为 $q(u,v)$ 的边际密度.
+::

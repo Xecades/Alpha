@@ -22,8 +22,10 @@ nav:
                 - chapter-28
                 - chapter-29-30
           - prob:
+                - distribution
                 - chapter-1
                 - chapter-2
+                - chapter-3
           - ma:
                 - cheatsheet
                 - prove-that
