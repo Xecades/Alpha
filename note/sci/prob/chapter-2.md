@@ -69,7 +69,7 @@ $$
       &=P(\xi_n^*\leqslant y)-P(\xi_1^*>x,\xi_n^*\leqslant y) \\
       &=F^n(y)-P\left(\bigcap_{i=1}^n(x<\xi_n\leqslant y)\right) \\[1em]
       &=\begin{cases}
-         F^n(x)-[F(y)-F(x)]^n & x<y \\[1em]
+         F^n(y)-[F(y)-F(x)]^n & x<y \\[1em]
          F^n(y) & x\geqslant y
       \end{cases}
    \end{align*}
