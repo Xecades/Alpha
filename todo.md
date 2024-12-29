@@ -18,6 +18,7 @@
  - 取消背景
  - 颜色换得更加明朗，黑色更黑
  - 添加色系预设，主色调为蓝色（参考 ADS slides）
+ - 参考上学期线性代数的笔记 pdf
 
  - 长时间不动隐藏 cursor
  - Dark Mode code block prism css error（目前是在 twikoo 中设置 theme 为 none）
